@@ -54,9 +54,13 @@
     "@loopback/rest": "^9.0.0",
     "@loopback/rest-explorer": "^3.0.3",
     "@loopback/service-proxy": "^3.0.3",
+    "@types/sqlstring": "^2.2.1",
     "dotenv": "^8.2.0",
     "dotenv-extended": "^2.9.0",
+    "knex": "^0.21.12",
     "loopback-connector-postgresql": "^5.2.1",
+    "pg": "^8.5.0",
+    "sqlstring": "^2.3.2",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
