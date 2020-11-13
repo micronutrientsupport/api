@@ -1,12 +1,14 @@
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
-import {
-  RestExplorerBindings,
-  RestExplorerComponent,
-} from '@loopback/rest-explorer';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
+import {
+  RestExplorerBindings,
+  RestExplorerComponent
+} from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
+import * as dotenv from 'dotenv';
+import * as dotenvExt from 'dotenv-extended';
 import path from 'path';
 import {MySequence} from './sequence';
 
@@ -40,5 +42,12 @@ export class ApiApplication extends BootMixin(
         nested: true,
       },
     };
+
+    // Load environment vars from .env files
+    dotenv.config();
+    dotenvExt.load({
+      schema: '.env.example',
+      errorOnMissing: true
+    })
   }
 }
