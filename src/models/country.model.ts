@@ -1,6 +1,6 @@
 import {Entity, model, property} from '@loopback/repository';
 
-@model({settings: {idInjection: false, postgresql: {schema: 'bmgf', table: 'country'}}})
+@model({settings: {idInjection: false, postgresql: {schema: 'bmgf', table: 'vw_country'}}})
 export class Country extends Entity {
   @property({
     type: 'string',
@@ -17,10 +17,10 @@ export class Country extends Entity {
   name?: string;
 
   @property({
-    type: 'string',
-    postgresql: {columnName: 'geometry', dataType: 'USER-DEFINED', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    type: 'object',
+    postgresql: {columnName: 'geometry', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
   })
-  geometry?: string;
+  geometry?: object;
 
   // Define well-known properties here
 

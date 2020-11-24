@@ -10,13 +10,13 @@ import {
 import {Country} from '../models';
 import {CountryRepository} from '../repositories';
 
-export class CountryControllerController {
+export class CountryController {
   constructor(
     @repository(CountryRepository)
     public countryRepository: CountryRepository,
   ) {}
 
-  @get('/countries', {
+  @get('/country', {
     responses: {
       '200': {
         description: 'Array of Country model instances',
