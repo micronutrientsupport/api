@@ -2,6 +2,7 @@ import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
+import {CrudRestComponent} from '@loopback/rest-crud';
 import {
   RestExplorerBindings,
   RestExplorerComponent
@@ -10,8 +11,8 @@ import {ServiceMixin} from '@loopback/service-proxy';
 import * as dotenv from 'dotenv';
 import * as dotenvExt from 'dotenv-extended';
 import path from 'path';
+import {ReadOnlyRestComponent} from './rest-components/readonly';
 import {MySequence} from './sequence';
-
 export {ApplicationConfig};
 
 export class ApiApplication extends BootMixin(
@@ -49,5 +50,7 @@ export class ApiApplication extends BootMixin(
       schema: '.env.example',
       errorOnMissing: true
     })
+    this.component(ReadOnlyRestComponent);
+    this.component(CrudRestComponent);
   }
 }
