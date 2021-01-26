@@ -5,6 +5,6 @@ const config: ModelCrudRestApiConfig = {
   model: ImpactScenario,
   pattern: 'ReadOnly',
   dataSource: 'db',
-  basePath: '/projection-scenarios',
+  basePath: '/projection-scenario',
 };
 module.exports = config;
