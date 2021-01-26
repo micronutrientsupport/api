@@ -20,9 +20,21 @@ export class ImpactScenario extends Entity {
 
   @property({
     type: 'string',
+    postgresql: {columnName: 'brief_description', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+  })
+  briefDescription?: string;
+
+  @property({
+    type: 'string',
     postgresql: {columnName: 'description', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
   })
   description?: string;
+
+  @property({
+    type: 'boolean',
+    postgresql: {columnName: 'is_baseline', dataType: 'boolean', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+  })
+  isBaseline?: boolean;
 
   // Define well-known properties here
 
