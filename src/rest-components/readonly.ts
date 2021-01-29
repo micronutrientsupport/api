@@ -1,11 +1,14 @@
 import {ApplicationConfig, Binding, BindingSelector, Component, Constructor, createBindingFromClass, inject, injectable} from '@loopback/core';
 import {asModelApiBuilder, ModelApiConfig} from '@loopback/model-api-builder';
-import {ApplicationWithRepositories, Entity, Model} from '@loopback/repository';
-import {HttpErrors, oas, OperationVisibility} from '@loopback/rest';
+import {ApplicationWithRepositories, Entity, Filter, Model} from '@loopback/repository';
+import {get, HttpErrors, oas, OperationVisibility, param} from '@loopback/rest';
 import {CrudRestApiBuilder, defineCrudRestController, ModelCrudRestApiConfig} from '@loopback/rest-crud';
+import {StandardJsonResponse} from '../controllers/standardJsonResponse';
 export {ApplicationConfig};
 
 type T = Entity;
+type IdType = keyof T;
+type IdName = keyof T;
 type Relations = {}
 
 @injectable(asModelApiBuilder)
@@ -93,17 +96,46 @@ class ReadOnlyCrudRestApiBuilder extends CrudRestApiBuilder {
           `Endpoint "DELETE ${config.basePath}" not found.`,
         );
       }
+
+      @get('/')
+      async findy(
+        @param.filter(entityClass)
+        filter?: Filter<T>,
+      ): Promise<StandardJsonResponse<Array<typeof entityClass>>> {
+        console.log('Findy', typeof entityClass);
+        const result = await (this as any).find(filter);
+        console.log(result);
+
+        return new StandardJsonResponse<Array<typeof entityClass>>(
+          `${result.length} ${entityClass.modelName} returned.`,
+          result,
+        );
+        //return (this as any).find(filter);
+      }
     }
+
+    //if (config.customRoutes) {
+    type Constructor<T = {}> = new (...args: any[]) => T;
+    function MixedIn<TBase extends Constructor>(Base: TBase) {
+      return class readOnlyControllerExt extends Base {
+        hello(): string {
+          return 'Hello world!';
+        }
+      };
+    }
+    // Create a new class by mixing `Timestamped` into `User`
+    const readOnlyController2: any = MixedIn(readOnlyController);
+    //}
 
     // Create instance of controller named after model
     // for organisation in OpenAPI explorer and to reflect
     // default Loopback structure
     const controllerName = `${modelClass.modelName}Controller`;
     const defineNamedController = new Function(
-      'readOnlyController',
-      `return class ${controllerName} extends readOnlyController {}`,
+      'readOnlyController2',
+      `return class ${controllerName} extends readOnlyController2 {}`,
     );
-    const controller = defineNamedController(readOnlyController);
+    const controller = defineNamedController(readOnlyController2);
 
     // Magic?
     this.injectFirstConstructorArg(
