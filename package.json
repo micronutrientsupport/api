@@ -58,6 +58,7 @@
     "dotenv": "^8.2.0",
     "dotenv-extended": "^2.9.0",
     "loopback-connector-postgresql": "^5.2.1",
+    "loopback-connector-rest": "^3.7.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
