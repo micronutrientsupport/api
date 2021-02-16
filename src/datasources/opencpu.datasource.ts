@@ -23,7 +23,7 @@ const config = {
         },
       },
       functions: {
-        replace: ["string", "pattern", "replacement"]
+        stringReplace: ["string", "pattern", "replacement"]
       },
     },
     {

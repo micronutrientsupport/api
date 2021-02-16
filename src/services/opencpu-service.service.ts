@@ -6,7 +6,7 @@ export interface OpencpuService {
   // this is where you define the Node.js methods that will be
   // mapped to REST/SOAP/gRPC operations as stated in the datasource
   // json file.
-  replace(string: string, pattern: string, replacement: string): Promise<OcpuLibrary>;
+  stringReplace(string: string, pattern: string, replacement: string): Promise<OcpuLibrary>;
   library(): string
 }
 

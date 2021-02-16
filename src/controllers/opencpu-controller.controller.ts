@@ -12,12 +12,12 @@ export class OpencpuControllerController {
   ) { }
 
   @get('/library/{string}/{pattern}/{replacement}')
-  async getStarWarCharacter(
+  async stringReplace(
     @param.path.string('string') string: string,
     @param.path.string('pattern') pattern: string,
     @param.path.string('replacement') replacement: string
   ): Promise<OcpuLibrary> {
-    return await this.opencpuService.replace(string, pattern, replacement);
+    return await this.opencpuService.stringReplace(string, pattern, replacement);
   }
 
   @get('/lib')
