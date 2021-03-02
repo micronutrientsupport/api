@@ -8,8 +8,8 @@ export interface OpencpuService {
   // json file.
   stringReplace(string: string, pattern: string, replacement: string): Promise<OcpuLibrary>;
   library(): string
+  naiveMean(data: HouseholdSummary): object
 }
-
 export class OpencpuServiceProvider implements Provider<OpencpuService> {
   constructor(
     // opencpu must match the name property in the datasource json file
@@ -21,6 +21,11 @@ export class OpencpuServiceProvider implements Provider<OpencpuService> {
     return getService(this.dataSource);
   }
 }
+
+export interface HouseholdSummary {
+  region: string,
+  vitA: number
+}[]
 
 export interface OcpuLibrary {
   name: string;

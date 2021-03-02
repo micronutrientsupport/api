@@ -28,6 +28,18 @@ const config = {
     },
     {
       template: {
+        method: "POST",
+        url: "https://opencpu.micronutrient.support/ocpu/user/newuser/library/testStats/R/naiveMean/json",
+        body: {
+          data: "{data:object}",
+        },
+      },
+      functions: {
+        naiveMean: ["data"]
+      },
+    },
+    {
+      template: {
         method: "GET",
         url: "https://opencpu.micronutrient.support/ocpu/library",
       },

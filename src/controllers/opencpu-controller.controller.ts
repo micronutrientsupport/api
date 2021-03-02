@@ -1,14 +1,18 @@
 // Uncomment these imports to begin using these cool features!
 
 import {inject} from '@loopback/core';
+import {repository} from '@loopback/repository';
 import {get, param} from '@loopback/rest';
-import {OcpuLibrary, OpencpuService} from '../services';
+import {TmpRegionConsumptionRepository} from '../repositories';
+import {HouseholdSummary, OcpuLibrary, OpencpuService} from '../services';
 
 
 export class OpencpuControllerController {
   constructor(
     @inject('services.OpencpuService')
     protected opencpuService: OpencpuService,
+    @repository(TmpRegionConsumptionRepository)
+    public tmpRegionConsumptionRepository: TmpRegionConsumptionRepository
   ) { }
 
   @get('/library/{string}/{pattern}/{replacement}')
@@ -18,6 +22,14 @@ export class OpencpuControllerController {
     @param.path.string('replacement') replacement: string
   ): Promise<OcpuLibrary> {
     return await this.opencpuService.stringReplace(string, pattern, replacement);
+  }
+
+  @get('/agg')
+  async getAgg(): Promise<object> {
+    let data = await this.tmpRegionConsumptionRepository.find();
+    let result = await this.opencpuService.naiveMean((data as unknown) as HouseholdSummary);
+    console.log(result);
+    return result;
   }
 
   @get('/lib')
