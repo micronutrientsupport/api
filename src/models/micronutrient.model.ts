@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({
-  settings: {idInjection: false, hiddenProperties: ['fooditemColumn'], postgresql: {schema: 'bmgf', table: 'micronutrient'}}
+  settings: {idInjection: false, hiddenProperties: ['fooditemColumn', 'impactColumn'], postgresql: {schema: 'andan-bmgf2', table: 'micronutrient'}}
 })
 export class Micronutrient extends Entity {
   @property({
@@ -46,7 +46,7 @@ export class Micronutrient extends Entity {
     type: 'boolean',
     postgresql: {columnName: 'in_impact', dataType: 'boolean', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
   })
-  inImpact?: boolean;
+  isInImpact?: boolean;
 
   @property({
     type: 'string',
