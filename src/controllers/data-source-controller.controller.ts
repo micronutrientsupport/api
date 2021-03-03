@@ -16,7 +16,7 @@ export class DataSourceControllerController {
     public dietDataSourcesRepository: DietDataSourcesRepository,
   ) { }
 
-  @get('/data-source/{countryId}', {
+  @get('/data-source/{countryId}/{dataType}', {
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
