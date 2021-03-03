@@ -1,10 +1,10 @@
 import {ModelCrudRestApiConfig} from '@loopback/rest-crud';
-import {Micronutrients} from '../models';
+import {Micronutrient} from '../models';
 
 const config: ModelCrudRestApiConfig = {
-  model: Micronutrients,
+  model: Micronutrient,
   pattern: 'ReadOnly',
   dataSource: 'db',
-  basePath: '/micronutrients',
+  basePath: '/micronutrient',
 };
 module.exports = config;
