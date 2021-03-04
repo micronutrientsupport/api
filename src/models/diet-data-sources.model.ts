@@ -3,7 +3,7 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'andan-bmgf2', table: 'diet_data_sources'}
+    postgresql: {schema: process.env.DB_SCHEMA, table: 'diet_data_sources'}
   }
 })
 export class DietDataSources extends Entity {
