@@ -2,8 +2,8 @@
 
 import {Filter, repository} from '@loopback/repository';
 import {get, getModelSchemaRef, param} from '@loopback/rest';
-import {ImpactCommodityAggregation, ImpactSummary, ImpactTotalFoodAvailability} from '../models';
-import {ImpactCommodityAggregationRepository, ImpactSummaryRepository, ImpactTotalFoodAvailabilityRepository} from '../repositories';
+import {ImpactCommodityAggregation, ImpactFoodGroupAggregation, ImpactSummary, ImpactTotalFoodAvailability} from '../models';
+import {ImpactCommodityAggregationRepository, ImpactFoodGroupAggregationRepository, ImpactSummaryRepository, ImpactTotalFoodAvailabilityRepository} from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
 
@@ -18,6 +18,8 @@ export class ProjectionsControllerController {
     public impactSummaryRepository: ImpactSummaryRepository,
     @repository(ImpactCommodityAggregationRepository)
     public impactCommodityAggregationRepository: ImpactCommodityAggregationRepository,
+    @repository(ImpactFoodGroupAggregationRepository)
+    public impactFoodGroupAggregationRepository: ImpactFoodGroupAggregationRepository,
   ) { }
 
   @get('/projections/total/{countryId}/{micronutrientId}', {
@@ -128,6 +130,54 @@ export class ProjectionsControllerController {
     };
     let data = await this.impactCommodityAggregationRepository.find(filter)
     return new StandardJsonResponse<Array<ImpactCommodityAggregation>>(
+      `${data.length} impact results returned.`,
+      data,
+    );
+  }
+
+  @get('/projections/food-group/{countryId}/{micronutrientId}', {
+    responses:
+      new StandardOpenApiResponses('Data sources')
+        .setDataType('array')
+        .setObjectSchema(getModelSchemaRef(ImpactFoodGroupAggregation))
+        .toObject(),
+  })
+  async findFoodGroup(
+    @param.path.string('countryId') countryId: string,
+    @param.path.string('micronutrientId') micronutrientId: string): Promise<object> {
+    let filter: Filter = {
+      where: {
+        country: countryId,
+        nutrient: micronutrientId,
+      }
+    };
+    let data = await this.impactFoodGroupAggregationRepository.find(filter)
+    return new StandardJsonResponse<Array<ImpactFoodGroupAggregation>>(
+      `${data.length} impact results returned.`,
+      data,
+    );
+  }
+
+  @get('/projections/food-group/{countryId}/{micronutrientId}/{scenarioId}', {
+    responses:
+      new StandardOpenApiResponses('Data sources')
+        .setDataType('array')
+        .setObjectSchema(getModelSchemaRef(ImpactFoodGroupAggregation))
+        .toObject(),
+  })
+  async findFoodGroupScenario(
+    @param.path.string('countryId') countryId: string,
+    @param.path.string('micronutrientId') micronutrientId: string,
+    @param.path.string('scenarioId') scenarioId: string): Promise<object> {
+    let filter: Filter = {
+      where: {
+        country: countryId,
+        nutrient: micronutrientId,
+        scenario: scenarioId
+      }
+    };
+    let data = await this.impactFoodGroupAggregationRepository.find(filter)
+    return new StandardJsonResponse<Array<ImpactFoodGroupAggregation>>(
       `${data.length} impact results returned.`,
       data,
     );
