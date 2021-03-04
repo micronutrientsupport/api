@@ -1,9 +1,10 @@
 import {ApplicationConfig, Binding, BindingSelector, Component, Constructor, createBindingFromClass, inject, injectable} from '@loopback/core';
 import {asModelApiBuilder, ModelApiConfig} from '@loopback/model-api-builder';
 import {ApplicationWithRepositories, Entity, Filter, Model} from '@loopback/repository';
-import {get, HttpErrors, oas, OperationVisibility, param} from '@loopback/rest';
+import {get, getModelSchemaRef, HttpErrors, oas, OperationVisibility, param} from '@loopback/rest';
 import {CrudRestApiBuilder, defineCrudRestController, ModelCrudRestApiConfig} from '@loopback/rest-crud';
 import {StandardJsonResponse} from '../controllers/standardJsonResponse';
+import {StandardOpenApiResponses} from '../controllers/standardOpenApiResponses';
 export {ApplicationConfig};
 
 type T = Entity;
@@ -97,12 +98,19 @@ class ReadOnlyCrudRestApiBuilder extends CrudRestApiBuilder {
         );
       }
 
-      @get('/')
+      @get('/', {
+        responses:
+          new StandardOpenApiResponses((config.custom) ? (config.custom as string) : `Array of ${entityClass.modelName} model instances`)
+            .setDataType('array')
+            .setObjectSchema(getModelSchemaRef(entityClass))
+            .toObject(),
+      })
       async findy(
         @param.filter(entityClass)
         filter?: Filter<T>,
       ): Promise<StandardJsonResponse<Array<typeof entityClass>>> {
         console.log('Findy', typeof entityClass);
+        console.log(config)
         const result = await (this as any).find(filter);
         console.log(result);
 

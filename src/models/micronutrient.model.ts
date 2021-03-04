@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({
-  settings: {idInjection: false, hiddenProperties: ['fooditemColumn', 'impactColumn'], postgresql: {schema: 'andan-bmgf2', table: 'micronutrient'}}
+  settings: {idInjection: false, hiddenProperties: ['fooditemColumn', 'impactColumn'], postgresql: {schema: process.env.DB_SCHEMA, table: 'micronutrient'}}
 })
 export class Micronutrient extends Entity {
   @property({
