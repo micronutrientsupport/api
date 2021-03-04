@@ -44,7 +44,7 @@ export class Micronutrient extends Entity {
 
   @property({
     type: 'boolean',
-    postgresql: {columnName: 'in_impact', dataType: 'boolean', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {columnName: 'is_in_impact', dataType: 'boolean', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
   })
   isInImpact?: boolean;
 
