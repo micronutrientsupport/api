@@ -1,7 +1,7 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({
-  settings: {idInjection: false, postgresql: {schema: 'bmgf', table: 'impact_scenario'}}
+  settings: {idInjection: false, postgresql: {schema: process.env.DB_SCHEMA, table: 'impact_scenario'}}
 })
 export class ImpactScenario extends Entity {
   @property({
