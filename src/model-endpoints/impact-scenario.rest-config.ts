@@ -6,5 +6,8 @@ const config: ModelCrudRestApiConfig = {
   pattern: 'ReadOnly',
   dataSource: 'db',
   basePath: '/projection-scenario',
+  config: {
+    custom: 'Hello'
+  }
 };
 module.exports = config;
