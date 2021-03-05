@@ -7,3 +7,6 @@ export * from './diet-data-sources.repository';
 export * from './impact-commodity-aggregation.repository';
 export * from './impact-summary.repository';
 export * from './impact-food-group-aggregation.repository';
+export * from './country-intake.repository';
+export * from './top-20-mn-per-country.repository';
+export * from './top-20-mn-per-hhsurvey.repository';
