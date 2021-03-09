@@ -1,13 +1,10 @@
 import {ModelCrudRestApiConfig} from '@loopback/rest-crud';
-import {ImpactScenario} from '../models';
+import {CountryIntake} from '../models';
 
 const config: ModelCrudRestApiConfig = {
-  model: ImpactScenario,
+  model: CountryIntake,
   pattern: 'ReadOnly',
   dataSource: 'db',
-  basePath: '/projection-scenario',
-  config: {
-    custom: 'Hello'
-  }
+  basePath: '/country-intakes',
 };
 module.exports = config;

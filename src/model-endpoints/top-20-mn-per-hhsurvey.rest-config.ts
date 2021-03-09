@@ -1,13 +1,10 @@
 import {ModelCrudRestApiConfig} from '@loopback/rest-crud';
-import {ImpactScenario} from '../models';
+import {Top20MnPerHhsurvey} from '../models';
 
 const config: ModelCrudRestApiConfig = {
-  model: ImpactScenario,
+  model: Top20MnPerHhsurvey,
   pattern: 'ReadOnly',
   dataSource: 'db',
-  basePath: '/projection-scenario',
-  config: {
-    custom: 'Hello'
-  }
+  basePath: '/top20mn-per-hhsurveys',
 };
 module.exports = config;
