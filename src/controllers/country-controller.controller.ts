@@ -15,7 +15,7 @@ export class CountryController {
   constructor(
     @repository(CountryRepository)
     public countryRepository: CountryRepository,
-  ) {}
+  ) { }
 
   @get('/country', {
     responses:
