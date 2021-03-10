@@ -1,3 +1,4 @@
+export * from './country-intake-geojson.model';
 export * from './country-intake.model';
 export * from './country.model';
 export * from './diet-data-sources.model';
@@ -9,5 +10,6 @@ export * from './impact-total-food-availability.model';
 export * from './micronutrient.model';
 export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
+
 
 
