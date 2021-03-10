@@ -38,6 +38,14 @@ export class CountryIntakeControllerController {
       }
     };
     let data = await this.countryIntakeGeojsonRepository.find(filter)
+    // Temp insert dummy threshold values
+    if (data[0].geojson) {
+      (data[0].geojson as any).features.forEach((feature: any) => {
+        console.log(feature.properties);
+        feature.properties.mn_threshold = 0;
+        feature.properties.mn_threshold_unit = '%';
+      })
+    }
     return new StandardJsonResponse<Array<CountryIntakeGeojson>>(
       `${data.length} top results returned.`,
       data,
