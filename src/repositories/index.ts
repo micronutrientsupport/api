@@ -11,3 +11,4 @@ export * from './country-intake.repository';
 export * from './top-20-mn-per-country.repository';
 export * from './top-20-mn-per-hhsurvey.repository';
 export * from './country-intake-geojson.repository';
+export * from './subregion-intake-geojson.repository';
