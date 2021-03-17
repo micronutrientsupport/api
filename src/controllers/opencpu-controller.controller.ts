@@ -11,7 +11,13 @@ export class OpencpuControllerController {
     protected opencpuService: OpencpuService,
   ) { }
 
-  @get('/library/{string}/{pattern}/{replacement}')
+  @get('/library/{string}/{pattern}/{replacement}', {
+    summary: 'OpenCPU StringReplace',
+    responses: {
+      '200': 'Thing',
+    },
+  }
+  )
   async stringReplace(
     @param.path.string('string') string: string,
     @param.path.string('pattern') pattern: string,
@@ -20,7 +26,12 @@ export class OpencpuControllerController {
     return await this.opencpuService.stringReplace(string, pattern, replacement);
   }
 
-  @get('/lib')
+  @get('/lib', {
+    summary: 'OpenCPU Lib',
+    responses: {
+      '200': 'Thing',
+    },
+  })
   async getLib(): Promise<string[]> {
     let lib = await this.opencpuService.library();
     return lib.split("\n");

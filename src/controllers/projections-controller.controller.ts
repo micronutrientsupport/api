@@ -23,13 +23,15 @@ export class ProjectionsControllerController {
   ) { }
 
   @get('/projections/total/{countryId}/{micronutrientId}', {
+    summary: 'Get projected total micronutrient availability',
+    tags: ['impact'],
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
         .setObjectSchema(getModelSchemaRef(ImpactTotalFoodAvailability))
         .toObject(),
   })
-  async findTotal(
+  async getTotalMNAvailabity(
     @param.path.string('countryId') countryId: string,
     @param.path.string('micronutrientId') micronutrientId: string): Promise<object> {
     let filter: Filter = {
@@ -63,6 +65,8 @@ export class ProjectionsControllerController {
   }
 
   @get('/projections/summary/{countryId}/{micronutrientId}/{scenarioId}', {
+    summary: 'Projections Summary',
+    tags: ['impact'],
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
@@ -88,6 +92,8 @@ export class ProjectionsControllerController {
   }
 
   @get('/projections/commodity/{countryId}/{micronutrientId}', {
+    summary: 'Commodity 2',
+    tags: ['impact'],
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
@@ -111,6 +117,8 @@ export class ProjectionsControllerController {
   }
 
   @get('/projections/commodity/{countryId}/{micronutrientId}/{scenarioId}', {
+    summary: 'Commodity 1',
+    tags: ['impact'],
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
@@ -136,6 +144,8 @@ export class ProjectionsControllerController {
   }
 
   @get('/projections/food-group/{countryId}/{micronutrientId}', {
+    summary: 'FoodGroup',
+    tags: ['impact'],
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
@@ -159,6 +169,8 @@ export class ProjectionsControllerController {
   }
 
   @get('/projections/food-group/{countryId}/{micronutrientId}/{scenarioId}', {
+    summary: 'FoodGroup',
+    tags: ['impact'],
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')

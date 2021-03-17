@@ -20,6 +20,7 @@ export class CountryIntakeControllerController {
 
 
   @get('/diet/country/geojson/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}', {
+    summary: 'Country GeoJSON',
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
@@ -55,6 +56,7 @@ export class CountryIntakeControllerController {
   }
 
   @get('/diet/household/geojson/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}', {
+    summary: 'Household GeoJSON',
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')

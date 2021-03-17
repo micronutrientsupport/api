@@ -1,5 +1,5 @@
 import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
+import {ApplicationConfig, createBindingFromClass} from '@loopback/core';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {CrudRestComponent} from '@loopback/rest-crud';
@@ -11,6 +11,7 @@ import {ServiceMixin} from '@loopback/service-proxy';
 import * as dotenv from 'dotenv';
 import * as dotenvExt from 'dotenv-extended';
 import path from 'path';
+import {InfoSpecEnhancer} from './enhancers/infoSpecEnhancer';
 import {ReadOnlyRestComponent} from './rest-components/readonly';
 import {MySequence} from './sequence';
 export {ApplicationConfig};
@@ -20,6 +21,8 @@ export class ApiApplication extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     super(options);
+
+    this.add(createBindingFromClass(InfoSpecEnhancer));
 
     // Set up the custom sequence
     this.sequence(MySequence);

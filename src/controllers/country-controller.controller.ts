@@ -18,6 +18,7 @@ export class CountryController {
   ) { }
 
   @get('/country', {
+    summary: 'Country',
     responses:
       new StandardOpenApiResponses('Array of Country model instances')
         .setDataType('array')

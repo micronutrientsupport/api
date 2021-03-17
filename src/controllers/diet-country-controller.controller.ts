@@ -19,6 +19,7 @@ export class DietCountryControllerController {
   ) { }
 
   @get('/diet/household/top20/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}', {
+    summary: 'Top20 Household',
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
@@ -46,6 +47,7 @@ export class DietCountryControllerController {
   }
 
   @get('/diet/country/top20/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}', {
+    summary: 'Top20 Household',
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')

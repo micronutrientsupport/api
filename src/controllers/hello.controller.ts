@@ -5,7 +5,12 @@
 import {get} from '@loopback/rest';
 
 export class HelloController {
-  @get('/hello')
+  @get('/hello', {
+    summary: 'Hello',
+    responses: {
+      '200': 'Thing',
+    },
+  })
   hello(): string {
     return 'Hello world!';
   }

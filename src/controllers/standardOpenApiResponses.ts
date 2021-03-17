@@ -9,7 +9,7 @@ export class StandardOpenApiResponses {
 
   constructor(
     private description: string,
-  ) {}
+  ) { }
 
   public setDataType(dataType: DataType): this {
     this.dataType = dataType;
@@ -44,6 +44,7 @@ export class StandardOpenApiResponses {
     return {
       '200': {
         description: this.description,
+        summary: this.description,
         content: {
           'application/json': {
             schema: {

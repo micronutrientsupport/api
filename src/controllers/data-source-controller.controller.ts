@@ -17,6 +17,7 @@ export class DataSourceControllerController {
   ) { }
 
   @get('/data-source/{countryId}/{dataType}', {
+    summary: 'Country data source',
     responses:
       new StandardOpenApiResponses('Data sources')
         .setDataType('array')
