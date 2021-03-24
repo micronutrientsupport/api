@@ -1,4 +1,4 @@
-primaryBranch: develop
+primaryBranch: main
 branches: [
   branch: develop
 ]
