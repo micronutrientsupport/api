@@ -32,7 +32,6 @@ export class CountryIntakeGeojson extends Entity {
 
   @property({
     type: 'string',
-    id: true,
     postgresql: {columnName: 'mn_name', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
   })
   mnName?: string;
