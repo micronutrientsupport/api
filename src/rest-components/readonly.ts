@@ -98,7 +98,16 @@ class ReadOnlyCrudRestApiBuilder extends CrudRestApiBuilder {
         );
       }
 
+      @oas.visibility(OperationVisibility.UNDOCUMENTED)
+      async findById() {
+        throw new HttpErrors.NotFound(
+          `Endpoint "DELETE ${config.basePath}" not found.`,
+        );
+      }
+
       @get('/', {
+        summary: 'Get ' + entityClass.modelName,
+        tags: ['auto'],
         responses:
           new StandardOpenApiResponses((config.custom) ? (config.custom as string) : `Array of ${entityClass.modelName} model instances`)
             .setDataType('array')

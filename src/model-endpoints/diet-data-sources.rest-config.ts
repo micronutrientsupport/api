@@ -5,6 +5,6 @@ const config: ModelCrudRestApiConfig = {
   model: DietDataSources,
   pattern: 'ReadOnly',
   dataSource: 'db',
-  basePath: '/diet-data-sources',
+  basePath: '/diet-data-source',
 };
 module.exports = config;
