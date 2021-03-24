@@ -107,7 +107,7 @@ class ReadOnlyCrudRestApiBuilder extends CrudRestApiBuilder {
 
       @get('/', {
         summary: 'Get ' + entityClass.modelName,
-        tags: ['thing'],
+        tags: ['auto'],
         responses:
           new StandardOpenApiResponses((config.custom) ? (config.custom as string) : `Array of ${entityClass.modelName} model instances`)
             .setDataType('array')
