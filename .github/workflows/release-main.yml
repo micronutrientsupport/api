@@ -14,9 +14,9 @@ jobs:
        - name: Initialize Pull Request
          uses: repo-sync/pull-request@v2
          with:
-           source_branch: github.event.pull_request.head.ref
+           source_branch: "${{ github.event.pull_request.head.ref }}"
            destination_branch: "main"
-           pr_title: "Release ${{ toJSON(github.event.pull_request.head.ref) }} to main"
+           pr_title: "Release ${{ github.event.pull_request.head.ref }} to main"
            pr_body: ":crown: *An automated PR*"             
            pr_assignee: "bgsandan"                           # Comma-separated list (no spaces)
            pr_label: "auto-pr"                               # Comma-separated list (no spaces)
