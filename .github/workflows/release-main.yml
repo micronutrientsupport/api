@@ -5,8 +5,8 @@ on:
 
 jobs:
  pullrequest:
-   #if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+   if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
    runs-on: ubuntu-latest
    steps: 
        - name: print
-         run: echo "${{ github.event_name }}"
+         run: echo "${{ github.event.pull_request.labels }}"
