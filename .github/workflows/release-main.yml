@@ -9,5 +9,5 @@ jobs:
    runs-on: ubuntu-latest
    steps: 
        - name: print
-         run: echo "${{ toJSON(github.event) }}"
+         run: echo "${{ toJSON(github.event.pull_request) }}"
               echo "${{ toJSON(github.event.sender) }}"
