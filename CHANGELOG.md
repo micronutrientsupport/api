@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.15](https://www.github.com/micronutrientsupport/api/compare/v1.4.14...v1.4.15) (2021-03-25)
+
+
+### Miscellaneous
+
+* CI auto PR ([1924a45](https://www.github.com/micronutrientsupport/api/commit/1924a452e53cc395614355b2044fbd8de84f380b))
+
 ### [1.4.14](https://www.github.com/micronutrientsupport/api/compare/v1.4.13...v1.4.14) (2021-03-25)
 
 
