@@ -1,14 +1,14 @@
           
 on:
   pull_request:
-    branches:
-      - develop
-    types: [closed]
+#    branches:
+#      - develop
+#    types: [closed]
 
 jobs:
   releasemain:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+ #   if: github.event.pull_request.merged == true
     steps: 
        - name: print
          run: echo ${{ github.pull_request }}
