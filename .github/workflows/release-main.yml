@@ -4,7 +4,7 @@ on:
 name: release-main
 jobs:
  pullrequest:
-   if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && contains(toJSON(github.event.pull_request.labels), 'autorelease')
+   if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && contains(toJSON(github.event.pull_request.labels), 'autorelease') && github.base_ref == 'develop'
    runs-on: ubuntu-latest
    steps: 
        - name: print
