@@ -1,0 +1,12 @@
+          
+on:
+  pull_request:
+    branches:
+      - deploy
+    types: [closed]
+
+jobs:
+  releasemain:
+    if: github.event.pull_request.merged == true
+    steps: 
+       echo github.event.pull_request
