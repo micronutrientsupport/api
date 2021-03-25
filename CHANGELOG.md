@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.11](https://www.github.com/micronutrientsupport/api/compare/v1.4.10...v1.4.11) (2021-03-25)
+
+
+### Miscellaneous
+
+* CI ([216da0d](https://www.github.com/micronutrientsupport/api/commit/216da0df4dad16163f6ea363f52e5bc4721e3373))
+
 ### [1.4.10](https://www.github.com/micronutrientsupport/api/compare/v1.4.9...v1.4.10) (2021-03-25)
 
 
