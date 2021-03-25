@@ -7,6 +7,8 @@ on:
 
 jobs:
   releasemain:
+    runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps: 
-       echo github.event.pull_request
+       - name: print
+         run: echo ${{ github.pull_request }}
