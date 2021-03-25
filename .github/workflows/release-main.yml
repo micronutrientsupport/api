@@ -1,8 +1,8 @@
           
 on:
-  pull_request:
-#    branches:
-#      - develop
+  push:
+    branches:
+      - develop
 #    types: [closed]
 
 jobs:
@@ -11,4 +11,4 @@ jobs:
  #   if: github.event.pull_request.merged == true
     steps: 
        - name: print
-         run: echo ${{ github.pull_request }}
+         run: echo "${{ github.pull_request }}"
