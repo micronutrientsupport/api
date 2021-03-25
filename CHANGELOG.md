@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.1.0](https://www.github.com/micronutrientsupport/api/compare/v1.0.0...v1.1.0) (2021-03-24)
+## [1.1.0](https://www.github.com/micronutrientsupport/api/compare/v1.0.0...v1.1.0) (2021-03-25)
 
 
 ### Features
@@ -13,6 +13,7 @@
 
 * adjust autorelease ([44d3832](https://www.github.com/micronutrientsupport/api/commit/44d383206e9d1ed7bbf88810fa5a12bcb76748d2))
 * adjust openapi tagging ([8ad4444](https://www.github.com/micronutrientsupport/api/commit/8ad444459cd28a253cf1947116e38a005d01294f))
+* reduce console clutter ([ea325c3](https://www.github.com/micronutrientsupport/api/commit/ea325c363fcfe3939595adf9f3d9f263a463014f))
 
 ## 1.0.0 (2021-03-24)
 
