@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/micronutrientsupport/api/compare/v1.3.0...v1.4.0) (2021-03-25)
+
+
+### Features
+
+* another nother pointless change ([4ecd16c](https://www.github.com/micronutrientsupport/api/commit/4ecd16c36cff8af637a6281cb5ff759eca864fcb))
+
 ## [1.3.0](https://www.github.com/micronutrientsupport/api/compare/v1.2.0...v1.3.0) (2021-03-25)
 
 
