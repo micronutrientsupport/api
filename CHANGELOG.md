@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/micronutrientsupport/api/compare/v1.4.30...v1.5.0) (2021-03-25)
+
+
+### Features
+
+* working CI deploy ([6a19b93](https://www.github.com/micronutrientsupport/api/commit/6a19b935503ec640f65d3adb51a48c25c21677aa))
+
 ### [1.4.30](https://www.github.com/micronutrientsupport/api/compare/v1.4.29...v1.4.30) (2021-03-25)
 
 
