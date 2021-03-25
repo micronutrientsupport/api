@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.25](https://www.github.com/micronutrientsupport/api/compare/v1.4.24...v1.4.25) (2021-03-25)
+
+
+### Miscellaneous
+
+* add CI automerge ([7dc1fc7](https://www.github.com/micronutrientsupport/api/commit/7dc1fc73d38be2309e5f7263a32cb72cb5a3c7d5))
+
 ### [1.4.24](https://www.github.com/micronutrientsupport/api/compare/v1.4.23...v1.4.24) (2021-03-25)
 
 
