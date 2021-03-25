@@ -118,10 +118,10 @@ class ReadOnlyCrudRestApiBuilder extends CrudRestApiBuilder {
         @param.filter(entityClass)
         filter?: Filter<T>,
       ): Promise<StandardJsonResponse<Array<typeof entityClass>>> {
-        console.log('Findy', typeof entityClass);
-        console.log(config)
+        //console.log('Findy', typeof entityClass);
+        //console.log(config)
         const result = await (this as any).find(filter);
-        console.log(result);
+        //console.log(result);
 
         return new StandardJsonResponse<Array<typeof entityClass>>(
           `${result.length} ${entityClass.modelName} returned.`,
