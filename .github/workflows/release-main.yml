@@ -6,9 +6,9 @@ on:
 #    types: [closed]
 
 jobs:
-  releasemain:
-    runs-on: ubuntu-latest
- #   if: github.event.pull_request.merged == true
-    steps: 
+ pullrequest:
+   if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+   runs-on: ubuntu-latest
+   steps: 
        - name: print
          run: echo "${{ github.pull_request }}"
