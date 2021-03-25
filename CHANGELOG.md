@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/micronutrientsupport/api/compare/v1.2.0...v1.3.0) (2021-03-25)
+
+
+### Features
+
+* another pointless change ([2d64562](https://www.github.com/micronutrientsupport/api/commit/2d645625dd13fb8346559fa517c31073aa85c301))
+* rename routes ([89802fd](https://www.github.com/micronutrientsupport/api/commit/89802fd5dcfd305386ac659af189a94528c48d44))
+
 ## [1.2.0](https://www.github.com/micronutrientsupport/api/compare/v1.1.0...v1.2.0) (2021-03-25)
 
 
