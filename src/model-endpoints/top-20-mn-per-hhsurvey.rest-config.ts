@@ -5,6 +5,6 @@ const config: ModelCrudRestApiConfig = {
   model: Top20MnPerHhsurvey,
   pattern: 'ReadOnly',
   dataSource: 'db',
-  basePath: '/top20mn-per-hhsurvey',
+  basePath: '/top20mn-per-hh',
 };
 module.exports = config;
