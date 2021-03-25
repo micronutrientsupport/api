@@ -1,4 +1,7 @@
-primaryBranch: develop
+primaryBranch: main
+branches: [
+  branch: develop
+]
 releaseLabels: [release]
 handleGHRelease: true
 changelogPath: CHANGELOG.md
