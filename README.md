@@ -1,3 +1,22 @@
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/micronutrientsupport/glossary">
+    <img src="https://avatars3.githubusercontent.com/u/59699004?s=400" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">MAPS Data API</h3>
+
+  <p align="center">
+    API for accessing data
+    <br />
+    <a href="https://github.com/micronutrientsupport/api/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/micronutrientsupport/api/issues">Request Feature</a>
+  </p>
+</p>
+
+
 # MAPS Data API
 
 This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/lb4/Command-line-interface.html) with the
