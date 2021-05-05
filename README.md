@@ -10,6 +10,8 @@
   <p align="center">
     API for accessing data
     <br />
+    <a href="https://api.micronutrient.support/explorer">OpenAPI explorer</a>
+    .
     <a href="https://github.com/micronutrientsupport/api/issues">Report Bug</a>
     ·
     <a href="https://github.com/micronutrientsupport/api/issues">Request Feature</a>
