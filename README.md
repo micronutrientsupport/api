@@ -5,7 +5,7 @@
     <img src="https://avatars3.githubusercontent.com/u/59699004?s=400" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">MAPS Data API</h3>
+  <h3 align="center">MAPS Data Access API</h3>
 
   <p align="center">
     API for accessing data
