@@ -71,7 +71,9 @@ npm run lint:fix
 npm test
 ```
 
-## Semvar
+## Versioning
+
+The API is versioned using semvar versioning based on commit message history (https://www.conventionalcommits.org/en/v1.0.0/)
 
 ## What's next
 
