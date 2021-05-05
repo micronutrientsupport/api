@@ -71,6 +71,8 @@ npm run lint:fix
 npm test
 ```
 
+## Semvar
+
 ## What's next
 
 Please check out [LoopBack 4 documentation](https://loopback.io/doc/en/lb4/) to
