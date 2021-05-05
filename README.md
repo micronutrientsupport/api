@@ -73,7 +73,7 @@ npm test
 
 ## Versioning
 
-The API is versioned using semvar versioning based on commit message history (https://www.conventionalcommits.org/en/v1.0.0/)
+The API is automatically versioned using semvar versioning based on commit message history (https://www.conventionalcommits.org/en/v1.0.0/)
 
 ## What's next
 
