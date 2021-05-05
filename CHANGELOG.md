@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.6.7](https://www.github.com/micronutrientsupport/api/compare/v1.6.6...v1.6.7) (2021-05-05)
+
+
+### Miscellaneous
+
+* README update ([d37be20](https://www.github.com/micronutrientsupport/api/commit/d37be2072e960a210b5cb4e92bc78fc7b68a51ff))
+
 ### [1.6.6](https://www.github.com/micronutrientsupport/api/compare/v1.6.5...v1.6.6) (2021-05-05)
 
 
