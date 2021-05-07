@@ -7,6 +7,7 @@ export interface OpencpuService {
   // mapped to REST/SOAP/gRPC operations as stated in the datasource
   // json file.
   stringReplace(string: string, pattern: string, replacement: string): Promise<OcpuLibrary>;
+  zinc(theData: object, group: string, magic: number): Promise<Response>;
   library(): string
 }
 
