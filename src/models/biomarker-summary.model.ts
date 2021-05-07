@@ -9,6 +9,7 @@ import {Entity, model, property} from '@loopback/repository';
 export class BiomarkerSummary extends Entity {
   @property({
     type: 'number',
+    id: true,
     scale: 0,
     postgresql: {columnName: 'survey_id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
   })
@@ -16,6 +17,7 @@ export class BiomarkerSummary extends Entity {
 
   @property({
     type: 'string',
+    id: true,
     postgresql: {columnName: 'group_id', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
   })
   groupId?: string;
