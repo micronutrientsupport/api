@@ -15,3 +15,4 @@ export * from './top-20-mn-per-hhsurvey.model';
 
 
 
+export * from './biomarker-summary.model';
