@@ -18,13 +18,31 @@ const config = {
         url: "https://opencpu.micronutrient.support/ocpu/user/biomarkers/library/summaryStats/R/zinc/json",
         body: {
           theData: "{theData:object}",
-          group: "{group:string}",
-          magic: "{magic:number}"
+          groupId: "{groupId:string}",
+          thresholdUpper: "{thresholdUpper:number}",
+          thresholdLower: "{thresholdLower:number}"
         },
         fullResponse: true
       },
       functions: {
-        zinc: ["theData", "group", "magic"]
+        zinc: ["theData", "groupId", "thresholdUpper", "thresholdLower"]
+        // hello: ["string", "pattern", "replacement"]
+      },
+    },
+    {
+      template: {
+        method: "POST",
+        url: "https://opencpu.micronutrient.support/ocpu/user/biomarkers/library/summaryStats/R/{biomarker}/json",
+        body: {
+          theData: "{theData:object}",
+          groupId: "{groupId:string}",
+          thresholdUpper: "{thresholdUpper:number}",
+          thresholdLower: "{thresholdLower:number}"
+        },
+        fullResponse: true
+      },
+      functions: {
+        biomarker: ["biomarker", "theData", "groupId", "thresholdUpper", "thresholdLower"]
         // hello: ["string", "pattern", "replacement"]
       },
     },
