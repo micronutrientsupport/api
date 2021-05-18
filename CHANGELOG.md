@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://www.github.com/micronutrientsupport/api/compare/v1.6.7...v1.7.0) (2021-05-18)
+
+
+### Features
+
+* **cache:** Add decorator to set cache expire header on endpoints ([ef53b61](https://www.github.com/micronutrientsupport/api/commit/ef53b6109f5849cca424990e4e5d823779f4be9e))
+
 ### [1.6.7](https://www.github.com/micronutrientsupport/api/compare/v1.6.6...v1.6.7) (2021-05-05)
 
 
