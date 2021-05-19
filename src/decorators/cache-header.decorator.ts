@@ -16,7 +16,7 @@ export function CacheHeader(durationInSeconds: number) {
       let controller = this as typeof target;
       if (controller.hasOwnProperty('response')) {
         // Set the cache header output
-        (this as any).response.set('Cache-Control', 'max-age=' + durationInSeconds);
+        (this as any).response.set('Surrogate-Control', 'max-age=' + durationInSeconds);
       }
       else {
         console.warn('Controller ', target, ' does not @inject the response object.  Cache header not set')
