@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.1](https://www.github.com/micronutrientsupport/api/compare/v1.7.0...v1.7.1) (2021-05-19)
+
+
+### Miscellaneous
+
+* switch header from cache-control to surrogate-control ([a19f12a](https://www.github.com/micronutrientsupport/api/commit/a19f12a5c54d301f2e53745d0b7b27053ad10d56))
+
 ## [1.7.0](https://www.github.com/micronutrientsupport/api/compare/v1.6.7...v1.7.0) (2021-05-18)
 
 
