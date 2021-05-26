@@ -55,6 +55,39 @@ export class BiomarkerSummary extends Entity {
   isPregnant?: boolean;
 
   @property({
+    type: 'boolean',
+    postgresql: {columnName: 'was_fasting', dataType: 'boolean', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+  })
+  wasFasting?: boolean;
+
+  @property({
+    type: 'string',
+    postgresql: {columnName: 'am_or_pm', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+  })
+  amOrPm?: string;
+
+  @property({
+    type: 'number',
+    scale: 0,
+    postgresql: {columnName: 'survey_cluster', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+  })
+  surveyCluster?: number;
+
+  @property({
+    type: 'number',
+    scale: 0,
+    postgresql: {columnName: 'survey_strata', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+  })
+  surveyStrata?: number;
+
+  @property({
+    type: 'number',
+    scale: 0,
+    postgresql: {columnName: 'survey_weight', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+  })
+  surveyWeight?: number;
+
+  @property({
     type: 'number',
     precision: 5,
     scale: 2,

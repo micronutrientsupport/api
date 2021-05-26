@@ -61,6 +61,11 @@ export class BiomarkerControllerController {
         urbanity: true,
         ageInMonths: true,
         isPregnant: true,
+        wasFasting: true,
+        amOrPm: true,
+        surveyCluster: true,
+        surveyStrata: true,
+        surveyWeight: true
       }
     };
     (filter as any).fields[biomarker] = true;
