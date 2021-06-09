@@ -4,6 +4,7 @@ import {Filter, repository} from '@loopback/repository';
 import {get, getModelSchemaRef, param} from '@loopback/rest';
 import {CountryIntake, CountryIntakeGeojson, SubregionIntakeGeojson} from '../models';
 import {CountryIntakeGeojsonRepository, CountryIntakeRepository, CountryRepository, SubregionIntakeGeojsonRepository} from '../repositories';
+import {toGeoJSONFeatureCollection} from '../utils/toGeoJSON';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
 
@@ -47,7 +48,6 @@ export class CountryIntakeControllerController {
     // Temp insert dummy threshold values
     if (data[0].geojson) {
       (data[0].geojson as any).features.forEach((feature: any) => {
-        console.log(feature.properties);
         feature.properties.mn_threshold = 0;
         feature.properties.mn_threshold_unit = '%';
       })
@@ -165,7 +165,7 @@ export class CountryIntakeControllerController {
     }
 
     data = data.map(val => {
-      console.log(val)
+
 
       const mn_col: string = (mnMap as any)[micronutrientId];
       console.log(mn_col);
@@ -189,6 +189,8 @@ export class CountryIntakeControllerController {
       let mnCo
       return res;
     })
+
+    data = [toGeoJSONFeatureCollection(data)];
 
     return new StandardJsonResponse<Array<CountryIntake>>(
       `${data.length} top results returned.`,

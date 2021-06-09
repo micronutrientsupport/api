@@ -1,6 +1,6 @@
 import {Entity, model, property} from '@loopback/repository';
 
-@model({settings: {idInjection: false, postgresql: {schema: process.env.DB_SCHEMA, table: 'vw_country'}}})
+@model({settings: {idInjection: false, postgresql: {schema: 'andan-biomarker', table: 'vw_country'}}})
 export class Country extends Entity {
   @property({
     type: 'string',
