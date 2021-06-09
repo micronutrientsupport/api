@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.0](https://www.github.com/micronutrientsupport/api/compare/v1.8.0...v1.9.0) (2021-06-09)
+
+
+### Features
+
+* make scenario response more like baseline response ([1d29497](https://www.github.com/micronutrientsupport/api/commit/1d29497c7f82d86a28605c7b185a5b20a4b7db8d))
+* update scenario to return geoJSON ([82e2e6e](https://www.github.com/micronutrientsupport/api/commit/82e2e6e64b6c912c2a179f9466bc84cec7ca00fd))
+
 ## [1.8.0](https://www.github.com/micronutrientsupport/api/compare/v1.7.1...v1.8.0) (2021-06-09)
 
 
