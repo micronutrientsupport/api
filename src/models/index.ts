@@ -15,3 +15,10 @@ export * from './top-20-mn-per-hhsurvey.model';
 
 
 
+<<<<<<< Updated upstream
+=======
+export * from './biomarker-summary.model';
+export * from './fooditem.model';
+export * from './food-group-items.model';
+export * from './food-genus-nutrients-pivot.model';
+>>>>>>> Stashed changes

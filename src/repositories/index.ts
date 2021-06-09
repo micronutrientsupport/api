@@ -12,3 +12,10 @@ export * from './top-20-mn-per-country.repository';
 export * from './top-20-mn-per-hhsurvey.repository';
 export * from './country-intake-geojson.repository';
 export * from './subregion-intake-geojson.repository';
+<<<<<<< Updated upstream
+=======
+export * from './biomarker-summary.repository';
+export * from './fooditem.repository';
+export * from './food-group-items.repository';
+export * from './food-genus-nutrients-pivot.repository';
+>>>>>>> Stashed changes

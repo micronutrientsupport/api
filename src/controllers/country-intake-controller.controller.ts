@@ -2,8 +2,8 @@
 
 import {Filter, repository} from '@loopback/repository';
 import {get, getModelSchemaRef, param} from '@loopback/rest';
-import {CountryIntakeGeojson, SubregionIntakeGeojson} from '../models';
-import {CountryIntakeGeojsonRepository, SubregionIntakeGeojsonRepository} from '../repositories';
+import {CountryIntake, CountryIntakeGeojson, SubregionIntakeGeojson} from '../models';
+import {CountryIntakeGeojsonRepository, CountryIntakeRepository, SubregionIntakeGeojsonRepository} from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
 
@@ -14,6 +14,8 @@ export class CountryIntakeControllerController {
   constructor(
     @repository(CountryIntakeGeojsonRepository)
     public countryIntakeGeojsonRepository: CountryIntakeGeojsonRepository,
+    @repository(CountryIntakeRepository)
+    public countryIntakeRepository: CountryIntakeRepository,
     @repository(SubregionIntakeGeojsonRepository)
     public subregionIntakeGeojsonRepository: SubregionIntakeGeojsonRepository
   ) { }
@@ -84,6 +86,36 @@ export class CountryIntakeControllerController {
     //   })
     // }
     return new StandardJsonResponse<Array<CountryIntakeGeojson>>(
+      `${data.length} top results returned.`,
+      data,
+    );
+  }
+
+  @get('/diet/scenario/composition', {
+    responses: {
+      '200': {
+        description: 'Array of CountryIntake model instances',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'array',
+              items: getModelSchemaRef(CountryIntake, {includeRelations: true}),
+            },
+          },
+        },
+      },
+    },
+  })
+  async findScenario(
+    @param({name: 'countryId', in: 'query', required: true}) countryId: string,
+    @param({name: 'micronutrientId', in: 'query', required: true}) micronutrientId: string,
+    @param({name: 'fooditemId', in: 'query', required: true}) fooditemId: string,
+    @param({name: 'compositionId', in: 'query', required: true}) compositionId: number,
+    @param({name: 'newValue', in: 'query', required: true}) newValue: number,
+    @param.filter(CountryIntake) filter?: Filter<CountryIntake>,
+  ): Promise<object> {
+    let data = await this.countryIntakeRepository.runCompositionScenario(countryId, compositionId, fooditemId, micronutrientId, newValue);
+    return new StandardJsonResponse<Array<CountryIntake>>(
       `${data.length} top results returned.`,
       data,
     );
