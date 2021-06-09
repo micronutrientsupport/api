@@ -19,6 +19,7 @@ export class CountryIntakeRepository extends DefaultCrudRepository<
     //console.log(this.modelClass.definition.settings)
     let o: Options;
     let schema = await this.dataSource.execute('SET schema \'andan-scenario\';');
+    console.log(await this.dataSource.execute('SELECT * FROM "andan-scenario".create_country_scenario($1, $2::text, $3::text, $4) WHERE country_id=$5', [fctSourceId, fooditemId, micronutrientId, newValue, countryId]))
     let result: CountryIntake[] = await this.dataSource.execute('SELECT * FROM "andan-scenario".create_country_scenario($1, $2::text, $3::text, $4) WHERE country_id=$5', [fctSourceId, fooditemId, micronutrientId, newValue, countryId]);
 
     return result;

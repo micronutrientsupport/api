@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "MAPS Micronutrient Support Tool API",
   "keywords": [
     "loopback-application",
@@ -57,6 +57,7 @@
     "@loopback/service-proxy": "^3.0.5",
     "dotenv": "^8.2.0",
     "dotenv-extended": "^2.9.0",
+    "geojson": "^0.5.0",
     "loopback-connector-postgresql": "^5.2.1",
     "loopback-connector-rest": "^3.7.0",
     "tslib": "^2.0.0"
