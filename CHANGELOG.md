@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0](https://www.github.com/micronutrientsupport/api/compare/v1.7.1...v1.8.0) (2021-06-09)
+
+
+### Features
+
+* Add initial routes for simple dietary change (composition) scenarios ([7331252](https://www.github.com/micronutrientsupport/api/commit/733125295495ed9fd1bb4ac9856faaa6b52f96bb))
+
+
+### Miscellaneous
+
+* fix merge conflicts in index.ts files ([cd0b949](https://www.github.com/micronutrientsupport/api/commit/cd0b9490a956e10a289560fadf2492e333657173))
+
 ### [1.7.1](https://www.github.com/micronutrientsupport/api/compare/v1.7.0...v1.7.1) (2021-05-19)
 
 
