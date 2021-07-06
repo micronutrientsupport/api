@@ -1,16 +1,13 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({
-  settings: {
-    idInjection: false,
-    postgresql: {schema: 'andan-biomarker', table: 'biomarker_summary'}
-  }
+  settings: {idInjection: false, postgresql: {schema: 'bmgf', table: 'biomarker_summary'}}
 })
 export class BiomarkerSummary extends Entity {
   @property({
     type: 'number',
-    id: true,
     scale: 0,
+    id: true,
     postgresql: {columnName: 'survey_id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
   })
   surveyId?: number;
@@ -62,9 +59,9 @@ export class BiomarkerSummary extends Entity {
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'am_or_pm', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {columnName: 'time_of_day_sampled', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
   })
-  amOrPm?: string;
+  timeOfDaySampled?: string;
 
   @property({
     type: 'number',
@@ -85,7 +82,7 @@ export class BiomarkerSummary extends Entity {
     scale: 0,
     postgresql: {columnName: 'survey_weight', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
   })
-  surveyWeight?: number;
+  surveyWeights?: number;
 
   @property({
     type: 'number',
@@ -105,27 +102,27 @@ export class BiomarkerSummary extends Entity {
 
   @property({
     type: 'number',
-    precision: 3,
+    precision: 4,
     scale: 2,
-    postgresql: {columnName: 'stfr', dataType: 'numeric', dataLength: null, dataPrecision: 3, dataScale: 2, nullable: 'YES'},
+    postgresql: {columnName: 'stfr', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 2, nullable: 'YES'},
   })
   stfr?: number;
 
   @property({
     type: 'number',
-    precision: 3,
+    precision: 4,
     scale: 2,
-    postgresql: {columnName: 'rbp', dataType: 'numeric', dataLength: null, dataPrecision: 3, dataScale: 2, nullable: 'YES'},
+    postgresql: {columnName: 'rbp', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 2, nullable: 'YES'},
   })
   rbp?: number;
 
   @property({
     type: 'number',
-    precision: 3,
+    precision: 4,
     scale: 2,
-    postgresql: {columnName: 'serum_retinol', dataType: 'numeric', dataLength: null, dataPrecision: 3, dataScale: 2, nullable: 'YES'},
+    postgresql: {columnName: 'retinol', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 2, nullable: 'YES'},
   })
-  serumRetinol?: number;
+  retinol?: number;
 
   @property({
     type: 'number',
@@ -137,6 +134,14 @@ export class BiomarkerSummary extends Entity {
 
   @property({
     type: 'number',
+    precision: 3,
+    scale: 1,
+    postgresql: {columnName: 'ps_folate', dataType: 'numeric', dataLength: null, dataPrecision: 3, dataScale: 1, nullable: 'YES'},
+  })
+  psFolate?: number;
+
+  @property({
+    type: 'number',
     precision: 5,
     scale: 1,
     postgresql: {columnName: 'vitamin_b12', dataType: 'numeric', dataLength: null, dataPrecision: 5, dataScale: 1, nullable: 'YES'},
@@ -145,17 +150,17 @@ export class BiomarkerSummary extends Entity {
 
   @property({
     type: 'number',
-    precision: 3,
+    precision: 4,
     scale: 1,
-    postgresql: {columnName: 'zinc', dataType: 'numeric', dataLength: null, dataPrecision: 3, dataScale: 1, nullable: 'YES'},
+    postgresql: {columnName: 'zinc', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 1, nullable: 'YES'},
   })
   zinc?: number;
 
   @property({
     type: 'number',
-    precision: 3,
+    precision: 5,
     scale: 2,
-    postgresql: {columnName: 'crp', dataType: 'numeric', dataLength: null, dataPrecision: 3, dataScale: 2, nullable: 'YES'},
+    postgresql: {columnName: 'crp', dataType: 'numeric', dataLength: null, dataPrecision: 5, dataScale: 2, nullable: 'YES'},
   })
   crp?: number;
 

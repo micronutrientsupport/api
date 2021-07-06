@@ -7,7 +7,8 @@ export interface OpencpuService {
   // mapped to REST/SOAP/gRPC operations as stated in the datasource
   // json file.
   stringReplace(string: string, pattern: string, replacement: string): Promise<OcpuLibrary>;
-  zinc(theData: object, groupId: string, tresholdUpper: number, thresholdLower: number): Promise<{}>;
+  zinc(theData: object, biomarkerName: string, groupId: string, tresholds: object): Promise<{}>;
+  zinc2(theData: object, biomarkerName: string, groupId: string, tresholds: object): Promise<{}>;
   biomarker(biomarker: string, theData: object, groupId: string, tresholdUpper: number, thresholdLower: number): Promise<{}>;
   library(): string
 }

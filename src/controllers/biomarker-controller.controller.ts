@@ -29,12 +29,12 @@ export class BiomarkerControllerController {
     let theData = data;
     let filtered = theData.filter(val => val.groupId === groupId);
 
-    let out = await this.opencpuService.zinc(filtered, groupId, 100, 80);
-    console.log((out as any).headers.location + 'console');
-    console.log((out as any).body);
+    //let out = await this.opencpuService.zinc(filtered, groupId, 100, 80);
+    //console.log((out as any).headers.location + 'console');
+    //console.log((out as any).body);
 
     return new StandardJsonResponse<Array<{}>>(
-      `${(out as any).body.length} Regional Biomarker summaries returned.`, (out as any).body,
+      `${(data as any).body.length} Regional Biomarker summaries returned.`, (data as any).body,
     );
   }
 
@@ -58,21 +58,22 @@ export class BiomarkerControllerController {
       },
       fields: {
         groupId: true,
-        urbanity: true,
+        regionName: true,
         ageInMonths: true,
         isPregnant: true,
         wasFasting: true,
-        amOrPm: true,
+        timeOfDaySampled: true,
         surveyCluster: true,
         surveyStrata: true,
-        surveyWeight: true
+        surveyWeights: true
       }
     };
     (filter as any).fields[biomarker] = true;
     return this.biomarkerSummaryRepository.find(filter)
       .then(async (biomarkerSummaries: BiomarkerSummary[]) => {
+        // console.log('Summaries:', biomarkerSummaries);
         try {
-          let out = await this.opencpuService.biomarker('zinc', biomarkerSummaries, groupId, 100, 2);
+          let out = await this.opencpuService.zinc(biomarkerSummaries, 'zinc', groupId, {up: 100});
           console.log((out as any).headers.location + 'console');
           console.log((out as any).body);
           console.log(process.env.npm_package_version);
@@ -85,10 +86,10 @@ export class BiomarkerControllerController {
           return {}
         }
 
-        // return new StandardJsonResponse<Array<BiomarkerSummary>>(
-        //   `${biomarkerSummaries.length} BiomarkerSummaries returned.`,
-        //   biomarkerSummaries,
-        // );
+        return new StandardJsonResponse<Array<BiomarkerSummary>>(
+          `${biomarkerSummaries.length} BiomarkerSummaries returned.`,
+          biomarkerSummaries,
+        );
       });
   }
 }

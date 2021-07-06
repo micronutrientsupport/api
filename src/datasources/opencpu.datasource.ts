@@ -15,17 +15,34 @@ const config = {
     {
       template: {
         method: "POST",
-        url: "https://opencpu.micronutrient.support/ocpu/user/biomarkers/library/summaryStats/R/zinc/json",
+        url: "https://opencpu.micronutrient.support/ocpu/apps/micronutrientsupport/biomarkerstats/R/SummaryStats/json",
         body: {
           theData: "{theData:object}",
+          biomarkerName: "{biomarkerName:string}",
           groupId: "{groupId:string}",
-          thresholdUpper: "{thresholdUpper:number}",
-          thresholdLower: "{thresholdLower:number}"
+          thresholds: "{thresholds:object}",
         },
         fullResponse: true
       },
       functions: {
-        zinc: ["theData", "groupId", "thresholdUpper", "thresholdLower"]
+        zinc: ["theData", "biomarkerName", "groupId", "thresholds"]
+        // hello: ["string", "pattern", "replacement"]
+      },
+    },
+    {
+      template: {
+        method: "POST",
+        url: "https://opencpu.micronutrient.support/ocpu/user/biomarkers/library/summaryStats/R/SummaryStats/json",
+        body: {
+          theData: "{theData:object}",
+          biomarkerName: "{biomarkerName:string}",
+          groupId: "{groupId:string}",
+          thresholds: "{thresholds:object}",
+        },
+        fullResponse: true
+      },
+      functions: {
+        zinc2: ["theData", "biomarkerName", "groupId", "thresholds"]
         // hello: ["string", "pattern", "replacement"]
       },
     },
