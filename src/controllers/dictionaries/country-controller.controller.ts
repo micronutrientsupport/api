@@ -1,14 +1,13 @@
 import {inject} from '@loopback/core';
-import {
-
-  repository
-} from '@loopback/repository';
+import {Filter, repository} from '@loopback/repository';
 import {
   get,
   getModelSchemaRef,
-
-  Response, RestBindings
+  param,
+  Response,
+  RestBindings,
 } from '@loopback/rest';
+import {CacheHeader} from '../../decorators/cache-header.decorator';
 //import {CacheHeader} from '../../decorators/cache-header.decorator';
 import {Country} from '../../models';
 import {CountryRepository} from '../../repositories';
@@ -19,24 +18,28 @@ export class CountryController {
   constructor(
     @repository(CountryRepository)
     public countryRepository: CountryRepository,
-    @inject(RestBindings.Http.RESPONSE) public response: Response
-  ) { }
+    @inject(RestBindings.Http.RESPONSE) public response: Response,
+  ) {}
 
-  //@CacheHeader(600)
+  @CacheHeader(600)
   @get('/country', {
-    responses:
-      new StandardOpenApiResponses('Array of Country model instances')
-        .setDataType('array')
-        .setObjectSchema(getModelSchemaRef(Country))
-        .toObject(),
+    responses: new StandardOpenApiResponses('Array of Country model instances')
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(Country))
+      .toObject(),
   })
-  async find(): Promise<StandardJsonResponse<Array<Country>>> {
-    return this.countryRepository.find()
-      .then((countries: Country[]) => {
-        return new StandardJsonResponse<Array<Country>>(
-          `${countries.length} Countries returned.`,
-          countries,
-        );
-      });
+  async find(
+    @param.query.string('countryId') countryId: string,
+  ): Promise<StandardJsonResponse<Array<Country>>> {
+    const filter: Filter = {
+      where: {
+        id: countryId,
+      },
+    };
+    const countries = await this.countryRepository.find(filter);
+    return new StandardJsonResponse<Array<Country>>(
+      `${countries.length} Countries returned.`,
+      countries,
+    );
   }
 }
