@@ -7,7 +7,6 @@ import {BiomarkerSummary} from '../models/biomarker-summary.model';
 import {BiomarkerSummaryRepository} from '../repositories/biomarker-summary.repository';
 import {OpencpuService} from '../services';
 import {StandardJsonResponse} from './standardJsonResponse';
-import data from './testData';
 
 export class BiomarkerControllerController {
   constructor(
@@ -15,31 +14,11 @@ export class BiomarkerControllerController {
     public biomarkerSummaryRepository: BiomarkerSummaryRepository,
     @inject('services.OpencpuService')
     protected opencpuService: OpencpuService,
-    @inject(RestBindings.Http.RESPONSE) public response: Response
-  ) { }
-
-  @get('/biomarkerdummy', {
-    responses: {}
-  })
-  async findDummy(
-    @param.query.string('surveyId') surveyId: number,
-    @param.query.string('groupId') groupId: string,
-    @param.query.string('biomarker') biomarker: number
-  ): Promise<{}> {
-    let theData = data;
-    let filtered = theData.filter(val => val.groupId === groupId);
-
-    //let out = await this.opencpuService.zinc(filtered, groupId, 100, 80);
-    //console.log((out as any).headers.location + 'console');
-    //console.log((out as any).body);
-
-    return new StandardJsonResponse<Array<{}>>(
-      `${(data as any).body.length} Regional Biomarker summaries returned.`, (data as any).body,
-    );
-  }
+    @inject(RestBindings.Http.RESPONSE) public response: Response,
+  ) {}
 
   @get('/biomarker', {
-    responses: {}
+    responses: {},
     // responses:
     //   new StandardOpenApiResponses('Array of BiomarkerSummary model instances')
     //     .setDataType('array')
@@ -49,41 +28,51 @@ export class BiomarkerControllerController {
   async find(
     @param.query.string('surveyId') surveyId: number,
     @param.query.string('groupId') groupId: string,
-    @param.query.string('biomarker') biomarker: number
+    @param.query.string('biomarker') biomarker: string,
+    @param.query.string('aggregationField') aggregationField: string,
   ): Promise<{}> {
-    let filter: Filter = {
+    const filter: Filter = {
       where: {
         surveyId: surveyId,
-        groupId: groupId
+        groupId: groupId,
       },
       fields: {
         groupId: true,
-        regionName: true,
+        wealthQuintile: true,
         ageInMonths: true,
         isPregnant: true,
         wasFasting: true,
         timeOfDaySampled: true,
         surveyCluster: true,
         surveyStrata: true,
-        surveyWeights: true
-      }
+        surveyWeights: true,
+      },
     };
     (filter as any).fields[biomarker] = true;
-    return this.biomarkerSummaryRepository.find(filter)
+    return this.biomarkerSummaryRepository
+      .find(filter)
       .then(async (biomarkerSummaries: BiomarkerSummary[]) => {
         // console.log('Summaries:', biomarkerSummaries);
         try {
-          let out = await this.opencpuService.zinc(biomarkerSummaries, 'zinc', groupId, {up: 100});
+          const out = await this.opencpuService.summaryStats(
+            biomarkerSummaries,
+            biomarker,
+            aggregationField,
+            groupId,
+            {up: 100},
+          );
           console.log((out as any).headers.location + 'console');
           console.log((out as any).body);
           console.log(process.env.npm_package_version);
           return new StandardJsonResponse<Array<{}>>(
-            `${(out as any).body.length} Regional Biomarker summaries returned.`, (out as any).body,
+            `${
+              (out as any).body.length
+            } Regional Biomarker summaries returned.`,
+            (out as any).body,
           );
-        }
-        catch (e) {
+        } catch (e) {
           console.log(e);
-          return {}
+          return {};
         }
 
         return new StandardJsonResponse<Array<BiomarkerSummary>>(

@@ -6,11 +6,13 @@ export interface OpencpuService {
   // this is where you define the Node.js methods that will be
   // mapped to REST/SOAP/gRPC operations as stated in the datasource
   // json file.
-  stringReplace(string: string, pattern: string, replacement: string): Promise<OcpuLibrary>;
-  zinc(theData: object, biomarkerName: string, groupId: string, tresholds: object): Promise<{}>;
-  zinc2(theData: object, biomarkerName: string, groupId: string, tresholds: object): Promise<{}>;
-  biomarker(biomarker: string, theData: object, groupId: string, tresholdUpper: number, thresholdLower: number): Promise<{}>;
-  library(): string
+  summaryStats(
+    theData: object,
+    biomarkerField: string,
+    aggregationField: string,
+    groupId: string,
+    tresholds: object,
+  ): Promise<{}>;
 }
 
 export class OpencpuServiceProvider implements Provider<OpencpuService> {
@@ -18,7 +20,7 @@ export class OpencpuServiceProvider implements Provider<OpencpuService> {
     // opencpu must match the name property in the datasource json file
     @inject('datasources.opencpu')
     protected dataSource: OpencpuDataSource = new OpencpuDataSource(),
-  ) { }
+  ) {}
 
   value(): Promise<OpencpuService> {
     return getService(this.dataSource);

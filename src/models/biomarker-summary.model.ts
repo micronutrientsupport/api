@@ -1,86 +1,173 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({
-  settings: {idInjection: false, postgresql: {schema: 'bmgf', table: 'biomarker_summary'}}
+  settings: {
+    idInjection: false,
+    postgresql: {schema: 'bmgf', table: 'biomarker_summary'},
+  },
 })
 export class BiomarkerSummary extends Entity {
   @property({
     type: 'number',
     scale: 0,
     id: true,
-    postgresql: {columnName: 'survey_id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'survey_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   surveyId?: number;
 
   @property({
     type: 'string',
     id: true,
-    postgresql: {columnName: 'group_id', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'group_id',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   groupId?: string;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'region_name', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'region_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   regionName?: string;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'wealth_quintile', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'wealth_quintile',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   wealthQuintile?: number;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'urbanity', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'urbanity',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   urbanity?: string;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'age_in_months', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'age_in_months',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   ageInMonths?: number;
 
   @property({
     type: 'boolean',
-    postgresql: {columnName: 'is_pregnant', dataType: 'boolean', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'is_pregnant',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   isPregnant?: boolean;
 
   @property({
     type: 'boolean',
-    postgresql: {columnName: 'was_fasting', dataType: 'boolean', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'was_fasting',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   wasFasting?: boolean;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'time_of_day_sampled', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'time_of_day_sampled',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   timeOfDaySampled?: string;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'survey_cluster', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'survey_cluster',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   surveyCluster?: number;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'survey_strata', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'survey_strata',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   surveyStrata?: number;
 
   @property({
     type: 'number',
     scale: 0,
-    postgresql: {columnName: 'survey_weight', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'survey_weight',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   surveyWeights?: number;
 
@@ -88,7 +175,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 5,
     scale: 2,
-    postgresql: {columnName: 'haemoglobin', dataType: 'numeric', dataLength: null, dataPrecision: 5, dataScale: 2, nullable: 'YES'},
+    postgresql: {
+      columnName: 'haemoglobin',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 5,
+      dataScale: 2,
+      nullable: 'YES',
+    },
   })
   haemoglobin?: number;
 
@@ -96,7 +190,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 5,
     scale: 2,
-    postgresql: {columnName: 'ferritin', dataType: 'numeric', dataLength: null, dataPrecision: 5, dataScale: 2, nullable: 'YES'},
+    postgresql: {
+      columnName: 'ferritin',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 5,
+      dataScale: 2,
+      nullable: 'YES',
+    },
   })
   ferritin?: number;
 
@@ -104,7 +205,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 4,
     scale: 2,
-    postgresql: {columnName: 'stfr', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 2, nullable: 'YES'},
+    postgresql: {
+      columnName: 'stfr',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 4,
+      dataScale: 2,
+      nullable: 'YES',
+    },
   })
   stfr?: number;
 
@@ -112,7 +220,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 4,
     scale: 2,
-    postgresql: {columnName: 'rbp', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 2, nullable: 'YES'},
+    postgresql: {
+      columnName: 'rbp',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 4,
+      dataScale: 2,
+      nullable: 'YES',
+    },
   })
   rbp?: number;
 
@@ -120,7 +235,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 4,
     scale: 2,
-    postgresql: {columnName: 'retinol', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 2, nullable: 'YES'},
+    postgresql: {
+      columnName: 'retinol',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 4,
+      dataScale: 2,
+      nullable: 'YES',
+    },
   })
   retinol?: number;
 
@@ -128,7 +250,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 4,
     scale: 1,
-    postgresql: {columnName: 'rbc_folate', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 1, nullable: 'YES'},
+    postgresql: {
+      columnName: 'rbc_folate',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 4,
+      dataScale: 1,
+      nullable: 'YES',
+    },
   })
   rbcFolate?: number;
 
@@ -136,7 +265,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 3,
     scale: 1,
-    postgresql: {columnName: 'ps_folate', dataType: 'numeric', dataLength: null, dataPrecision: 3, dataScale: 1, nullable: 'YES'},
+    postgresql: {
+      columnName: 'ps_folate',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 3,
+      dataScale: 1,
+      nullable: 'YES',
+    },
   })
   psFolate?: number;
 
@@ -144,7 +280,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 5,
     scale: 1,
-    postgresql: {columnName: 'vitamin_b12', dataType: 'numeric', dataLength: null, dataPrecision: 5, dataScale: 1, nullable: 'YES'},
+    postgresql: {
+      columnName: 'vitamin_b12',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 5,
+      dataScale: 1,
+      nullable: 'YES',
+    },
   })
   vitaminB12?: number;
 
@@ -152,7 +295,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 4,
     scale: 1,
-    postgresql: {columnName: 'zinc', dataType: 'numeric', dataLength: null, dataPrecision: 4, dataScale: 1, nullable: 'YES'},
+    postgresql: {
+      columnName: 'zinc',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 4,
+      dataScale: 1,
+      nullable: 'YES',
+    },
   })
   zinc?: number;
 
@@ -160,7 +310,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 5,
     scale: 2,
-    postgresql: {columnName: 'crp', dataType: 'numeric', dataLength: null, dataPrecision: 5, dataScale: 2, nullable: 'YES'},
+    postgresql: {
+      columnName: 'crp',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 5,
+      dataScale: 2,
+      nullable: 'YES',
+    },
   })
   crp?: number;
 
@@ -168,7 +325,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 3,
     scale: 2,
-    postgresql: {columnName: 'agp', dataType: 'numeric', dataLength: null, dataPrecision: 3, dataScale: 2, nullable: 'YES'},
+    postgresql: {
+      columnName: 'agp',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 3,
+      dataScale: 2,
+      nullable: 'YES',
+    },
   })
   agp?: number;
 
@@ -176,7 +340,14 @@ export class BiomarkerSummary extends Entity {
     type: 'number',
     precision: 5,
     scale: 2,
-    postgresql: {columnName: 'iodine', dataType: 'numeric', dataLength: null, dataPrecision: 5, dataScale: 2, nullable: 'YES'},
+    postgresql: {
+      columnName: 'iodine',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 5,
+      dataScale: 2,
+      nullable: 'YES',
+    },
   })
   iodine?: number;
 
@@ -195,4 +366,5 @@ export interface BiomarkerSummaryRelations {
   // describe navigational properties here
 }
 
-export type BiomarkerSummaryWithRelations = BiomarkerSummary & BiomarkerSummaryRelations;
+export type BiomarkerSummaryWithRelations = BiomarkerSummary &
+  BiomarkerSummaryRelations;

@@ -14,80 +14,30 @@ const config = {
   operations: [
     {
       template: {
-        method: "POST",
-        url: "https://opencpu.micronutrient.support/ocpu/apps/micronutrientsupport/biomarkerstats/R/SummaryStats/json",
+        method: 'POST',
+        url:
+          'https://opencpu.micronutrient.support/ocpu/apps/micronutrientsupport/biomarkerstats/R/SummaryStats/json',
         body: {
-          theData: "{theData:object}",
-          biomarkerName: "{biomarkerName:string}",
-          groupId: "{groupId:string}",
-          thresholds: "{thresholds:object}",
+          theData: '{theData:object}',
+          biomarkerField: '{biomarkerField:string}',
+          aggregationField: '{aggregationField:string}',
+          groupId: '{groupId:string}',
+          thresholds: '{thresholds:object}',
         },
-        fullResponse: true
+        fullResponse: true,
       },
       functions: {
-        zinc: ["theData", "biomarkerName", "groupId", "thresholds"]
-        // hello: ["string", "pattern", "replacement"]
+        summaryStats: [
+          'theData',
+          'biomarkerField',
+          'aggregationField',
+          'groupId',
+          'thresholds',
+        ],
       },
     },
-    {
-      template: {
-        method: "POST",
-        url: "https://opencpu.micronutrient.support/ocpu/user/biomarkers/library/summaryStats/R/SummaryStats/json",
-        body: {
-          theData: "{theData:object}",
-          biomarkerName: "{biomarkerName:string}",
-          groupId: "{groupId:string}",
-          thresholds: "{thresholds:object}",
-        },
-        fullResponse: true
-      },
-      functions: {
-        zinc2: ["theData", "biomarkerName", "groupId", "thresholds"]
-        // hello: ["string", "pattern", "replacement"]
-      },
-    },
-    {
-      template: {
-        method: "POST",
-        url: "https://opencpu.micronutrient.support/ocpu/user/biomarkers/library/summaryStats/R/{biomarker}/json",
-        body: {
-          theData: "{theData:object}",
-          groupId: "{groupId:string}",
-          thresholdUpper: "{thresholdUpper:number}",
-          thresholdLower: "{thresholdLower:number}"
-        },
-        fullResponse: true
-      },
-      functions: {
-        biomarker: ["biomarker", "theData", "groupId", "thresholdUpper", "thresholdLower"]
-        // hello: ["string", "pattern", "replacement"]
-      },
-    },
-    {
-      template: {
-        method: "POST",
-        url: "https://opencpu.micronutrient.support/ocpu/library/stringr/R/str_replace/json",
-        body: {
-          string: "{string:string}",
-          pattern: "{pattern:string}",
-          replacement: "{replacement}"
-        },
-      },
-      functions: {
-        stringReplace: ["string", "pattern", "replacement"]
-      },
-    },
-    {
-      template: {
-        method: "GET",
-        url: "https://opencpu.micronutrient.support/ocpu/library",
-      },
-      functions: {
-        library: []
-      },
-    }
   ],
-  crud: false
+  crud: false,
 };
 
 // Observe application's life cycle to disconnect the datasource when
@@ -95,7 +45,8 @@ const config = {
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.
 // Learn more at https://loopback.io/doc/en/lb4/Life-cycle.html
 @lifeCycleObserver('datasource')
-export class OpencpuDataSource extends juggler.DataSource
+export class OpencpuDataSource
+  extends juggler.DataSource
   implements LifeCycleObserver {
   static dataSourceName = 'opencpu';
   static readonly defaultConfig = config;
