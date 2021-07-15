@@ -4,8 +4,8 @@ import {Entity, model, property} from '@loopback/repository';
   settings: {
     idInjection: false,
     postgresql: {
-      schema: 'bmgf-andan-normalise-household-consumption',
-      table: 'household_deficiency_aggregation',
+      schema: 'bmgf',
+      table: 'household_deficiency_afe_aggregation',
     },
   },
 })
