@@ -34,6 +34,7 @@ export class CountryIntakeControllerController {
   @get(
     '/diet/country/geojson/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}',
     {
+      summary: 'country data sources',
       responses: new StandardOpenApiResponses('Data sources')
         .setDataType('array')
         .setObjectSchema(getModelSchemaRef(CountryIntakeGeojson))
@@ -71,6 +72,7 @@ export class CountryIntakeControllerController {
   @get(
     '/diet/household/geojson/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}',
     {
+      summary: 'household data sources',
       responses: new StandardOpenApiResponses('Data sources')
         .setDataType('array')
         .setObjectSchema(getModelSchemaRef(SubregionIntakeGeojson))
@@ -107,6 +109,7 @@ export class CountryIntakeControllerController {
   }
 
   @get('/diet/scenario/composition', {
+    summary: 'Scenario composition',
     responses: {
       '200': {
         description: 'Array of CountryIntake model instances',
