@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.10.1](https://www.github.com/micronutrientsupport/api/compare/v1.10.0...v1.10.1) (2021-08-20)
+
+
+### Miscellaneous
+
+* merge develop ([e9ae787](https://www.github.com/micronutrientsupport/api/commit/e9ae787df744f5169e47f75a06f018239448fa3c))
+
 ## [1.10.0](https://www.github.com/micronutrientsupport/api/compare/v1.9.0...v1.10.0) (2021-07-12)
 
 
