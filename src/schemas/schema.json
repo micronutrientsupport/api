@@ -1,0 +1,1472 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CountryIntakeGeojson": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "dataSourceId": {
+          "type": "number"
+        },
+        "mnName": {
+          "type": "string"
+        },
+        "mnValue": {
+          "type": "string"
+        },
+        "geojson": {
+          "type": "string"
+        }
+      }
+    },
+    "Entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {},
+      "description": "Base class for entities which have unique ids"
+    },
+    "Model": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Base class for models"
+    },
+    "Persistable": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryIntakeGeojsonRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryIntakeGeojsonWithRelations": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "dataSourceId": {
+          "type": "number"
+        },
+        "mnName": {
+          "type": "string"
+        },
+        "mnValue": {
+          "type": "string"
+        },
+        "geojson": {
+          "type": "string"
+        }
+      }
+    },
+    "CountryIntake": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "dataSourceId": {
+          "type": "number"
+        },
+        "moistureInG": {
+          "type": "number"
+        },
+        "energyInKcal": {
+          "type": "number"
+        },
+        "energyInKj": {
+          "type": "number"
+        },
+        "nitrogenInG": {
+          "type": "number"
+        },
+        "totalproteinInG": {
+          "type": "number"
+        },
+        "totalfatsInG": {
+          "type": "number"
+        },
+        "saturatedfaInG": {
+          "type": "number"
+        },
+        "monounsaturatedfaInG": {
+          "type": "number"
+        },
+        "polyunsaturatedfaInG": {
+          "type": "number"
+        },
+        "cholesterolInMg": {
+          "type": "number"
+        },
+        "carbohydrateavailableInG": {
+          "type": "number"
+        },
+        "fibreInG": {
+          "type": "number"
+        },
+        "ashInG": {
+          "type": "number"
+        },
+        "caInMg": {
+          "type": "number"
+        },
+        "feInMg": {
+          "type": "number"
+        },
+        "mgInMg": {
+          "type": "number"
+        },
+        "pInMg": {
+          "type": "number"
+        },
+        "kInMg": {
+          "type": "number"
+        },
+        "naInMg": {
+          "type": "number"
+        },
+        "znInMg": {
+          "type": "number"
+        },
+        "cuInMg": {
+          "type": "number"
+        },
+        "mnInMcg": {
+          "type": "number"
+        },
+        "iInMcg": {
+          "type": "number"
+        },
+        "seInMcg": {
+          "type": "number"
+        },
+        "vitaminaInRaeInMcg": {
+          "type": "number"
+        },
+        "thiaminInMg": {
+          "type": "number"
+        },
+        "riboflavinInMg": {
+          "type": "number"
+        },
+        "niacinInMg": {
+          "type": "number"
+        },
+        "vitaminb6InMg": {
+          "type": "number"
+        },
+        "folicacidInMcg": {
+          "type": "number"
+        },
+        "folateInMcg": {
+          "type": "number"
+        },
+        "vitaminb12InMcg": {
+          "type": "number"
+        },
+        "pantothenateInMg": {
+          "type": "number"
+        },
+        "biotinInMcg": {
+          "type": "number"
+        },
+        "vitamincInMg": {
+          "type": "number"
+        },
+        "vitamindInMcg": {
+          "type": "number"
+        },
+        "vitamineInMg": {
+          "type": "number"
+        },
+        "phyticacidInMg": {
+          "type": "number"
+        }
+      }
+    },
+    "CountryIntakeRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryIntakeWithRelations": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "dataSourceId": {
+          "type": "number"
+        },
+        "moistureInG": {
+          "type": "number"
+        },
+        "energyInKcal": {
+          "type": "number"
+        },
+        "energyInKj": {
+          "type": "number"
+        },
+        "nitrogenInG": {
+          "type": "number"
+        },
+        "totalproteinInG": {
+          "type": "number"
+        },
+        "totalfatsInG": {
+          "type": "number"
+        },
+        "saturatedfaInG": {
+          "type": "number"
+        },
+        "monounsaturatedfaInG": {
+          "type": "number"
+        },
+        "polyunsaturatedfaInG": {
+          "type": "number"
+        },
+        "cholesterolInMg": {
+          "type": "number"
+        },
+        "carbohydrateavailableInG": {
+          "type": "number"
+        },
+        "fibreInG": {
+          "type": "number"
+        },
+        "ashInG": {
+          "type": "number"
+        },
+        "caInMg": {
+          "type": "number"
+        },
+        "feInMg": {
+          "type": "number"
+        },
+        "mgInMg": {
+          "type": "number"
+        },
+        "pInMg": {
+          "type": "number"
+        },
+        "kInMg": {
+          "type": "number"
+        },
+        "naInMg": {
+          "type": "number"
+        },
+        "znInMg": {
+          "type": "number"
+        },
+        "cuInMg": {
+          "type": "number"
+        },
+        "mnInMcg": {
+          "type": "number"
+        },
+        "iInMcg": {
+          "type": "number"
+        },
+        "seInMcg": {
+          "type": "number"
+        },
+        "vitaminaInRaeInMcg": {
+          "type": "number"
+        },
+        "thiaminInMg": {
+          "type": "number"
+        },
+        "riboflavinInMg": {
+          "type": "number"
+        },
+        "niacinInMg": {
+          "type": "number"
+        },
+        "vitaminb6InMg": {
+          "type": "number"
+        },
+        "folicacidInMcg": {
+          "type": "number"
+        },
+        "folateInMcg": {
+          "type": "number"
+        },
+        "vitaminb12InMcg": {
+          "type": "number"
+        },
+        "pantothenateInMg": {
+          "type": "number"
+        },
+        "biotinInMcg": {
+          "type": "number"
+        },
+        "vitamincInMg": {
+          "type": "number"
+        },
+        "vitamindInMcg": {
+          "type": "number"
+        },
+        "vitamineInMg": {
+          "type": "number"
+        },
+        "phyticacidInMg": {
+          "type": "number"
+        }
+      }
+    },
+    "Country": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "geometry": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "geometry"
+      ]
+    },
+    "CountryRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryWithRelations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "geometry": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "geometry",
+        "id",
+        "name"
+      ]
+    },
+    "DietDataSources": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "consumptionDataType": {
+          "type": "string"
+        },
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "DietDataSourcesRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "DietDataSourcesWithRelations": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "consumptionDataType": {
+          "type": "string"
+        },
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "FoodGenusNutrientsPivot": {
+      "type": "object",
+      "properties": {
+        "fooditemId": {
+          "type": "string"
+        },
+        "compositionId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "micronutrientValue": {
+          "type": "number"
+        }
+      }
+    },
+    "FoodGenusNutrientsPivotRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "FoodGenusNutrientsPivotWithRelations": {
+      "type": "object",
+      "properties": {
+        "fooditemId": {
+          "type": "string"
+        },
+        "compositionId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "micronutrientValue": {
+          "type": "number"
+        }
+      }
+    },
+    "FoodGroupItems": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "number"
+        },
+        "groupName": {
+          "type": "string"
+        },
+        "fooditems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "foodName": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "foodName"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      }
+    },
+    "FoodGroupItemsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "FoodGroupItemsWithRelations": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "number"
+        },
+        "groupName": {
+          "type": "string"
+        },
+        "fooditems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "foodName": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "foodName"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      }
+    },
+    "Fooditem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "originalFoodId": {
+          "type": "string"
+        },
+        "originalFoodName": {
+          "type": "string"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "foodGenusConfidence": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "dataReferenceId": {
+          "type": "string"
+        },
+        "moistureInG": {
+          "type": "number"
+        },
+        "energyInKcal": {
+          "type": "number"
+        },
+        "energyInKj": {
+          "type": "number"
+        },
+        "nitrogenInG": {
+          "type": "number"
+        },
+        "totalproteinInG": {
+          "type": "number"
+        },
+        "totalfatsInG": {
+          "type": "number"
+        },
+        "saturatedfaInG": {
+          "type": "number"
+        },
+        "monounsaturatedfaInG": {
+          "type": "number"
+        },
+        "polyunsaturatedfaInG": {
+          "type": "number"
+        },
+        "cholesterolInMg": {
+          "type": "number"
+        },
+        "carbohydrateavailableInG": {
+          "type": "number"
+        },
+        "fibreInG": {
+          "type": "number"
+        },
+        "ashInG": {
+          "type": "number"
+        },
+        "caInMg": {
+          "type": "number"
+        },
+        "feInMg": {
+          "type": "number"
+        },
+        "mgInMg": {
+          "type": "number"
+        },
+        "pInMg": {
+          "type": "number"
+        },
+        "kInMg": {
+          "type": "number"
+        },
+        "naInMg": {
+          "type": "number"
+        },
+        "znInMg": {
+          "type": "number"
+        },
+        "cuInMg": {
+          "type": "number"
+        },
+        "mnInMcg": {
+          "type": "number"
+        },
+        "iInMcg": {
+          "type": "number"
+        },
+        "seInMcg": {
+          "type": "number"
+        },
+        "vitaminaInRaeInMcg": {
+          "type": "number"
+        },
+        "thiaminInMg": {
+          "type": "number"
+        },
+        "riboflavinInMg": {
+          "type": "number"
+        },
+        "niacinInMg": {
+          "type": "number"
+        },
+        "vitaminb6InMg": {
+          "type": "number"
+        },
+        "folicacidInMcg": {
+          "type": "number"
+        },
+        "folateInMcg": {
+          "type": "number"
+        },
+        "vitaminb12InMcg": {
+          "type": "number"
+        },
+        "pantothenateInMg": {
+          "type": "number"
+        },
+        "biotinInMcg": {
+          "type": "number"
+        },
+        "vitamincInMg": {
+          "type": "number"
+        },
+        "vitamindInMcg": {
+          "type": "number"
+        },
+        "vitamineInMg": {
+          "type": "number"
+        },
+        "phyticacidInMg": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "FooditemRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "FooditemWithRelations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "originalFoodId": {
+          "type": "string"
+        },
+        "originalFoodName": {
+          "type": "string"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "foodGenusConfidence": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "dataReferenceId": {
+          "type": "string"
+        },
+        "moistureInG": {
+          "type": "number"
+        },
+        "energyInKcal": {
+          "type": "number"
+        },
+        "energyInKj": {
+          "type": "number"
+        },
+        "nitrogenInG": {
+          "type": "number"
+        },
+        "totalproteinInG": {
+          "type": "number"
+        },
+        "totalfatsInG": {
+          "type": "number"
+        },
+        "saturatedfaInG": {
+          "type": "number"
+        },
+        "monounsaturatedfaInG": {
+          "type": "number"
+        },
+        "polyunsaturatedfaInG": {
+          "type": "number"
+        },
+        "cholesterolInMg": {
+          "type": "number"
+        },
+        "carbohydrateavailableInG": {
+          "type": "number"
+        },
+        "fibreInG": {
+          "type": "number"
+        },
+        "ashInG": {
+          "type": "number"
+        },
+        "caInMg": {
+          "type": "number"
+        },
+        "feInMg": {
+          "type": "number"
+        },
+        "mgInMg": {
+          "type": "number"
+        },
+        "pInMg": {
+          "type": "number"
+        },
+        "kInMg": {
+          "type": "number"
+        },
+        "naInMg": {
+          "type": "number"
+        },
+        "znInMg": {
+          "type": "number"
+        },
+        "cuInMg": {
+          "type": "number"
+        },
+        "mnInMcg": {
+          "type": "number"
+        },
+        "iInMcg": {
+          "type": "number"
+        },
+        "seInMcg": {
+          "type": "number"
+        },
+        "vitaminaInRaeInMcg": {
+          "type": "number"
+        },
+        "thiaminInMg": {
+          "type": "number"
+        },
+        "riboflavinInMg": {
+          "type": "number"
+        },
+        "niacinInMg": {
+          "type": "number"
+        },
+        "vitaminb6InMg": {
+          "type": "number"
+        },
+        "folicacidInMcg": {
+          "type": "number"
+        },
+        "folateInMcg": {
+          "type": "number"
+        },
+        "vitaminb12InMcg": {
+          "type": "number"
+        },
+        "pantothenateInMg": {
+          "type": "number"
+        },
+        "biotinInMcg": {
+          "type": "number"
+        },
+        "vitamincInMg": {
+          "type": "number"
+        },
+        "vitamindInMcg": {
+          "type": "number"
+        },
+        "vitamineInMg": {
+          "type": "number"
+        },
+        "phyticacidInMg": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ImpactCommodityAggregation": {
+      "type": "object",
+      "properties": {
+        "nutrient": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "commodity": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "value": {
+          "type": "number"
+        },
+        "rank": {
+          "type": "number"
+        }
+      }
+    },
+    "ImpactCommodityAggregationRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ImpactCommodityAggregationWithRelations": {
+      "type": "object",
+      "properties": {
+        "nutrient": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "commodity": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "value": {
+          "type": "number"
+        },
+        "rank": {
+          "type": "number"
+        }
+      }
+    },
+    "ImpactFoodGroupAggregation": {
+      "type": "object",
+      "properties": {
+        "nutrient": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "foodGroup": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "value": {
+          "type": "number"
+        },
+        "rank": {
+          "type": "number"
+        }
+      }
+    },
+    "ImpactFoodGroupAggregationRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ImpactFoodGroupAggregationWithRelations": {
+      "type": "object",
+      "properties": {
+        "nutrient": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "foodGroup": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "value": {
+          "type": "number"
+        },
+        "rank": {
+          "type": "number"
+        }
+      }
+    },
+    "ImpactScenario": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "briefDescription": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isBaseline": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ImpactScenarioRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ImpactScenarioWithRelations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "briefDescription": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isBaseline": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ImpactSummary": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "micronutrient": {
+          "type": "string"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "recommended": {
+          "type": "number"
+        },
+        "referenceVal": {
+          "type": "number"
+        },
+        "referenceYear": {
+          "type": "number"
+        },
+        "intersectYear": {
+          "type": "string"
+        },
+        "difference": {
+          "type": "number"
+        }
+      }
+    },
+    "ImpactSummaryRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ImpactSummaryWithRelations": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "micronutrient": {
+          "type": "string"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "recommended": {
+          "type": "number"
+        },
+        "referenceVal": {
+          "type": "number"
+        },
+        "referenceYear": {
+          "type": "number"
+        },
+        "intersectYear": {
+          "type": "string"
+        },
+        "difference": {
+          "type": "number"
+        }
+      }
+    },
+    "ImpactTotalFoodAvailability": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "Ca": {
+          "type": "number"
+        },
+        "CaDiff": {
+          "type": "number"
+        },
+        "B9": {
+          "type": "number"
+        },
+        "B9Diff": {
+          "type": "number"
+        },
+        "Fe": {
+          "type": "number"
+        },
+        "FeDiff": {
+          "type": "number"
+        },
+        "Mg": {
+          "type": "number"
+        },
+        "MgDiff": {
+          "type": "number"
+        },
+        "B3": {
+          "type": "number"
+        },
+        "B3Diff": {
+          "type": "number"
+        },
+        "P": {
+          "type": "number"
+        },
+        "PDiff": {
+          "type": "number"
+        },
+        "K": {
+          "type": "number"
+        },
+        "KDiff": {
+          "type": "number"
+        },
+        "Protein": {
+          "type": "number"
+        },
+        "ProteinDiff": {
+          "type": "number"
+        },
+        "B2": {
+          "type": "number"
+        },
+        "B2Diff": {
+          "type": "number"
+        },
+        "B1": {
+          "type": "number"
+        },
+        "B1Diff": {
+          "type": "number"
+        },
+        "A": {
+          "type": "number"
+        },
+        "ADiff": {
+          "type": "number"
+        },
+        "B6": {
+          "type": "number"
+        },
+        "B6Diff": {
+          "type": "number"
+        },
+        "C": {
+          "type": "number"
+        },
+        "CDiff": {
+          "type": "number"
+        },
+        "Zn": {
+          "type": "number"
+        },
+        "ZnDiff": {
+          "type": "number"
+        }
+      }
+    },
+    "ImpactTotalFoodAvailabilityRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "ImpactTotalFoodAvailabilityWithRelations": {
+      "type": "object",
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "scenario": {
+          "type": "string"
+        },
+        "Ca": {
+          "type": "number"
+        },
+        "CaDiff": {
+          "type": "number"
+        },
+        "B9": {
+          "type": "number"
+        },
+        "B9Diff": {
+          "type": "number"
+        },
+        "Fe": {
+          "type": "number"
+        },
+        "FeDiff": {
+          "type": "number"
+        },
+        "Mg": {
+          "type": "number"
+        },
+        "MgDiff": {
+          "type": "number"
+        },
+        "B3": {
+          "type": "number"
+        },
+        "B3Diff": {
+          "type": "number"
+        },
+        "P": {
+          "type": "number"
+        },
+        "PDiff": {
+          "type": "number"
+        },
+        "K": {
+          "type": "number"
+        },
+        "KDiff": {
+          "type": "number"
+        },
+        "Protein": {
+          "type": "number"
+        },
+        "ProteinDiff": {
+          "type": "number"
+        },
+        "B2": {
+          "type": "number"
+        },
+        "B2Diff": {
+          "type": "number"
+        },
+        "B1": {
+          "type": "number"
+        },
+        "B1Diff": {
+          "type": "number"
+        },
+        "A": {
+          "type": "number"
+        },
+        "ADiff": {
+          "type": "number"
+        },
+        "B6": {
+          "type": "number"
+        },
+        "B6Diff": {
+          "type": "number"
+        },
+        "C": {
+          "type": "number"
+        },
+        "CDiff": {
+          "type": "number"
+        },
+        "Zn": {
+          "type": "number"
+        },
+        "ZnDiff": {
+          "type": "number"
+        }
+      }
+    },
+    "Micronutrient": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "fooditemColumn": {
+          "type": "string"
+        },
+        "isInImpact": {
+          "type": "boolean"
+        },
+        "impactColumn": {
+          "type": "string"
+        },
+        "isBiomarker": {
+          "type": "boolean"
+        },
+        "isDiet": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "MicronutrientRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "MicronutrientWithRelations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "fooditemColumn": {
+          "type": "string"
+        },
+        "isInImpact": {
+          "type": "boolean"
+        },
+        "impactColumn": {
+          "type": "string"
+        },
+        "isBiomarker": {
+          "type": "boolean"
+        },
+        "isDiet": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SubregionIntakeGeojson": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "surveyId": {
+          "type": "number"
+        },
+        "geojson": {
+          "type": "string"
+        }
+      }
+    },
+    "SubregionIntakeGeojsonRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "SubregionIntakeGeojsonWithRelations": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "surveyId": {
+          "type": "number"
+        },
+        "geojson": {
+          "type": "string"
+        }
+      }
+    },
+    "Top20MnPerCountry": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "dataSourceId": {
+          "type": "number"
+        },
+        "mnName": {
+          "type": "string"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "mnConsumedPerDay": {
+          "type": "number"
+        },
+        "ranking": {
+          "type": "number"
+        },
+        "foodName": {
+          "type": "string"
+        }
+      }
+    },
+    "Top20MnPerCountryRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Top20MnPerCountryWithRelations": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "dataSourceId": {
+          "type": "number"
+        },
+        "mnName": {
+          "type": "string"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "mnConsumedPerDay": {
+          "type": "number"
+        },
+        "ranking": {
+          "type": "number"
+        },
+        "foodName": {
+          "type": "string"
+        }
+      }
+    },
+    "Top20MnPerHhsurvey": {
+      "type": "object",
+      "properties": {
+        "surveyId": {
+          "type": "number"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "mnName": {
+          "type": "string"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "mnConsumedPerDay": {
+          "type": "number"
+        },
+        "ranking": {
+          "type": "number"
+        },
+        "foodName": {
+          "type": "string"
+        }
+      }
+    },
+    "Top20MnPerHhsurveyRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Top20MnPerHhsurveyWithRelations": {
+      "type": "object",
+      "properties": {
+        "surveyId": {
+          "type": "number"
+        },
+        "fctSourceId": {
+          "type": "number"
+        },
+        "mnName": {
+          "type": "string"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "mnConsumedPerDay": {
+          "type": "number"
+        },
+        "ranking": {
+          "type": "number"
+        },
+        "foodName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

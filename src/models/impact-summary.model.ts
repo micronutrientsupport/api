@@ -9,6 +9,7 @@ import {Entity, model, property} from '@loopback/repository';
 export class ImpactSummary extends Entity {
   @property({
     type: 'string',
+    description: 'ISO 3166-1 alpha-3 code for the country or territory',
     id: true,
     postgresql: {
       columnName: 'country',
@@ -23,6 +24,7 @@ export class ImpactSummary extends Entity {
 
   @property({
     type: 'string',
+    description: 'ID of the micronutrient',
     id: true,
     postgresql: {
       columnName: 'micronutrient',
@@ -37,6 +39,7 @@ export class ImpactSummary extends Entity {
 
   @property({
     type: 'string',
+    description: 'ID for the projection scenario used',
     id: true,
     postgresql: {
       columnName: 'scenario',
@@ -51,6 +54,8 @@ export class ImpactSummary extends Entity {
 
   @property({
     type: 'number',
+    description:
+      'Reccomended dietary supply of the micronutrient per capita per day',
     scale: 0,
     postgresql: {
       columnName: 'recommended',
@@ -61,10 +66,12 @@ export class ImpactSummary extends Entity {
       nullable: 'YES',
     },
   })
-  target?: number;
+  recommended?: number;
 
   @property({
     type: 'number',
+    description:
+      'The projected availability of the micronutrient for the `referenceYear`',
     postgresql: {
       columnName: 'daily_reference_val',
       dataType: 'numeric',
@@ -78,6 +85,8 @@ export class ImpactSummary extends Entity {
 
   @property({
     type: 'number',
+    description:
+      'Reference year for the `referenceVal` projected availability value',
     postgresql: {
       columnName: 'reference_year',
       dataType: 'numeric',
@@ -91,6 +100,8 @@ export class ImpactSummary extends Entity {
 
   @property({
     type: 'string',
+    description:
+      "The projected year that dietary supply will reach the `recommended` value under the given scenario given 'business as usual'",
     postgresql: {
       columnName: 'intersect_year',
       dataType: 'text',
@@ -104,6 +115,8 @@ export class ImpactSummary extends Entity {
 
   @property({
     type: 'number',
+    description:
+      'The percentage difference between the `referenceVal` and the `reccomended` supply value',
     postgresql: {
       columnName: 'difference',
       dataType: 'numeric',

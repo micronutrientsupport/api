@@ -29,7 +29,7 @@ if (require.main === module) {
       openApiSpec: {
         // useful when used with OpenAPI-to-GraphQL to locate your application
         servers: [{url: 'https://api.micronutrient.support'}],
-        setServersFromRequest: false
+        setServersFromRequest: false,
       },
     },
   };
