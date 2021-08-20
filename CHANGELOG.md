@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/micronutrientsupport/api/compare/v1.10.0...v2.0.0) (2021-08-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* bump semvar version
+
+### Miscellaneous
+
+* bump semvar version ([856ee6d](https://www.github.com/micronutrientsupport/api/commit/856ee6d0408256ea93c366c86db1f2e4bd56882b))
+* merge develop ([e9ae787](https://www.github.com/micronutrientsupport/api/commit/e9ae787df744f5169e47f75a06f018239448fa3c))
+
 ## [1.10.0](https://www.github.com/micronutrientsupport/api/compare/v1.9.0...v1.10.0) (2021-07-12)
 
 
