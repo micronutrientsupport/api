@@ -1,14 +1,10 @@
-import {
-  Filter,
-
-  repository
-} from '@loopback/repository';
-import {
-  get,
-  getModelSchemaRef, param
-} from '@loopback/rest';
+import {Filter, repository} from '@loopback/repository';
+import {get, getModelSchemaRef, param} from '@loopback/rest';
 import {FoodGenusNutrientsPivot, FoodGroupItems} from '../models';
-import {FoodGenusNutrientsPivotRepository, FoodGroupItemsRepository} from '../repositories';
+import {
+  FoodGenusNutrientsPivotRepository,
+  FoodGroupItemsRepository,
+} from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
 
 export class FoodItemControllerController {
@@ -17,9 +13,12 @@ export class FoodItemControllerController {
     public foodGenusNutrientsPivotRepository: FoodGenusNutrientsPivotRepository,
     @repository(FoodGroupItemsRepository)
     public foodGroupItemsRepository: FoodGroupItemsRepository,
-  ) { }
+  ) {}
 
   @get('/diet/food-group', {
+    summary: 'Get Food Groups and Food Items',
+    description: 'Return a list of food groups and their associated fooditems',
+    tags: ['diet'],
     responses: {
       '200': {
         description: 'Array of FoodGroupItems model instances',
@@ -27,7 +26,9 @@ export class FoodItemControllerController {
           'application/json': {
             schema: {
               type: 'array',
-              items: getModelSchemaRef(FoodGroupItems, {includeRelations: true}),
+              items: getModelSchemaRef(FoodGroupItems, {
+                includeRelations: true,
+              }),
             },
           },
         },
@@ -37,8 +38,7 @@ export class FoodItemControllerController {
   async findFoodGroup(
     @param.filter(FoodGroupItems) filter?: Filter<FoodGroupItems>,
   ): Promise<object> {
-
-    let data = await this.foodGroupItemsRepository.find(filter);
+    const data = await this.foodGroupItemsRepository.find(filter);
     return new StandardJsonResponse<Array<FoodGroupItems>>(
       `${data.length} top results returned.`,
       data,
@@ -46,6 +46,8 @@ export class FoodItemControllerController {
   }
 
   @get('/diet/composition', {
+    summary: 'composition',
+    tags: ['diet'],
     responses: {
       '200': {
         description: 'Array of FoodGenusNutrientsPivot model instances',
@@ -53,7 +55,9 @@ export class FoodItemControllerController {
           'application/json': {
             schema: {
               type: 'array',
-              items: getModelSchemaRef(FoodGenusNutrientsPivot, {includeRelations: true}),
+              items: getModelSchemaRef(FoodGenusNutrientsPivot, {
+                includeRelations: true,
+              }),
             },
           },
         },
@@ -66,15 +70,15 @@ export class FoodItemControllerController {
     @param.query.string('fooditemId') fooditemId: string,
     //@param.filter(FoodGenusNutrientsPivot) filter?: Filter<FoodGenusNutrientsPivot>,
   ): Promise<object> {
-    let filter: Filter = {
+    const filter: Filter = {
       where: {
         compositionId: compositionId,
         micronutrientId: micronutrientId,
-        fooditemId: fooditemId
-      }
+        fooditemId: fooditemId,
+      },
     };
 
-    let data = await this.foodGenusNutrientsPivotRepository.find(filter);
+    const data = await this.foodGenusNutrientsPivotRepository.find(filter);
     return new StandardJsonResponse<Array<FoodGenusNutrientsPivot>>(
       `${data.length} top results returned.`,
       data,

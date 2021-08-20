@@ -8,47 +8,48 @@ import {
   RestBindings,
 } from '@loopback/rest';
 import {CacheHeader} from '../../decorators/cache-header.decorator';
-//import {CacheHeader} from '../../decorators/cache-header.decorator';
-import {Country} from '../../models';
-import {CountryRepository} from '../../repositories';
+import {Micronutrient} from '../../models';
+import {MicronutrientRepository} from '../../repositories';
 import {StandardJsonResponse} from '../standardJsonResponse';
 import {StandardOpenApiResponses} from '../standardOpenApiResponses';
 
-export class CountryController {
+export class MicronutrientController {
   constructor(
-    @repository(CountryRepository)
-    public countryRepository: CountryRepository,
+    @repository(MicronutrientRepository)
+    public micronutrientRepository: MicronutrientRepository,
     @inject(RestBindings.Http.RESPONSE) public response: Response,
   ) {}
 
   @CacheHeader(600)
-  @get('/countries', {
-    summary: 'Get country geometries',
+  @get('/micronutrients', {
+    summary: 'Get Micronutrients',
     description: 'Get names and geometries of countries in the tool',
-    tags: ['geography'],
-    responses: new StandardOpenApiResponses('Array of Country model instances')
+    tags: ['micronutrients'],
+    responses: new StandardOpenApiResponses(
+      'Array of Micronutrient model instances',
+    )
       .setDataType('array')
-      .setObjectSchema(getModelSchemaRef(Country))
+      .setObjectSchema(getModelSchemaRef(Micronutrient))
       .toObject(),
   })
-  async getCountryGeometries(
+  async getMicronutrients(
     @param.query.string('countryId', {
       description: 'ISO 3166-1 alpha-3 code for the country or territory',
       required: false,
       example: 'MWI',
     })
     countryId: string,
-  ): Promise<StandardJsonResponse<Array<Country>>> {
+  ): Promise<StandardJsonResponse<Array<Micronutrient>>> {
     const filter: Filter = {
       where: {
         id: countryId,
       },
     };
-    const countries = await this.countryRepository.find(filter);
-    return new StandardJsonResponse<Array<Country>>(
-      `${countries.length} Countries returned.`,
-      countries,
-      'Country',
+    const micronutrients = await this.micronutrientRepository.find(filter);
+    return new StandardJsonResponse<Array<Micronutrient>>(
+      `${micronutrients.length} Micronutrients returned.`,
+      micronutrients,
+      'Micronutrient',
     );
   }
 }
