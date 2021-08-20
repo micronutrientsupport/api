@@ -16,3 +16,4 @@ export * from './top-20-mn-per-country.repository';
 export * from './top-20-mn-per-hhsurvey.repository';
 
 
+export * from './household-deficiency-aggregation.repository';

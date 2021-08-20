@@ -11,6 +11,7 @@ import {
   CountryIntakeGeojsonRepository,
   CountryIntakeRepository,
   CountryRepository,
+  HouseholdDeficiencyAggregationRepository,
   SubregionIntakeGeojsonRepository,
 } from '../repositories';
 import {toGeoJSONFeatureCollection} from '../utils/toGeoJSON';
@@ -29,6 +30,8 @@ export class CountryIntakeControllerController {
     public countryIntakeRepository: CountryIntakeRepository,
     @repository(SubregionIntakeGeojsonRepository)
     public subregionIntakeGeojsonRepository: SubregionIntakeGeojsonRepository,
+    @repository(HouseholdDeficiencyAggregationRepository)
+    public householdDeficiencyAggregationRepository: HouseholdDeficiencyAggregationRepository,
   ) {}
 
   @get(
@@ -73,6 +76,68 @@ export class CountryIntakeControllerController {
     '/diet/household/geojson/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}',
     {
       summary: 'household data sources',
+      responses: new StandardOpenApiResponses('Data sources')
+        .setDataType('array')
+        .setObjectSchema(getModelSchemaRef(SubregionIntakeGeojson))
+        .toObject(),
+    },
+  )
+  async findSubregionIntakeGeojson2(
+    @param.path.string('countryId') countryId: string,
+    @param.path.string('micronutrientId') micronutrientId: string,
+    @param.path.string('compositionId') compositionId: number,
+    @param.path.string('consumptionId') consumptionId: number,
+  ): Promise<object> {
+    const filter: Filter = {
+      where: {
+        country: countryId,
+        micronutrientId: micronutrientId,
+        fctSourceId: 24,
+        surveyId: consumptionId,
+      },
+    };
+    const data = await this.householdDeficiencyAggregationRepository.find(
+      filter,
+    );
+
+    data.map(res => {
+      res.geometry = JSON.parse((res as any).geometry);
+      res.id = res.subregionId;
+      if (res.medianSupply) {
+        res.mn_absolute = Math.round(res.medianSupply * 100) / 100;
+      } else {
+        res.mn_absolute = 'N/A';
+      }
+      res.mn_absolute_unit = res.unit;
+      res.mn_threshold = res.deficientPercentage;
+      res.mn_threshold_unit =
+        '% of sampled households (' +
+        res.deficientCount +
+        '/' +
+        res.householdCount +
+        ' )';
+      res.subregion_name = res.subregionName;
+      res.subregion_type = 'District';
+    });
+
+    const ndata = [{geojson: toGeoJSONFeatureCollection(data)}];
+    // Temp insert dummy threshold values
+    // if (data[0].geojson) {
+    //   (data[0].geojson as any).features.forEach((feature: any) => {
+    //     console.log(feature.properties);
+    //     feature.properties.mn_threshold = 0;
+    //     feature.properties.mn_threshold_unit = '%';
+    //   })
+    // }
+    return new StandardJsonResponse<Array<object>>(
+      `${ndata.length} top results returned.`,
+      ndata,
+    );
+  }
+
+  @get(
+    '/diet/household/geojson-old/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}',
+    {
       responses: new StandardOpenApiResponses('Data sources')
         .setDataType('array')
         .setObjectSchema(getModelSchemaRef(SubregionIntakeGeojson))

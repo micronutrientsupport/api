@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://www.github.com/micronutrientsupport/api/compare/v1.9.0...v1.10.0) (2021-07-12)
+
+
+### Features
+
+* fix ish4 routes ([166ced7](https://www.github.com/micronutrientsupport/api/commit/166ced7ad6bb8358fb624851f98aa3a35c79712c))
+
 ## [1.9.0](https://www.github.com/micronutrientsupport/api/compare/v1.8.0...v1.9.0) (2021-06-09)
 
 
