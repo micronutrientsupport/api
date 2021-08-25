@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/micronutrientsupport/api/compare/v2.0.0...v2.0.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* ensure openapi spec specifies https ([8fa4ca0](https://www.github.com/micronutrientsupport/api/commit/8fa4ca0bd0a62370ba3c14746dc808752b12dea6))
+* fix urls for swagger ui ([3b88229](https://www.github.com/micronutrientsupport/api/commit/3b88229f961029a86ab39174354747b35296eae6))
+
 ## [2.0.0](https://www.github.com/micronutrientsupport/api/compare/v1.10.0...v2.0.0) (2021-08-20)
 
 
