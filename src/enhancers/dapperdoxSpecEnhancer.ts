@@ -46,6 +46,7 @@ export class DapperdoxSpecEnhancer implements OASEnhancer {
     spec.info.title = 'Core Data API';
 
     spec.host = 'localhost:3000';
+    spec.schemes = ['https'];
 
     spec.securityDefinitions = {
       apiKey: {
