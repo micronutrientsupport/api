@@ -28,7 +28,10 @@ if (require.main === module) {
       gracePeriodForClose: 5000, // 5 seconds
       openApiSpec: {
         // useful when used with OpenAPI-to-GraphQL to locate your application
-        servers: [{url: 'https://api.micronutrient.support'}],
+        servers: [
+          {url: 'http://localhost:3000'},
+          {url: 'https://api.micronutrient.support/v2'},
+        ],
         setServersFromRequest: false,
       },
     },
