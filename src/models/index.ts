@@ -16,3 +16,4 @@ export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
 
 export * from './household-deficiency-aggregation.model';
+export * from './biomarker-data-sources.model';

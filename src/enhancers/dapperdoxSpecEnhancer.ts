@@ -64,6 +64,10 @@ export class DapperdoxSpecEnhancer implements OASEnhancer {
           description: 'Diet data',
         },
         {
+          name: 'biomarker',
+          description: 'Biomarker data',
+        },
+        {
           name: 'projections',
           description: 'Future dietary supply projections',
         },

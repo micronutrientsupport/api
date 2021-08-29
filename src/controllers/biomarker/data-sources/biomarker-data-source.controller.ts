@@ -2,29 +2,29 @@
 
 import {Filter, repository} from '@loopback/repository';
 import {get, getModelSchemaRef, param} from '@loopback/rest';
-import {DietDataSources} from '../../../models';
-import {DietDataSourcesRepository} from '../../../repositories';
+import {BiomarkerDataSources} from '../../../models';
+import {BiomarkerDataSourcesRepository} from '../../../repositories';
 import {StandardJsonResponse} from '../../standardJsonResponse';
 import {StandardOpenApiResponses} from '../../standardOpenApiResponses';
 
 // import {inject} from '@loopback/core';
 
-export class DataSourceController {
+export class BiomarkerDataSourceController {
   constructor(
-    @repository(DietDataSourcesRepository)
-    public dietDataSourcesRepository: DietDataSourcesRepository,
+    @repository(BiomarkerDataSourcesRepository)
+    public biomarkerDataSourcesRepository: BiomarkerDataSourcesRepository,
   ) {}
 
-  @get('diet/data-sources', {
-    summary: 'Get diet data sources by country',
+  @get('biomarker/data-sources', {
+    summary: 'Get biomarker data sources by country',
     description:
       'Get the IDs for the _best_ data sources for use in subsequent requests',
-    tags: ['diet'],
+    tags: ['biomarker'],
     responses: new StandardOpenApiResponses(
-      'Array of DietDataSources model instances',
+      'Array of BiomarkerDataSources model instances',
     )
       .setDataType('array')
-      .setObjectSchema(getModelSchemaRef(DietDataSources))
+      .setObjectSchema(getModelSchemaRef(BiomarkerDataSources))
       .toObject(),
   })
   async find(
@@ -48,11 +48,11 @@ export class DataSourceController {
         micronutrientId: micronutrientId,
       },
     };
-    const data = await this.dietDataSourcesRepository.find(filter);
-    return new StandardJsonResponse<Array<DietDataSources>>(
-      `${data.length} diet data sources returned.`,
+    const data = await this.biomarkerDataSourcesRepository.find(filter);
+    return new StandardJsonResponse<Array<BiomarkerDataSources>>(
+      `${data.length} biomarker data sources returned.`,
       data,
-      'DietDataSources',
+      'BiomarkerDataSources',
     );
   }
 }
