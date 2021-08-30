@@ -1,11 +1,11 @@
 import {Filter, repository} from '@loopback/repository';
 import {get, getModelSchemaRef, param} from '@loopback/rest';
-import {FoodGenusNutrientsPivot, FoodGroupItems} from '../models';
+import {FoodGenusNutrientsPivot, FoodGroupItems} from '../../../models';
 import {
   FoodGenusNutrientsPivotRepository,
   FoodGroupItemsRepository,
-} from '../repositories';
-import {StandardJsonResponse} from './standardJsonResponse';
+} from '../../../repositories';
+import {StandardJsonResponse} from '../../standardJsonResponse';
 
 export class FoodItemControllerController {
   constructor(
