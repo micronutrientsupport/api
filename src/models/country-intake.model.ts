@@ -9,6 +9,7 @@ import {Entity, model, property} from '@loopback/repository';
 export class CountryIntake extends Entity {
   @property({
     type: 'string',
+    id: true,
     postgresql: {
       columnName: 'country_id',
       dataType: 'text',
@@ -23,6 +24,7 @@ export class CountryIntake extends Entity {
   @property({
     type: 'number',
     scale: 0,
+    id: true,
     postgresql: {
       columnName: 'fct_source_id',
       dataType: 'integer',
@@ -36,6 +38,7 @@ export class CountryIntake extends Entity {
 
   @property({
     type: 'number',
+    id: true,
     scale: 0,
     postgresql: {
       columnName: 'data_source_id',
