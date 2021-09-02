@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/micronutrientsupport/api/compare/v2.1.0...v2.1.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* set schema in dapperdox enhancer ([0af0748](https://www.github.com/micronutrientsupport/api/commit/0af07488ccd2f01bc433cefae924067ccae456dc))
+
 ## [2.1.0](https://www.github.com/micronutrientsupport/api/compare/v2.0.1...v2.1.0) (2021-09-02)
 
 
