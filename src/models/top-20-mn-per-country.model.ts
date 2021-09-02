@@ -3,64 +3,116 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    hiddenProperties: ['dataSourceId', 'fctSourceId', 'foodGenusId'],
-    postgresql: {schema: process.env.DB_SCHEMA, table: 'top20_mn_per_country'}
-  }
+    postgresql: {schema: process.env.DB_SCHEMA, table: 'top20_mn_per_country'},
+  },
 })
 export class Top20MnPerCountry extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
+    description:
+      'The ID of the composition data used for matching and calculations',
     id: true,
-    postgresql: {columnName: 'country_id', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    scale: 0,
+    postgresql: {
+      columnName: 'fct_source_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
-  countryId?: string;
+  compositionDataId?: number;
 
   @property({
     type: 'number',
+    description:
+      'The ID of the consumption data used for matching and calculations',
     id: true,
     scale: 0,
-    postgresql: {columnName: 'fct_source_id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'data_source_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
-  fctSourceId?: number;
-
-  @property({
-    type: 'number',
-    id: true,
-    scale: 0,
-    postgresql: {columnName: 'data_source_id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
-  })
-  dataSourceId?: number;
+  consumptionDataId?: number;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'mn_name', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    description: 'ID of the micronutrient',
+    postgresql: {
+      columnName: 'mn_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
-  mnName?: string;
+  micronutrientId?: string;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'food_genus_id', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    description: 'Food Genus of the contributing food item',
+    postgresql: {
+      columnName: 'food_genus_id',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   foodGenusId?: string;
 
   @property({
     type: 'number',
-    postgresql: {columnName: 'mn_consumed_per_day', dataType: 'numeric', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    description:
+      'Quantity of micronutrient provided by the food item per capita per day',
+    postgresql: {
+      columnName: 'mn_consumed_per_day',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
-  mnConsumedPerDay?: number;
+  dailyMnContribution?: number;
 
   @property({
     type: 'number',
+    description:
+      'Ranking of the scale of micronutrient contribution from this food item (low number = greater contribution)',
     scale: 0,
-    postgresql: {columnName: 'ranking', dataType: 'bigint', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'ranking',
+      dataType: 'bigint',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   ranking?: number;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'food_name', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    description: 'Human readbale name of the contributing food item',
+    postgresql: {
+      columnName: 'food_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
-  foodName?: string;
+  foodGenusName?: string;
 
   // Define well-known properties here
 
@@ -77,4 +129,5 @@ export interface Top20MnPerCountryRelations {
   // describe navigational properties here
 }
 
-export type Top20MnPerCountryWithRelations = Top20MnPerCountry & Top20MnPerCountryRelations;
+export type Top20MnPerCountryWithRelations = Top20MnPerCountry &
+  Top20MnPerCountryRelations;

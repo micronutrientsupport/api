@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/micronutrientsupport/api/compare/v2.0.1...v2.1.0) (2021-09-02)
+
+
+### Features
+
+* Add view for biomarker data sources: ([24bcacd](https://www.github.com/micronutrientsupport/api/commit/24bcacd7ade2fa275a9e6f8c382a8ebf3d1b29bc))
+* fix afe household views, geojson responses ([18e2701](https://www.github.com/micronutrientsupport/api/commit/18e27017aa55fa61c8f3b5e27f33ffa4bf8cd3b9))
+* refactor top20 food routes ([bb97841](https://www.github.com/micronutrientsupport/api/commit/bb978416772b0c1c24985c2f22d933ddbe304079))
+
+
+### Bug Fixes
+
+* consolidation and docs updates ([9269a85](https://www.github.com/micronutrientsupport/api/commit/9269a854d9ca0817c96b6175d880349bac4ff2fc))
+
+
+### Miscellaneous
+
+* fix imports ([e864608](https://www.github.com/micronutrientsupport/api/commit/e864608d31de034be1e602fea66c09da3a7785d4))
+* update schema ref ([412c45e](https://www.github.com/micronutrientsupport/api/commit/412c45e1238f009e19b26d7fb1737d910de5a9a1))
+
 ### [2.0.1](https://www.github.com/micronutrientsupport/api/compare/v2.0.0...v2.0.1) (2021-08-25)
 
 

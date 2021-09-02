@@ -17,7 +17,7 @@ export class StandardOpenApiResponses {
     return this;
   }
 
-  public toObject(): ResponsesObject {
+  public toObject(canReturnGeoJSON = false): ResponsesObject {
     const dataType =
       null == this.dataType
         ? null == this.objectSchema
@@ -44,7 +44,8 @@ export class StandardOpenApiResponses {
         type: dataType,
       };
     }
-    return {
+
+    const response = {
       '200': {
         description: this.description,
         content: {
@@ -78,5 +79,23 @@ export class StandardOpenApiResponses {
         description: 'Failed attempt to perform the operation',
       },
     };
+
+    if (canReturnGeoJSON) {
+      (response['200'].content as any)['application/geo+json'] = {
+        schema: {
+          type: 'object',
+          title: `GeoJSON response for ${
+            this.objectSchema.definitions[
+              Object.keys(this.objectSchema.definitions)[0]
+            ].title
+          } model`,
+          properties: {
+            data: dataSchema,
+          },
+        },
+      };
+    }
+
+    return response;
   }
 }
