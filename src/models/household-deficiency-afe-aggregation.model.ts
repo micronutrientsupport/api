@@ -4,14 +4,16 @@ import {Entity, model, property} from '@loopback/repository';
   settings: {
     idInjection: false,
     postgresql: {
-      schema: 'bmgf-andan-normalise-household-consumption',
-      table: 'household_deficiency_aggregation',
+      schema: process.env.DB_SCHEMA,
+      table: 'household_deficiency_afe_aggregation',
     },
   },
 })
-export class HouseholdDeficiencyAggregation extends Entity {
+export class HouseholdDeficiencyAfeAggregation extends Entity {
   @property({
     type: 'number',
+    description:
+      'The ID of the consumption data used for matching and calculations',
     scale: 0,
     id: true,
     postgresql: {
@@ -23,10 +25,12 @@ export class HouseholdDeficiencyAggregation extends Entity {
       nullable: 'YES',
     },
   })
-  surveyId?: number;
+  consumptionDataId?: number;
 
   @property({
     type: 'number',
+    description:
+      'The ID of the composition data used for matching and calculations',
     scale: 0,
     id: true,
     postgresql: {
@@ -38,10 +42,11 @@ export class HouseholdDeficiencyAggregation extends Entity {
       nullable: 'YES',
     },
   })
-  fctSourceId?: number;
+  compositionDataId?: number;
 
   @property({
     type: 'string',
+    description: 'ISO 3166-1 alpha-3 code for the country or territory',
     id: true,
     postgresql: {
       columnName: 'country',
@@ -52,12 +57,13 @@ export class HouseholdDeficiencyAggregation extends Entity {
       nullable: 'YES',
     },
   })
-  country?: string;
+  countryId?: string;
 
   @property({
     type: 'string',
+    description: 'The ID of the area used for aggregating household data',
     postgresql: {
-      columnName: 'subregion_id',
+      columnName: 'aggregation_area_id',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -65,12 +71,14 @@ export class HouseholdDeficiencyAggregation extends Entity {
       nullable: 'YES',
     },
   })
-  subregionId?: string;
+  aggregationAreaId?: string;
 
   @property({
     type: 'string',
+    description:
+      'The human readable name of the area used for aggregating household data',
     postgresql: {
-      columnName: 'subregion_name',
+      columnName: 'aggregation_area_name',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -78,10 +86,12 @@ export class HouseholdDeficiencyAggregation extends Entity {
       nullable: 'YES',
     },
   })
-  subregionName?: string;
+  aggregationAreaName?: string;
 
   @property({
     type: 'string',
+    description:
+      'GeoJSON representation of the boundary of the aggregation area',
     postgresql: {
       columnName: 'geometry',
       dataType: 'text',
@@ -95,6 +105,7 @@ export class HouseholdDeficiencyAggregation extends Entity {
 
   @property({
     type: 'string',
+    description: 'ID of the micronutrient',
     postgresql: {
       columnName: 'micronutrient_id',
       dataType: 'text',
@@ -108,6 +119,7 @@ export class HouseholdDeficiencyAggregation extends Entity {
 
   @property({
     type: 'string',
+    description: 'The units for the micronutrient measurement',
     postgresql: {
       columnName: 'unit',
       dataType: 'text',
@@ -121,6 +133,8 @@ export class HouseholdDeficiencyAggregation extends Entity {
 
   @property({
     type: 'number',
+    description:
+      'Median micronutrient availability per household within the aggregation area',
     postgresql: {
       columnName: 'median_supply',
       dataType: 'numeric',
@@ -134,6 +148,7 @@ export class HouseholdDeficiencyAggregation extends Entity {
 
   @property({
     type: 'number',
+    description: 'The number of sampled households within the aggregation area',
     scale: 0,
     postgresql: {
       columnName: 'household_count',
@@ -148,6 +163,8 @@ export class HouseholdDeficiencyAggregation extends Entity {
 
   @property({
     type: 'number',
+    description:
+      'The number of the sampled households which are deficient in the micronutrient based on AFE',
     scale: 0,
     postgresql: {
       columnName: 'deficient_count',
@@ -162,6 +179,8 @@ export class HouseholdDeficiencyAggregation extends Entity {
 
   @property({
     type: 'number',
+    description:
+      'The percentage of the sampled households which are deficient in the micronutrient based on AFE',
     postgresql: {
       columnName: 'deficient_percentage',
       dataType: 'numeric',
@@ -179,14 +198,14 @@ export class HouseholdDeficiencyAggregation extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<HouseholdDeficiencyAggregation>) {
+  constructor(data?: Partial<HouseholdDeficiencyAfeAggregation>) {
     super(data);
   }
 }
 
-export interface HouseholdDeficiencyAggregationRelations {
+export interface HouseholdDeficiencyAfeAggregationRelations {
   // describe navigational properties here
 }
 
-export type HouseholdDeficiencyAggregationWithRelations = HouseholdDeficiencyAggregation &
-  HouseholdDeficiencyAggregationRelations;
+export type HouseholdDeficiencyAfeAggregationWithRelations = HouseholdDeficiencyAfeAggregation &
+  HouseholdDeficiencyAfeAggregationRelations;

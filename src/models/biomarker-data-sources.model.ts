@@ -3,10 +3,13 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: process.env.DB_SCHEMA, table: 'diet_data_sources'},
+    postgresql: {
+      schema: process.env.DB_SCHEMA,
+      table: 'biomarker_data_sources',
+    },
   },
 })
-export class DietDataSources extends Entity {
+export class BiomarkerDataSources extends Entity {
   @property({
     type: 'string',
     required: true,
@@ -25,7 +28,21 @@ export class DietDataSources extends Entity {
 
   @property({
     type: 'string',
-    description: 'ID of the micronutrient',
+    description: 'Name of the biomarker measured',
+    postgresql: {
+      columnName: 'biomarker_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  biomarkerName?: string;
+
+  @property({
+    type: 'string',
+    description: 'ID of the corresponding micronutrient for the biomarker',
     id: true,
     postgresql: {
       columnName: 'micronutrient_id',
@@ -39,28 +56,11 @@ export class DietDataSources extends Entity {
   micronutrientId?: string;
 
   @property({
-    type: 'string',
-    description:
-      'The granularity of the consumption data. Either `country` or `household`',
-    id: true,
-    postgresql: {
-      columnName: 'consumption_data_type',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  consumptionDataType?: string;
-
-  @property({
     type: 'number',
-    description:
-      'The ID of the consumption data for use in subsequent requests',
+    description: 'The ID of the biomarker survey',
     scale: 0,
     postgresql: {
-      columnName: 'consumption_data_id',
+      columnName: 'survey_id',
       dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
@@ -68,30 +68,13 @@ export class DietDataSources extends Entity {
       nullable: 'YES',
     },
   })
-  consumptionDataId?: number;
-
-  @property({
-    type: 'number',
-    description:
-      'The ID of the composition data for use in subsequent requests',
-    scale: 0,
-    postgresql: {
-      columnName: 'composition_data_id',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  compositionDataId?: number;
+  surveyId?: number;
 
   @property({
     type: 'string',
-    description:
-      'Human readable name for the combination of consumption and composition data',
+    description: 'Human readable name of the biomarker survey',
     postgresql: {
-      columnName: 'combined_name',
+      columnName: 'survey_name',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -99,7 +82,7 @@ export class DietDataSources extends Entity {
       nullable: 'YES',
     },
   })
-  displayName?: string;
+  surveyName?: string;
 
   // Define well-known properties here
 
@@ -107,14 +90,14 @@ export class DietDataSources extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<DietDataSources>) {
+  constructor(data?: Partial<BiomarkerDataSources>) {
     super(data);
   }
 }
 
-export interface DietDataSourcesRelations {
+export interface BiomarkerDataSourcesRelations {
   // describe navigational properties here
 }
 
-export type DietDataSourcesWithRelations = DietDataSources &
-  DietDataSourcesRelations;
+export type BiomarkerDataSourcesWithRelations = BiomarkerDataSources &
+  BiomarkerDataSourcesRelations;

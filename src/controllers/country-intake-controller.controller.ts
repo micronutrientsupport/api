@@ -5,14 +5,13 @@ import {get, getModelSchemaRef, param} from '@loopback/rest';
 import {
   CountryIntake,
   CountryIntakeGeojson,
-  SubregionIntakeGeojson,
+  HouseholdDeficiencyAfeAggregation,
 } from '../models';
 import {
   CountryIntakeGeojsonRepository,
   CountryIntakeRepository,
   CountryRepository,
-  HouseholdDeficiencyAggregationRepository,
-  SubregionIntakeGeojsonRepository,
+  HouseholdDeficiencyAfeAggregationRepository,
 } from '../repositories';
 import {toGeoJSONFeatureCollection} from '../utils/toGeoJSON';
 import {StandardJsonResponse} from './standardJsonResponse';
@@ -28,10 +27,8 @@ export class CountryIntakeControllerController {
     public countryIntakeGeojsonRepository: CountryIntakeGeojsonRepository,
     @repository(CountryIntakeRepository)
     public countryIntakeRepository: CountryIntakeRepository,
-    @repository(SubregionIntakeGeojsonRepository)
-    public subregionIntakeGeojsonRepository: SubregionIntakeGeojsonRepository,
-    @repository(HouseholdDeficiencyAggregationRepository)
-    public householdDeficiencyAggregationRepository: HouseholdDeficiencyAggregationRepository,
+    @repository(HouseholdDeficiencyAfeAggregationRepository)
+    public householdDeficiencyAfeAggregationRepository: HouseholdDeficiencyAfeAggregationRepository,
   ) {}
 
   @get(
@@ -78,7 +75,7 @@ export class CountryIntakeControllerController {
       summary: 'household data sources',
       responses: new StandardOpenApiResponses('Data sources')
         .setDataType('array')
-        .setObjectSchema(getModelSchemaRef(SubregionIntakeGeojson))
+        .setObjectSchema(getModelSchemaRef(HouseholdDeficiencyAfeAggregation))
         .toObject(),
     },
   )
@@ -90,13 +87,13 @@ export class CountryIntakeControllerController {
   ): Promise<object> {
     const filter: Filter = {
       where: {
-        country: countryId,
+        countryId: countryId,
         micronutrientId: micronutrientId,
         fctSourceId: 24,
         surveyId: consumptionId,
       },
     };
-    const data = await this.householdDeficiencyAggregationRepository.find(
+    const data = await this.householdDeficiencyAfeAggregationRepository.find(
       filter,
     );
 
@@ -132,44 +129,6 @@ export class CountryIntakeControllerController {
     return new StandardJsonResponse<Array<object>>(
       `${ndata.length} top results returned.`,
       ndata,
-    );
-  }
-
-  @get(
-    '/diet/household/geojson-old/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}',
-    {
-      responses: new StandardOpenApiResponses('Data sources')
-        .setDataType('array')
-        .setObjectSchema(getModelSchemaRef(SubregionIntakeGeojson))
-        .toObject(),
-    },
-  )
-  async findSubregionIntakeGeojson(
-    @param.path.string('countryId') countryId: string,
-    @param.path.string('micronutrientId') micronutrientId: string,
-    @param.path.string('compositionId') compositionId: number,
-    @param.path.string('consumptionId') consumptionId: number,
-  ): Promise<object> {
-    const filter: Filter = {
-      where: {
-        countryId: countryId,
-        mnName: micronutrientId,
-        //  fctSourceId: compositionId,
-        //  dataSourceId: consumptionId
-      },
-    };
-    const data = await this.subregionIntakeGeojsonRepository.find(filter);
-    // Temp insert dummy threshold values
-    // if (data[0].geojson) {
-    //   (data[0].geojson as any).features.forEach((feature: any) => {
-    //     console.log(feature.properties);
-    //     feature.properties.mn_threshold = 0;
-    //     feature.properties.mn_threshold_unit = '%';
-    //   })
-    // }
-    return new StandardJsonResponse<Array<CountryIntakeGeojson>>(
-      `${data.length} top results returned.`,
-      data,
     );
   }
 
