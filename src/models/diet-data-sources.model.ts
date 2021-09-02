@@ -91,7 +91,7 @@ export class DietDataSources extends Entity {
     description:
       'Human readable name for the combination of consumption and composition data',
     postgresql: {
-      columnName: 'name',
+      columnName: 'combined_name',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -99,7 +99,7 @@ export class DietDataSources extends Entity {
       nullable: 'YES',
     },
   })
-  name?: string;
+  displayName?: string;
 
   // Define well-known properties here
 

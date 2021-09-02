@@ -18,7 +18,7 @@ export class FoodItemControllerController {
   @get('/diet/food-group', {
     summary: 'Get Food Groups and Food Items',
     description: 'Return a list of food groups and their associated fooditems',
-    tags: ['diet'],
+    // tags: ['diet'],
     responses: {
       '200': {
         description: 'Array of FoodGroupItems model instances',
@@ -47,7 +47,7 @@ export class FoodItemControllerController {
 
   @get('/diet/composition', {
     summary: 'composition',
-    tags: ['diet'],
+    // tags: ['diet'],
     responses: {
       '200': {
         description: 'Array of FoodGenusNutrientsPivot model instances',
