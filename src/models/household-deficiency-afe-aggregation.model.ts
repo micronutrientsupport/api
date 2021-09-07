@@ -136,7 +136,7 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
     description:
       'Median micronutrient availability per household within the aggregation area',
     postgresql: {
-      columnName: 'median_supply',
+      columnName: 'dietary_supply',
       dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
@@ -144,7 +144,7 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
       nullable: 'YES',
     },
   })
-  medianSupply?: number;
+  dietarySupply?: number;
 
   @property({
     type: 'number',
