@@ -36,7 +36,7 @@ export class DietDataSourceController {
     })
     countryId: string,
     @param.query.string('micronutrientId', {
-      description: 'ID for the micronutrient as returned by `/micronutrients`',
+      description: 'ç as returned by `/micronutrients`',
       required: false,
       example: 'Ca',
     })
@@ -49,6 +49,17 @@ export class DietDataSourceController {
       },
     };
     const data = await this.dietDataSourcesRepository.find(filter);
+
+    data.map((dataSource) => {
+      if(!dataSource.consumptionDataDescription) {
+        dataSource.consumptionDataDescription = 'No description available for this data source'
+      }
+      if(!dataSource.compositionDataDescription) {
+        dataSource.compositionDataDescription = 'No description available for this data source'
+      }
+      return dataSource;
+    })
+
     return new StandardJsonResponse<Array<DietDataSources>>(
       `${data.length} diet data sources returned.`,
       data,

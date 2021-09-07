@@ -10,7 +10,7 @@ export class Top20MnPerCountry extends Entity {
   @property({
     type: 'number',
     description:
-      'The ID of the composition data used for matching and calculations',
+      'The ID of the consumption data used for matching and calculations',
     id: true,
     scale: 0,
     postgresql: {
