@@ -73,6 +73,54 @@ export class DietDataSources extends Entity {
   @property({
     type: 'number',
     description:
+      'The name of the consumption data source',
+    scale: 0,
+    postgresql: {
+      columnName: 'consumption_data_name',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  consumptionDataName?: string;
+
+  @property({
+    type: 'number',
+    description:
+      'A description of the consumption data source',
+    scale: 0,
+    postgresql: {
+      columnName: 'consumption_data_description',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  consumptionDataDescription?: string;
+
+  @property({
+    type: 'number',
+    description:
+      'The Geonetwork metadata UUID for the consumption data source',
+    scale: 0,
+    postgresql: {
+      columnName: 'consumption_data_metadata_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  consumptionDataMetadataId?: string;
+
+  @property({
+    type: 'number',
+    description:
       'The ID of the composition data for use in subsequent requests',
     scale: 0,
     postgresql: {
@@ -85,6 +133,54 @@ export class DietDataSources extends Entity {
     },
   })
   compositionDataId?: number;
+
+  @property({
+    type: 'number',
+    description:
+      'The name of the composition data source',
+    scale: 0,
+    postgresql: {
+      columnName: 'composition_data_name',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  compositionDataName?: string;
+
+    @property({
+    type: 'number',
+    description:
+      'A description of the consumption data source',
+    scale: 0,
+    postgresql: {
+      columnName: 'composition_data_description',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  compositionDataDescription?: string;
+
+  @property({
+    type: 'number',
+    description:
+      'The Geonetwork metadata UUID for the composition data source',
+    scale: 0,
+    postgresql: {
+      columnName: 'composition_data_metadata_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  compositionDataMetadataId?: string;
 
   @property({
     type: 'string',

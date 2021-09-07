@@ -33,16 +33,16 @@ export class MicronutrientController {
       .toObject(),
   })
   async getMicronutrients(
-    @param.query.string('countryId', {
-      description: 'ISO 3166-1 alpha-3 code for the country or territory',
+    @param.query.string('micronutrientId', {
+      description: 'ID of the micronutrient',
       required: false,
-      example: 'MWI',
+      example: 'Ca',
     })
-    countryId: string,
+    micronutrientId: string,
   ): Promise<StandardJsonResponse<Array<Micronutrient>>> {
     const filter: Filter = {
       where: {
-        id: countryId,
+        id: micronutrientId,
       },
     };
     const micronutrients = await this.micronutrientRepository.find(filter);
