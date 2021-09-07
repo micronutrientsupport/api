@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/micronutrientsupport/api/compare/v2.1.1...v2.2.0) (2021-09-07)
+
+
+### Features
+
+* add geojson to countries dictionary.  Update data sources to add data info ([ccdf5a0](https://www.github.com/micronutrientsupport/api/commit/ccdf5a064e36ea50e2579d1c605be45f74df5eab))
+
+
+### Bug Fixes
+
+* add ids to countryintake model ([252c2a0](https://www.github.com/micronutrientsupport/api/commit/252c2a0c8ba6f90992f31e7de7fc053e8aca8716))
+
 ### [2.1.1](https://www.github.com/micronutrientsupport/api/compare/v2.1.0...v2.1.1) (2021-09-02)
 
 
