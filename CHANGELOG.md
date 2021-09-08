@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/micronutrientsupport/api/compare/v2.2.0...v2.3.0) (2021-09-08)
+
+
+### Features
+
+* add biomarker age gender group endpoint ([1d60e64](https://www.github.com/micronutrientsupport/api/commit/1d60e6428ebbb871d67c4f1ba873237e25d6df3b))
+
 ## [2.2.0](https://www.github.com/micronutrientsupport/api/compare/v2.1.1...v2.2.0) (2021-09-07)
 
 
