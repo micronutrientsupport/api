@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/micronutrientsupport/api/compare/v2.3.0...v2.4.0) (2021-09-08)
+
+
+### Features
+
+* add age-gender groupId to the biomarker data sources endpoint ([8ae3140](https://www.github.com/micronutrientsupport/api/commit/8ae3140ec29649ddf4e5ca2159408bcd16ad84de))
+
 ## [2.3.0](https://www.github.com/micronutrientsupport/api/compare/v2.2.0...v2.3.0) (2021-09-08)
 
 
