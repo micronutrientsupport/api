@@ -6,3 +6,5 @@ export * from './diet/data-sources/diet-data-source.controller';
 export * from './diet/food-items/food-item-controller.controller';
 export * from './diet/projections/projections.controller';
 export * from './diet/top-foods/top-foods.controller';
+export * from './biomarker/data-sources/biomarker-data-source.controller';
+export * from './biomarker/age-gender-groups/biomarker-age-gender-groups.controller';

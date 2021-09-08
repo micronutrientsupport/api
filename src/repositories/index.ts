@@ -15,3 +15,4 @@ export * from './impact-total-food-availability.repository';
 export * from './micronutrient.repository';
 export * from './top-20-mn-per-country.repository';
 export * from './top-20-mn-per-hhsurvey.repository';
+export * from './biomarker-group.repository';
