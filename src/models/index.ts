@@ -15,3 +15,4 @@ export * from './impact-total-food-availability.model';
 export * from './micronutrient.model';
 export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
+export * from './biomarker-group.model';
