@@ -41,11 +41,19 @@ export class BiomarkerDataSourceController {
       example: 'Ca',
     })
     micronutrientId: string,
+    @param.query.string('groupId', {
+      description:
+        'ID for the age-gender group as returned by `/biomarker/age-gender-groups`',
+      required: false,
+      example: 'WRA',
+    })
+    groupId: string,
   ): Promise<object> {
     const filter: Filter = {
       where: {
         countryId: countryId,
         micronutrientId: micronutrientId,
+        groupId: groupId,
       },
     };
     const data = await this.biomarkerDataSourcesRepository.find(filter);
