@@ -91,17 +91,20 @@ export class CountryDeficiencyAfe extends Entity {
   countryId?: string;
 
   @property({
-    type: 'string',
+    type: 'object',
+    required: true,
+    description:
+      'GeoJSON representation of the boundary of the country or territory',
     postgresql: {
       columnName: 'geometry',
-      dataType: 'USER-DEFINED',
+      dataType: 'text',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
       nullable: 'YES',
     },
   })
-  geometry?: string;
+  geometry: object;
 
   @property({
     type: 'number',
