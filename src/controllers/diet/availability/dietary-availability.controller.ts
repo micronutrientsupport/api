@@ -100,6 +100,16 @@ export class DietaryAvailabilityController {
     //     feature.properties.mn_threshold_unit = '%';
     //   });
     // }
+
+    if (acceptHeader.startsWith('application/geo+json;')) {
+      const ndata = toGeoJSONFeatureCollection(data);
+      this.response.set('Content-Type', 'application/geo+json');
+      this.response.status(200).send(ndata);
+      // Return the HTTP response object so that LoopBack framework skips the
+      // generation of HTTP response
+      return this.response;
+    }
+
     return new StandardJsonResponse<Array<CountryDeficiencyAfe>>(
       `${data.length} top results returned.`,
       data,
