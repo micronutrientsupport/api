@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.4.3](https://www.github.com/micronutrientsupport/api/compare/v2.4.2...v2.4.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* sort geojson response for country deficiency ([09d234e](https://www.github.com/micronutrientsupport/api/commit/09d234e21513d6f768b53ac562d873dac179c37e))
+
 ### [2.4.2](https://www.github.com/micronutrientsupport/api/compare/v2.4.1...v2.4.2) (2021-09-09)
 
 
