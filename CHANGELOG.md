@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.4.1](https://www.github.com/micronutrientsupport/api/compare/v2.4.0...v2.4.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* use the correct models/repositories for country deficiency ([ffed05e](https://www.github.com/micronutrientsupport/api/commit/ffed05e1938152fc20b9ee922bdd89aeff555c02))
+
 ## [2.4.0](https://www.github.com/micronutrientsupport/api/compare/v2.3.0...v2.4.0) (2021-09-08)
 
 
