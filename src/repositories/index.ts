@@ -16,3 +16,6 @@ export * from './micronutrient.repository';
 export * from './top-20-mn-per-country.repository';
 export * from './top-20-mn-per-hhsurvey.repository';
 export * from './biomarker-group.repository';
+export * from './household-intake-afe.repository';
+export * from './monthly-food.repository';
+export * from './country-deficiency-afe.repository';
