@@ -10,11 +10,11 @@ import {
   RestBindings,
 } from '@loopback/rest';
 import {
-  CountryIntake,
+  CountryDeficiencyAfe,
   HouseholdDeficiencyAfeAggregation,
 } from '../../../models';
 import {
-  CountryIntakeRepository,
+  CountryDeficiencyAfeRepository,
   HouseholdDeficiencyAfeAggregationRepository,
 } from '../../../repositories';
 import {toGeoJSONFeatureCollection} from '../../../utils/toGeoJSON';
@@ -27,8 +27,8 @@ export class DietaryAvailabilityController {
   constructor(
     @repository(HouseholdDeficiencyAfeAggregationRepository)
     public householdDeficiencyAfeAggregationRepository: HouseholdDeficiencyAfeAggregationRepository,
-    @repository(CountryIntakeRepository)
-    public countryIntakeRepository: CountryIntakeRepository,
+    @repository(CountryDeficiencyAfeRepository)
+    public countryDeficiencyAfeRepository: CountryDeficiencyAfeRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
   ) {}
 
@@ -42,7 +42,7 @@ export class DietaryAvailabilityController {
       'Array of CountryIntake model instances',
     )
       .setDataType('array')
-      .setObjectSchema(getModelSchemaRef(CountryIntake))
+      .setObjectSchema(getModelSchemaRef(CountryDeficiencyAfe))
       .toObject(true),
   })
   async findCountryIntake(
@@ -92,7 +92,7 @@ export class DietaryAvailabilityController {
         surveyId: consumptionDataId,
       },
     };
-    const data = await this.countryIntakeRepository.find(filter);
+    const data = await this.countryDeficiencyAfeRepository.find(filter);
     // // Temp insert dummy threshold values
     // if (data[0].geojson) {
     //   (data[0].geojson as any).features.forEach((feature: any) => {
@@ -100,10 +100,10 @@ export class DietaryAvailabilityController {
     //     feature.properties.mn_threshold_unit = '%';
     //   });
     // }
-    return new StandardJsonResponse<Array<CountryIntake>>(
+    return new StandardJsonResponse<Array<CountryDeficiencyAfe>>(
       `${data.length} top results returned.`,
       data,
-      'CountryIntake',
+      'CountryDeficiencyAfe',
     );
   }
 
