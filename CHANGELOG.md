@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/micronutrientsupport/api/compare/v2.4.3...v2.5.0) (2021-10-10)
+
+
+### Features
+
+* major rehaul and consolidation of routes and return values ([a40b6ee](https://www.github.com/micronutrientsupport/api/commit/a40b6eebcf99df526b7618b962c5d47f9f524e39))
+
 ### [2.4.3](https://www.github.com/micronutrientsupport/api/compare/v2.4.2...v2.4.3) (2021-09-09)
 
 
