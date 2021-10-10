@@ -3,7 +3,10 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'bmgf', table: 'country_deficiency_afe'},
+    postgresql: {
+      schema: process.env.DB_SCHEMA,
+      table: 'country_deficiency_afe',
+    },
   },
 })
 export class CountryDeficiencyAfe extends Entity {
@@ -47,6 +50,19 @@ export class CountryDeficiencyAfe extends Entity {
   aggregationAreaType?: string;
 
   @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'micronutrient_id',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  micronutrientId?: string;
+
+  @property({
     type: 'number',
     scale: 0,
     id: true,
@@ -78,7 +94,6 @@ export class CountryDeficiencyAfe extends Entity {
 
   @property({
     type: 'string',
-    id: true,
     postgresql: {
       columnName: 'country_id',
       dataType: 'text',
@@ -91,10 +106,7 @@ export class CountryDeficiencyAfe extends Entity {
   countryId?: string;
 
   @property({
-    type: 'object',
-    required: true,
-    description:
-      'GeoJSON representation of the boundary of the country or territory',
+    type: 'string',
     postgresql: {
       columnName: 'geometry',
       dataType: 'text',
@@ -104,7 +116,7 @@ export class CountryDeficiencyAfe extends Entity {
       nullable: 'YES',
     },
   })
-  geometry: object;
+  geometry?: string;
 
   @property({
     type: 'number',

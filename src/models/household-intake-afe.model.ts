@@ -3,7 +3,7 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'bmgf', table: 'household_intake_afe'},
+    postgresql: {schema: process.env.DB_SCHEMA, table: 'household_intake_afe'},
   },
 })
 export class HouseholdIntakeAfe extends Entity {

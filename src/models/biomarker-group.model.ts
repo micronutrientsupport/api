@@ -1,7 +1,10 @@
 import {Entity, model, property} from '@loopback/repository';
 
 @model({
-  settings: {idInjection: false, postgresql: {schema: 'bmgf', table: 'biomarker_group'}}
+  settings: {
+    idInjection: false,
+    postgresql: {schema: process.env.DB_SCHEMA, table: 'biomarker_group'},
+  },
 })
 export class BiomarkerGroup extends Entity {
   @property({
@@ -9,21 +12,43 @@ export class BiomarkerGroup extends Entity {
     description: 'ID of the biomarker age-gender group',
     required: true,
     id: 1,
-    postgresql: {columnName: 'group_id', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'NO'},
+    postgresql: {
+      columnName: 'group_id',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'NO',
+    },
   })
   groupId: string;
 
   @property({
     type: 'string',
-    description: 'Classification of the biomarker age-gender group. Adult/Children',
-    postgresql: {columnName: 'supra_group', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    description:
+      'Classification of the biomarker age-gender group. Adult/Children',
+    postgresql: {
+      columnName: 'supra_group',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   supraGroup?: string;
 
   @property({
     type: 'string',
     description: 'Human readable name of the biomarker age-gender group',
-    postgresql: {columnName: 'group_name', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'group_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   groupName?: string;
 
@@ -42,4 +67,5 @@ export interface BiomarkerGroupRelations {
   // describe navigational properties here
 }
 
-export type BiomarkerGroupWithRelations = BiomarkerGroup & BiomarkerGroupRelations;
+export type BiomarkerGroupWithRelations = BiomarkerGroup &
+  BiomarkerGroupRelations;
