@@ -3,7 +3,10 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'bmgf', table: 'food_genus_nutrients_pivot'},
+    postgresql: {
+      schema: process.env.DB_SCHEMA,
+      table: 'food_genus_nutrients_pivot',
+    },
   },
 })
 export class FoodGenusNutrientsPivot extends Entity {

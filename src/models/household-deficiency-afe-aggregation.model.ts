@@ -12,8 +12,6 @@ import {Entity, model, property} from '@loopback/repository';
 export class HouseholdDeficiencyAfeAggregation extends Entity {
   @property({
     type: 'number',
-    description:
-      'The ID of the consumption data used for matching and calculations',
     scale: 0,
     id: true,
     postgresql: {
@@ -29,8 +27,6 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
 
   @property({
     type: 'number',
-    description:
-      'The ID of the composition data used for matching and calculations',
     scale: 0,
     id: true,
     postgresql: {
@@ -46,8 +42,6 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
 
   @property({
     type: 'string',
-    description: 'ISO 3166-1 alpha-3 code for the country or territory',
-    id: true,
     postgresql: {
       columnName: 'country',
       dataType: 'text',
@@ -60,23 +54,21 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
   countryId?: string;
 
   @property({
-    type: 'string',
-    description: 'The ID of the area used for aggregating household data',
+    type: 'number',
+    scale: 0,
     postgresql: {
       columnName: 'aggregation_area_id',
-      dataType: 'text',
+      dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
-      dataScale: null,
+      dataScale: 0,
       nullable: 'YES',
     },
   })
-  aggregationAreaId?: string;
+  aggregationAreaId?: number;
 
   @property({
     type: 'string',
-    description:
-      'The human readable name of the area used for aggregating household data',
     postgresql: {
       columnName: 'aggregation_area_name',
       dataType: 'text',
@@ -90,8 +82,19 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
 
   @property({
     type: 'string',
-    description:
-      'GeoJSON representation of the boundary of the aggregation area',
+    postgresql: {
+      columnName: 'aggregation_area_type',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  aggregationAreaType?: string;
+
+  @property({
+    type: 'string',
     postgresql: {
       columnName: 'geometry',
       dataType: 'text',
@@ -101,11 +104,10 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
       nullable: 'YES',
     },
   })
-  geometry?: string;
+  geometry?: object;
 
   @property({
     type: 'string',
-    description: 'ID of the micronutrient',
     postgresql: {
       columnName: 'micronutrient_id',
       dataType: 'text',
@@ -119,7 +121,6 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
 
   @property({
     type: 'string',
-    description: 'The units for the micronutrient measurement',
     postgresql: {
       columnName: 'unit',
       dataType: 'text',
@@ -133,8 +134,6 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
 
   @property({
     type: 'number',
-    description:
-      'Median micronutrient availability per household within the aggregation area',
     postgresql: {
       columnName: 'dietary_supply',
       dataType: 'numeric',
@@ -148,7 +147,6 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
 
   @property({
     type: 'number',
-    description: 'The number of sampled households within the aggregation area',
     scale: 0,
     postgresql: {
       columnName: 'household_count',
@@ -163,8 +161,6 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
 
   @property({
     type: 'number',
-    description:
-      'The number of the sampled households which are deficient in the micronutrient based on AFE',
     scale: 0,
     postgresql: {
       columnName: 'deficient_count',
@@ -179,8 +175,6 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
 
   @property({
     type: 'number',
-    description:
-      'The percentage of the sampled households which are deficient in the micronutrient based on AFE',
     postgresql: {
       columnName: 'deficient_percentage',
       dataType: 'numeric',
@@ -191,6 +185,19 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
     },
   })
   deficientPercentage?: number;
+
+  @property({
+    type: 'number',
+    postgresql: {
+      columnName: 'deficient_value',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  deficientValue?: number;
 
   // Define well-known properties here
 

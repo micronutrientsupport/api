@@ -12,10 +12,12 @@ import {
 import {
   CountryDeficiencyAfe,
   HouseholdDeficiencyAfeAggregation,
+  MonthlyFood,
 } from '../../../models';
 import {
   CountryDeficiencyAfeRepository,
   HouseholdDeficiencyAfeAggregationRepository,
+  MonthlyFoodRepository,
 } from '../../../repositories';
 import {toGeoJSONFeatureCollection} from '../../../utils/toGeoJSON';
 import {StandardJsonResponse} from '../../standardJsonResponse';
@@ -29,6 +31,8 @@ export class DietaryAvailabilityController {
     public householdDeficiencyAfeAggregationRepository: HouseholdDeficiencyAfeAggregationRepository,
     @repository(CountryDeficiencyAfeRepository)
     public countryDeficiencyAfeRepository: CountryDeficiencyAfeRepository,
+    @repository(MonthlyFoodRepository)
+    public monthlyFoodRepository: MonthlyFoodRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
   ) {}
 
@@ -46,13 +50,6 @@ export class DietaryAvailabilityController {
       .toObject(true),
   })
   async findCountryIntake(
-    @param.query.string('countryId', {
-      description:
-        'ISO 3166-1 alpha-3 code for the country as returned by `/countries`',
-      required: false,
-      example: 'MWI',
-    })
-    countryId: string,
     @param.query.string('micronutrientId', {
       description: 'ID for the micronutrient as returned by `/micronutrients`',
       required: false,
@@ -86,13 +83,17 @@ export class DietaryAvailabilityController {
   ): Promise<object> {
     const filter: Filter = {
       where: {
-        countryId: countryId,
         micronutrientId: micronutrientId,
-        fctSourceId: compositionDataId,
-        surveyId: consumptionDataId,
+        compositionDataId: compositionDataId,
+        consumptionDataId: consumptionDataId,
       },
     };
     const data = await this.countryDeficiencyAfeRepository.find(filter);
+
+    data.map(res => {
+      res.geometry = JSON.parse((res as any).geometry);
+    });
+
     // // Temp insert dummy threshold values
     // if (data[0].geojson) {
     //   (data[0].geojson as any).features.forEach((feature: any) => {
@@ -117,27 +118,19 @@ export class DietaryAvailabilityController {
     );
   }
 
-  @get('diet/household/availability', {
-    summary: 'Get dietary MN availability by household',
+  @get('diet/household/monthly', {
+    summary: 'Get dietary MN by calendar month',
     description:
-      'Get the dietary availability and prevalence of deficiency based on household level data, aggregated to the subregional level',
+      'Get the dietary availability based on household level data, aggregated to the calendar month',
     tags: ['diet'],
-    produces: ['application/json', 'application/geo+json'],
     responses: new StandardOpenApiResponses(
-      'Array of HouseholdDeficiencyAfeAggregation model instances',
+      'Array of MonthlyFood model instances',
     )
       .setDataType('array')
-      .setObjectSchema(getModelSchemaRef(HouseholdDeficiencyAfeAggregation))
+      .setObjectSchema(getModelSchemaRef(MonthlyFood))
       .toObject(true),
   })
-  async find(
-    @param.query.string('countryId', {
-      description:
-        'ISO 3166-1 alpha-3 code for the country as returned by `/countries`',
-      required: false,
-      example: 'MWI',
-    })
-    countryId: string,
+  async getMonthly(
     @param.query.string('micronutrientId', {
       description: 'ID for the micronutrient as returned by `/micronutrients`',
       required: false,
@@ -171,7 +164,67 @@ export class DietaryAvailabilityController {
   ): Promise<object> {
     const filter: Filter = {
       where: {
-        country: countryId,
+        micronutrientId: micronutrientId,
+        compositionDataId: compositionDataId,
+        consumptionDataId: consumptionDataId,
+      },
+    };
+    const data = await this.monthlyFoodRepository.find(filter);
+
+    return new StandardJsonResponse<Array<MonthlyFood>>(
+      `${data.length} monthly food breakdowns returned.`,
+      data,
+      'MonthlyFood',
+    );
+  }
+
+  @get('diet/household/availability', {
+    summary: 'Get dietary MN availability by household',
+    description:
+      'Get the dietary availability and prevalence of deficiency based on household level data, aggregated to the subregional level',
+    tags: ['diet'],
+    produces: ['application/json', 'application/geo+json'],
+    responses: new StandardOpenApiResponses(
+      'Array of HouseholdDeficiencyAfeAggregation model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(HouseholdDeficiencyAfeAggregation))
+      .toObject(true),
+  })
+  async find(
+    @param.query.string('micronutrientId', {
+      description: 'ID for the micronutrient as returned by `/micronutrients`',
+      required: false,
+      example: 'Ca',
+    })
+    micronutrientId: string,
+    @param.query.string('compositionDataId', {
+      description:
+        'ID for the composition data source as returned by `/diet/data-sources`',
+      required: false,
+      example: '1',
+    })
+    compositionDataId: number,
+    @param.query.string('consumptionDataId', {
+      description:
+        'ID for the household level consumption data source as returned by `/diet/data-sources`',
+      required: false,
+      example: '1',
+    })
+    consumptionDataId: number,
+    @param.header.string('Accept', {
+      description:
+        'Defaults to `application/json`.  Requesting `application/geo+json` will result in the ' +
+        'data being returned as a GeoJSON feature collection.  See ' +
+        '[the resource page](./core-data-api/resources/standard-api-response-for-householddeficiencyafeaggregation-model#geojson-feature-collection)' +
+        ' for more details',
+      required: false,
+      example: 'application/geo-json',
+    })
+    acceptHeader: string,
+  ): Promise<object> {
+    const filter: Filter = {
+      where: {
         micronutrientId: micronutrientId,
         compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
@@ -184,22 +237,22 @@ export class DietaryAvailabilityController {
     // TODO: Fix This
     data.map(res => {
       res.geometry = JSON.parse((res as any).geometry);
-      res.id = res.subregionId;
-      if (res.medianSupply) {
-        res.mn_absolute = Math.round(res.medianSupply * 100) / 100;
-      } else {
-        res.mn_absolute = 'N/A';
-      }
-      res.mn_absolute_unit = res.unit;
-      res.mn_threshold = res.deficientPercentage;
-      res.mn_threshold_unit =
-        '% of sampled households (' +
-        res.deficientCount +
-        '/' +
-        res.householdCount +
-        ' )';
-      res.subregion_name = res.subregionName;
-      res.subregion_type = 'District';
+      //   res.id = res.subregionId;
+      //   if (res.medianSupply) {
+      //     res.mn_absolute = Math.round(res.medianSupply * 100) / 100;
+      //   } else {
+      //     res.mn_absolute = 'N/A';
+      //   }
+      //   res.mn_absolute_unit = res.unit;
+      //   res.mn_threshold = res.deficientPercentage;
+      //   res.mn_threshold_unit =
+      //     '% of sampled households (' +
+      //     res.deficientCount +
+      //     '/' +
+      //     res.householdCount +
+      //     ' )';
+      //   res.subregion_name = res.subregionName;
+      //   res.subregion_type = 'District';
     });
 
     if (acceptHeader.startsWith('application/geo+json;')) {

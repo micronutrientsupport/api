@@ -3,14 +3,24 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'andan-api-dev2', table: 'country_intake_geojson'}
-  }
+    postgresql: {
+      schema: process.env.DB_SCHEMA,
+      table: 'country_intake_geojson',
+    },
+  },
 })
 export class CountryIntakeGeojson extends Entity {
   @property({
     type: 'string',
     id: true,
-    postgresql: {columnName: 'country_id', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'country_id',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   countryId?: string;
 
@@ -18,7 +28,14 @@ export class CountryIntakeGeojson extends Entity {
     type: 'number',
     id: true,
     scale: 0,
-    postgresql: {columnName: 'fct_source_id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'fct_source_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   fctSourceId?: number;
 
@@ -26,25 +43,53 @@ export class CountryIntakeGeojson extends Entity {
     type: 'number',
     id: true,
     scale: 0,
-    postgresql: {columnName: 'data_source_id', dataType: 'integer', dataLength: null, dataPrecision: null, dataScale: 0, nullable: 'YES'},
+    postgresql: {
+      columnName: 'data_source_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
   })
   dataSourceId?: number;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'mn_name', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'mn_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   mnName?: string;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'mn_value', dataType: 'text', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'mn_value',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   mnValue?: string;
 
   @property({
     type: 'string',
-    postgresql: {columnName: 'geojson', dataType: 'json', dataLength: null, dataPrecision: null, dataScale: null, nullable: 'YES'},
+    postgresql: {
+      columnName: 'geojson',
+      dataType: 'json',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
   })
   geojson?: string;
 
@@ -63,4 +108,5 @@ export interface CountryIntakeGeojsonRelations {
   // describe navigational properties here
 }
 
-export type CountryIntakeGeojsonWithRelations = CountryIntakeGeojson & CountryIntakeGeojsonRelations;
+export type CountryIntakeGeojsonWithRelations = CountryIntakeGeojson &
+  CountryIntakeGeojsonRelations;

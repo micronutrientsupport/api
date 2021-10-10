@@ -16,9 +16,9 @@ export class NationalScaleHouseholds {
   ) {}
 
   @get('/diet/household/overview', {
-    summary: 'Get the a something',
+    summary: 'Get national summary (houshold)',
     description:
-      'Get the top fooditems contributing to the micronutrient intake for a given nation based on Household level consumption data',
+      'Get a list of dietary supply values for anonymised households across the nation',
     tags: ['diet'],
     responses: new StandardOpenApiResponses(
       'Array of HouseholdIntakeAfe model instances',
@@ -48,20 +48,12 @@ export class NationalScaleHouseholds {
       example: '1',
     })
     consumptionDataId: number,
-    @param.query.number('totalFoods', {
-      description:
-        'Number of food items to return from the greatest contributor down.  Between 1 and 20 (defaults to 20)',
-      required: false,
-      example: '10',
-    })
-    totalFoods: number,
   ): Promise<object> {
     const filter: Filter = {
       where: {
         micronutrientId: micronutrientId,
         compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
-        ranking: {lte: totalFoods ? totalFoods : 20},
       },
     };
     const data = await this.householdIntakeAfeRepository.find(filter);
