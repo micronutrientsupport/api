@@ -1,12 +1,8 @@
 // Uncomment these imports to begin using these cool features!
 
 import {Filter, repository} from '@loopback/repository';
-import {get, getModelSchemaRef, param} from '@loopback/rest';
-import {
-  CountryIntake,
-  CountryIntakeGeojson,
-  HouseholdDeficiencyAfeAggregation,
-} from '../models';
+import {param} from '@loopback/rest';
+import {CountryIntake} from '../models';
 import {
   CountryIntakeGeojsonRepository,
   CountryIntakeRepository,
@@ -15,7 +11,6 @@ import {
 } from '../repositories';
 import {toGeoJSONFeatureCollection} from '../utils/toGeoJSON';
 import {StandardJsonResponse} from './standardJsonResponse';
-import {StandardOpenApiResponses} from './standardOpenApiResponses';
 
 // import {inject} from '@loopback/core';
 
@@ -31,123 +26,6 @@ export class CountryIntakeControllerController {
     public householdDeficiencyAfeAggregationRepository: HouseholdDeficiencyAfeAggregationRepository,
   ) {}
 
-  @get(
-    '/diet/country/geojson/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}',
-    {
-      summary: 'country data sources',
-      responses: new StandardOpenApiResponses('Data sources')
-        .setDataType('array')
-        .setObjectSchema(getModelSchemaRef(CountryIntakeGeojson))
-        .toObject(),
-    },
-  )
-  async findCountryIntakeGeojson(
-    @param.path.string('countryId') countryId: string,
-    @param.path.string('micronutrientId') micronutrientId: string,
-    @param.path.string('compositionId') compositionId: number,
-    @param.path.string('consumptionId') consumptionId: number,
-  ): Promise<object> {
-    const filter: Filter = {
-      where: {
-        countryId: countryId,
-        mnName: micronutrientId,
-        fctSourceId: compositionId,
-        dataSourceId: consumptionId,
-      },
-    };
-    const data = await this.countryIntakeGeojsonRepository.find(filter);
-    // Temp insert dummy threshold values
-    if (data[0].geojson) {
-      (data[0].geojson as any).features.forEach((feature: any) => {
-        feature.properties.mn_threshold = 0;
-        feature.properties.mn_threshold_unit = '%';
-      });
-    }
-    return new StandardJsonResponse<Array<CountryIntakeGeojson>>(
-      `${data.length} top results returned.`,
-      data,
-    );
-  }
-
-  @get(
-    '/diet/household/geojson/{countryId}/{micronutrientId}/{compositionId}/{consumptionId}',
-    {
-      summary: 'household data sources',
-      responses: new StandardOpenApiResponses('Data sources')
-        .setDataType('array')
-        .setObjectSchema(getModelSchemaRef(HouseholdDeficiencyAfeAggregation))
-        .toObject(),
-    },
-  )
-  async findSubregionIntakeGeojson2(
-    @param.path.string('countryId') countryId: string,
-    @param.path.string('micronutrientId') micronutrientId: string,
-    @param.path.string('compositionId') compositionId: number,
-    @param.path.string('consumptionId') consumptionId: number,
-  ): Promise<object> {
-    const filter: Filter = {
-      where: {
-        countryId: countryId,
-        micronutrientId: micronutrientId,
-        fctSourceId: 24,
-        surveyId: consumptionId,
-      },
-    };
-    const data = await this.householdDeficiencyAfeAggregationRepository.find(
-      filter,
-    );
-
-    data.map(res => {
-      res.geometry = JSON.parse((res as any).geometry);
-      res.id = res.subregionId;
-      if (res.medianSupply) {
-        res.mn_absolute = Math.round(res.medianSupply * 100) / 100;
-      } else {
-        res.mn_absolute = 'N/A';
-      }
-      res.mn_absolute_unit = res.unit;
-      res.mn_threshold = res.deficientPercentage;
-      res.mn_threshold_unit =
-        '% of sampled households (' +
-        res.deficientCount +
-        '/' +
-        res.householdCount +
-        ' )';
-      res.subregion_name = res.subregionName;
-      res.subregion_type = 'District';
-    });
-
-    const ndata = [{geojson: toGeoJSONFeatureCollection(data)}];
-    // Temp insert dummy threshold values
-    // if (data[0].geojson) {
-    //   (data[0].geojson as any).features.forEach((feature: any) => {
-    //     console.log(feature.properties);
-    //     feature.properties.mn_threshold = 0;
-    //     feature.properties.mn_threshold_unit = '%';
-    //   })
-    // }
-    return new StandardJsonResponse<Array<object>>(
-      `${ndata.length} top results returned.`,
-      ndata,
-    );
-  }
-
-  @get('/diet/scenario/composition', {
-    summary: 'Scenario composition',
-    responses: {
-      '200': {
-        description: 'Array of CountryIntake model instances',
-        content: {
-          'application/json': {
-            schema: {
-              type: 'array',
-              items: getModelSchemaRef(CountryIntake, {includeRelations: true}),
-            },
-          },
-        },
-      },
-    },
-  })
   async findScenario(
     @param({name: 'countryId', in: 'query', required: true}) countryId: string,
     @param({name: 'micronutrientId', in: 'query', required: true})
