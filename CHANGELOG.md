@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://www.github.com/micronutrientsupport/api/compare/v2.6.0...v2.7.0) (2021-10-12)
+
+
+### Features
+
+* add default flag to age-gender model ([f958b01](https://www.github.com/micronutrientsupport/api/commit/f958b012a073ffee2205a4f04296c02ed771b31a))
+
 ## [2.6.0](https://www.github.com/micronutrientsupport/api/compare/v2.5.0...v2.6.0) (2021-10-12)
 
 

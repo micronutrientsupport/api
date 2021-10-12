@@ -52,6 +52,20 @@ export class BiomarkerGroup extends Entity {
   })
   groupName?: string;
 
+  @property({
+    type: 'boolean',
+    description: 'Is the group the default selection?',
+    postgresql: {
+      columnName: 'is_default',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  isDefault?: boolean;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
