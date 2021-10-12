@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://www.github.com/micronutrientsupport/api/compare/v2.5.0...v2.6.0) (2021-10-12)
+
+
+### Features
+
+* add food_group details to top 20 food item models ([3f088a8](https://www.github.com/micronutrientsupport/api/commit/3f088a8cc41a4478a772c1e007153ea7147e1c78))
+
 ## [2.5.0](https://www.github.com/micronutrientsupport/api/compare/v2.4.3...v2.5.0) (2021-10-10)
 
 
