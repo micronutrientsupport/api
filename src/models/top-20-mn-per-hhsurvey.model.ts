@@ -114,6 +114,35 @@ export class Top20MnPerHhsurvey extends Entity {
   })
   foodGenusName?: string;
 
+  @property({
+    type: 'string',
+    description: 'ID of the food group the contributing food item belongs to',
+    postgresql: {
+      columnName: 'food_group_id',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  foodGroupId?: string;
+
+  @property({
+    type: 'string',
+    description:
+      'Human readbale name of the food group the contributing food item belongs to',
+    postgresql: {
+      columnName: 'food_group_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  foodGroupName?: string;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
