@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.8.1](https://www.github.com/micronutrientsupport/api/compare/v2.8.0...v2.8.1) (2021-10-14)
+
+
+### Bug Fixes
+
+* add food_group_name field to monthly food endpoint ([bc97f46](https://www.github.com/micronutrientsupport/api/commit/bc97f46500567f999ad07ea44cdcf59684471881))
+
 ## [2.8.0](https://www.github.com/micronutrientsupport/api/compare/v2.7.0...v2.8.0) (2021-10-14)
 
 
