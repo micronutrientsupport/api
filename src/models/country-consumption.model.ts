@@ -3,36 +3,13 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    hiddenProperties: [
-      'id',
-      'foodGenusConfidence',
-      'countryId',
-      'originalId',
-      'dateConsumed',
-      'originalName',
-    ],
     postgresql: {schema: 'bmgf', table: 'country_consumption'},
   },
 })
 export class CountryConsumption extends Entity {
   @property({
-    type: 'number',
-    required: true,
-    scale: 0,
-    id: 1,
-    postgresql: {
-      columnName: 'id',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'NO',
-    },
-  })
-  id: number;
-
-  @property({
     type: 'string',
+    id: true,
     postgresql: {
       columnName: 'food_genus_id',
       dataType: 'text',
@@ -43,71 +20,6 @@ export class CountryConsumption extends Entity {
     },
   })
   foodGenusId?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'food_genus_confidence',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  foodGenusConfidence?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'country_id',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  countryId?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'original_id',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  originalId?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'original_name',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  originalName?: string;
-
-  @property({
-    type: 'date',
-    postgresql: {
-      columnName: 'date_consumed',
-      dataType: 'date',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  dateConsumed?: string;
 
   @property({
     type: 'number',
