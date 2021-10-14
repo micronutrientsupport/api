@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.9.0](https://www.github.com/micronutrientsupport/api/compare/v2.8.1...v2.9.0) (2021-10-14)
+
+
+### Features
+
+* add consumption endpoint for scenarios ([8722577](https://www.github.com/micronutrientsupport/api/commit/872257788c5a5a96818adcac33bbe8a85d461779))
+
+
+### Miscellaneous
+
+* tidy up model fields ([6b2dfce](https://www.github.com/micronutrientsupport/api/commit/6b2dfceca51a49082ca22326765def17e250ecb9))
+
 ### [2.8.1](https://www.github.com/micronutrientsupport/api/compare/v2.8.0...v2.8.1) (2021-10-14)
 
 
