@@ -75,6 +75,19 @@ export class MonthlyFood extends Entity {
   foodGroupId?: number;
 
   @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'food_group_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  foodGroupName?: string;
+
+  @property({
     type: 'number',
     scale: 0,
     id: true,
