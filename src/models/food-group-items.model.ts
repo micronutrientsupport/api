@@ -12,7 +12,7 @@ export class FoodGroupItems extends Entity {
     scale: 0,
     id: true,
     postgresql: {
-      columnName: 'group_id',
+      columnName: 'food_group_id',
       dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
@@ -20,12 +20,12 @@ export class FoodGroupItems extends Entity {
       nullable: 'YES',
     },
   })
-  groupId?: number;
+  foodGroupId?: number;
 
   @property({
     type: 'string',
     postgresql: {
-      columnName: 'group_name',
+      columnName: 'food_group_name',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -33,7 +33,7 @@ export class FoodGroupItems extends Entity {
       nullable: 'YES',
     },
   })
-  groupName?: string;
+  foodGroupName?: string;
 
   @property({
     type: 'string',
@@ -46,7 +46,7 @@ export class FoodGroupItems extends Entity {
       nullable: 'YES',
     },
   })
-  fooditems?: [{id: string; foodName: string}];
+  foodItems?: [{foodGenusId: string; foodGenusName: string}];
 
   // Define well-known properties here
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://www.github.com/micronutrientsupport/api/compare/v2.7.0...v2.8.0) (2021-10-14)
+
+
+### Features
+
+* add endpoints for country level dietary change scenarios ([6f124dd](https://www.github.com/micronutrientsupport/api/commit/6f124dd9cb47891e35d781dbcfae1a7e0b15380f))
+
 ## [2.7.0](https://www.github.com/micronutrientsupport/api/compare/v2.6.0...v2.7.0) (2021-10-12)
 
 
