@@ -3,6 +3,7 @@ export * from './biomarker/data-sources/biomarker-data-source.controller';
 export * from './country-intake-controller.controller';
 export * from './dictionaries/country.controller';
 export * from './dictionaries/foodComposition.controller';
+export * from './dictionaries/foodConsumption.controller';
 export * from './dictionaries/foodGroup.controller';
 export * from './dictionaries/micronutrient.controller';
 export * from './diet/availability/dietary-availability.controller';
