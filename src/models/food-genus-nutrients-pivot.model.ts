@@ -22,7 +22,7 @@ export class FoodGenusNutrientsPivot extends Entity {
       nullable: 'YES',
     },
   })
-  fooditemId?: string;
+  foodGenusId?: string;
 
   @property({
     type: 'number',
@@ -36,7 +36,7 @@ export class FoodGenusNutrientsPivot extends Entity {
       nullable: 'YES',
     },
   })
-  compositionId?: number;
+  compositionDataId?: number;
 
   @property({
     type: 'string',

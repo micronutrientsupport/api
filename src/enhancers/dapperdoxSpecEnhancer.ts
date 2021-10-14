@@ -21,11 +21,24 @@ export class DapperdoxSpecEnhancer implements OASEnhancer {
       Object.keys(spec.paths[path]).forEach(method => {
         // See https://github.com/DapperDox/dapperdox/issues/59
         // Move examples to seperate section
-        spec.paths[path][method].parameters.forEach((parameter: any) => {
-          if (parameter.example) {
-            parameter.type = `${parameter.schema.type} e.g. "${parameter.example}"`;
-          }
-        });
+        if (spec.paths[path][method].parameters) {
+          spec.paths[path][method].parameters.forEach((parameter: any) => {
+            if (parameter.example) {
+              parameter.type = `${parameter.schema.type} e.g. "${parameter.example}"`;
+            }
+          });
+        }
+
+        if (spec.paths[path][method].requestBody) {
+          spec.paths[path][method].parameters.push({
+            in: 'body',
+            name: 'body',
+            required: true,
+            schema:
+              spec.paths[path][method].requestBody.content['application/json']
+                .schema,
+          });
+        }
 
         //spec.paths[path][method].security = [];
         //spec.paths[path][method].security.push({apiKey: []});
