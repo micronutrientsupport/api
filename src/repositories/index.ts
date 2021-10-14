@@ -19,3 +19,4 @@ export * from './biomarker-group.repository';
 export * from './household-intake-afe.repository';
 export * from './monthly-food.repository';
 export * from './country-deficiency-afe.repository';
+export * from './country-consumption.repository';
