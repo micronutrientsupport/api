@@ -35,7 +35,16 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
       ],
     );
 
-    return result;
+    // Hydrate database rows into loopback models
+    const resultModels = result.map(res => {
+      if (this.dataSource.connector) {
+        return this.dataSource.connector.fromRow('CountryDeficiencyAfe', res);
+      } else {
+        return res;
+      }
+    });
+
+    return resultModels;
   }
 
   public async runConsumptionScenario(
@@ -61,7 +70,16 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
       ],
     );
 
-    return result;
+    // Hydrate database rows into loopback models
+    const resultModels = result.map(res => {
+      if (this.dataSource.connector) {
+        return this.dataSource.connector.fromRow('CountryDeficiencyAfe', res);
+      } else {
+        return res;
+      }
+    });
+
+    return resultModels;
   }
 
   public async runComparisonScenario(
@@ -89,6 +107,15 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
       ],
     );
 
-    return result;
+    // Hydrate database rows into loopback models
+    const resultModels = result.map(res => {
+      if (this.dataSource.connector) {
+        return this.dataSource.connector.fromRow('CountryDeficiencyAfe', res);
+      } else {
+        return res;
+      }
+    });
+
+    return resultModels;
   }
 }

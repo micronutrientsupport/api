@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.9.3](https://www.github.com/micronutrientsupport/api/compare/v2.9.2...v2.9.3) (2021-10-19)
+
+
+### Bug Fixes
+
+* ensure database responses to native sql queries are hydrated into loopback models ([a093656](https://www.github.com/micronutrientsupport/api/commit/a09365615faba845c70c1fc69e0007c49956e2e0))
+
 ### [2.9.2](https://www.github.com/micronutrientsupport/api/compare/v2.9.1...v2.9.2) (2021-10-19)
 
 
