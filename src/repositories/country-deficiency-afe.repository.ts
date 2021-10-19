@@ -26,10 +26,9 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
       'SET search_path TO ' + this.dataSource.settings.schema + ',public;',
     );
     const result: CountryDeficiencyAfe[] = await this.dataSource.execute(
-      'SELECT * FROM create_country_deficiency_afe_composition_scenario($1::numeric, $2::numeric, $3::text[], $4::text, $5::numeric[])',
+      'SELECT * FROM create_country_deficiency_afe_composition_scenario($2::numeric, $3::text[], $4::text, $5::numeric[])',
       [
         compositionDataId,
-        consumptionDataId,
         foodGenusIdStringArray,
         micronutrientId,
         newCompositionValuesArray,
@@ -53,9 +52,8 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
       'SET search_path TO ' + this.dataSource.settings.schema + ',public;',
     );
     const result: CountryDeficiencyAfe[] = await this.dataSource.execute(
-      'SELECT * FROM create_country_deficiency_afe_consumption_scenario($1::numeric, $2::numeric, $3::text[], $4::text, $5::numeric[])',
+      'SELECT * FROM create_country_deficiency_afe_consumption_scenario($2::numeric, $3::text[], $4::text, $5::numeric[])',
       [
-        compositionDataId,
         consumptionDataId,
         foodGenusIdStringArray,
         micronutrientId,
@@ -82,9 +80,8 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
       'SET search_path TO ' + this.dataSource.settings.schema + ',public;',
     );
     const result: CountryDeficiencyAfe[] = await this.dataSource.execute(
-      'SELECT * FROM create_country_deficiency_afe_comparison_scenario($1::numeric, $2::numeric, $3::text[], $4::text, $5::text[])',
+      'SELECT * FROM create_country_deficiency_afe_comparison_scenario($2::numeric, $3::text[], $4::text, $5::text[])',
       [
-        compositionDataId,
         consumptionDataId,
         foodGenusIdStringArray,
         micronutrientId,

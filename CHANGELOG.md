@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.9.1](https://www.github.com/micronutrientsupport/api/compare/v2.9.0...v2.9.1) (2021-10-19)
+
+
+### Bug Fixes
+
+* fix mismatch of scenario schemas ([c57b857](https://www.github.com/micronutrientsupport/api/commit/c57b857aa12e9aabd054a20a53526121d9ebee5f))
+
 ## [2.9.0](https://www.github.com/micronutrientsupport/api/compare/v2.8.1...v2.9.0) (2021-10-14)
 
 
