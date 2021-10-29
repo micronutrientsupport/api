@@ -1,6 +1,239 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "BiomarkerDataSources": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "biomarkerName": {
+          "type": "string"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "surveyId": {
+          "type": "number"
+        },
+        "groupId": {
+          "type": "number"
+        },
+        "surveyName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "countryId"
+      ]
+    },
+    "Entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {},
+      "description": "Base class for entities which have unique ids"
+    },
+    "Model": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Base class for models"
+    },
+    "Persistable": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "BiomarkerDataSourcesRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "BiomarkerDataSourcesWithRelations": {
+      "type": "object",
+      "properties": {
+        "countryId": {
+          "type": "string"
+        },
+        "biomarkerName": {
+          "type": "string"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "surveyId": {
+          "type": "number"
+        },
+        "groupId": {
+          "type": "number"
+        },
+        "surveyName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "countryId"
+      ]
+    },
+    "BiomarkerGroup": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "supraGroup": {
+          "type": "string"
+        },
+        "groupName": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "groupId"
+      ]
+    },
+    "BiomarkerGroupRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "BiomarkerGroupWithRelations": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "supraGroup": {
+          "type": "string"
+        },
+        "groupName": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "groupId"
+      ]
+    },
+    "CountryConsumption": {
+      "type": "object",
+      "properties": {
+        "foodGenusId": {
+          "type": "string"
+        },
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "consumptionValue": {
+          "type": "number"
+        }
+      }
+    },
+    "CountryConsumptionRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryConsumptionWithRelations": {
+      "type": "object",
+      "properties": {
+        "foodGenusId": {
+          "type": "string"
+        },
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "consumptionValue": {
+          "type": "number"
+        }
+      }
+    },
+    "CountryDeficiencyAfe": {
+      "type": "object",
+      "properties": {
+        "aggregationAreaId": {
+          "type": "string"
+        },
+        "aggregationAreaName": {
+          "type": "string"
+        },
+        "aggregationAreaType": {
+          "type": "string"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "countryId": {
+          "type": "string"
+        },
+        "geometry": {
+          "type": "string"
+        },
+        "dietarySupply": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "deficientValue": {
+          "type": "number"
+        },
+        "deficientPercentage": {
+          "type": "string"
+        }
+      }
+    },
+    "CountryDeficiencyAfeRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryDeficiencyAfeWithRelations": {
+      "type": "object",
+      "properties": {
+        "aggregationAreaId": {
+          "type": "string"
+        },
+        "aggregationAreaName": {
+          "type": "string"
+        },
+        "aggregationAreaType": {
+          "type": "string"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "countryId": {
+          "type": "string"
+        },
+        "geometry": {
+          "type": "string"
+        },
+        "dietarySupply": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "deficientValue": {
+          "type": "number"
+        },
+        "deficientPercentage": {
+          "type": "string"
+        }
+      }
+    },
     "CountryIntakeGeojson": {
       "type": "object",
       "properties": {
@@ -23,21 +256,6 @@
           "type": "string"
         }
       }
-    },
-    "Entity": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {},
-      "description": "Base class for entities which have unique ids"
-    },
-    "Model": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "Base class for models"
-    },
-    "Persistable": {
-      "type": "object",
-      "additionalProperties": false
     },
     "CountryIntakeGeojsonRelations": {
       "type": "object",
@@ -72,10 +290,10 @@
         "countryId": {
           "type": "string"
         },
-        "fctSourceId": {
+        "compositionDataId": {
           "type": "number"
         },
-        "dataSourceId": {
+        "consumptionDataId": {
           "type": "number"
         },
         "moistureInG": {
@@ -108,7 +326,7 @@
         "cholesterolInMg": {
           "type": "number"
         },
-        "carbohydrateavailableInG": {
+        "carbohydratesInG": {
           "type": "number"
         },
         "fibreInG": {
@@ -204,10 +422,10 @@
         "countryId": {
           "type": "string"
         },
-        "fctSourceId": {
+        "compositionDataId": {
           "type": "number"
         },
-        "dataSourceId": {
+        "consumptionDataId": {
           "type": "number"
         },
         "moistureInG": {
@@ -240,7 +458,7 @@
         "cholesterolInMg": {
           "type": "number"
         },
-        "carbohydrateavailableInG": {
+        "carbohydratesInG": {
           "type": "number"
         },
         "fibreInG": {
@@ -326,6 +544,112 @@
         }
       }
     },
+    "CountryUnmatchedItems": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "amountConsumedInG": {
+          "type": "number"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "foodGenusName": {
+          "type": "string"
+        }
+      }
+    },
+    "CountryUnmatchedItemsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryUnmatchedItemsWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "amountConsumedInG": {
+          "type": "number"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "foodGenusName": {
+          "type": "string"
+        }
+      }
+    },
+    "CountryUnmatchedTotals": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionTotalItems": {
+          "type": "number"
+        },
+        "consumptionUnmatchedCount": {
+          "type": "number"
+        },
+        "consumptionUnmatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionUnmatchedWeight": {
+          "type": "number"
+        },
+        "consumptionUnmatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
+    "CountryUnmatchedTotalsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryUnmatchedTotalsWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionTotalItems": {
+          "type": "number"
+        },
+        "consumptionUnmatchedCount": {
+          "type": "number"
+        },
+        "consumptionUnmatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionUnmatchedWeight": {
+          "type": "number"
+        },
+        "consumptionUnmatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
     "Country": {
       "type": "object",
       "properties": {
@@ -374,19 +698,43 @@
         "countryId": {
           "type": "string"
         },
+        "micronutrientId": {
+          "type": "string"
+        },
         "consumptionDataType": {
           "type": "string"
         },
         "consumptionDataId": {
           "type": "number"
         },
+        "consumptionDataName": {
+          "type": "string"
+        },
+        "consumptionDataDescription": {
+          "type": "string"
+        },
+        "consumptionDataMetadataId": {
+          "type": "string"
+        },
         "compositionDataId": {
           "type": "number"
         },
-        "name": {
+        "compositionDataName": {
+          "type": "string"
+        },
+        "compositionDataDescription": {
+          "type": "string"
+        },
+        "compositionDataMetadataId": {
+          "type": "string"
+        },
+        "displayName": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "countryId"
+      ]
     },
     "DietDataSourcesRelations": {
       "type": "object",
@@ -398,27 +746,51 @@
         "countryId": {
           "type": "string"
         },
+        "micronutrientId": {
+          "type": "string"
+        },
         "consumptionDataType": {
           "type": "string"
         },
         "consumptionDataId": {
           "type": "number"
         },
+        "consumptionDataName": {
+          "type": "string"
+        },
+        "consumptionDataDescription": {
+          "type": "string"
+        },
+        "consumptionDataMetadataId": {
+          "type": "string"
+        },
         "compositionDataId": {
           "type": "number"
         },
-        "name": {
+        "compositionDataName": {
+          "type": "string"
+        },
+        "compositionDataDescription": {
+          "type": "string"
+        },
+        "compositionDataMetadataId": {
+          "type": "string"
+        },
+        "displayName": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "countryId"
+      ]
     },
     "FoodGenusNutrientsPivot": {
       "type": "object",
       "properties": {
-        "fooditemId": {
+        "foodGenusId": {
           "type": "string"
         },
-        "compositionId": {
+        "compositionDataId": {
           "type": "number"
         },
         "micronutrientId": {
@@ -436,10 +808,10 @@
     "FoodGenusNutrientsPivotWithRelations": {
       "type": "object",
       "properties": {
-        "fooditemId": {
+        "foodGenusId": {
           "type": "string"
         },
-        "compositionId": {
+        "compositionDataId": {
           "type": "number"
         },
         "micronutrientId": {
@@ -453,27 +825,27 @@
     "FoodGroupItems": {
       "type": "object",
       "properties": {
-        "groupId": {
+        "foodGroupId": {
           "type": "number"
         },
-        "groupName": {
+        "foodGroupName": {
           "type": "string"
         },
-        "fooditems": {
+        "foodItems": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "id": {
+              "foodGenusId": {
                 "type": "string"
               },
-              "foodName": {
+              "foodGenusName": {
                 "type": "string"
               }
             },
             "required": [
-              "id",
-              "foodName"
+              "foodGenusId",
+              "foodGenusName"
             ],
             "additionalProperties": false
           },
@@ -489,27 +861,27 @@
     "FoodGroupItemsWithRelations": {
       "type": "object",
       "properties": {
-        "groupId": {
+        "foodGroupId": {
           "type": "number"
         },
-        "groupName": {
+        "foodGroupName": {
           "type": "string"
         },
-        "fooditems": {
+        "foodItems": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "id": {
+              "foodGenusId": {
                 "type": "string"
               },
-              "foodName": {
+              "foodGenusName": {
                 "type": "string"
               }
             },
             "required": [
-              "id",
-              "foodName"
+              "foodGenusId",
+              "foodGenusName"
             ],
             "additionalProperties": false
           },
@@ -807,6 +1179,248 @@
       "required": [
         "id"
       ]
+    },
+    "HouseholdDeficiencyAfeAggregation": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "countryId": {
+          "type": "string"
+        },
+        "aggregationAreaId": {
+          "type": "number"
+        },
+        "aggregationAreaName": {
+          "type": "string"
+        },
+        "aggregationAreaType": {
+          "type": "string"
+        },
+        "geometry": {
+          "type": "object"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "dietarySupply": {
+          "type": "number"
+        },
+        "householdCount": {
+          "type": "number"
+        },
+        "deficientCount": {
+          "type": "number"
+        },
+        "deficientPercentage": {
+          "type": "number"
+        },
+        "deficientValue": {
+          "type": "number"
+        }
+      }
+    },
+    "HouseholdDeficiencyAfeAggregationRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "HouseholdDeficiencyAfeAggregationWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "countryId": {
+          "type": "string"
+        },
+        "aggregationAreaId": {
+          "type": "number"
+        },
+        "aggregationAreaName": {
+          "type": "string"
+        },
+        "aggregationAreaType": {
+          "type": "string"
+        },
+        "geometry": {
+          "type": "object"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "dietarySupply": {
+          "type": "number"
+        },
+        "householdCount": {
+          "type": "number"
+        },
+        "deficientCount": {
+          "type": "number"
+        },
+        "deficientPercentage": {
+          "type": "number"
+        },
+        "deficientValue": {
+          "type": "number"
+        }
+      }
+    },
+    "HouseholdIntakeAfe": {
+      "type": "object",
+      "properties": {
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "dietarySupply": {
+          "type": "number"
+        },
+        "isDeficient": {
+          "type": "boolean"
+        },
+        "deficientValue": {
+          "type": "number"
+        }
+      }
+    },
+    "HouseholdIntakeAfeRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "HouseholdIntakeAfeWithRelations": {
+      "type": "object",
+      "properties": {
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "dietarySupply": {
+          "type": "number"
+        },
+        "isDeficient": {
+          "type": "boolean"
+        },
+        "deficientValue": {
+          "type": "number"
+        }
+      }
+    },
+    "HouseholdUnmatchedItems": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "amountConsumedInG": {
+          "type": "number"
+        },
+        "householdCount": {
+          "type": "number"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "foodGenusName": {
+          "type": "string"
+        }
+      }
+    },
+    "HouseholdUnmatchedItemsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "HouseholdUnmatchedItemsWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "amountConsumedInG": {
+          "type": "number"
+        },
+        "householdCount": {
+          "type": "number"
+        },
+        "foodGenusId": {
+          "type": "string"
+        },
+        "foodGenusName": {
+          "type": "string"
+        }
+      }
+    },
+    "HouseholdUnmatchedTotals": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionTotalItems": {
+          "type": "number"
+        },
+        "consumptionUnmatchedCount": {
+          "type": "number"
+        },
+        "consumptionUnmatchedCountPercentage": {
+          "type": "number"
+        }
+      }
+    },
+    "HouseholdUnmatchedTotalsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "HouseholdUnmatchedTotalsWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionTotalItems": {
+          "type": "number"
+        },
+        "consumptionUnmatchedCount": {
+          "type": "number"
+        },
+        "consumptionUnmatchedCountPercentage": {
+          "type": "number"
+        }
+      }
     },
     "ImpactCommodityAggregation": {
       "type": "object",
@@ -1312,69 +1926,96 @@
         "id"
       ]
     },
-    "SubregionIntakeGeojson": {
+    "MonthlyFood": {
       "type": "object",
       "properties": {
-        "countryId": {
-          "type": "string"
-        },
-        "fctSourceId": {
+        "percentageMnConsumed": {
           "type": "number"
         },
-        "surveyId": {
+        "micronutrientId": {
+          "type": "string"
+        },
+        "dietarySupply": {
           "type": "number"
         },
-        "geojson": {
+        "monthConsumed": {
+          "type": "number"
+        },
+        "foodGroupId": {
+          "type": "number"
+        },
+        "foodGroupName": {
           "type": "string"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionDataId": {
+          "type": "number"
         }
       }
     },
-    "SubregionIntakeGeojsonRelations": {
+    "MonthlyFoodRelations": {
       "type": "object",
       "additionalProperties": false
     },
-    "SubregionIntakeGeojsonWithRelations": {
+    "MonthlyFoodWithRelations": {
       "type": "object",
       "properties": {
-        "countryId": {
-          "type": "string"
-        },
-        "fctSourceId": {
+        "percentageMnConsumed": {
           "type": "number"
         },
-        "surveyId": {
+        "micronutrientId": {
+          "type": "string"
+        },
+        "dietarySupply": {
           "type": "number"
         },
-        "geojson": {
+        "monthConsumed": {
+          "type": "number"
+        },
+        "foodGroupId": {
+          "type": "number"
+        },
+        "foodGroupName": {
           "type": "string"
+        },
+        "compositionDataId": {
+          "type": "number"
+        },
+        "consumptionDataId": {
+          "type": "number"
         }
       }
     },
     "Top20MnPerCountry": {
       "type": "object",
       "properties": {
-        "countryId": {
-          "type": "string"
-        },
-        "fctSourceId": {
+        "compositionDataId": {
           "type": "number"
         },
-        "dataSourceId": {
+        "consumptionDataId": {
           "type": "number"
         },
-        "mnName": {
+        "micronutrientId": {
           "type": "string"
         },
         "foodGenusId": {
           "type": "string"
         },
-        "mnConsumedPerDay": {
+        "dailyMnContribution": {
           "type": "number"
         },
         "ranking": {
           "type": "number"
         },
-        "foodName": {
+        "foodGenusName": {
+          "type": "string"
+        },
+        "foodGroupId": {
+          "type": "string"
+        },
+        "foodGroupName": {
           "type": "string"
         }
       }
@@ -1386,28 +2027,31 @@
     "Top20MnPerCountryWithRelations": {
       "type": "object",
       "properties": {
-        "countryId": {
-          "type": "string"
-        },
-        "fctSourceId": {
+        "compositionDataId": {
           "type": "number"
         },
-        "dataSourceId": {
+        "consumptionDataId": {
           "type": "number"
         },
-        "mnName": {
+        "micronutrientId": {
           "type": "string"
         },
         "foodGenusId": {
           "type": "string"
         },
-        "mnConsumedPerDay": {
+        "dailyMnContribution": {
           "type": "number"
         },
         "ranking": {
           "type": "number"
         },
-        "foodName": {
+        "foodGenusName": {
+          "type": "string"
+        },
+        "foodGroupId": {
+          "type": "string"
+        },
+        "foodGroupName": {
           "type": "string"
         }
       }
@@ -1415,25 +2059,31 @@
     "Top20MnPerHhsurvey": {
       "type": "object",
       "properties": {
-        "surveyId": {
+        "consumptionDataId": {
           "type": "number"
         },
-        "fctSourceId": {
+        "compositionDataId": {
           "type": "number"
         },
-        "mnName": {
+        "micronutrientId": {
           "type": "string"
         },
         "foodGenusId": {
           "type": "string"
         },
-        "mnConsumedPerDay": {
+        "dailyMnContribution": {
           "type": "number"
         },
         "ranking": {
           "type": "number"
         },
-        "foodName": {
+        "foodGenusName": {
+          "type": "string"
+        },
+        "foodGroupId": {
+          "type": "string"
+        },
+        "foodGroupName": {
           "type": "string"
         }
       }
@@ -1445,25 +2095,31 @@
     "Top20MnPerHhsurveyWithRelations": {
       "type": "object",
       "properties": {
-        "surveyId": {
+        "consumptionDataId": {
           "type": "number"
         },
-        "fctSourceId": {
+        "compositionDataId": {
           "type": "number"
         },
-        "mnName": {
+        "micronutrientId": {
           "type": "string"
         },
         "foodGenusId": {
           "type": "string"
         },
-        "mnConsumedPerDay": {
+        "dailyMnContribution": {
           "type": "number"
         },
         "ranking": {
           "type": "number"
         },
-        "foodName": {
+        "foodGenusName": {
+          "type": "string"
+        },
+        "foodGroupId": {
+          "type": "string"
+        },
+        "foodGroupName": {
           "type": "string"
         }
       }
