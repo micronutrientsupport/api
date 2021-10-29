@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.0](https://www.github.com/micronutrientsupport/api/compare/v2.9.3...v2.10.0) (2021-10-29)
+
+
+### Features
+
+* add endpoints for unmatched food consumption data ([5c4697c](https://www.github.com/micronutrientsupport/api/commit/5c4697c8b65b1df7ef075589678d613d00091c10))
+
 ### [2.9.3](https://www.github.com/micronutrientsupport/api/compare/v2.9.2...v2.9.3) (2021-10-19)
 
 
