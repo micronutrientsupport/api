@@ -7,6 +7,7 @@ export * from './dictionaries/foodConsumption.controller';
 export * from './dictionaries/foodGroup.controller';
 export * from './dictionaries/micronutrient.controller';
 export * from './diet/availability/dietary-availability.controller';
+export * from './diet/availability/dietary-unmatched.controller';
 export * from './diet/data-sources/diet-data-source.controller';
 export * from './diet/food-items/food-item-controller.controller';
 export * from './diet/projections/projections.controller';

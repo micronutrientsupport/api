@@ -20,3 +20,7 @@ export * from './household-intake-afe.repository';
 export * from './monthly-food.repository';
 export * from './country-deficiency-afe.repository';
 export * from './country-consumption.repository';
+export * from './country-unmatched-items.repository';
+export * from './country-unmatched-totals.repository';
+export * from './household-unmatched-items.repository';
+export * from './household-unmatched-totals.repository';
