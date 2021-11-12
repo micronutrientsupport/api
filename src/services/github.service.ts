@@ -25,7 +25,8 @@ export interface GithubService {
     title: string,
     body: string,
     labels: string[],
-  ): Promise<{url: string}>;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+  ): Promise<{html_url: string}>;
 }
 
 export class GithubProvider implements Provider<GithubService> {

@@ -1,9 +1,26 @@
 import {Provider, service} from '@loopback/core';
 import Bull, {Job, Queue} from 'bull';
+import sharp from 'sharp';
 import {v4 as uuidv4} from 'uuid';
 import {GithubProvider, GithubService} from '.';
 
 export class FeedbackProcessor {
+  private scaleImage(b64data: string, maxWidth: number) {
+    console.log('About to shrink img to', maxWidth);
+    const parts = b64data.split(';');
+    const mimType = parts[0].split(':')[1];
+    const imageData = parts[1].split(',')[1];
+    const img = new Buffer(imageData, 'base64');
+    return sharp(img)
+      .resize({width: maxWidth, fit: 'inside', withoutEnlargement: true})
+      .toBuffer()
+      .then(resizedImageBuffer => {
+        const resizedImageData = resizedImageBuffer.toString('base64');
+        const resizedBase64 = `data:${mimType};base64,${resizedImageData}`;
+        return resizedBase64;
+      });
+  }
+
   constructor(public githubService: GithubService) {}
 
   async process(feedbackJob: Job): Promise<void> {
@@ -25,13 +42,18 @@ export class FeedbackProcessor {
     if (pageSlug.includes('?')) {
       pageSlug = pageSlug.substring(0, pageSlug.indexOf('?'));
     }
+    if (pageSlug.length < 1) {
+      pageSlug = 'home';
+    }
 
     try {
+      const scaledImage = await this.scaleImage(data.screenshot, 800);
+      console.log('scaledImage');
       const image = await this.githubService.commitFile(
         process.env.GITHUB_ORGANISATION ?? '',
         process.env.GITHUB_IMAGE_REPOSITORY ?? '',
         `screenshots/${uuid}.png`,
-        data.screenshot.replace('data:image/png;base64,', ''),
+        scaledImage.replace('data:image/png;base64,', ''),
         `Add screenshot ${uuid}.png`,
       );
 
@@ -62,7 +84,7 @@ export class FeedbackProcessor {
         [pageSlug],
       );
 
-      console.log(`Created ${issue.url}`);
+      console.log(`Created ${issue.html_url}`);
       //return issue;
     } catch (e) {
       console.error(e);

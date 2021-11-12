@@ -5,6 +5,7 @@ import {get, param, post, requestBody} from '@loopback/rest';
 import {Queue} from 'bull';
 import {FeedbackQueueProvider} from '../services/feedbackQueue.service';
 import {GithubProvider, GithubService} from '../services/github.service';
+import {StandardJsonResponse} from './standardJsonResponse';
 
 // import {inject} from '@loopback/core';
 
@@ -73,10 +74,14 @@ export class GithubController {
       width: number;
       height: number;
     },
-  ): Promise<boolean> {
+  ): Promise<object> {
     const job = await this.feedbackQueue.add(body);
     console.log(`Queued job ${job.id}`);
-    return Promise.resolve(true);
+    return new StandardJsonResponse<Array<{success: boolean}>>(
+      `Feedback recorded.`,
+      [{success: true}],
+      'CountryDeficiencyAfe',
+    );
   }
 
   @get('/user')
