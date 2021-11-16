@@ -30,6 +30,9 @@ export class DapperdoxSpecEnhancer implements OASEnhancer {
         }
 
         if (spec.paths[path][method].requestBody) {
+          if (!spec.paths[path][method].parameters) {
+            spec.paths[path][method].parameters = [];
+          }
           spec.paths[path][method].parameters.push({
             in: 'body',
             name: 'body',
