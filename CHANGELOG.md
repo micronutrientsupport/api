@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.11.2](https://www.github.com/micronutrientsupport/api/compare/v2.11.1...v2.11.2) (2021-11-16)
+
+
+### Bug Fixes
+
+* fix openapi generator enhancer ([55f94fc](https://www.github.com/micronutrientsupport/api/commit/55f94fc202f6979aef736d4e7eb95cf2badf5671))
+
 ### [2.11.1](https://www.github.com/micronutrientsupport/api/compare/v2.11.0...v2.11.1) (2021-11-16)
 
 
