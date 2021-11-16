@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.11.0](https://www.github.com/micronutrientsupport/api/compare/v2.10.0...v2.11.0) (2021-11-16)
+
+
+### Features
+
+* add github api datasource and job queue to service requests for feedback endpoint ([794c1b8](https://www.github.com/micronutrientsupport/api/commit/794c1b82b5e1a20536daadf02c0468ad4ec3b934))
+
+
+### Bug Fixes
+
+* fix slug for homepage, resize images for transfer size, boost supported request size ([805d542](https://www.github.com/micronutrientsupport/api/commit/805d542e1a0698eaa770394bf988df6214a848a8))
+
 ## [2.10.0](https://www.github.com/micronutrientsupport/api/compare/v2.9.3...v2.10.0) (2021-10-29)
 
 
