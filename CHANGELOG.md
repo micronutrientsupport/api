@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.11.1](https://www.github.com/micronutrientsupport/api/compare/v2.11.0...v2.11.1) (2021-11-16)
+
+
+### Miscellaneous
+
+* bump docker node version ([0d5b64e](https://www.github.com/micronutrientsupport/api/commit/0d5b64e8916e7466dbcffd3cfb574681ab462ccb))
+
 ## [2.11.0](https://www.github.com/micronutrientsupport/api/compare/v2.10.0...v2.11.0) (2021-11-16)
 
 
