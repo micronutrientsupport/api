@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.11.3](https://www.github.com/micronutrientsupport/api/compare/v2.11.2...v2.11.3) (2021-11-19)
+
+
+### Miscellaneous
+
+* fix function call params ([376093e](https://www.github.com/micronutrientsupport/api/commit/376093eb708655ec9075a081b75af220f1ab3c7d))
+
 ### [2.11.2](https://www.github.com/micronutrientsupport/api/compare/v2.11.1...v2.11.2) (2021-11-16)
 
 
