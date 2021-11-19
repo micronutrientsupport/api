@@ -28,7 +28,7 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
     foodGenusIds: string[],
     newCompositionValues: number[],
   ): Promise<(CountryDeficiencyAfe & CountryDeficiencyAfeRelations)[]> {
-    return this.executeSQLFunction('consumptionScenario', [
+    return this.executeSQLFunction('compositionScenario', [
       compositionDataId,
       consumptionDataId,
       foodGenusIds,
