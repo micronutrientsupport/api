@@ -120,8 +120,8 @@ export class DietaryChangeScenariosController {
     //console.log(foodGenusIds);
 
     const data = await this.countryDeficiencyAfeRepository.runCompositionScenario(
-      body.consumptionDataId,
       body.compositionDataId,
+      body.consumptionDataId,
       body.micronutrientId,
       body.foodGenusIds,
       body.replacementCompositionValues,
@@ -234,8 +234,8 @@ export class DietaryChangeScenariosController {
     //console.log(foodGenusIds);
 
     const data = await this.countryDeficiencyAfeRepository.runConsumptionScenario(
-      body.consumptionDataId,
       body.compositionDataId,
+      body.consumptionDataId,
       body.micronutrientId,
       body.foodGenusIds,
       body.replacementConsumptionValues,
@@ -348,8 +348,8 @@ export class DietaryChangeScenariosController {
     //console.log(foodGenusIds);
 
     const data = await this.countryDeficiencyAfeRepository.runComparisonScenario(
-      body.consumptionDataId,
       body.compositionDataId,
+      body.consumptionDataId,
       body.micronutrientId,
       body.foodGenusIds,
       body.replacementFoodGenusIds,
