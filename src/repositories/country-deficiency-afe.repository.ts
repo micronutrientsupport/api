@@ -14,11 +14,11 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
 
   private functionSQLCommands: {[key: string]: string} = {
     compositionScenario:
-      'create_country_deficiency_afe_composition_scenario($1::numeric, $2::text[], $3::text, $4::numeric[])',
+      'create_country_deficiency_afe_composition_scenario($1::numeric, $2::numeric, $3::text[], $4::text, $5::numeric[])',
     consumptionScenario:
-      'create_country_deficiency_afe_consumption_scenario($1::numeric, $2::text[], $3::text, $4::numeric[])',
+      'create_country_deficiency_afe_consumption_scenario($1::numeric, $2::numeric, $3::text[], $4::text, $5::numeric[])',
     comparisonScenario:
-      'create_country_deficiency_afe_comparison_scenario($1::numeric, $2::text[], $3::text, $4::text[])',
+      'create_country_deficiency_afe_comparison_scenario($1::numeric, $2::numeric, $3::text[], $4::text, $5::text[])',
   };
 
   public async runCompositionScenario(
@@ -30,6 +30,7 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
   ): Promise<(CountryDeficiencyAfe & CountryDeficiencyAfeRelations)[]> {
     return this.executeSQLFunction('consumptionScenario', [
       compositionDataId,
+      consumptionDataId,
       foodGenusIds,
       micronutrientId,
       newCompositionValues,
@@ -44,6 +45,7 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
     newConsumptionValues: number[],
   ): Promise<(CountryDeficiencyAfe & CountryDeficiencyAfeRelations)[]> {
     return this.executeSQLFunction('consumptionScenario', [
+      compositionDataId,
       consumptionDataId,
       foodGenusIds,
       micronutrientId,
@@ -59,6 +61,7 @@ export class CountryDeficiencyAfeRepository extends DefaultCrudRepository<
     replacementFoodGenusIds: string[],
   ): Promise<(CountryDeficiencyAfe & CountryDeficiencyAfeRelations)[]> {
     return this.executeSQLFunction('comparisonScenario', [
+      compositionDataId,
       consumptionDataId,
       foodGenusIds,
       micronutrientId,
