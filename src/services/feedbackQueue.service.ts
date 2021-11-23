@@ -115,6 +115,10 @@ export class FeedbackQueueProvider implements Provider<Queue> {
       },
     });
 
+    queue.on('error', e => {
+      console.error('Queue Error', e);
+    });
+
     queue.process(this.createConsumer());
 
     return queue;
