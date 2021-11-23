@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.11.6](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.11.6) (2021-11-23)
+
+
+### Miscellaneous
+
+* add extra debug info to redis connection ([c05bb06](https://www.github.com/micronutrientsupport/api/commit/c05bb066eefb9b3ea9ba84a5cf04bb9b15f6bfcf))
+
 ### [2.11.5](https://www.github.com/micronutrientsupport/api/compare/v2.11.4...v2.11.5) (2021-11-19)
 
 
