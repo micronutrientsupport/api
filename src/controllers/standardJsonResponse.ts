@@ -5,7 +5,7 @@ export class StandardJsonResponse<T = string> {
   public type: string;
   public data: T | string;
   public props: object; // needs reviewing what this is
-  public meta: string; // needs reviewing what this is
+  public meta: object; // needs reviewing what this is
 
   constructor(
     message: string,
@@ -13,7 +13,7 @@ export class StandardJsonResponse<T = string> {
     schemaName?: string,
     type = 'Success 200',
     props: object = {},
-    meta = '',
+    meta = {},
   ) {
     this.msg = message;
     this.data = null != data ? data : '';

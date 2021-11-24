@@ -17,6 +17,7 @@ import {
 import {
   CountryDeficiencyAfeRepository,
   HouseholdDeficiencyAfeAggregationRepository,
+  MnBinRangeRepository,
   MonthlyFoodRepository,
 } from '../../../repositories';
 import {toGeoJSONFeatureCollection} from '../../../utils/toGeoJSON';
@@ -33,6 +34,8 @@ export class DietaryAvailabilityController {
     public countryDeficiencyAfeRepository: CountryDeficiencyAfeRepository,
     @repository(MonthlyFoodRepository)
     public monthlyFoodRepository: MonthlyFoodRepository,
+    @repository(MnBinRangeRepository)
+    public mnBinRangeRepository: MnBinRangeRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
   ) {}
 
@@ -111,10 +114,35 @@ export class DietaryAvailabilityController {
       return this.response;
     }
 
+    const binFilter: Filter = {
+      where: {
+        micronutrientId: micronutrientId,
+      },
+    };
+    const bins = (await this.mnBinRangeRepository.find(binFilter))[0];
+    const meta: {bins?: {desc: string; data: number[]}} = {};
+    if (bins) {
+      const binsMeta = {
+        desc:
+          'Reccomended bin ranges for consistent display of data across nations',
+        data: [
+          parseFloat(`${bins.bin0}`),
+          parseFloat(`${bins.bin1}`),
+          parseFloat(`${bins.bin2}`),
+          parseFloat(`${bins.bin3}`),
+          parseFloat(`${bins.bin4}`),
+          parseFloat(`${bins.bin5}`),
+        ],
+      };
+      meta.bins = binsMeta;
+    }
     return new StandardJsonResponse<Array<CountryDeficiencyAfe>>(
       `${data.length} top results returned.`,
       data,
       'CountryDeficiencyAfe',
+      undefined,
+      undefined,
+      meta,
     );
   }
 
@@ -264,10 +292,36 @@ export class DietaryAvailabilityController {
       return this.response;
     }
 
+    const binFilter: Filter = {
+      where: {
+        micronutrientId: micronutrientId,
+      },
+    };
+    const bins = (await this.mnBinRangeRepository.find(binFilter))[0];
+    const meta: {bins?: {desc: string; data: number[]}} = {};
+    if (bins) {
+      const binsMeta = {
+        desc:
+          'Reccomended bin ranges for consistent display of data across nations',
+        data: [
+          parseFloat(`${bins.bin0}`),
+          parseFloat(`${bins.bin1}`),
+          parseFloat(`${bins.bin2}`),
+          parseFloat(`${bins.bin3}`),
+          parseFloat(`${bins.bin4}`),
+          parseFloat(`${bins.bin5}`),
+        ],
+      };
+      meta.bins = binsMeta;
+    }
+
     return new StandardJsonResponse<Array<HouseholdDeficiencyAfeAggregation>>(
       `${data.length} dietary availability aggregations returned.`,
       data,
       'HouseholdDeficiencyAfeAggregation',
+      undefined,
+      undefined,
+      meta,
     );
   }
 }
