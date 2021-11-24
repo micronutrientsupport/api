@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.12.0](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.12.0) (2021-11-24)
+
+
+### Features
+
+* add bin ranges for map views ([7ad663c](https://www.github.com/micronutrientsupport/api/commit/7ad663c69a969cb689d3fed0dbe4f2822473b82f))
+
+
+### Miscellaneous
+
+* add extra debug info to redis connection ([ca8aea8](https://www.github.com/micronutrientsupport/api/commit/ca8aea8cbcd4749c627ab66baa23cd0642e600c7))
+* release 2.11.6 ([660fc46](https://www.github.com/micronutrientsupport/api/commit/660fc46e03e049edfe2c339119a119e2c52e6c72))
+
 ### [2.11.6](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.11.6) (2021-11-23)
 
 
