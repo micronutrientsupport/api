@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.0](https://www.github.com/micronutrientsupport/api/compare/v2.11.6...v2.12.0) (2021-11-24)
+
+
+### Features
+
+* add bin ranges to dietary availability outputs ([1a33a2b](https://www.github.com/micronutrientsupport/api/commit/1a33a2b655545d61f192f652295001130637fac6))
+
 ### [2.11.6](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.11.6) (2021-11-23)
 
 
