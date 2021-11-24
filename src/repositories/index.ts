@@ -24,3 +24,4 @@ export * from './country-unmatched-items.repository';
 export * from './country-unmatched-totals.repository';
 export * from './household-unmatched-items.repository';
 export * from './household-unmatched-totals.repository';
+export * from './mn-bin-range.repository';
