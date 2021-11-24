@@ -24,3 +24,4 @@ export * from './country-unmatched-items.model';
 export * from './country-unmatched-totals.model';
 export * from './household-unmatched-items.model';
 export * from './household-unmatched-totals.model';
+export * from './mn-bin-range.model';
