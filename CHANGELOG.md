@@ -1,5 +1,282 @@
 # Changelog
 
+## [2.12.0](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.12.0) (2021-11-24)
+
+
+### Features
+
+* add bin ranges for map views ([7ad663c](https://www.github.com/micronutrientsupport/api/commit/7ad663c69a969cb689d3fed0dbe4f2822473b82f))
+
+
+### Miscellaneous
+
+* add extra debug info to redis connection ([ca8aea8](https://www.github.com/micronutrientsupport/api/commit/ca8aea8cbcd4749c627ab66baa23cd0642e600c7))
+* release 2.11.6 ([660fc46](https://www.github.com/micronutrientsupport/api/commit/660fc46e03e049edfe2c339119a119e2c52e6c72))
+
+### [2.11.6](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.11.6) (2021-11-23)
+
+
+### Miscellaneous
+
+* add extra debug info to redis connection ([c05bb06](https://www.github.com/micronutrientsupport/api/commit/c05bb066eefb9b3ea9ba84a5cf04bb9b15f6bfcf))
+
+### [2.11.5](https://www.github.com/micronutrientsupport/api/compare/v2.11.4...v2.11.5) (2021-11-19)
+
+
+### Miscellaneous
+
+* fix function call params 4 ([8a64f56](https://www.github.com/micronutrientsupport/api/commit/8a64f56775173403b64de42294692cf6680df892))
+
+### [2.11.4](https://www.github.com/micronutrientsupport/api/compare/v2.11.3...v2.11.4) (2021-11-19)
+
+
+### Miscellaneous
+
+* fix function call params 2 ([c593477](https://www.github.com/micronutrientsupport/api/commit/c593477b6b33e2021c2d0282d9af9a9540146ce3))
+
+### [2.11.3](https://www.github.com/micronutrientsupport/api/compare/v2.11.2...v2.11.3) (2021-11-19)
+
+
+### Miscellaneous
+
+* fix function call params ([376093e](https://www.github.com/micronutrientsupport/api/commit/376093eb708655ec9075a081b75af220f1ab3c7d))
+
+### [2.11.2](https://www.github.com/micronutrientsupport/api/compare/v2.11.1...v2.11.2) (2021-11-16)
+
+
+### Bug Fixes
+
+* fix openapi generator enhancer ([55f94fc](https://www.github.com/micronutrientsupport/api/commit/55f94fc202f6979aef736d4e7eb95cf2badf5671))
+
+### [2.11.1](https://www.github.com/micronutrientsupport/api/compare/v2.11.0...v2.11.1) (2021-11-16)
+
+
+### Miscellaneous
+
+* bump docker node version ([0d5b64e](https://www.github.com/micronutrientsupport/api/commit/0d5b64e8916e7466dbcffd3cfb574681ab462ccb))
+
+## [2.11.0](https://www.github.com/micronutrientsupport/api/compare/v2.10.0...v2.11.0) (2021-11-16)
+
+
+### Features
+
+* add github api datasource and job queue to service requests for feedback endpoint ([794c1b8](https://www.github.com/micronutrientsupport/api/commit/794c1b82b5e1a20536daadf02c0468ad4ec3b934))
+
+
+### Bug Fixes
+
+* fix slug for homepage, resize images for transfer size, boost supported request size ([805d542](https://www.github.com/micronutrientsupport/api/commit/805d542e1a0698eaa770394bf988df6214a848a8))
+
+## [2.10.0](https://www.github.com/micronutrientsupport/api/compare/v2.9.3...v2.10.0) (2021-10-29)
+
+
+### Features
+
+* add endpoints for unmatched food consumption data ([5c4697c](https://www.github.com/micronutrientsupport/api/commit/5c4697c8b65b1df7ef075589678d613d00091c10))
+
+### [2.9.3](https://www.github.com/micronutrientsupport/api/compare/v2.9.2...v2.9.3) (2021-10-19)
+
+
+### Bug Fixes
+
+* ensure database responses to native sql queries are hydrated into loopback models ([a093656](https://www.github.com/micronutrientsupport/api/commit/a09365615faba845c70c1fc69e0007c49956e2e0))
+
+### [2.9.2](https://www.github.com/micronutrientsupport/api/compare/v2.9.1...v2.9.2) (2021-10-19)
+
+
+### Bug Fixes
+
+* sort sql param numbering ([081cfef](https://www.github.com/micronutrientsupport/api/commit/081cfef3845cbc86ff0cc827160600f69ced342b))
+
+### [2.9.1](https://www.github.com/micronutrientsupport/api/compare/v2.9.0...v2.9.1) (2021-10-19)
+
+
+### Bug Fixes
+
+* fix mismatch of scenario schemas ([c57b857](https://www.github.com/micronutrientsupport/api/commit/c57b857aa12e9aabd054a20a53526121d9ebee5f))
+
+## [2.9.0](https://www.github.com/micronutrientsupport/api/compare/v2.8.1...v2.9.0) (2021-10-14)
+
+
+### Features
+
+* add consumption endpoint for scenarios ([8722577](https://www.github.com/micronutrientsupport/api/commit/872257788c5a5a96818adcac33bbe8a85d461779))
+
+
+### Miscellaneous
+
+* tidy up model fields ([6b2dfce](https://www.github.com/micronutrientsupport/api/commit/6b2dfceca51a49082ca22326765def17e250ecb9))
+
+### [2.8.1](https://www.github.com/micronutrientsupport/api/compare/v2.8.0...v2.8.1) (2021-10-14)
+
+
+### Bug Fixes
+
+* add food_group_name field to monthly food endpoint ([bc97f46](https://www.github.com/micronutrientsupport/api/commit/bc97f46500567f999ad07ea44cdcf59684471881))
+
+## [2.8.0](https://www.github.com/micronutrientsupport/api/compare/v2.7.0...v2.8.0) (2021-10-14)
+
+
+### Features
+
+* add endpoints for country level dietary change scenarios ([6f124dd](https://www.github.com/micronutrientsupport/api/commit/6f124dd9cb47891e35d781dbcfae1a7e0b15380f))
+
+## [2.7.0](https://www.github.com/micronutrientsupport/api/compare/v2.6.0...v2.7.0) (2021-10-12)
+
+
+### Features
+
+* add default flag to age-gender model ([f958b01](https://www.github.com/micronutrientsupport/api/commit/f958b012a073ffee2205a4f04296c02ed771b31a))
+
+## [2.6.0](https://www.github.com/micronutrientsupport/api/compare/v2.5.0...v2.6.0) (2021-10-12)
+
+
+### Features
+
+* add food_group details to top 20 food item models ([3f088a8](https://www.github.com/micronutrientsupport/api/commit/3f088a8cc41a4478a772c1e007153ea7147e1c78))
+
+## [2.5.0](https://www.github.com/micronutrientsupport/api/compare/v2.4.3...v2.5.0) (2021-10-10)
+
+
+### Features
+
+* major rehaul and consolidation of routes and return values ([a40b6ee](https://www.github.com/micronutrientsupport/api/commit/a40b6eebcf99df526b7618b962c5d47f9f524e39))
+
+### [2.4.3](https://www.github.com/micronutrientsupport/api/compare/v2.4.2...v2.4.3) (2021-09-09)
+
+
+### Bug Fixes
+
+* sort geojson response for country deficiency ([09d234e](https://www.github.com/micronutrientsupport/api/commit/09d234e21513d6f768b53ac562d873dac179c37e))
+
+### [2.4.2](https://www.github.com/micronutrientsupport/api/compare/v2.4.1...v2.4.2) (2021-09-09)
+
+
+### Bug Fixes
+
+* fix ids in countrydeficiencyAfe model: ([2109a25](https://www.github.com/micronutrientsupport/api/commit/2109a255f28f829c32263d03e31c10909374002b))
+
+### [2.4.1](https://www.github.com/micronutrientsupport/api/compare/v2.4.0...v2.4.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* use the correct models/repositories for country deficiency ([ffed05e](https://www.github.com/micronutrientsupport/api/commit/ffed05e1938152fc20b9ee922bdd89aeff555c02))
+
+## [2.4.0](https://www.github.com/micronutrientsupport/api/compare/v2.3.0...v2.4.0) (2021-09-08)
+
+
+### Features
+
+* add age-gender groupId to the biomarker data sources endpoint ([8ae3140](https://www.github.com/micronutrientsupport/api/commit/8ae3140ec29649ddf4e5ca2159408bcd16ad84de))
+
+## [2.3.0](https://www.github.com/micronutrientsupport/api/compare/v2.2.0...v2.3.0) (2021-09-08)
+
+
+### Features
+
+* add biomarker age gender group endpoint ([1d60e64](https://www.github.com/micronutrientsupport/api/commit/1d60e6428ebbb871d67c4f1ba873237e25d6df3b))
+
+## [2.2.0](https://www.github.com/micronutrientsupport/api/compare/v2.1.1...v2.2.0) (2021-09-07)
+
+
+### Features
+
+* add geojson to countries dictionary.  Update data sources to add data info ([ccdf5a0](https://www.github.com/micronutrientsupport/api/commit/ccdf5a064e36ea50e2579d1c605be45f74df5eab))
+
+
+### Bug Fixes
+
+* add ids to countryintake model ([252c2a0](https://www.github.com/micronutrientsupport/api/commit/252c2a0c8ba6f90992f31e7de7fc053e8aca8716))
+
+### [2.1.1](https://www.github.com/micronutrientsupport/api/compare/v2.1.0...v2.1.1) (2021-09-02)
+
+
+### Bug Fixes
+
+* set schema in dapperdox enhancer ([0af0748](https://www.github.com/micronutrientsupport/api/commit/0af07488ccd2f01bc433cefae924067ccae456dc))
+
+## [2.1.0](https://www.github.com/micronutrientsupport/api/compare/v2.0.1...v2.1.0) (2021-09-02)
+
+
+### Features
+
+* Add view for biomarker data sources: ([24bcacd](https://www.github.com/micronutrientsupport/api/commit/24bcacd7ade2fa275a9e6f8c382a8ebf3d1b29bc))
+* fix afe household views, geojson responses ([18e2701](https://www.github.com/micronutrientsupport/api/commit/18e27017aa55fa61c8f3b5e27f33ffa4bf8cd3b9))
+* refactor top20 food routes ([bb97841](https://www.github.com/micronutrientsupport/api/commit/bb978416772b0c1c24985c2f22d933ddbe304079))
+
+
+### Bug Fixes
+
+* consolidation and docs updates ([9269a85](https://www.github.com/micronutrientsupport/api/commit/9269a854d9ca0817c96b6175d880349bac4ff2fc))
+
+
+### Miscellaneous
+
+* fix imports ([e864608](https://www.github.com/micronutrientsupport/api/commit/e864608d31de034be1e602fea66c09da3a7785d4))
+* update schema ref ([412c45e](https://www.github.com/micronutrientsupport/api/commit/412c45e1238f009e19b26d7fb1737d910de5a9a1))
+
+### [2.0.1](https://www.github.com/micronutrientsupport/api/compare/v2.0.0...v2.0.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* ensure openapi spec specifies https ([8fa4ca0](https://www.github.com/micronutrientsupport/api/commit/8fa4ca0bd0a62370ba3c14746dc808752b12dea6))
+* fix urls for swagger ui ([3b88229](https://www.github.com/micronutrientsupport/api/commit/3b88229f961029a86ab39174354747b35296eae6))
+
+## [2.0.0](https://www.github.com/micronutrientsupport/api/compare/v1.10.0...v2.0.0) (2021-08-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* bump semvar version
+
+### Miscellaneous
+
+* bump semvar version ([856ee6d](https://www.github.com/micronutrientsupport/api/commit/856ee6d0408256ea93c366c86db1f2e4bd56882b))
+* merge develop ([e9ae787](https://www.github.com/micronutrientsupport/api/commit/e9ae787df744f5169e47f75a06f018239448fa3c))
+
+## [1.10.0](https://www.github.com/micronutrientsupport/api/compare/v1.9.0...v1.10.0) (2021-07-12)
+
+
+### Features
+
+* fix ish4 routes ([166ced7](https://www.github.com/micronutrientsupport/api/commit/166ced7ad6bb8358fb624851f98aa3a35c79712c))
+
+## [1.9.0](https://www.github.com/micronutrientsupport/api/compare/v1.8.0...v1.9.0) (2021-06-09)
+
+
+### Features
+
+* make scenario response more like baseline response ([1d29497](https://www.github.com/micronutrientsupport/api/commit/1d29497c7f82d86a28605c7b185a5b20a4b7db8d))
+* update scenario to return geoJSON ([82e2e6e](https://www.github.com/micronutrientsupport/api/commit/82e2e6e64b6c912c2a179f9466bc84cec7ca00fd))
+
+## [1.8.0](https://www.github.com/micronutrientsupport/api/compare/v1.7.1...v1.8.0) (2021-06-09)
+
+
+### Features
+
+* Add initial routes for simple dietary change (composition) scenarios ([7331252](https://www.github.com/micronutrientsupport/api/commit/733125295495ed9fd1bb4ac9856faaa6b52f96bb))
+
+
+### Miscellaneous
+
+* fix merge conflicts in index.ts files ([cd0b949](https://www.github.com/micronutrientsupport/api/commit/cd0b9490a956e10a289560fadf2492e333657173))
+
+### [1.7.1](https://www.github.com/micronutrientsupport/api/compare/v1.7.0...v1.7.1) (2021-05-19)
+
+
+### Miscellaneous
+
+* switch header from cache-control to surrogate-control ([a19f12a](https://www.github.com/micronutrientsupport/api/commit/a19f12a5c54d301f2e53745d0b7b27053ad10d56))
+
+## [1.7.0](https://www.github.com/micronutrientsupport/api/compare/v1.6.7...v1.7.0) (2021-05-18)
+
+
+### Features
+
+* **cache:** Add decorator to set cache expire header on endpoints ([ef53b61](https://www.github.com/micronutrientsupport/api/commit/ef53b6109f5849cca424990e4e5d823779f4be9e))
+
 ### [1.6.7](https://www.github.com/micronutrientsupport/api/compare/v1.6.6...v1.6.7) (2021-05-05)
 
 

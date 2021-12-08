@@ -1,18 +1,28 @@
+export * from './biomarker-data-sources.model';
+export * from './biomarker-group.model';
+export * from './biomarker-summary.model';
+export * from './country-consumption.model';
+export * from './country-deficiency-afe.model';
 export * from './country-intake-geojson.model';
 export * from './country-intake.model';
+export * from './country-unmatched-items.model';
+export * from './country-unmatched-totals.model';
 export * from './country.model';
 export * from './diet-data-sources.model';
+export * from './food-genus-nutrients-pivot.model';
+export * from './food-group-items.model';
+export * from './fooditem.model';
+export * from './household-deficiency-afe-aggregation.model';
+export * from './household-intake-afe.model';
+export * from './household-unmatched-items.model';
+export * from './household-unmatched-totals.model';
 export * from './impact-commodity-aggregation.model';
 export * from './impact-food-group-aggregation.model';
 export * from './impact-scenario.model';
 export * from './impact-summary.model';
 export * from './impact-total-food-availability.model';
 export * from './micronutrient.model';
-export * from './subregion-intake-geojson.model';
+export * from './mn-bin-range.model';
+export * from './monthly-food.model';
 export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
-
-
-
-
-export * from './biomarker-summary.model';
