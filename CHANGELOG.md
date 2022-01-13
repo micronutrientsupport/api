@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.14.0](https://www.github.com/micronutrientsupport/api/compare/v2.13.0...v2.14.0) (2022-01-13)
+
+
+### Features
+
+* add route to create derived intervention ([5f5edcc](https://www.github.com/micronutrientsupport/api/commit/5f5edccb3578f91cebd433ebbd8891e556a83ca2))
+
 ## [2.13.0](https://www.github.com/micronutrientsupport/api/compare/v2.12.0...v2.13.0) (2022-01-13)
 
 
