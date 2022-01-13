@@ -9,6 +9,7 @@ import {
   getModelSchemaRef,
   param,
   patch,
+  post,
   requestBody,
 } from '@loopback/rest';
 import {
@@ -53,6 +54,44 @@ export class InterventionController {
     @repository(InterventionDataRepository)
     public interventionDataRepository: InterventionDataRepository,
   ) {}
+
+  @post('/interventions', {
+    responses: {
+      '200': {
+        description: 'InterventionList model instance',
+        content: {
+          'application/json': {schema: getModelSchemaRef(InterventionList)},
+        },
+      },
+    },
+  })
+  async create(
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: {
+            title: 'CreateInterventionBody',
+            required: ['parentInterventionId'],
+            type: 'object',
+            properties: {
+              parentInterventionId: {
+                description:
+                  'ID of the parent intervention to copy as returned by `/interventions`',
+                type: 'number',
+              },
+            },
+          },
+        },
+      },
+    })
+    body: {
+      parentInterventionId: number;
+    },
+  ): Promise<InterventionList[]> {
+    return this.interventionListRepository.createNewIntervention(
+      body.parentInterventionId,
+    );
+  }
 
   @get('/interventions', {
     description: 'get interventions',
