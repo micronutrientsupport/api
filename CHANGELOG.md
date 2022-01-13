@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.13.0](https://www.github.com/micronutrientsupport/api/compare/v2.12.0...v2.13.0) (2022-01-13)
+
+
+### Features
+
+* **intervention:** add initial routes for accessing and updating intervention data ([678ba24](https://www.github.com/micronutrientsupport/api/commit/678ba24a1a7952edd10c0771e925baeded086e8d))
+
 ## [2.12.0](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.12.0) (2021-11-24)
 
 
