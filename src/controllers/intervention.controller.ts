@@ -1,9 +1,4 @@
-import {
-  Filter,
-  FilterExcludingWhere,
-  IsolationLevel,
-  repository,
-} from '@loopback/repository';
+import {Filter, IsolationLevel, repository} from '@loopback/repository';
 import {
   get,
   getModelSchemaRef,
@@ -34,6 +29,8 @@ import {
   InterventionStartupScaleupCostsRepository,
   InterventionVehicleStandardRepository,
 } from '../repositories';
+import {StandardJsonResponse} from './standardJsonResponse';
+import {StandardOpenApiResponses} from './standardOpenApiResponses';
 
 export class InterventionController {
   constructor(
@@ -56,14 +53,12 @@ export class InterventionController {
   ) {}
 
   @post('/interventions', {
-    responses: {
-      '200': {
-        description: 'InterventionList model instance',
-        content: {
-          'application/json': {schema: getModelSchemaRef(InterventionList)},
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of Micronutrient model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionList))
+      .toObject(),
   })
   async create(
     @requestBody({
@@ -87,82 +82,75 @@ export class InterventionController {
     body: {
       parentInterventionId: number;
     },
-  ): Promise<InterventionList[]> {
-    return this.interventionListRepository.createNewIntervention(
+  ): Promise<StandardJsonResponse<Array<InterventionList>>> {
+    const newIntervention = await this.interventionListRepository.createNewIntervention(
       body.parentInterventionId,
+    );
+    return new StandardJsonResponse<Array<InterventionList>>(
+      `New Intervention created`,
+      newIntervention,
+      'InterventionList',
     );
   }
 
   @get('/interventions', {
     description: 'get interventions',
     summary: 'get interventions',
-    responses: {
-      '200': {
-        description: 'Array of InterventionList model instances',
-        summary: '',
-        content: {
-          'application/json': {
-            schema: {
-              title: 'InterventionList',
-              type: 'array',
-              items: getModelSchemaRef(InterventionList, {
-                includeRelations: true,
-              }),
-            },
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of Micronutrient model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionList))
+      .toObject(),
   })
-  async find(
-    @param.filter(InterventionList) filter?: Filter<InterventionList>,
-  ): Promise<InterventionList[]> {
-    return this.interventionListRepository.find(filter);
+  async find(): Promise<StandardJsonResponse<Array<InterventionList>>> {
+    const filter: Filter = {
+      where: {
+        isPremade: true,
+      },
+    };
+    const interventions = await this.interventionListRepository.find(filter);
+    return new StandardJsonResponse<Array<InterventionList>>(
+      `${interventions.length} Interventions returned.`,
+      interventions,
+      'InterventionList',
+    );
   }
 
   @get('/interventions/{id}', {
     description: 'get intervention by id',
     summary: 'get intervention by id',
-    responses: {
-      '200': {
-        description: 'InterventionList model instance',
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(InterventionList, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of Micronutrient model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionList))
+      .toObject(),
   })
   async findById(
     @param.path.number('id') id: number,
-    @param.filter(InterventionList, {exclude: 'where'})
-    filter?: FilterExcludingWhere<InterventionList>,
-  ): Promise<InterventionList> {
-    return this.interventionListRepository.findById(id, filter);
+  ): Promise<StandardJsonResponse<Array<InterventionList>>> {
+    const interventions = await this.interventionListRepository.findById(id);
+    return new StandardJsonResponse<Array<InterventionList>>(
+      `Intervention returned.`,
+      [interventions],
+      'InterventionList',
+    );
   }
 
   @get('/interventions/{id}/data', {
     description: 'get all data for intervention',
     summary: 'get all data for intervention',
-    responses: {
-      '200': {
-        description: 'InterventionList model instance',
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(InterventionDataAggregate, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of Micronutrient model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionDataAggregate))
+      .toObject(),
   })
   async findAllCostsById(
     @param.path.number('id') id: number,
-  ): Promise<InterventionDataAggregate> {
+  ): Promise<StandardJsonResponse<Array<InterventionDataAggregate>>> {
     const filter: Filter = {
       where: {
         interventionId: id,
@@ -196,176 +184,185 @@ export class InterventionController {
       ...recurringCosts[0],
     });
 
-    return interventionData;
+    return new StandardJsonResponse<Array<InterventionDataAggregate>>(
+      `Intervention data returned.`,
+      [interventionData],
+      'InterventionDataAggregate',
+    );
   }
 
   @get('/interventions/{id}/baseline-assumptions', {
     description: 'get baseline',
     summary: 'get baseline',
     operationId: 'baseline-assumptions',
-    responses: {
-      '200': {
-        description: 'InterventionList model instance',
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(InterventionBaselineAssumptions, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionBaselineAssumptions instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionBaselineAssumptions))
+      .toObject(),
   })
   async findBaselineAssumptionsById(
     @param.path.number('id') id: number,
-  ): Promise<InterventionBaselineAssumptions[]> {
+  ): Promise<StandardJsonResponse<Array<InterventionBaselineAssumptions>>> {
     const filter: Filter = {
       where: {
         interventionId: id,
       },
     };
-    return this.interventionBaselineAssumptionsRepository.find(filter);
+    const baselineAssumptions = await this.interventionBaselineAssumptionsRepository.find(
+      filter,
+    );
+    return new StandardJsonResponse<Array<InterventionBaselineAssumptions>>(
+      `Intervention data returned.`,
+      baselineAssumptions,
+      'InterventionBaselineAssumptions',
+    );
   }
 
   @get('/interventions/{id}/food-vehicle-standards', {
     description: 'get food-vehicle',
     summary: 'get food-vehicle',
     operationId: 'food-vehicle-standards',
-    responses: {
-      '200': {
-        description: 'InterventionVehicleStandard model instance',
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(InterventionVehicleStandard, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionVehicleStandard instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionVehicleStandard))
+      .toObject(),
   })
   async findFoodVehicleStandardById(
     @param.path.number('id') id: number,
-  ): Promise<InterventionVehicleStandard[]> {
+  ): Promise<StandardJsonResponse<Array<InterventionVehicleStandard>>> {
     const filter: Filter = {
       where: {
         interventionId: id,
       },
     };
-    return this.interventionVehicleStandardRepository.find(filter);
+    const foodVehicleStandard = await this.interventionVehicleStandardRepository.find(
+      filter,
+    );
+    return new StandardJsonResponse<Array<InterventionVehicleStandard>>(
+      `Intervention data returned.`,
+      foodVehicleStandard,
+      'InterventionVehicleStandard',
+    );
   }
 
   @get('/interventions/{id}/industry-information', {
     description: 'get industry-info',
     summary: 'get industry-info',
     operationId: 'industry-information',
-    responses: {
-      '200': {
-        description: 'InterventionIndustryInformation model instance',
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(InterventionIndustryInformation, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionIndustryInformation instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionIndustryInformation))
+      .toObject(),
   })
   async findIndustryInfoById(
     @param.path.number('id') id: number,
-  ): Promise<InterventionIndustryInformation[]> {
+  ): Promise<StandardJsonResponse<Array<InterventionIndustryInformation>>> {
     const filter: Filter = {
       where: {
         interventionId: id,
       },
     };
-    return this.interventionIndustryInformationRepository.find(filter);
+    const industryInformation = await this.interventionIndustryInformationRepository.find(
+      filter,
+    );
+    return new StandardJsonResponse<Array<InterventionIndustryInformation>>(
+      `Intervention data returned.`,
+      industryInformation,
+      'InterventionIndustryInformation',
+    );
   }
 
   @get('/interventions/{id}/monitoring-information', {
     description: 'get monitoring',
     summary: 'get monitoring',
     operationId: 'monitoring-information',
-    responses: {
-      '200': {
-        description: 'InterventionMonitoringInformation model instance',
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(InterventionMonitoringInformation, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionMonitoringInformation instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionMonitoringInformation))
+      .toObject(),
   })
   async findMonitoringInfoById(
     @param.path.number('id') id: number,
-  ): Promise<InterventionMonitoringInformation[]> {
+  ): Promise<StandardJsonResponse<Array<InterventionMonitoringInformation>>> {
     const filter: Filter = {
       where: {
         interventionId: id,
       },
     };
-    return this.interventionMonitoringInformationRepository.find(filter);
+    const monitoringInformation = await this.interventionMonitoringInformationRepository.find(
+      filter,
+    );
+    return new StandardJsonResponse<Array<InterventionMonitoringInformation>>(
+      `Intervention data returned.`,
+      monitoringInformation,
+      'InterventionMonitoringInformation',
+    );
   }
 
   @get('/interventions/{id}/startup-scaleup-costs', {
     description: 'get startup',
     summary: 'get startup',
     operationId: 'startup-scaleup-costs',
-    responses: {
-      '200': {
-        description: 'InterventionStartupScaleupCosts model instance',
-        summary: '',
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(InterventionStartupScaleupCosts, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionStartupScaleupCosts instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionStartupScaleupCosts))
+      .toObject(),
   })
   async findStartupScaleupCostsById(
     @param.path.number('id') id: number,
-  ): Promise<InterventionStartupScaleupCosts[]> {
+  ): Promise<StandardJsonResponse<Array<InterventionStartupScaleupCosts>>> {
     const filter: Filter = {
       where: {
         interventionId: id,
       },
     };
-    return this.interventionStartupScaleupCostsRepository.find(filter);
+    const startupScaleup = await this.interventionStartupScaleupCostsRepository.find(
+      filter,
+    );
+    return new StandardJsonResponse<Array<InterventionStartupScaleupCosts>>(
+      `Intervention data returned.`,
+      startupScaleup,
+      'InterventionStartupScaleupCosts',
+    );
   }
 
   @get('/interventions/{id}/recurring-costs', {
     description: 'get recurring',
     summary: 'get recurring',
     operationId: 'recurring-costs',
-    responses: {
-      '200': {
-        description: 'InterventionRecurringCosts model instance',
-        content: {
-          'application/json': {
-            schema: getModelSchemaRef(InterventionRecurringCosts, {
-              includeRelations: true,
-            }),
-          },
-        },
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionRecurringCosts instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionRecurringCosts))
+      .toObject(),
   })
   async findRecurringCostsById(
     @param.path.number('id') id: number,
-  ): Promise<InterventionRecurringCosts[]> {
+  ): Promise<StandardJsonResponse<Array<InterventionRecurringCosts>>> {
     const filter: Filter = {
       where: {
         interventionId: id,
       },
     };
-    return this.interventionRecurringCostsRepository.find(filter);
+    const recurring = await this.interventionRecurringCostsRepository.find(
+      filter,
+    );
+    return new StandardJsonResponse<Array<InterventionRecurringCosts>>(
+      `Intervention data returned.`,
+      recurring,
+      'InterventionRecurringCosts',
+    );
   }
 
   @patch('/interventions/{id}/data', {
