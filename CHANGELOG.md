@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.14.1](https://www.github.com/micronutrientsupport/api/compare/v2.14.0...v2.14.1) (2022-01-18)
+
+
+### Bug Fixes
+
+* update intervention responses to use standard JSON format ([9b55882](https://www.github.com/micronutrientsupport/api/commit/9b55882c1ade2162940942c271dfe5be27e0aa04))
+
 ## [2.14.0](https://www.github.com/micronutrientsupport/api/compare/v2.13.0...v2.14.0) (2022-01-13)
 
 
