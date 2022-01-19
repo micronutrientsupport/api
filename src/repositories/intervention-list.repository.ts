@@ -18,7 +18,7 @@ export class InterventionListRepository extends DefaultCrudRepository<
   ): Promise<(InterventionList & InterventionListRelations)[]> {
     // Set the search path to include the current schema
     await this.dataSource.execute(
-      'SET search_path TO "andan-intervention-costs",' +
+      'SET search_path TO "bmgf",' +
         this.dataSource.settings.schema +
         ',public;',
     );
