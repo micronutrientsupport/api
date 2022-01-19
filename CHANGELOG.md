@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.14.2](https://www.github.com/micronutrientsupport/api/compare/v2.14.1...v2.14.2) (2022-01-19)
+
+
+### Miscellaneous
+
+* fix schema for intervention routes ([acee769](https://www.github.com/micronutrientsupport/api/commit/acee7696b656334a91040c46c8e2674fbc67f788))
+
 ### [2.14.1](https://www.github.com/micronutrientsupport/api/compare/v2.14.0...v2.14.1) (2022-01-18)
 
 
