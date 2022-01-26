@@ -1,5 +1,46 @@
 # Changelog
 
+### [2.14.2](https://www.github.com/micronutrientsupport/api/compare/v2.14.1...v2.14.2) (2022-01-19)
+
+
+### Miscellaneous
+
+* fix schema for intervention routes ([acee769](https://www.github.com/micronutrientsupport/api/commit/acee7696b656334a91040c46c8e2674fbc67f788))
+
+### [2.14.1](https://www.github.com/micronutrientsupport/api/compare/v2.14.0...v2.14.1) (2022-01-18)
+
+
+### Bug Fixes
+
+* update intervention responses to use standard JSON format ([9b55882](https://www.github.com/micronutrientsupport/api/commit/9b55882c1ade2162940942c271dfe5be27e0aa04))
+
+## [2.14.0](https://www.github.com/micronutrientsupport/api/compare/v2.13.0...v2.14.0) (2022-01-13)
+
+
+### Features
+
+* add route to create derived intervention ([5f5edcc](https://www.github.com/micronutrientsupport/api/commit/5f5edccb3578f91cebd433ebbd8891e556a83ca2))
+
+## [2.13.0](https://www.github.com/micronutrientsupport/api/compare/v2.12.0...v2.13.0) (2022-01-13)
+
+
+### Features
+
+* **intervention:** add initial routes for accessing and updating intervention data ([678ba24](https://www.github.com/micronutrientsupport/api/commit/678ba24a1a7952edd10c0771e925baeded086e8d))
+
+## [2.12.0](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.12.0) (2021-11-24)
+
+
+### Features
+
+* add bin ranges for map views ([7ad663c](https://www.github.com/micronutrientsupport/api/commit/7ad663c69a969cb689d3fed0dbe4f2822473b82f))
+
+
+### Miscellaneous
+
+* add extra debug info to redis connection ([ca8aea8](https://www.github.com/micronutrientsupport/api/commit/ca8aea8cbcd4749c627ab66baa23cd0642e600c7))
+* release 2.11.6 ([660fc46](https://www.github.com/micronutrientsupport/api/commit/660fc46e03e049edfe2c339119a119e2c52e6c72))
+
 ### [2.11.6](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.11.6) (2021-11-23)
 
 
