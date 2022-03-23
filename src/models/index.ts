@@ -34,3 +34,4 @@ export * from './mn-bin-range.model';
 export * from './monthly-food.model';
 export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
+export * from './intervention-summary-costs.model';
