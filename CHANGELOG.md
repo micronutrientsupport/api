@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.15.0](https://www.github.com/micronutrientsupport/api/compare/v2.14.2...v2.15.0) (2022-03-23)
+
+
+### Features
+
+* **intervention:** add summary costs endpoint ([f84dde6](https://www.github.com/micronutrientsupport/api/commit/f84dde679a152b4b981fb060d64e1f3211d784d8))
+
 ### [2.14.2](https://www.github.com/micronutrientsupport/api/compare/v2.14.1...v2.14.2) (2022-01-19)
 
 
