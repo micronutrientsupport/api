@@ -8,15 +8,15 @@ import {
   RestBindings,
 } from '@loopback/rest';
 import {CacheHeader} from '../../decorators/cache-header.decorator';
-import {Micronutrient} from '../../models';
-import {MicronutrientRepository} from '../../repositories';
+import {MicronutrientDropdown} from '../../models';
+import {MicronutrientDropdownRepository} from '../../repositories';
 import {StandardJsonResponse} from '../standardJsonResponse';
 import {StandardOpenApiResponses} from '../standardOpenApiResponses';
 
 export class MicronutrientController {
   constructor(
-    @repository(MicronutrientRepository)
-    public micronutrientRepository: MicronutrientRepository,
+    @repository(MicronutrientDropdownRepository)
+    public micronutrientRepository: MicronutrientDropdownRepository,
     @inject(RestBindings.Http.RESPONSE) public response: Response,
   ) {}
 
@@ -29,7 +29,7 @@ export class MicronutrientController {
       'Array of Micronutrient model instances',
     )
       .setDataType('array')
-      .setObjectSchema(getModelSchemaRef(Micronutrient))
+      .setObjectSchema(getModelSchemaRef(MicronutrientDropdown))
       .toObject(),
   })
   async getMicronutrients(
@@ -39,14 +39,14 @@ export class MicronutrientController {
       example: 'Ca',
     })
     micronutrientId: string,
-  ): Promise<StandardJsonResponse<Array<Micronutrient>>> {
+  ): Promise<StandardJsonResponse<Array<MicronutrientDropdown>>> {
     const filter: Filter = {
       where: {
         id: micronutrientId,
       },
     };
     const micronutrients = await this.micronutrientRepository.find(filter);
-    return new StandardJsonResponse<Array<Micronutrient>>(
+    return new StandardJsonResponse<Array<MicronutrientDropdown>>(
       `${micronutrients.length} Micronutrients returned.`,
       micronutrients,
       'Micronutrient',
