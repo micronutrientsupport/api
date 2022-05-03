@@ -16,6 +16,7 @@ import {
   InterventionMonitoringInformation,
   InterventionRecurringCosts,
   InterventionStartupScaleupCosts,
+  InterventionSummaryCosts,
   InterventionUpdateDelta,
   InterventionVehicleStandard,
 } from '../models';
@@ -27,6 +28,7 @@ import {
   InterventionMonitoringInformationRepository,
   InterventionRecurringCostsRepository,
   InterventionStartupScaleupCostsRepository,
+  InterventionSummaryCostsRepository,
   InterventionVehicleStandardRepository,
 } from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
@@ -48,6 +50,8 @@ export class InterventionController {
     public interventionStartupScaleupCostsRepository: InterventionStartupScaleupCostsRepository,
     @repository(InterventionRecurringCostsRepository)
     public interventionRecurringCostsRepository: InterventionRecurringCostsRepository,
+    @repository(InterventionSummaryCostsRepository)
+    public interventionSummaryCostsRepository: InterventionSummaryCostsRepository,
     @repository(InterventionDataRepository)
     public interventionDataRepository: InterventionDataRepository,
   ) {}
@@ -362,6 +366,35 @@ export class InterventionController {
       `Intervention data returned.`,
       recurring,
       'InterventionRecurringCosts',
+    );
+  }
+
+  @get('/interventions/{id}/cost-summary', {
+    description: 'get summary',
+    summary: 'get summary',
+    operationId: 'summary-costs',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionSummaryCosts instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionSummaryCosts))
+      .toObject(),
+  })
+  async findCostsSummaryById(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionSummaryCosts>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+    const recurring = await this.interventionSummaryCostsRepository.find(
+      filter,
+    );
+    return new StandardJsonResponse<Array<InterventionSummaryCosts>>(
+      `Intervention data returned.`,
+      recurring,
+      'InterventionSummaryCosts',
     );
   }
 
