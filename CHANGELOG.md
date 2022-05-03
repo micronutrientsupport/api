@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.15.1](https://www.github.com/micronutrientsupport/api/compare/v2.15.0...v2.15.1) (2022-05-03)
+
+
+### Bug Fixes
+
+* update models/repositories for micronutrient endpoint to look at new view rather than source table ([0d7de58](https://www.github.com/micronutrientsupport/api/commit/0d7de5881dbaec400b5cccefeaeece053da6045d))
+
 ## [2.15.0](https://www.github.com/micronutrientsupport/api/compare/v2.14.2...v2.15.0) (2022-03-23)
 
 
