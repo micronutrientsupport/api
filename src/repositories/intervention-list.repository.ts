@@ -27,7 +27,7 @@ export class InterventionListRepository extends DefaultCrudRepository<
 
     // Execute the query
     const sql =
-      'SELECT * FROM create_derived_intervention($1::numeric,$2::numeric)';
+      'SELECT * FROM create_derived_intervention($1::numeric,$2::text,$3::text,$4::numeric)';
     const result: unknown[] = await this.dataSource.execute(sql, [
       parentInterventionId,
       newInterventionName,
