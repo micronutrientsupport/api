@@ -3,7 +3,10 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'bmgf', table: 'micronutrient_dropdown'},
+    postgresql: {
+      schema: process.env.DB_SCHEMA,
+      table: 'micronutrient_dropdown',
+    },
   },
 })
 export class MicronutrientDropdown extends Entity {
