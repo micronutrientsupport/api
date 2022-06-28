@@ -3,7 +3,7 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'bmgf', table: 'mn_bin_range'},
+    postgresql: {schema: process.env.DB_SCHEMA, table: 'mn_bin_range'},
   },
 })
 export class MnBinRange extends Entity {
