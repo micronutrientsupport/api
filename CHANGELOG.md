@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.16.1](https://www.github.com/micronutrientsupport/api/compare/v2.16.0...v2.16.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* fix reference to new intervention fn: ([85e15c9](https://www.github.com/micronutrientsupport/api/commit/85e15c995a4d835dc6bd2cd4078f6995a65dedfb))
+
 ## [2.16.0](https://www.github.com/micronutrientsupport/api/compare/v2.15.1...v2.16.0) (2022-06-28)
 
 
