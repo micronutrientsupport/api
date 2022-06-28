@@ -14,6 +14,8 @@ export class InterventionListRepository extends DefaultCrudRepository<
 
   public async createNewIntervention(
     parentInterventionId: number,
+    newInterventionName: string,
+    newInterventionDescription?: string,
     userId = 1,
   ): Promise<(InterventionList & InterventionListRelations)[]> {
     // Set the search path to include the current schema
@@ -28,6 +30,8 @@ export class InterventionListRepository extends DefaultCrudRepository<
       'SELECT * FROM create_derived_intervention($1::numeric,$2::numeric)';
     const result: unknown[] = await this.dataSource.execute(sql, [
       parentInterventionId,
+      newInterventionName,
+      newInterventionDescription,
       userId,
     ]);
 

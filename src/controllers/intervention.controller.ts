@@ -70,13 +70,21 @@ export class InterventionController {
         'application/json': {
           schema: {
             title: 'CreateInterventionBody',
-            required: ['parentInterventionId'],
+            required: ['parentInterventionId', 'newInterventionName'],
             type: 'object',
             properties: {
               parentInterventionId: {
                 description:
                   'ID of the parent intervention to copy as returned by `/interventions`',
                 type: 'number',
+              },
+              newInterventionName: {
+                description: 'Name for the derived intervention',
+                type: 'string',
+              },
+              newInterventionDescription: {
+                description: 'Description for the derived intervention',
+                type: 'string',
               },
             },
           },
@@ -85,10 +93,14 @@ export class InterventionController {
     })
     body: {
       parentInterventionId: number;
+      newInterventionName: string;
+      newInterventionDescription?: string;
     },
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
     const newIntervention = await this.interventionListRepository.createNewIntervention(
       body.parentInterventionId,
+      body.newInterventionName,
+      body.newInterventionDescription ? body.newInterventionDescription : '',
     );
     return new StandardJsonResponse<Array<InterventionList>>(
       `New Intervention created`,
