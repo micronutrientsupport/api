@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.17.0](https://www.github.com/micronutrientsupport/api/compare/v2.16.1...v2.17.0) (2022-07-20)
+
+
+### Features
+
+* add routes to expose updated match statistics routes ([f857587](https://www.github.com/micronutrientsupport/api/commit/f8575870b5f8fee6fe13df5460e4425e95c9d1ee))
+
+
+### Bug Fixes
+
+* adjust inputs for household baseline routes ([4771bec](https://www.github.com/micronutrientsupport/api/commit/4771bec43cd94c0c6d204000dce9312dbe91ec09))
+
 ### [2.16.1](https://www.github.com/micronutrientsupport/api/compare/v2.16.0...v2.16.1) (2022-06-28)
 
 
