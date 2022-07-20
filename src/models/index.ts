@@ -1,5 +1,6 @@
 export * from './biomarker-data-sources.model';
 export * from './biomarker-group.model';
+export * from './country-consumption-fctlist-matches.model';
 export * from './country-consumption.model';
 export * from './country-deficiency-afe.model';
 export * from './country-intake-geojson.model';
@@ -11,6 +12,7 @@ export * from './diet-data-sources.model';
 export * from './food-genus-nutrients-pivot.model';
 export * from './food-group-items.model';
 export * from './fooditem.model';
+export * from './household-consumption-fctlist-matches.model';
 export * from './household-deficiency-afe-aggregation.model';
 export * from './household-intake-afe.model';
 export * from './household-unmatched-items.model';

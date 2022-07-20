@@ -1,5 +1,6 @@
 export * from './biomarker-data-sources.repository';
 export * from './biomarker-group.repository';
+export * from './country-consumption-fctlist-matches.repository';
 export * from './country-consumption.repository';
 export * from './country-deficiency-afe.repository';
 export * from './country-intake-geojson.repository';
@@ -11,6 +12,7 @@ export * from './diet-data-sources.repository';
 export * from './food-genus-nutrients-pivot.repository';
 export * from './food-group-items.repository';
 export * from './fooditem.repository';
+export * from './household-consumption-fctlist-matches.repository';
 export * from './household-deficiency-afe-aggregation.repository';
 export * from './household-intake-afe.repository';
 export * from './household-unmatched-items.repository';

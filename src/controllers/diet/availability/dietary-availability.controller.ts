@@ -193,7 +193,7 @@ export class DietaryAvailabilityController {
     const filter: Filter = {
       where: {
         micronutrientId: micronutrientId,
-        compositionDataId: compositionDataId,
+        // compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
       },
     };
@@ -254,7 +254,7 @@ export class DietaryAvailabilityController {
     const filter: Filter = {
       where: {
         micronutrientId: micronutrientId,
-        compositionDataId: compositionDataId,
+        //compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
       },
     };

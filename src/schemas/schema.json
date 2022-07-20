@@ -116,6 +116,86 @@
         "groupId"
       ]
     },
+    "CountryConsumptionFctlistMatches": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionListId": {
+          "type": "number"
+        },
+        "compositionSourceId": {
+          "type": "number"
+        },
+        "compositionSourceName": {
+          "type": "string"
+        },
+        "consumptionMatchedCount": {
+          "type": "number"
+        },
+        "consumptionTotalCount": {
+          "type": "number"
+        },
+        "consumptionMatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionMatchedWeight": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionMatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
+    "CountryConsumptionFctlistMatchesRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryConsumptionFctlistMatchesWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionListId": {
+          "type": "number"
+        },
+        "compositionSourceId": {
+          "type": "number"
+        },
+        "compositionSourceName": {
+          "type": "string"
+        },
+        "consumptionMatchedCount": {
+          "type": "number"
+        },
+        "consumptionTotalCount": {
+          "type": "number"
+        },
+        "consumptionMatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionMatchedWeight": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionMatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
     "CountryConsumption": {
       "type": "object",
       "properties": {
@@ -1179,6 +1259,86 @@
       "required": [
         "id"
       ]
+    },
+    "HouseholdConsumptionFctlistMatches": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionListId": {
+          "type": "number"
+        },
+        "compositionSourceId": {
+          "type": "number"
+        },
+        "compositionSourceName": {
+          "type": "string"
+        },
+        "consumptionMatchedCount": {
+          "type": "number"
+        },
+        "consumptionTotalCount": {
+          "type": "number"
+        },
+        "consumptionMatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionMatchedWeight": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionMatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
+    "HouseholdConsumptionFctlistMatchesRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "HouseholdConsumptionFctlistMatchesWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionListId": {
+          "type": "number"
+        },
+        "compositionSourceId": {
+          "type": "number"
+        },
+        "compositionSourceName": {
+          "type": "string"
+        },
+        "consumptionMatchedCount": {
+          "type": "number"
+        },
+        "consumptionTotalCount": {
+          "type": "number"
+        },
+        "consumptionMatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionMatchedWeight": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionMatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
     },
     "HouseholdDeficiencyAfeAggregation": {
       "type": "object",
@@ -2301,6 +2461,44 @@
         }
       }
     },
+    "InterventionSummaryCosts": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "summaryCosts": {
+          "type": "string"
+        },
+        "discountRate": {
+          "type": "number"
+        },
+        "summaryCostsDiscounted": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionSummaryCostsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionSummaryCostsWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "summaryCosts": {
+          "type": "string"
+        },
+        "discountRate": {
+          "type": "number"
+        },
+        "summaryCostsDiscounted": {
+          "type": "string"
+        }
+      }
+    },
     "InterventionValuesJson": {
       "type": "object",
       "properties": {
@@ -2365,7 +2563,7 @@
         }
       }
     },
-    "Micronutrient": {
+    "MicronutrientDropdown": {
       "type": "object",
       "properties": {
         "id": {
@@ -2383,9 +2581,6 @@
         "category": {
           "type": "string"
         },
-        "fooditemColumn": {
-          "type": "string"
-        },
         "isInImpact": {
           "type": "boolean"
         },
@@ -2398,16 +2593,13 @@
         "isDiet": {
           "type": "boolean"
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
-    "MicronutrientRelations": {
+    "MicronutrientDropdownRelations": {
       "type": "object",
       "additionalProperties": false
     },
-    "MicronutrientWithRelations": {
+    "MicronutrientDropdownWithRelations": {
       "type": "object",
       "properties": {
         "id": {
@@ -2425,9 +2617,6 @@
         "category": {
           "type": "string"
         },
-        "fooditemColumn": {
-          "type": "string"
-        },
         "isInImpact": {
           "type": "boolean"
         },
@@ -2440,10 +2629,7 @@
         "isDiet": {
           "type": "boolean"
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "MnBinRange": {
       "type": "object",
