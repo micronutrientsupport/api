@@ -52,7 +52,7 @@ export class NationalScaleHouseholds {
     const filter: Filter = {
       where: {
         micronutrientId: micronutrientId,
-        compositionDataId: compositionDataId,
+        //compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
       },
     };
