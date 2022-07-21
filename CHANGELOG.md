@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.18.0](https://www.github.com/micronutrientsupport/api/compare/v2.17.0...v2.18.0) (2022-07-21)
+
+
+### Features
+
+* return data value from intervention patch route ([49fdb7e](https://www.github.com/micronutrientsupport/api/commit/49fdb7e9bcb307c35d270115f5cf85c406d93e43))
+
 ## [2.17.0](https://www.github.com/micronutrientsupport/api/compare/v2.16.1...v2.17.0) (2022-07-20)
 
 
