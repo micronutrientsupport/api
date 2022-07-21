@@ -414,11 +414,12 @@ export class InterventionController {
     description: 'patch data',
     summary: 'patch data',
     operationId: 'datap',
-    responses: {
-      '204': {
-        description: 'InterventionList PATCH success',
-      },
-    },
+    responses: new StandardOpenApiResponses(
+      'Array of Micronutrient model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionList))
+      .toObject(),
   })
   async updateDataRowMultiple(
     @param.path.number('id') id: number,
@@ -473,13 +474,13 @@ export class InterventionController {
       },
     })
     interventionUpdateDeltaList: InterventionUpdateDelta[],
-  ): Promise<void> {
+  ): Promise<StandardJsonResponse<Array<InterventionList>>> {
     const tx = await this.interventionDataRepository.dataSource.beginTransaction(
       IsolationLevel.READ_COMMITTED,
     );
-    interventionUpdateDeltaList.map(delta => {
+    interventionUpdateDeltaList.map(async delta => {
       const interventionUpdateDelta = new InterventionData(delta);
-      this.interventionDataRepository.updateAll(
+      await this.interventionDataRepository.updateAll(
         interventionUpdateDelta,
         {
           interventionId: id,
@@ -490,6 +491,20 @@ export class InterventionController {
         },
       );
     });
+
     await tx.commit();
+
+    // Fetch the intervention
+    const filter: Filter = {
+      where: {
+        id: id,
+      },
+    };
+    const intervention = await this.interventionListRepository.find(filter);
+    return new StandardJsonResponse<Array<InterventionList>>(
+      `Intervention data updated`,
+      intervention,
+      'InterventionList',
+    );
   }
 }
