@@ -60,6 +60,12 @@ export class DietaryUnmatchedController {
       .toObject(true),
   })
   async findCountryUnmatched(
+    @param.query.string('micronutrientId', {
+      description: 'ID for the micronutrient as returned by `/micronutrients`',
+      required: false,
+      example: 'Ca',
+    })
+    micronutrientId: string,
     @param.query.string('compositionDataId', {
       description:
         'ID for the composition data source as returned by `/diet/data-sources`',
@@ -79,6 +85,7 @@ export class DietaryUnmatchedController {
       where: {
         compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
+        micronutrientId: micronutrientId,
       },
     };
     const data = await this.countryUnmatchedItemsRepository.find(filter);

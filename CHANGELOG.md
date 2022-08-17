@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.18.1](https://www.github.com/micronutrientsupport/api/compare/v2.18.0...v2.18.1) (2022-08-17)
+
+
+### Bug Fixes
+
+* update unmatched items endpoint to use the fct hierarchy views ([f357cf7](https://www.github.com/micronutrientsupport/api/commit/f357cf73f7c452d549e9a5db0459872c7848193f))
+
 ## [2.18.0](https://www.github.com/micronutrientsupport/api/compare/v2.17.0...v2.18.0) (2022-07-21)
 
 
