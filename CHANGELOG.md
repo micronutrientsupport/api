@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.19.0](https://www.github.com/micronutrientsupport/api/compare/v2.18.1...v2.19.0) (2022-11-23)
+
+
+### Features
+
+* add endpoint to expose API and data version numbers ([e8f189a](https://www.github.com/micronutrientsupport/api/commit/e8f189a8076db567dff125692d519d4fa0fe39dd))
+
 ### [2.18.1](https://www.github.com/micronutrientsupport/api/compare/v2.18.0...v2.18.1) (2022-08-17)
 
 
