@@ -7,6 +7,8 @@ import {DataVersionRepository} from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
 
+import version from '../version.json';
+
 // import {inject} from '@loopback/core';
 
 export class ApiMetadataControllerController {
@@ -31,8 +33,8 @@ export class ApiMetadataControllerController {
     const data = await this.dataVersionRepository.find(filter);
 
     const schema = data.find(record => record.type === 'schema')?.version;
-    const seed = data.find(record => record.type === 'schema')?.version;
-    const api = process.env.npm_package_version;
+    const seed = data.find(record => record.type === 'seed')?.version;
+    const api = version.version;
 
     return new StandardJsonResponse<
       Array<{api: string; seed: string; schema: string}>
