@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.19.2](https://github.com/micronutrientsupport/api/compare/v2.19.1...v2.19.2) (2022-11-23)
+
+
+### Bug Fixes
+
+* trigger release update ([a43b1f4](https://github.com/micronutrientsupport/api/commit/a43b1f45d6d7b429259abc48278e597f027ba0d3))
+
+
+### Miscellaneous
+
+* fix release please config 3 ([c3af8b5](https://github.com/micronutrientsupport/api/commit/c3af8b50f961f3e10650b69df3286d2a2de87845))
+* fix release please config 4 ([79445ae](https://github.com/micronutrientsupport/api/commit/79445aea29bf9d9f0037011caf5f7fe0d5432636))
+* fix release please config 5 ([f035147](https://github.com/micronutrientsupport/api/commit/f035147dbd14973a5ef427fd974d543b5a9fad96))
+
 ## [2.19.1](https://github.com/micronutrientsupport/api/compare/v2.19.0...v2.19.1) (2022-11-23)
 
 
