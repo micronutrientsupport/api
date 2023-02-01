@@ -24,6 +24,13 @@
 This application is generated using [LoopBack 4 CLI](https://loopback.io/doc/en/lb4/Command-line-interface.html) with the
 [initial project layout](https://loopback.io/doc/en/lb4/Loopback-application-layout.html).
 
+
+## Set up the database
+
+See the database repository on how to set up a database for the MAPS project.
+
+
+
 ## Install dependencies
 
 By default, dependencies were installed when this application was generated.
@@ -38,6 +45,11 @@ To only install resolved dependencies in `package-lock.json`:
 ```sh
 npm ci
 ```
+
+## Set up environment variables
+
+- copy `.env.example` to `.env`
+- fill in the various variables (descriptions of what the variables are is in the file). Make sure never to commit the `.env` file itself, as it will contain sensitive information such as passwords.
 
 ## Run the application
 
