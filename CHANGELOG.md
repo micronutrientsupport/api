@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.19.3](https://github.com/micronutrientsupport/api/compare/v2.19.2...v2.19.3) (2023-02-03)
+
+
+### Bug Fixes
+
+* try to explicitly set cors headers for intervention pathc request ([fd35014](https://github.com/micronutrientsupport/api/commit/fd35014fef0468f30d913a781821fe034314a4ab))
+
 ## [2.19.2](https://github.com/micronutrientsupport/api/compare/v2.19.1...v2.19.2) (2022-11-23)
 
 

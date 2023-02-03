@@ -1,3 +1,4 @@
+import {inject} from '@loopback/core';
 import {Filter, IsolationLevel, repository} from '@loopback/repository';
 import {
   get,
@@ -6,6 +7,8 @@ import {
   patch,
   post,
   requestBody,
+  Response,
+  RestBindings,
 } from '@loopback/rest';
 import {
   InterventionBaselineAssumptions,
@@ -54,6 +57,7 @@ export class InterventionController {
     public interventionSummaryCostsRepository: InterventionSummaryCostsRepository,
     @repository(InterventionDataRepository)
     public interventionDataRepository: InterventionDataRepository,
+    @inject(RestBindings.Http.RESPONSE) private response: Response,
   ) {}
 
   @post('/interventions', {
@@ -501,10 +505,17 @@ export class InterventionController {
       },
     };
     const intervention = await this.interventionListRepository.find(filter);
-    return new StandardJsonResponse<Array<InterventionList>>(
+
+    const data = new StandardJsonResponse<Array<InterventionList>>(
       `Intervention data updated`,
       intervention,
       'InterventionList',
     );
+
+    this.response.set('Access-Control-Allow-Methods', '*');
+    this.response.status(200).send(data);
+    // Return the HTTP response object so that LoopBack framework skips the
+    // generation of HTTP response
+    return data;
   }
 }
