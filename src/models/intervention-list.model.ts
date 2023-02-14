@@ -157,6 +157,34 @@ export class InterventionList extends Entity {
   })
   tenYearTotalCost?: number;
 
+  @property({
+    type: 'date',
+    description: 'When was the intervention last edited',
+    postgresql: {
+      columnName: 'last_edited',
+      dataType: 'date',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  lastEdited?: string;
+
+  @property({
+    type: 'boolean',
+    description: 'Is the intervention a template',
+    postgresql: {
+      columnName: 'is_premade',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  isTemplateIntervention?: boolean;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
