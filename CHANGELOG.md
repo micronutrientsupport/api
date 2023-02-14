@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.19.4](https://github.com/micronutrientsupport/api/compare/v2.19.3...v2.19.4) (2023-02-14)
+
+
+### Bug Fixes
+
+* add missing fields to intervention list endpoint ([6e9766c](https://github.com/micronutrientsupport/api/commit/6e9766c2a12c71e2bd0fb927bfba192123a8f4df))
+* add parent intervention to intervention list ([6a050fb](https://github.com/micronutrientsupport/api/commit/6a050fb7abaab4b39c9bf6805be6d2d4ed4aaa7f))
+
 ## [2.19.3](https://github.com/micronutrientsupport/api/compare/v2.19.2...v2.19.3) (2023-02-03)
 
 
