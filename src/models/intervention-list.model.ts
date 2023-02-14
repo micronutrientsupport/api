@@ -185,6 +185,21 @@ export class InterventionList extends Entity {
   })
   isTemplateIntervention?: boolean;
 
+  @property({
+    type: 'number',
+    scale: 0,
+    id: true,
+    postgresql: {
+      columnName: 'parent_intervention',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  parentIntervention?: number;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
