@@ -479,6 +479,9 @@ export class InterventionController {
     })
     interventionUpdateDeltaList: InterventionUpdateDelta[],
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
+    console.log('Patch');
+    console.log(interventionUpdateDeltaList);
+
     const tx = await this.interventionDataRepository.dataSource.beginTransaction(
       IsolationLevel.READ_COMMITTED,
     );
@@ -512,8 +515,10 @@ export class InterventionController {
       'InterventionList',
     );
 
-    this.response.set('Access-Control-Allow-Methods', '*');
-    this.response.status(200).send(data);
+    console.log(data);
+
+    //this.response.set('Access-Control-Allow-Methods', '*');
+    //this.response.status(200).send(data);
     // Return the HTTP response object so that LoopBack framework skips the
     // generation of HTTP response
     return data;
