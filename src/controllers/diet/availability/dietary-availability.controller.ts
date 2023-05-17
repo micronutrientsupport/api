@@ -3,11 +3,11 @@
 import {inject} from '@loopback/core';
 import {Filter, repository} from '@loopback/repository';
 import {
+  Response,
+  RestBindings,
   get,
   getModelSchemaRef,
   param,
-  Response,
-  RestBindings,
 } from '@loopback/rest';
 import {
   CountryDeficiencyAfe,
@@ -226,13 +226,6 @@ export class DietaryAvailabilityController {
       example: 'Ca',
     })
     micronutrientId: string,
-    @param.query.string('compositionDataId', {
-      description:
-        'ID for the composition data source as returned by `/diet/data-sources`',
-      required: false,
-      example: '1',
-    })
-    compositionDataId: number,
     @param.query.string('consumptionDataId', {
       description:
         'ID for the household level consumption data source as returned by `/diet/data-sources`',
@@ -254,8 +247,8 @@ export class DietaryAvailabilityController {
     const filter: Filter = {
       where: {
         micronutrientId: micronutrientId,
-        //compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
+        aggregationAreaType: 'admin',
       },
     };
     const data = await this.householdDeficiencyAfeAggregationRepository.find(
