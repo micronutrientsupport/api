@@ -26,21 +26,6 @@ export class HouseholdDeficiencyAfeAggregation extends Entity {
   consumptionDataId?: number;
 
   @property({
-    type: 'number',
-    scale: 0,
-    id: true,
-    postgresql: {
-      columnName: 'fct_source_id',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'YES',
-    },
-  })
-  compositionDataId?: number;
-
-  @property({
     type: 'string',
     postgresql: {
       columnName: 'country',

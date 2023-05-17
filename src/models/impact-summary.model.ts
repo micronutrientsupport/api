@@ -73,7 +73,7 @@ export class ImpactSummary extends Entity {
     description:
       'The projected availability of the micronutrient for the `referenceYear`',
     postgresql: {
-      columnName: 'daily_reference_val',
+      columnName: 'impact_reference_val',
       dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
@@ -81,14 +81,14 @@ export class ImpactSummary extends Entity {
       nullable: 'YES',
     },
   })
-  referenceVal?: number;
+  impactReferenceVal?: number;
 
   @property({
     type: 'number',
     description:
       'Reference year for the `referenceVal` projected availability value',
     postgresql: {
-      columnName: 'reference_year',
+      columnName: 'impact_reference_year',
       dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
@@ -96,14 +96,14 @@ export class ImpactSummary extends Entity {
       nullable: 'YES',
     },
   })
-  referenceYear?: number;
+  impactReferenceYear?: number;
 
   @property({
     type: 'string',
     description:
       "The projected year that dietary supply will reach the `recommended` value under the given scenario given 'business as usual'",
     postgresql: {
-      columnName: 'intersect_year',
+      columnName: 'impact_intersect_year',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -111,14 +111,14 @@ export class ImpactSummary extends Entity {
       nullable: 'YES',
     },
   })
-  intersectYear?: string;
+  impactIntersectYear?: string;
 
   @property({
     type: 'number',
     description:
       'The percentage difference between the `referenceVal` and the `reccomended` supply value',
     postgresql: {
-      columnName: 'difference',
+      columnName: 'impact_difference',
       dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
@@ -126,7 +126,37 @@ export class ImpactSummary extends Entity {
       nullable: 'YES',
     },
   })
-  difference?: number;
+  impactDifference?: number;
+
+  @property({
+    type: 'number',
+    description:
+      'The national median dietary micronutrient supply value from Quick MAPS baseline',
+    postgresql: {
+      columnName: 'dietary_supply_median',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  dietarySupplyMedian?: number;
+
+  @property({
+    type: 'string',
+    description:
+      'The micronutrient supply inadequacy statement from Quick MAPS baseline',
+    postgresql: {
+      columnName: 'dietary_inadequacy',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  dietaryInadequacy?: string;
 
   // Define well-known properties here
 
