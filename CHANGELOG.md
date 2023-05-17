@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.20.0](https://github.com/micronutrientsupport/api/compare/v2.19.4...v2.20.0) (2023-05-17)
+
+
+### Features
+
+* update routes to return national median figures in impact summary endpoint ([ce305b5](https://github.com/micronutrientsupport/api/commit/ce305b5bc7a708699f35c8ecaaab4193264b99ba))
+
 ## [2.19.4](https://github.com/micronutrientsupport/api/compare/v2.19.3...v2.19.4) (2023-02-14)
 
 
