@@ -1,15 +1,17 @@
-import {inject} from '@loopback/core';
+import {JSONObject, inject} from '@loopback/core';
 import {Filter, IsolationLevel, repository} from '@loopback/repository';
 import {
+  Response,
+  RestBindings,
   get,
   getModelSchemaRef,
   param,
   patch,
   post,
   requestBody,
-  Response,
-  RestBindings,
 } from '@loopback/rest';
+import {parse} from 'excel-formula-parser';
+import transformJS from 'js-to-json-logic';
 import {
   InterventionBaselineAssumptions,
   InterventionData,
@@ -36,6 +38,74 @@ import {
 } from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
+
+export type InterventionIndustryInformationFields = {
+  year0: number;
+  year0Edited: boolean;
+  year0Default: number;
+  year0Formula: string | JSONObject;
+  year1: number;
+  year1Edited: boolean;
+  year1Default: number;
+  year1Formula: string | JSONObject;
+  year2: number;
+  year2Edited: boolean;
+  year2Default: number;
+  year2Formula: string | JSONObject;
+  year3: number;
+  year3Edited: boolean;
+  year3Default: number;
+  year3Formula: string | JSONObject;
+  year4: number;
+  year4Edited: boolean;
+  year4Default: number;
+  year4Formula: string | JSONObject;
+  year5: number;
+  year5Edited: boolean;
+  year5Default: number;
+  year5Formula: string | JSONObject;
+  year6: number;
+  year6Edited: boolean;
+  year6Default: number;
+  year6Formula: string | JSONObject;
+  year7: number;
+  year7Edited: boolean;
+  year7Default: number;
+  year7Formula: string | JSONObject;
+  year8: number;
+  year8Edited: boolean;
+  year8Default: number;
+  year8Formula: string | JSONObject;
+  year9: number;
+  year9Edited: boolean;
+  year9Default: number;
+  year9Formula: string | JSONObject;
+  rowName: string;
+  rowIndex: number;
+  rowUnits: string;
+  labelText: string;
+  dataSource: string;
+  isEditable: boolean;
+  dataCitation: string;
+  dataSourceDefault: string;
+};
+
+const formulaToJsonLogic = (formula: string): JSONObject => {
+  if (!formula) return {};
+
+  // strip up to and including opening = sign
+  const operands = formula.substring(formula.indexOf('=') + 1);
+  //console.log(operands);
+
+  // Convert excel formula into AST
+  const tree = parse(operands);
+  //console.log(tree);
+
+  const jsonLogic = transformJS.processNode(tree);
+  //console.log(jsonLogic);
+
+  return jsonLogic;
+};
 
 export class InterventionController {
   constructor(
@@ -291,6 +361,29 @@ export class InterventionController {
     const industryInformation = await this.interventionIndustryInformationRepository.find(
       filter,
     );
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    industryInformation[0].industryInformation = industryInformation[0].industryInformation.map(
+      (value: InterventionIndustryInformationFields) => {
+        value.year0Formula = formulaToJsonLogic(value.year0Formula as string);
+        value.year1Formula = formulaToJsonLogic(value.year1Formula as string);
+        value.year2Formula = formulaToJsonLogic(value.year2Formula as string);
+        value.year3Formula = formulaToJsonLogic(value.year3Formula as string);
+        value.year4Formula = formulaToJsonLogic(value.year4Formula as string);
+        value.year5Formula = formulaToJsonLogic(value.year5Formula as string);
+        value.year6Formula = formulaToJsonLogic(value.year6Formula as string);
+        value.year7Formula = formulaToJsonLogic(value.year7Formula as string);
+        value.year8Formula = formulaToJsonLogic(value.year8Formula as string);
+        value.year9Formula = formulaToJsonLogic(value.year9Formula as string);
+
+        // value.year2Formula = value.year2Formula
+        // ? formulaToJsonLogic(value.year2Formula as string)
+        // : {};
+
+        return value;
+      },
+    );
+
     return new StandardJsonResponse<Array<InterventionIndustryInformation>>(
       `Intervention data returned.`,
       industryInformation,
