@@ -13,6 +13,7 @@ WORKDIR /home/node/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY --chown=node package*.json ./
+ADD --chown=node patches ./patches
 
 RUN npm install
 
