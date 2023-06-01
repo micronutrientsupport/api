@@ -92,17 +92,12 @@ export type InterventionIndustryInformationFields = {
 
 const formulaToJsonLogic = (formula: string): JSONObject => {
   if (!formula) return {};
-
   // strip up to and including opening = sign
   const operands = formula.substring(formula.indexOf('=') + 1);
-  //console.log(operands);
-
   // Convert excel formula into AST
   const tree = parse(operands);
-  //console.log(tree);
-
+  //Convert AST to Json logic
   const jsonLogic = transformJS.processNode(tree);
-  //console.log(jsonLogic);
 
   return jsonLogic;
 };
