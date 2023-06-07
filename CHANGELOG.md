@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.21.1](https://github.com/micronutrientsupport/api/compare/v2.21.0...v2.21.1) (2023-06-07)
+
+
+### Bug Fixes
+
+* always display name and id for country endpoint ([ac8b2c7](https://github.com/micronutrientsupport/api/commit/ac8b2c79d27f67f6c15b687543f5934eee3a71ae))
+* always display name, country id for regions endpoint ([d922318](https://github.com/micronutrientsupport/api/commit/d9223185d602c346aefb0a3d30f9fa754c5fefe4))
+
 ## [2.21.0](https://github.com/micronutrientsupport/api/compare/v2.20.0...v2.21.0) (2023-06-07)
 
 
