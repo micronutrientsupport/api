@@ -1,0 +1,80 @@
+diff --git a/node_modules/js-to-json-logic/js-to-json-logic.d.ts b/node_modules/js-to-json-logic/js-to-json-logic.d.ts
+index de72f86..756ac3f 100644
+--- a/node_modules/js-to-json-logic/js-to-json-logic.d.ts
++++ b/node_modules/js-to-json-logic/js-to-json-logic.d.ts
+@@ -1 +1,2 @@
+-export default function transformJS (code: string): any
++export function transformJS (code: string): any
++export function processNode (node: any, valueOnly?: boolean): any;
+diff --git a/node_modules/js-to-json-logic/lib/index.js b/node_modules/js-to-json-logic/lib/index.js
+index c6ab89c..c6180cb 100644
+--- a/node_modules/js-to-json-logic/lib/index.js
++++ b/node_modules/js-to-json-logic/lib/index.js
+@@ -66,6 +66,52 @@ function processNode (node, valueOnly = false) {
+       }
+     }
+ 
++    case 'cell': {
++      let cell = node.key;
++      let col = cell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
++      let row = cell.split(col)[1];
++
++      switch(col) {
++        case 'D': {
++          col = 1;
++        }
++        case 'E': {
++          col = 2;
++        }
++        case 'F': {
++          col = 3;
++        }
++        case 'G': {
++          col = 4;
++        }
++        case 'H': {
++          col = 5;
++        }
++        case 'I': {
++          col = 6;
++        }
++        case 'J': {
++          col = 7;
++        }
++        case 'K': {
++          col = 8;
++        }
++        case 'L': {
++          col = 9;
++        }
++        case 'M': {
++          col = 10;
++        }
++      }
++
++      return {var:
++        {
++          year: col,
++          rowIndex: row
++       }
++      };
++    }
++
+     case 'Literal': {
+       if (node.value instanceof RegExp) {
+         return [node.value.source, node.value.flags]
+@@ -125,7 +171,7 @@ function processNode (node, valueOnly = false) {
+     }
+ 
+     case 'LogicalExpression':
+-    case 'BinaryExpression': {
++    case 'binary-expression': {
+       return {
+         [processOp(node.operator)]: [processNode(node.left), processNode(node.right)]
+       }
+@@ -266,4 +312,4 @@ const transformJS = (code) => {
+   }
+ }
+ 
+-module.exports = transformJS
++module.exports = {transformJS, processNode}
