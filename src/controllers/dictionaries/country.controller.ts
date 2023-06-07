@@ -71,6 +71,11 @@ export class CountryController {
           typeof includeGeometry === 'undefined' || includeGeometry
             ? true
             : false,
+        id: true,
+        name: true,
+        country: true,
+        type: true,
+        adminLevel: true,
       },
     };
     const regions = await this.aggregationAreaRepository.find(filter);
@@ -134,6 +139,8 @@ export class CountryController {
           typeof includeGeometry === 'undefined' || includeGeometry
             ? true
             : false,
+        id: true,
+        name: true,
       },
     };
     const countries = await this.countryRepository.find(filter);
