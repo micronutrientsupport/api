@@ -38,3 +38,4 @@ export * from './monthly-food.repository';
 export * from './top-20-mn-per-country.repository';
 export * from './top-20-mn-per-hhsurvey.repository';
 export * from './data-version.repository';
+export * from './aggregation-area.repository';

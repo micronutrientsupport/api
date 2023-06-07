@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.21.0](https://github.com/micronutrientsupport/api/compare/v2.20.0...v2.21.0) (2023-06-07)
+
+
+### Features
+
+* add basic output of jsonlogic for inteverntion industryinformation fields from db ([9b67861](https://github.com/micronutrientsupport/api/commit/9b67861a3b78ea07245b834600c5b9ca5a0f2389))
+* add flag to disable GeoJSON for country endpoint and add subregions endpoint ([c94f2f5](https://github.com/micronutrientsupport/api/commit/c94f2f57b59e988f41b090ef50e200c0fb3db7d7))
+
+
+### Bug Fixes
+
+* add patch-package to dev dependencies ([73a5023](https://github.com/micronutrientsupport/api/commit/73a502347fed2399f41bfa4fb16218abf146b195))
+
+
+### Miscellaneous
+
+* actually add the patches: ([1d1be07](https://github.com/micronutrientsupport/api/commit/1d1be07df867260d6b5d0a29a327062d7ab7d45c))
+* add pathces to dockerfile build ([d4ff2f4](https://github.com/micronutrientsupport/api/commit/d4ff2f4d3d11c289ff0a860ba3bac0fd1b911078))
+* tidy up loggin ([9e3155b](https://github.com/micronutrientsupport/api/commit/9e3155b73b649ed8b00f831689339a86a6bcf907))
+
 ## [2.20.0](https://github.com/micronutrientsupport/api/compare/v2.19.4...v2.20.0) (2023-05-17)
 
 

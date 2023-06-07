@@ -38,3 +38,4 @@ export * from './monthly-food.model';
 export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
 export * from './data-version.model';
+export * from './aggregation-area.model';
