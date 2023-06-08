@@ -10,6 +10,7 @@ import {
   post,
   requestBody,
 } from '@loopback/rest';
+import {readFileSync} from 'fs';
 import {parse} from 'excel-formula-parser';
 import transformJS from 'js-to-json-logic';
 import {
@@ -38,6 +39,7 @@ import {
 } from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
+import industry from './newIndustryInfo.json';
 
 export type InterventionIndustryInformationFields = {
   year0: number;
@@ -96,9 +98,12 @@ const formulaToJsonLogic = (formula: string): JSONObject => {
   const operands = formula.substring(formula.indexOf('=') + 1);
   // Convert excel formula into AST
   const tree = parse(operands);
+
+  //console.log(sql);
+
   //Convert AST to Json logic
   const jsonLogic = transformJS.processNode(tree);
-
+  //const jsonLogic = {};
   return jsonLogic;
 };
 
@@ -348,6 +353,12 @@ export class InterventionController {
   async findIndustryInfoById(
     @param.path.number('id') id: number,
   ): Promise<StandardJsonResponse<Array<InterventionIndustryInformation>>> {
+    return industry as any;
+    // const data = readFileSync('newIndustryInfo.json', {
+    //   encoding: 'utf8',
+    //   flag: 'r',
+    // });
+
     const filter: Filter = {
       where: {
         interventionId: id,
