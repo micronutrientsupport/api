@@ -1,5 +1,4 @@
 {
-  "msg": "Intervention data returned.",
   "data": [
     {
       "interventionId": 1,
@@ -141,7 +140,8 @@
           "labelText": "Total Number of milling days per year",
           "dataSource": null,
           "isEditable": false,
-          "rowFormula": {
+          "year0Edited": null,
+          "year0Formula": {
             "*": [
               {
                 "var": {
@@ -155,16 +155,141 @@
               }
             ]
           },
-          "year0Edited": null,
           "year1Edited": null,
+          "year1Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "year2Edited": null,
+          "year2Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "year3Edited": null,
+          "year3Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "year4Edited": null,
+          "year4Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "year5Edited": null,
+          "year5Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "year6Edited": null,
+          "year6Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "year7Edited": null,
+          "year7Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "year8Edited": null,
+          "year8Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "year9Edited": null,
+          "year9Formula": {
+            "*": [
+              {
+                "var": {
+                  "rowIndex": "32"
+                }
+              },
+              {
+                "var": {
+                  "rowIndex": "33"
+                }
+              }
+            ]
+          },
           "dataCitation": null,
           "year0Default": null,
           "year1Default": null,
@@ -234,26 +359,116 @@
           "labelText": "Number of iron tests plus value from elsewhere",
           "dataSource": null,
           "isEditable": false,
-          "rowFormula": {
+          "year0Formula": {
             "+": [
               {
                 "var": {
                   "rowIndex": "35"
                 }
               },
-                10
+              10
             ]
           },
           "year0Edited": null,
           "year1Edited": null,
+          "year1Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              11
+            ]
+          },
           "year2Edited": null,
+          "year2Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              12
+            ]
+          },
           "year3Edited": null,
+          "year3Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              13
+            ]
+          },
           "year4Edited": null,
+          "year4Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              14
+            ]
+          },
           "year5Edited": null,
+          "year5Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              15
+            ]
+          },
           "year6Edited": null,
+          "year6Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              16
+            ]
+          },
           "year7Edited": null,
+          "year7Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              17
+            ]
+          },
           "year8Edited": null,
+          "year8Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              18
+            ]
+          },
           "year9Edited": null,
+          "year9Formula": {
+            "+": [
+              {
+                "var": {
+                  "rowIndex": "35"
+                }
+              },
+              19
+            ]
+          },
           "dataCitation": null,
           "year0Default": null,
           "year1Default": null,
@@ -350,7 +565,8 @@
       ]
     }
   ],
-  "type": "Success 200",
+  "meta": {},
+  "msg": "Intervention data returned.",
   "props": {
     "type": "object",
     "properties": {
@@ -368,5 +584,5 @@
       "industryInformation"
     ]
   },
-  "meta": {}
+  "type": "Success 200"
 }
