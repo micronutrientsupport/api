@@ -43,46 +43,37 @@ export type InterventionIndustryInformationFields = {
   year0: number;
   year0Edited: boolean;
   year0Default: number;
-  year0Formula: string | JSONObject;
   year1: number;
   year1Edited: boolean;
   year1Default: number;
-  year1Formula: string | JSONObject;
   year2: number;
   year2Edited: boolean;
   year2Default: number;
-  year2Formula: string | JSONObject;
   year3: number;
   year3Edited: boolean;
   year3Default: number;
-  year3Formula: string | JSONObject;
   year4: number;
   year4Edited: boolean;
   year4Default: number;
-  year4Formula: string | JSONObject;
   year5: number;
   year5Edited: boolean;
   year5Default: number;
-  year5Formula: string | JSONObject;
   year6: number;
   year6Edited: boolean;
   year6Default: number;
-  year6Formula: string | JSONObject;
   year7: number;
   year7Edited: boolean;
   year7Default: number;
-  year7Formula: string | JSONObject;
   year8: number;
   year8Edited: boolean;
   year8Default: number;
-  year8Formula: string | JSONObject;
   year9: number;
   year9Edited: boolean;
   year9Default: number;
-  year9Formula: string | JSONObject;
   rowName: string;
   rowIndex: number;
   rowUnits: string;
+  rowFormula: string | JSONObject;
   labelText: string;
   dataSource: string;
   isEditable: boolean;
@@ -92,10 +83,16 @@ export type InterventionIndustryInformationFields = {
 
 const formulaToJsonLogic = (formula: string): JSONObject => {
   if (!formula) return {};
+
   // strip up to and including opening = sign
   const operands = formula.substring(formula.indexOf('=') + 1);
+
+  console.log(operands);
+
   // Convert excel formula into AST
   const tree = parse(operands);
+
+  console.log(tree);
   //Convert AST to Json logic
   const jsonLogic = transformJS.processNode(tree);
 
@@ -360,21 +357,8 @@ export class InterventionController {
     // Replace Excel Formulae with JsonLogic for interpretation on the frontend
     industryInformation[0].industryInformation = industryInformation[0].industryInformation.map(
       (value: InterventionIndustryInformationFields) => {
-        value.year0Formula = formulaToJsonLogic(value.year0Formula as string);
-        value.year1Formula = formulaToJsonLogic(value.year1Formula as string);
-        value.year2Formula = formulaToJsonLogic(value.year2Formula as string);
-        value.year3Formula = formulaToJsonLogic(value.year3Formula as string);
-        value.year4Formula = formulaToJsonLogic(value.year4Formula as string);
-        value.year5Formula = formulaToJsonLogic(value.year5Formula as string);
-        value.year6Formula = formulaToJsonLogic(value.year6Formula as string);
-        value.year7Formula = formulaToJsonLogic(value.year7Formula as string);
-        value.year8Formula = formulaToJsonLogic(value.year8Formula as string);
-        value.year9Formula = formulaToJsonLogic(value.year9Formula as string);
-
-        // value.year2Formula = value.year2Formula
-        // ? formulaToJsonLogic(value.year2Formula as string)
-        // : {};
-
+        console.log(value.rowFormula);
+        value.rowFormula = formulaToJsonLogic(value.rowFormula as string);
         return value;
       },
     );
