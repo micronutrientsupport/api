@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.22.0](https://github.com/micronutrientsupport/api/compare/v2.21.1...v2.22.0) (2023-06-13)
+
+
+### Features
+
+* add rowFormula to industryInfo endpoint ([d8ba2d0](https://github.com/micronutrientsupport/api/commit/d8ba2d01ecffd3a2ff8cb1c1b8843a5794908cf8))
+
 ## [2.21.1](https://github.com/micronutrientsupport/api/compare/v2.21.0...v2.21.1) (2023-06-07)
 
 
