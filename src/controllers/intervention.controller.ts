@@ -152,6 +152,18 @@ export class InterventionController {
                 description: 'Description for the derived intervention',
                 type: 'string',
               },
+              newInterventionNation: {
+                description: 'ISO short code for the focus nation',
+                type: 'string',
+              },
+              newInterventionFocusGeography: {
+                description: 'ID for the intervention focus geography',
+                type: 'string',
+              },
+              newInterventionFocusMicronutrient: {
+                description: 'ID for the focus micronutrient',
+                type: 'string',
+              },
             },
           },
         },
@@ -160,12 +172,20 @@ export class InterventionController {
     body: {
       parentInterventionId: number;
       newInterventionName: string;
+      newInterventionNation: string;
+      newInterventionFocusMicronutrient: string;
+      newInterventionFocusGeography?: string;
       newInterventionDescription?: string;
     },
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
     const newIntervention = await this.interventionListRepository.createNewIntervention(
       body.parentInterventionId,
       body.newInterventionName,
+      body.newInterventionNation,
+      body.newInterventionFocusMicronutrient,
+      body.newInterventionFocusGeography
+        ? body.newInterventionFocusGeography
+        : body.newInterventionNation,
       body.newInterventionDescription ? body.newInterventionDescription : '',
     );
     return new StandardJsonResponse<Array<InterventionList>>(

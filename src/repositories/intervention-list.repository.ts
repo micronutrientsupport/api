@@ -15,6 +15,9 @@ export class InterventionListRepository extends DefaultCrudRepository<
   public async createNewIntervention(
     parentInterventionId: number,
     newInterventionName: string,
+    newInterventionNation: string,
+    newInterventionFocusMicronutrient: string,
+    newInterventionFocusGeography?: string,
     newInterventionDescription?: string,
     userId = 1,
   ): Promise<(InterventionList & InterventionListRelations)[]> {
@@ -27,11 +30,14 @@ export class InterventionListRepository extends DefaultCrudRepository<
 
     // Execute the query
     const sql =
-      'SELECT * FROM create_derived_intervention($1::numeric,$2::text,$3::text,$4::numeric)';
+      'SELECT * FROM create_derived_intervention($1::numeric,$2::text,$3::text,$4::text,$5::text,$6::text,$7::numeric)';
     const result: unknown[] = await this.dataSource.execute(sql, [
       parentInterventionId,
       newInterventionName,
       newInterventionDescription,
+      newInterventionNation,
+      newInterventionFocusMicronutrient,
+      newInterventionFocusGeography,
       userId,
     ]);
 
