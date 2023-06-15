@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.23.0](https://github.com/micronutrientsupport/api/compare/v2.22.0...v2.23.0) (2023-06-15)
+
+
+### Features
+
+* update create intervention function to accept the new params ([523ffdc](https://github.com/micronutrientsupport/api/commit/523ffdccace0e5a9b0acaf00668a1950aeca65e5))
+
 ## [2.22.0](https://github.com/micronutrientsupport/api/compare/v2.21.1...v2.22.0) (2023-06-13)
 
 
