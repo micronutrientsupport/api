@@ -142,6 +142,7 @@
           "isEditable": false,
           "year0Edited": null,
           "year0Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -170,8 +171,11 @@
               50
             ]
           },
+          1
+         ]},
           "year1Edited": null,
           "year1Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -199,9 +203,11 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "year2Edited": null,
           "year2Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -229,9 +235,11 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "year3Edited": null,
           "year3Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -259,9 +267,11 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "year4Edited": null,
           "year4Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -289,9 +299,11 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "year5Edited": null,
           "year5Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -319,9 +331,11 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "year6Edited": null,
           "year6Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -349,9 +363,11 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "year7Edited": null,
           "year7Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -379,9 +395,11 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "year8Edited": null,
           "year8Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -409,9 +427,11 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "year9Edited": null,
           "year9Formula":   {
+            "roundup": [{
             "if": [{
                 ">": [{
                     "var": {
@@ -439,7 +459,8 @@
               },
               50
             ]
-          },
+          },1
+          ]},
           "dataCitation": null,
           "year0Default": null,
           "year1Default": null,
@@ -653,22 +674,152 @@
           "year7": 0.804,
           "year8": 0.804,
           "year9": 0.804,
-          "rowName": "domestically_processed_vehicle_pct",
+          "rowName": "PV test",
           "rowIndex": 37,
           "rowUnits": "percent",
-          "labelText": "Fortifiable wheat flour that is domestically processed (%)",
+          "labelText": "PV test based on row 34",
           "dataSource": null,
-          "isEditable": true,
+          "isEditable": false,
           "year0Edited": null,
           "year1Edited": null,
+          "year0Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year0"
+                }
+              }
+            ]
+          },
           "year2Edited": null,
+          "year1Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year1"
+                }
+              }
+            ]
+          },
+          "year2Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year2"
+                }
+              }
+            ]
+          },
           "year3Edited": null,
+          "year3Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year3"
+                }
+              }
+            ]
+          },
           "year4Edited": null,
+          "year4Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year4"
+                }
+              }
+            ]
+          },
           "year5Edited": null,
+          "year5Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year5"
+                }
+              }
+            ]
+          },
           "year6Edited": null,
+          "year6Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year6"
+                }
+              }
+            ]
+          },
           "year7Edited": null,
+          "year7Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year7"
+                }
+              }
+            ]
+          },
           "year8Edited": null,
+          "year8Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year8"
+                }
+              }
+            ]
+          },
           "year9Edited": null,
+          "year9Formula": {
+            "PV": [
+              0.1,
+              3,
+              0,
+              {
+                "var": {
+                  "rowIndex": "34",
+                  "colIndex": "year9"
+                }
+              }
+            ]
+          },
           "dataCitation": null,
           "year0Default": null,
           "year1Default": null,
