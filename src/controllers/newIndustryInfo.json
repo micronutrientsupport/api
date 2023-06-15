@@ -141,173 +141,303 @@
           "dataSource": null,
           "isEditable": false,
           "year0Edited": null,
-          "year0Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year0"
-                }
+          "year0Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year0"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year0"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year1Edited": null,
-          "year1Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year1"
-                }
+          "year1Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year1"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year1"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year1"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year2Edited": null,
-          "year2Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year2"
-                }
+          "year2Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year2"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year2"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year2"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year3Edited": null,
-          "year3Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year3"
-                }
+          "year3Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year3"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year3"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year3"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year4Edited": null,
-          "year4Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year4"
-                }
+          "year4Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year4"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year4"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year4"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year5Edited": null,
-          "year5Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year5"
-                }
+          "year5Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year5"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year5"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year5"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year6Edited": null,
-          "year6Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year6"
-                }
+          "year6Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year6"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year6"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year6"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year7Edited": null,
-          "year7Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year7"
-                }
+          "year7Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year7"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year7"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year7"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year8Edited": null,
-          "year8Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year8"
-                }
+          "year8Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year8"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year8"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year8"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "year9Edited": null,
-          "year9Formula": {
-            "*": [
-              {
-                "var": {
-                  "rowIndex": "32",
-                  "colIndex": "year9"
-                }
+          "year9Formula":   {
+            "if": [{
+                ">": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year0"
+                    }
+                  },
+                  50
+                ]
               },
               {
-                "var": {
-                  "rowIndex": "33",
-                  "colIndex": "year9"
-                }
-              }
+                "*": [{
+                    "var": {
+                      "rowIndex": "32",
+                      "colIndex": "year9"
+                    }
+                  },
+                  {
+                    "var": {
+                      "rowIndex": "33",
+                      "colIndex": "year9"
+                    }
+                  }
+                ]
+              },
+              50
             ]
           },
           "dataCitation": null,
@@ -363,20 +493,20 @@
           "year9Default": null
         },
         {
-          "year0": 4,
-          "year1": 4,
-          "year2": 4,
-          "year3": 4,
-          "year4": 4,
-          "year5": 4,
-          "year6": 4,
-          "year7": 4,
-          "year8": 4,
-          "year9": 4,
+          "year0": 0.10,
+          "year1": 0.11,
+          "year2": 0.12,
+          "year3": 0.13,
+          "year4": 0.14,
+          "year5": 0.15,
+          "year6": 0.16,
+          "year7": 0.17,
+          "year8": 0.18,
+          "year9": 0.19,
           "rowName": "annual_external_tests",
           "rowIndex": 36,
-          "rowUnits": "number",
-          "labelText": "Number of iron tests plus value from elsewhere",
+          "rowUnits": "percent",
+          "labelText": "Percentage of iron tests plus value from elsewhere",
           "dataSource": null,
           "isEditable": false,
           "year0Formula": {
@@ -387,7 +517,7 @@
                   "colIndex": "year0"
                 }
               },
-              10
+              0.10
             ]
           },
           "year0Edited": null,
@@ -400,7 +530,7 @@
                   "colIndex": "year1"
                 }
               },
-              11
+              0.11
             ]
           },
           "year2Edited": null,
@@ -412,7 +542,7 @@
                   "colIndex": "year2"
                 }
               },
-              12
+              0.12
             ]
           },
           "year3Edited": null,
@@ -424,7 +554,7 @@
                   "colIndex": "year3"
                 }
               },
-              13
+              0.13
             ]
           },
           "year4Edited": null,
@@ -436,7 +566,7 @@
                   "colIndex": "year4"
                 }
               },
-              14
+              0.14
             ]
           },
           "year5Edited": null,
@@ -448,7 +578,7 @@
                   "colIndex": "year5"
                 }
               },
-              15
+              0.15
             ]
           },
           "year6Edited": null,
@@ -460,7 +590,7 @@
                   "colIndex": "year6"
                 }
               },
-              16
+              0.16
             ]
           },
           "year7Edited": null,
@@ -472,7 +602,7 @@
                   "colIndex": "year7"
                 }
               },
-              17
+              0.17
             ]
           },
           "year8Edited": null,
@@ -484,7 +614,7 @@
                   "colIndex": "year8"
                 }
               },
-              18
+              0.18
             ]
           },
           "year9Edited": null,
@@ -496,7 +626,7 @@
                   "colIndex": "year9"
                 }
               },
-              19
+              0.19
             ]
           },
           "dataCitation": null,
