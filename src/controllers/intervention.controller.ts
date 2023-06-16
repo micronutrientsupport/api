@@ -440,6 +440,54 @@ export class InterventionController {
     const monitoringInformation = await this.interventionMonitoringInformationRepository.find(
       filter,
     );
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    monitoringInformation[0].monitoringInformation = monitoringInformation[0].monitoringInformation.map(
+      (value: InterventionIndustryInformationFields) => {
+        value.year0Formula = formulaToJsonLogic(
+          value.year0Formula as string,
+          value.missingData,
+        );
+        value.year1Formula = formulaToJsonLogic(
+          value.year1Formula as string,
+          value.missingData,
+        );
+        value.year2Formula = formulaToJsonLogic(
+          value.year2Formula as string,
+          value.missingData,
+        );
+        value.year3Formula = formulaToJsonLogic(
+          value.year3Formula as string,
+          value.missingData,
+        );
+        value.year4Formula = formulaToJsonLogic(
+          value.year4Formula as string,
+          value.missingData,
+        );
+        value.year5Formula = formulaToJsonLogic(
+          value.year5Formula as string,
+          value.missingData,
+        );
+        value.year6Formula = formulaToJsonLogic(
+          value.year6Formula as string,
+          value.missingData,
+        );
+        value.year7Formula = formulaToJsonLogic(
+          value.year7Formula as string,
+          value.missingData,
+        );
+        value.year8Formula = formulaToJsonLogic(
+          value.year8Formula as string,
+          value.missingData,
+        );
+        value.year9Formula = formulaToJsonLogic(
+          value.year9Formula as string,
+          value.missingData,
+        );
+        return value;
+      },
+    );
+
     return new StandardJsonResponse<Array<InterventionMonitoringInformation>>(
       `Intervention data returned.`,
       monitoringInformation,

@@ -389,7 +389,7 @@ export class InterventionDataAggregate extends Entity {
       nullable: 'YES',
     },
   })
-  monitoringInformation?: string;
+  monitoringInformation?: InterventionIndustryInformationFields[];
 
   @property({
     type: 'string',
