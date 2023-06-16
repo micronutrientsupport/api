@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.24.0](https://github.com/micronutrientsupport/api/compare/v2.23.0...v2.24.0) (2023-06-16)
+
+
+### Features
+
+* return JSONLogic for industry_info ([26a4d5a](https://github.com/micronutrientsupport/api/commit/26a4d5ae1faeff3a162a53aa7810f2f59a43a4bc))
+* update industry info and monitoring info to do json logic and pass missing data as literals ([aca673a](https://github.com/micronutrientsupport/api/commit/aca673a3cadb417fb8d5ba0385b939157a7ce659))
+
 ## [2.23.0](https://github.com/micronutrientsupport/api/compare/v2.22.0...v2.23.0) (2023-06-15)
 
 
