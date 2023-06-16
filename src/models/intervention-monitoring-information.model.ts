@@ -1,4 +1,5 @@
 import {Entity, model, property} from '@loopback/repository';
+import {InterventionIndustryInformationFields} from '../controllers/intervention.controller';
 
 @model({
   settings: {
@@ -36,7 +37,7 @@ export class InterventionMonitoringInformation extends Entity {
       nullable: 'YES',
     },
   })
-  monitoringInformation?: string;
+  monitoringInformation: InterventionIndustryInformationFields[];
 
   // Define well-known properties here
 
