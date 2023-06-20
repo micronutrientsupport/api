@@ -97,12 +97,12 @@ const formulaToJsonLogic = (formula: string, missingData: {}): JSONObject => {
   // strip up to and including opening = sign
   const operands = formula.substring(formula.indexOf('=') + 1);
 
-  console.log(operands);
+  //console.log(operands);
 
   // Convert excel formula into AST
   const tree = parse(operands);
 
-  console.log(tree);
+  //console.log(tree);
   //Convert AST to Json logic
   const jsonLogic = transformJS.processNode(tree, missingData);
 
