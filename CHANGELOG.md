@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.24.1](https://github.com/micronutrientsupport/api/compare/v2.24.0...v2.24.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* fix jsonlogic extradata substitution ([78ef69c](https://github.com/micronutrientsupport/api/commit/78ef69c985f111c5b5ddda535944b929c3ba057d))
+
 ## [2.24.0](https://github.com/micronutrientsupport/api/compare/v2.23.0...v2.24.0) (2023-06-16)
 
 
