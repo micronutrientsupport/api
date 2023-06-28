@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.25.0](https://github.com/micronutrientsupport/api/compare/v2.24.1...v2.25.0) (2023-06-28)
+
+
+### Features
+
+* add jsonlogic formulae generation to susu and recurring costs endpoints ([4aad9db](https://github.com/micronutrientsupport/api/commit/4aad9dbf1d7662ada78c99d315adca6e0d0b0dd2))
+
 ## [2.24.1](https://github.com/micronutrientsupport/api/compare/v2.24.0...v2.24.1) (2023-06-20)
 
 

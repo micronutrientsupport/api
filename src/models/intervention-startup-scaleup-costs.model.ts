@@ -1,4 +1,5 @@
 import {Entity, model, property} from '@loopback/repository';
+import {InterventionDataFieldsSubset} from '../controllers/intervention.controller';
 
 @model({
   settings: {
@@ -36,7 +37,15 @@ export class InterventionStartupScaleupCosts extends Entity {
       nullable: 'YES',
     },
   })
-  startupScaleupCosts?: string;
+  startupScaleupCosts?: {
+    category: string;
+    costs: {
+      section: string;
+      costBreakdown: InterventionDataFieldsSubset[];
+      year0Total: number;
+      year1Total: number;
+    }[];
+  }[];
 
   // Define well-known properties here
 
