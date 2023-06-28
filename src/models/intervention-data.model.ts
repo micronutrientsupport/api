@@ -1,5 +1,8 @@
 import {Entity, model, property} from '@loopback/repository';
-import {InterventionIndustryInformationFields} from '../controllers/intervention.controller';
+import {
+  InterventionDataFields,
+  InterventionDataFieldsSubset,
+} from '../controllers/intervention.controller';
 
 @model({
   settings: {
@@ -376,7 +379,7 @@ export class InterventionDataAggregate extends Entity {
       nullable: 'YES',
     },
   })
-  industryInformation?: InterventionIndustryInformationFields[];
+  industryInformation?: InterventionDataFields[];
 
   @property({
     type: 'string',
@@ -389,7 +392,7 @@ export class InterventionDataAggregate extends Entity {
       nullable: 'YES',
     },
   })
-  monitoringInformation?: InterventionIndustryInformationFields[];
+  monitoringInformation?: InterventionDataFields[];
 
   @property({
     type: 'string',
@@ -402,7 +405,15 @@ export class InterventionDataAggregate extends Entity {
       nullable: 'YES',
     },
   })
-  startupScaleupCosts?: string;
+  startupScaleupCosts?: {
+    category: string;
+    costs: {
+      section: string;
+      costBreakdown: InterventionDataFieldsSubset[];
+      year0Total: number;
+      year1Total: number;
+    }[];
+  }[];
 
   @property({
     type: 'string',
@@ -415,7 +426,23 @@ export class InterventionDataAggregate extends Entity {
       nullable: 'YES',
     },
   })
-  recurringCosts?: string;
+  recurringCosts?: {
+    category: string;
+    costs: {
+      section: string;
+      costBreakdown: InterventionDataFields[];
+      year0Total: number;
+      year1Total: number;
+      year2Total: number;
+      year3Total: number;
+      year4Total: number;
+      year5Total: number;
+      year6Total: number;
+      year7Total: number;
+      year8Total: number;
+      year9Total: number;
+    }[];
+  }[];
 
   constructor(data?: Partial<InterventionDataAggregate>) {
     super(data);
