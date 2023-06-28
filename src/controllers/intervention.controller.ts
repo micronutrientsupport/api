@@ -39,7 +39,8 @@ import {
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
 
-export type InterventionIndustryInformationFields = {
+export type InterventionDataFields = {
+  debug: any;
   year0: number;
   year0Edited: boolean;
   year0Default: number;
@@ -80,7 +81,9 @@ export type InterventionIndustryInformationFields = {
   year9Edited: boolean;
   year9Default: number;
   year9Formula: string | JSONObject;
-  missingData: {};
+  missingData?: {};
+  reportedRows?: {};
+  missingRows?: {};
   rowName: string;
   rowIndex: number;
   rowUnits: string;
@@ -91,7 +94,43 @@ export type InterventionIndustryInformationFields = {
   dataSourceDefault: string;
 };
 
-const formulaToJsonLogic = (formula: string, missingData: {}): JSONObject => {
+export type InterventionDataFieldsSubset = Omit<
+  InterventionDataFields,
+  | 'year2'
+  | 'year2Edited'
+  | 'year2Default'
+  | 'year2Formula'
+  | 'year3'
+  | 'year3Edited'
+  | 'year3Default'
+  | 'year3Formula'
+  | 'year4'
+  | 'year4Edited'
+  | 'year4Default'
+  | 'year4Formula'
+  | 'year5'
+  | 'year5Edited'
+  | 'year5Default'
+  | 'year5Formula'
+  | 'year6'
+  | 'year6Edited'
+  | 'year6Default'
+  | 'year6Formula'
+  | 'year7'
+  | 'year7Edited'
+  | 'year7Default'
+  | 'year7Formula'
+  | 'year8'
+  | 'year8Edited'
+  | 'year8Default'
+  | 'year8Formula'
+  | 'year9'
+  | 'year9Edited'
+  | 'year9Default'
+  | 'year9Formula'
+>;
+
+const formulaToJsonLogic = (formula: string, missingData?: {}): JSONObject => {
   if (!formula) return {};
 
   // strip up to and including opening = sign
@@ -108,6 +147,91 @@ const formulaToJsonLogic = (formula: string, missingData: {}): JSONObject => {
 
   return jsonLogic;
 };
+
+function replaceExcelFormulaeWothJsonLogic<
+  Type extends InterventionDataFields | InterventionDataFieldsSubset
+>(dataObject: Type): Type {
+  dataObject.debug = {};
+  dataObject.debug.year0FormulaExcel = dataObject.year0Formula;
+  dataObject.debug.year1FormulaExcel = dataObject.year1Formula;
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year2Formula')) {
+    dataObject.debug.year2FormulaExcel = (dataObject as InterventionDataFields).year2Formula;
+    dataObject.debug.year3FormulaExcel = (dataObject as InterventionDataFields).year3Formula;
+    dataObject.debug.year4FormulaExcel = (dataObject as InterventionDataFields).year4Formula;
+    dataObject.debug.year5FormulaExcel = (dataObject as InterventionDataFields).year5Formula;
+    dataObject.debug.year6FormulaExcel = (dataObject as InterventionDataFields).year6Formula;
+    dataObject.debug.year7FormulaExcel = (dataObject as InterventionDataFields).year7Formula;
+    dataObject.debug.year8FormulaExcel = (dataObject as InterventionDataFields).year8Formula;
+    dataObject.debug.year9FormulaExcel = (dataObject as InterventionDataFields).year9Formula;
+  }
+
+  dataObject.year0Formula = formulaToJsonLogic(
+    dataObject.year0Formula as string,
+    dataObject.missingData,
+  );
+  dataObject.year1Formula = formulaToJsonLogic(
+    dataObject.year1Formula as string,
+    dataObject.missingData,
+  );
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year2Formula')) {
+    (dataObject as InterventionDataFields).year2Formula = formulaToJsonLogic(
+      (dataObject as InterventionDataFields).year2Formula as string,
+      dataObject.missingData,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year3Formula')) {
+    (dataObject as InterventionDataFields).year3Formula = formulaToJsonLogic(
+      (dataObject as InterventionDataFields).year3Formula as string,
+      dataObject.missingData,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year4Formula')) {
+    (dataObject as InterventionDataFields).year4Formula = formulaToJsonLogic(
+      (dataObject as InterventionDataFields).year4Formula as string,
+      dataObject.missingData,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year5Formula')) {
+    (dataObject as InterventionDataFields).year5Formula = formulaToJsonLogic(
+      (dataObject as InterventionDataFields).year5Formula as string,
+      dataObject.missingData,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year6Formula')) {
+    (dataObject as InterventionDataFields).year6Formula = formulaToJsonLogic(
+      (dataObject as InterventionDataFields).year6Formula as string,
+      dataObject.missingData,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year7Formula')) {
+    (dataObject as InterventionDataFields).year7Formula = formulaToJsonLogic(
+      (dataObject as InterventionDataFields).year7Formula as string,
+      dataObject.missingData,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year8Formula')) {
+    (dataObject as InterventionDataFields).year8Formula = formulaToJsonLogic(
+      (dataObject as InterventionDataFields).year8Formula as string,
+      dataObject.missingData,
+    );
+  }
+  if (Object.prototype.hasOwnProperty.call(dataObject, 'year9Formula')) {
+    (dataObject as InterventionDataFields).year9Formula = formulaToJsonLogic(
+      (dataObject as InterventionDataFields).year9Formula as string,
+      dataObject.missingData,
+    );
+  }
+
+  dataObject.debug.missingData = dataObject.missingData;
+  dataObject.debug.missingRows = dataObject.missingRows;
+  dataObject.debug.reportedRows = dataObject.reportedRows;
+
+  delete dataObject.missingData;
+  delete dataObject.missingRows;
+  delete dataObject.reportedRows;
+
+  return dataObject;
+}
 
 export class InterventionController {
   constructor(
@@ -386,48 +510,8 @@ export class InterventionController {
 
     // Replace Excel Formulae with JsonLogic for interpretation on the frontend
     industryInformation[0].industryInformation = industryInformation[0].industryInformation.map(
-      (value: InterventionIndustryInformationFields) => {
-        value.year0Formula = formulaToJsonLogic(
-          value.year0Formula as string,
-          value.missingData,
-        );
-        value.year1Formula = formulaToJsonLogic(
-          value.year1Formula as string,
-          value.missingData,
-        );
-        value.year2Formula = formulaToJsonLogic(
-          value.year2Formula as string,
-          value.missingData,
-        );
-        value.year3Formula = formulaToJsonLogic(
-          value.year3Formula as string,
-          value.missingData,
-        );
-        value.year4Formula = formulaToJsonLogic(
-          value.year4Formula as string,
-          value.missingData,
-        );
-        value.year5Formula = formulaToJsonLogic(
-          value.year5Formula as string,
-          value.missingData,
-        );
-        value.year6Formula = formulaToJsonLogic(
-          value.year6Formula as string,
-          value.missingData,
-        );
-        value.year7Formula = formulaToJsonLogic(
-          value.year7Formula as string,
-          value.missingData,
-        );
-        value.year8Formula = formulaToJsonLogic(
-          value.year8Formula as string,
-          value.missingData,
-        );
-        value.year9Formula = formulaToJsonLogic(
-          value.year9Formula as string,
-          value.missingData,
-        );
-        return value;
+      (value: InterventionDataFields) => {
+        return replaceExcelFormulaeWothJsonLogic(value);
       },
     );
 
@@ -463,48 +547,8 @@ export class InterventionController {
 
     // Replace Excel Formulae with JsonLogic for interpretation on the frontend
     monitoringInformation[0].monitoringInformation = monitoringInformation[0].monitoringInformation.map(
-      (value: InterventionIndustryInformationFields) => {
-        value.year0Formula = formulaToJsonLogic(
-          value.year0Formula as string,
-          value.missingData,
-        );
-        value.year1Formula = formulaToJsonLogic(
-          value.year1Formula as string,
-          value.missingData,
-        );
-        value.year2Formula = formulaToJsonLogic(
-          value.year2Formula as string,
-          value.missingData,
-        );
-        value.year3Formula = formulaToJsonLogic(
-          value.year3Formula as string,
-          value.missingData,
-        );
-        value.year4Formula = formulaToJsonLogic(
-          value.year4Formula as string,
-          value.missingData,
-        );
-        value.year5Formula = formulaToJsonLogic(
-          value.year5Formula as string,
-          value.missingData,
-        );
-        value.year6Formula = formulaToJsonLogic(
-          value.year6Formula as string,
-          value.missingData,
-        );
-        value.year7Formula = formulaToJsonLogic(
-          value.year7Formula as string,
-          value.missingData,
-        );
-        value.year8Formula = formulaToJsonLogic(
-          value.year8Formula as string,
-          value.missingData,
-        );
-        value.year9Formula = formulaToJsonLogic(
-          value.year9Formula as string,
-          value.missingData,
-        );
-        return value;
+      (value: InterventionDataFields) => {
+        return replaceExcelFormulaeWothJsonLogic(value);
       },
     );
 
@@ -537,6 +581,16 @@ export class InterventionController {
     const startupScaleup = await this.interventionStartupScaleupCostsRepository.find(
       filter,
     );
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    startupScaleup[0].startupScaleupCosts?.forEach(section => {
+      section.costs.forEach(costs => {
+        costs.costBreakdown.map(value => {
+          return replaceExcelFormulaeWothJsonLogic(value);
+        });
+      });
+    });
+
     return new StandardJsonResponse<Array<InterventionStartupScaleupCosts>>(
       `Intervention data returned.`,
       startupScaleup,
@@ -566,6 +620,16 @@ export class InterventionController {
     const recurring = await this.interventionRecurringCostsRepository.find(
       filter,
     );
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    recurring[0].recurringCosts?.forEach(section => {
+      section.costs.forEach(costs => {
+        costs.costBreakdown.map(value => {
+          return replaceExcelFormulaeWothJsonLogic(value);
+        });
+      });
+    });
+
     return new StandardJsonResponse<Array<InterventionRecurringCosts>>(
       `Intervention data returned.`,
       recurring,

@@ -1,4 +1,5 @@
 import {Entity, model, property} from '@loopback/repository';
+import {InterventionDataFields} from '../controllers/intervention.controller';
 
 @model({
   settings: {
@@ -36,7 +37,23 @@ export class InterventionRecurringCosts extends Entity {
       nullable: 'YES',
     },
   })
-  recurringCosts?: string;
+  recurringCosts?: {
+    category: string;
+    costs: {
+      section: string;
+      costBreakdown: InterventionDataFields[];
+      year0Total: number;
+      year1Total: number;
+      year2Total: number;
+      year3Total: number;
+      year4Total: number;
+      year5Total: number;
+      year6Total: number;
+      year7Total: number;
+      year8Total: number;
+      year9Total: number;
+    }[];
+  }[];
 
   // Define well-known properties here
 
