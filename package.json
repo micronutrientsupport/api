@@ -58,6 +58,7 @@
     "@loopback/rest-crud": "^0.8.19",
     "@loopback/rest-explorer": "^3.0.5",
     "@loopback/service-proxy": "^3.0.5",
+    "@sentry/node": "^6.16.1",
     "bull": "^4.1.0",
     "dotenv": "^8.2.0",
     "dotenv-extended": "^2.9.0",

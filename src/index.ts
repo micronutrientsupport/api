@@ -1,9 +1,15 @@
 import {RestBindings} from '@loopback/rest';
+import * as Sentry from '@sentry/node';
 import {ApiApplication, ApplicationConfig} from './application';
 
 export * from './application';
 
 export async function main(options: ApplicationConfig = {}) {
+  Sentry.init({
+    dsn:
+      'https://b52e3657527d4f7b9d05a7fef89568a8@glitchtip.micronutrient.support/2',
+  });
+
   const app = new ApiApplication(options);
   await app.boot();
   await app.start();
@@ -35,6 +41,15 @@ if (require.main === module) {
           {url: 'https://api.micronutrient.support/v2'},
         ],
         setServersFromRequest: false,
+      },
+      cors: {
+        origin: '*',
+        methods: '*',
+        //methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
+        maxAge: 86400,
+        credentials: true,
       },
     },
   };
