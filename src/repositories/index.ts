@@ -1,6 +1,7 @@
 export * from './biomarker-data-sources.repository';
 export * from './biomarker-group.repository';
 export * from './biomarker-summary.repository';
+export * from './biomarker-threshold-list.repository';
 export * from './country-consumption.repository';
 export * from './country-deficiency-afe.repository';
 export * from './country-intake-geojson.repository';

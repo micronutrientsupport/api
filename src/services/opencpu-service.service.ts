@@ -11,7 +11,7 @@ export interface OpencpuService {
     biomarkerField: string,
     aggregationField: string,
     groupId: string,
-    tresholds: object,
+    thresholds: object,
   ): Promise<{}>;
 }
 

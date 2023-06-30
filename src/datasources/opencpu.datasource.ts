@@ -4,7 +4,7 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'opencpu',
   connector: 'rest',
-  baseURL: 'https://opencpu.micronutrient.support/ocpu/',
+  baseURL: process.env.OCPU_URL + '/ocpu',
   options: {
     //headers: {
     //  accept: "application/json",
@@ -16,12 +16,18 @@ const config = {
       template: {
         method: 'POST',
         url:
-          'https://opencpu.micronutrient.support/ocpu/apps/micronutrientsupport/biomarkerstats/R/SummaryStats/json',
+          process.env.OCPU_URL +
+          '/ocpu/apps/' +
+          process.env.OCPU_BIOMARKER_PACKAGE +
+          '/R/' +
+          process.env.OCPU_BIOMARKER_FUNCTION +
+          '/json',
         body: {
           theData: '{theData:object}',
           biomarkerField: '{biomarkerField:string}',
           aggregationField: '{aggregationField:string}',
-          groupId: '{groupId:string}',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          group_id: '{groupId:string}',
           thresholds: '{thresholds:object}',
         },
         fullResponse: true,
