@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.26.0](https://github.com/micronutrientsupport/api/compare/v2.25.0...v2.26.0) (2023-07-05)
+
+
+### Features
+
+* add initial login logout and register routes ([e359407](https://github.com/micronutrientsupport/api/commit/e359407c1e159aa236fbbb6595c63b3d6dbcd123))
+
 ## [2.25.0](https://github.com/micronutrientsupport/api/compare/v2.24.1...v2.25.0) (2023-06-28)
 
 
