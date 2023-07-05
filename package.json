@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "2.25.0",
+  "version": "2.26.0",
   "description": "MAPS Micronutrient Support Tool API",
   "keywords": [
     "loopback-application",
@@ -52,13 +52,13 @@
     "!*/__tests__"
   ],
   "dependencies": {
-    "@loopback/boot": "^3.1.2",
-    "@loopback/core": "^2.13.1",
-    "@loopback/repository": "^3.3.0",
-    "@loopback/rest": "^9.1.1",
-    "@loopback/rest-crud": "^0.8.19",
-    "@loopback/rest-explorer": "^3.0.5",
-    "@loopback/service-proxy": "^3.0.5",
+    "@loopback/boot": "^6.0.0",
+    "@loopback/core": "^5.0.0",
+    "@loopback/repository": "^6.0.0",
+    "@loopback/rest": "^13.0.0",
+    "@loopback/rest-crud": "^0.16.0",
+    "@loopback/rest-explorer": "^6.0.0",
+    "@loopback/service-proxy": "^6.0.0",
     "bull": "^4.1.0",
     "dotenv": "^8.2.0",
     "dotenv-extended": "^2.9.0",
@@ -73,17 +73,17 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@loopback/build": "^6.2.8",
-    "@loopback/eslint-config": "^10.0.4",
-    "@loopback/testlab": "^3.2.10",
+    "@loopback/build": "^10.0.0",
+    "@loopback/eslint-config": "^14.0.0",
+    "@loopback/testlab": "^6.0.0",
     "@types/bull": "^3.15.5",
-    "@types/node": "^10.17.48",
+    "@types/node": "^14.18.47",
     "@types/sharp": "^0.29.3",
     "@types/uuid": "^8.3.1",
-    "eslint": "^7.15.0",
+    "eslint": "^8.40.0",
     "patch-package": "^7.0.0",
-    "source-map-support": "^0.5.19",
+    "source-map-support": "^0.5.21",
     "tsc-watch": "^4.4.0",
-    "typescript": "~4.1.2"
+    "typescript": "~4.9.5"
   }
 }
