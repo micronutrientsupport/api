@@ -62,9 +62,11 @@ export class UserControllerController {
         body.username,
         body.password,
       );
+      console.log(userResponse);
       const user: ParseUser = {
         username: userResponse.username,
         sessionToken: userResponse.sessionToken,
+        profilePic: userResponse.profilePic.url,
       };
       return new StandardJsonResponse<Array<ParseUser>>(
         `Logged in as ${user.username}.`,
@@ -170,6 +172,7 @@ export class UserControllerController {
       const user: ParseUser = {
         username: body.username,
         sessionToken: userResponse.sessionToken,
+        profilePic: userProfileResponse.profilePic.url,
       };
 
       return new StandardJsonResponse<Array<ParseUser>>(
@@ -211,6 +214,7 @@ export class UserControllerController {
         id: userProfileResponse.objectId,
         username: userProfileResponse.username,
         email: userProfileResponse.email,
+        profilePic: userProfileResponse.profilePic.url,
         name: userProfileResponse.name ? userProfileResponse.name : '',
         organisation: userProfileResponse.organisation
           ? userProfileResponse.organisation

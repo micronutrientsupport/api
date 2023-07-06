@@ -48,14 +48,20 @@ export interface ParseErrorResponse {
 }
 
 export interface ParseLoginResponse {
+  objectId: string;
   username: string;
-  email: string;
+  profilePic: {
+    url: string;
+  };
   sessionToken: string;
 }
 
 export interface ParseRegisterResponse {
   objectId: string;
-  createdAt: string;
+  username: string;
+  profilePic: {
+    url: string;
+  };
   sessionToken: string;
 }
 
@@ -66,6 +72,9 @@ export interface ParseProfileResponse {
   username: string;
   email: string;
   name: string;
+  profilePic: {
+    url: string;
+  };
   organisation: string;
   createdAt: string;
   updatedAt: string;
@@ -84,6 +93,7 @@ export interface ParseBadgesResponse {
 
 export interface ParseUser {
   username: string;
+  profilePic: string;
   sessionToken: string;
 }
 
@@ -91,6 +101,7 @@ export interface ParseProfile {
   id: string;
   username: string;
   email: string;
+  profilePic: string;
   name?: string;
   organisation?: string;
   registrationDate: Date;
