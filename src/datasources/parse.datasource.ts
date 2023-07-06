@@ -12,7 +12,7 @@ const config = {
         url: `${process.env.PARSE_APP_URL}/login`,
         headers: {
           'X-Parse-Application-Id': process.env.PARSE_APP_ID,
-          'X-Parse-Revocable-Session': 1,
+          // 'X-Parse-Revocable-Session': 1,
         },
         body: {
           username: '{username:string}',
@@ -45,7 +45,7 @@ const config = {
         url: `${process.env.PARSE_APP_URL}/users`,
         headers: {
           'X-Parse-Application-Id': process.env.PARSE_APP_ID,
-          'X-Parse-Revocable-Session': 1,
+          // 'X-Parse-Revocable-Session': 1,
         },
         body: {
           username: '{username:string}',
@@ -74,6 +74,51 @@ const config = {
       },
       functions: {
         getProfile: ['token'],
+      },
+    },
+    {
+      /*
+      Qeury string is the encoded version of:
+
+        ?where=${encodeURIComponent(
+          JSON.stringify({
+            $relatedTo: {
+              object: {
+                __type: 'Pointer',
+                className: '_User',
+                objectId: 'nHqmDp1B3Z',
+              },
+              key: 'badges',
+            },
+          }),
+        )}`,
+        */
+      template: {
+        method: 'GET',
+        url: `${process.env.PARSE_APP_URL}/classes/badges`,
+        query: {
+          where: {
+            $relatedTo: {
+              object: {
+                __type: 'Pointer',
+                className: '_User',
+                objectId: '{userId:string}',
+              },
+              key: 'badges',
+            },
+          },
+          //where: '%7B%22%24relatedTo%22%3A%7B%22object%22%3A%7B%22__type%22%3A%22Pointer%22%2C%22className%22%3A%22_User%22%2C%22objectId%22%3A%22{userId:string}%22%7D%2C%22key%22%3A%22badges%22%7D%7D"',
+        },
+        headers: {
+          'user-agent': 'node.js',
+          'X-Parse-Application-Id': process.env.PARSE_APP_ID,
+          'X-Parse-Session-Token': '{token:string}',
+        },
+        body: {},
+        fullResponse: false,
+      },
+      functions: {
+        getBadges: ['token', 'userId'],
       },
     },
   ],

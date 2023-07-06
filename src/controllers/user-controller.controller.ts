@@ -162,12 +162,18 @@ export class UserControllerController {
         body.name,
         body.organisation,
       );
+
+      const userProfileResponse = await this.parseService.getProfile(
+        userResponse.sessionToken,
+      );
+
       const user: ParseUser = {
-        username: userResponse.username,
+        username: body.username,
         sessionToken: userResponse.sessionToken,
       };
+
       return new StandardJsonResponse<Array<ParseUser>>(
-        `Successfully registered as ${user.username}.`,
+        `Successfully registered as ${body.username}.`,
         [user],
         'ParseUser',
       );
@@ -196,11 +202,29 @@ export class UserControllerController {
       const userProfileResponse = await this.parseService.getProfile(
         sessionToken,
       );
+      const userBadgesResponse = await this.parseService.getBadges(
+        sessionToken,
+        userProfileResponse.objectId,
+      );
+      console.log(userBadgesResponse);
       const profile: ParseProfile = {
+        id: userProfileResponse.objectId,
         username: userProfileResponse.username,
         email: userProfileResponse.email,
-        registerDate: new Date(userProfileResponse.createdAt),
+        name: userProfileResponse.name ? userProfileResponse.name : '',
+        organisation: userProfileResponse.organisation
+          ? userProfileResponse.organisation
+          : '',
+        registrationDate: new Date(userProfileResponse.createdAt),
         updatedDate: new Date(userProfileResponse.updatedAt),
+        badges: userBadgesResponse.results.map(badge => {
+          return {
+            title: badge.name,
+            description: badge.description,
+            url: badge.url,
+            image: badge.image.url,
+          };
+        }),
       };
       return new StandardJsonResponse<Array<ParseProfile>>(
         `Fetched profile successfully.`,
@@ -208,6 +232,7 @@ export class UserControllerController {
         'ParseUser',
       );
     } catch (e: any) {
+      console.log(e);
       const err: ParseErrorResponse = e;
       this.response.status(err.statusCode);
       return new StandardJsonResponse<null>(
