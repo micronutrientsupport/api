@@ -3,43 +3,46 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {
-      schema: process.env.DB_SCHEMA,
-      table: 'intervention_list',
-    },
+    postgresql: {schema: 'bmgf', table: 'intervention'},
   },
 })
-export class InterventionList extends Entity {
+export class Intervention extends Entity {
   @property({
     type: 'number',
+    required: true,
+    jsonSchema: {nullable: false},
     scale: 0,
-    id: true,
+    id: 1,
     postgresql: {
       columnName: 'id',
       dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
       dataScale: 0,
-      nullable: 'YES',
+      nullable: 'NO',
+      generated: undefined,
     },
   })
-  id?: number;
+  id: number;
 
   @property({
     type: 'string',
+    jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'name',
+      columnName: 'intervention_name',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
       nullable: 'YES',
+      generated: undefined,
     },
   })
-  name?: string;
+  interventionName?: string;
 
   @property({
     type: 'string',
+    jsonSchema: {nullable: true},
     postgresql: {
       columnName: 'description',
       dataType: 'text',
@@ -47,25 +50,14 @@ export class InterventionList extends Entity {
       dataPrecision: null,
       dataScale: null,
       nullable: 'YES',
+      generated: undefined,
     },
   })
   description?: string;
 
   @property({
     type: 'string',
-    postgresql: {
-      columnName: 'app_user_id',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  userId?: string;
-
-  @property({
-    type: 'string',
+    jsonSchema: {nullable: true},
     postgresql: {
       columnName: 'country_id',
       dataType: 'text',
@@ -73,51 +65,75 @@ export class InterventionList extends Entity {
       dataPrecision: null,
       dataScale: null,
       nullable: 'YES',
+      generated: undefined,
     },
   })
   countryId?: string;
 
   @property({
     type: 'string',
+    jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'fortification_type_id',
+      columnName: 'app_user_id',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
       nullable: 'YES',
+      generated: undefined,
     },
   })
-  fortificationTypeId?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'fortification_type_name',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  fortificationTypeName?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'program_status',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  programStatus?: string;
+  userId?: string;
 
   @property({
     type: 'number',
+    jsonSchema: {nullable: true},
+    scale: 0,
+    postgresql: {
+      columnName: 'data_citation_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  dataCitationId?: number;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'focus_micronutrient',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  focusMicronutrient?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'focus_geography',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  focusGeography?: string;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
     scale: 0,
     postgresql: {
       columnName: 'food_vehicle_id',
@@ -126,25 +142,59 @@ export class InterventionList extends Entity {
       dataPrecision: null,
       dataScale: 0,
       nullable: 'YES',
+      generated: undefined,
     },
   })
   foodVehicleId?: number;
 
   @property({
     type: 'string',
+    jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'food_vehicle_name',
+      columnName: 'fortification_type_id',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
       nullable: 'YES',
+      generated: undefined,
     },
   })
-  foodVehicleName?: string;
+  fortificationTypeId?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'program_status',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  programStatus?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'file_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  fileName?: string;
 
   @property({
     type: 'number',
+    jsonSchema: {nullable: true},
     scale: 0,
     postgresql: {
       columnName: 'base_year',
@@ -153,40 +203,14 @@ export class InterventionList extends Entity {
       dataPrecision: null,
       dataScale: 0,
       nullable: 'YES',
+      generated: undefined,
     },
   })
   baseYear?: number;
 
   @property({
-    type: 'number',
-    postgresql: {
-      columnName: 'ten_year_total_cost',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  tenYearTotalCost?: number;
-
-  @property({
-    type: 'date',
-    description: 'When was the intervention last edited',
-    postgresql: {
-      columnName: 'last_edited',
-      dataType: 'date',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  lastEdited?: string;
-
-  @property({
     type: 'boolean',
-    description: 'Is the intervention a template',
+    jsonSchema: {nullable: true},
     postgresql: {
       columnName: 'is_premade',
       dataType: 'boolean',
@@ -194,14 +218,30 @@ export class InterventionList extends Entity {
       dataPrecision: null,
       dataScale: null,
       nullable: 'YES',
+      generated: undefined,
     },
   })
   isTemplateIntervention?: boolean;
 
   @property({
+    type: 'boolean',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'is_locked',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  isLocked?: boolean;
+
+  @property({
     type: 'number',
+    jsonSchema: {nullable: true},
     scale: 0,
-    id: true,
     postgresql: {
       columnName: 'parent_intervention',
       dataType: 'integer',
@@ -209,9 +249,25 @@ export class InterventionList extends Entity {
       dataPrecision: null,
       dataScale: 0,
       nullable: 'YES',
+      generated: undefined,
     },
   })
   parentIntervention?: number;
+
+  @property({
+    type: 'date',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'last_edited',
+      dataType: 'timestamp without time zone',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  lastEdited?: string;
 
   // Define well-known properties here
 
@@ -219,14 +275,13 @@ export class InterventionList extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<InterventionList>) {
+  constructor(data?: Partial<Intervention>) {
     super(data);
   }
 }
 
-export interface InterventionListRelations {
+export interface InterventionRelations {
   // describe navigational properties here
 }
 
-export type InterventionListWithRelations = InterventionList &
-  InterventionListRelations;
+export type InterventionWithRelations = Intervention & InterventionRelations;

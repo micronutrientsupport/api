@@ -92,6 +92,7 @@ export interface ParseBadgesResponse {
 }
 
 export interface ParseUser {
+  id: string;
   username: string;
   profilePic: string;
   sessionToken: string;

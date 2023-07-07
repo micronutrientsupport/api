@@ -19,7 +19,7 @@ export class InterventionListRepository extends DefaultCrudRepository<
     newInterventionFocusMicronutrient: string,
     newInterventionFocusGeography?: string,
     newInterventionDescription?: string,
-    userId = 1,
+    userId: string = 'Anonymous',
   ): Promise<(InterventionList & InterventionListRelations)[]> {
     // Set the search path to include the current schema
     await this.dataSource.execute(
@@ -30,7 +30,7 @@ export class InterventionListRepository extends DefaultCrudRepository<
 
     // Execute the query
     const sql =
-      'SELECT * FROM create_derived_intervention($1::numeric,$2::text,$3::text,$4::text,$5::text,$6::text,$7::numeric)';
+      'SELECT * FROM create_derived_intervention($1::numeric,$2::text,$3::text,$4::text,$5::text,$6::text,$7::text)';
     const result: unknown[] = await this.dataSource.execute(sql, [
       parentInterventionId,
       newInterventionName,
