@@ -64,9 +64,10 @@ export class UserControllerController {
       );
       console.log(userResponse);
       const user: ParseUser = {
+        id: userResponse.objectId,
         username: userResponse.username,
         sessionToken: userResponse.sessionToken,
-        profilePic: userResponse.profilePic.url,
+        profilePic: userResponse.profilePic?.url,
       };
       return new StandardJsonResponse<Array<ParseUser>>(
         `Logged in as ${user.username}.`,
@@ -76,6 +77,7 @@ export class UserControllerController {
     } catch (e: any) {
       const err: ParseErrorResponse = e;
       this.response.status(err.statusCode);
+      console.log(err);
       return new StandardJsonResponse<null>(
         parseStringifiedJson<ParseError>(err.message).error,
         null,
@@ -170,9 +172,10 @@ export class UserControllerController {
       );
 
       const user: ParseUser = {
-        username: body.username,
+        id: userResponse.objectId,
+        username: userResponse.username,
         sessionToken: userResponse.sessionToken,
-        profilePic: userProfileResponse.profilePic.url,
+        profilePic: userProfileResponse.profilePic?.url,
       };
 
       return new StandardJsonResponse<Array<ParseUser>>(
@@ -214,7 +217,7 @@ export class UserControllerController {
         id: userProfileResponse.objectId,
         username: userProfileResponse.username,
         email: userProfileResponse.email,
-        profilePic: userProfileResponse.profilePic.url,
+        profilePic: userProfileResponse.profilePic?.url,
         name: userProfileResponse.name ? userProfileResponse.name : '',
         organisation: userProfileResponse.organisation
           ? userProfileResponse.organisation

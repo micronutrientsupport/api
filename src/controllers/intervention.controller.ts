@@ -1,6 +1,7 @@
-import {JSONObject, inject} from '@loopback/core';
+import {JSONObject, inject, intercept} from '@loopback/core';
 import {Filter, IsolationLevel, repository} from '@loopback/repository';
 import {
+  Request,
   Response,
   RestBindings,
   get,
@@ -12,6 +13,10 @@ import {
 } from '@loopback/rest';
 import {parse} from 'excel-formula-parser';
 import transformJS from 'js-to-json-logic';
+import {
+  AuthenticatedRequest,
+  AuthenticationCheckInterceptorInterceptor,
+} from '../interceptors';
 import {
   InterventionBaselineAssumptions,
   InterventionData,
@@ -32,6 +37,7 @@ import {
   InterventionListRepository,
   InterventionMonitoringInformationRepository,
   InterventionRecurringCostsRepository,
+  InterventionRepository,
   InterventionStartupScaleupCostsRepository,
   InterventionSummaryCostsRepository,
   InterventionVehicleStandardRepository,
@@ -235,6 +241,8 @@ function replaceExcelFormulaeWothJsonLogic<
 
 export class InterventionController {
   constructor(
+    @repository(InterventionRepository)
+    public interventionRepository: InterventionRepository,
     @repository(InterventionListRepository)
     public interventionListRepository: InterventionListRepository,
     @repository(InterventionBaselineAssumptionsRepository)
@@ -254,8 +262,10 @@ export class InterventionController {
     @repository(InterventionDataRepository)
     public interventionDataRepository: InterventionDataRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
+    @inject(RestBindings.Http.REQUEST) private request: Request,
   ) {}
 
+  @intercept(AuthenticationCheckInterceptorInterceptor.BINDING_KEY)
   @post('/interventions', {
     responses: new StandardOpenApiResponses(
       'Array of Micronutrient model instances',
@@ -265,6 +275,12 @@ export class InterventionController {
       .toObject(),
   })
   async create(
+    @param.header.string('X-Session-Token', {
+      description: 'Optional session token returned by `/user/login`',
+      required: false,
+      example: 'r:123456789abc',
+    })
+    sessionToken: string,
     @requestBody({
       content: {
         'application/json': {
@@ -312,16 +328,32 @@ export class InterventionController {
       newInterventionDescription?: string;
     },
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
-    const newIntervention = await this.interventionListRepository.createNewIntervention(
-      body.parentInterventionId,
-      body.newInterventionName,
-      body.newInterventionNation,
-      body.newInterventionFocusMicronutrient,
-      body.newInterventionFocusGeography
-        ? body.newInterventionFocusGeography
-        : body.newInterventionNation,
-      body.newInterventionDescription ? body.newInterventionDescription : '',
-    );
+    let newIntervention;
+    if ((this.request as AuthenticatedRequest).user) {
+      const user = (this.request as AuthenticatedRequest).user;
+      newIntervention = await this.interventionListRepository.createNewIntervention(
+        body.parentInterventionId,
+        body.newInterventionName,
+        body.newInterventionNation,
+        body.newInterventionFocusMicronutrient,
+        body.newInterventionFocusGeography
+          ? body.newInterventionFocusGeography
+          : body.newInterventionNation,
+        body.newInterventionDescription ? body.newInterventionDescription : '',
+        user.id,
+      );
+    } else {
+      newIntervention = await this.interventionListRepository.createNewIntervention(
+        body.parentInterventionId,
+        body.newInterventionName,
+        body.newInterventionNation,
+        body.newInterventionFocusMicronutrient,
+        body.newInterventionFocusGeography
+          ? body.newInterventionFocusGeography
+          : body.newInterventionNation,
+        body.newInterventionDescription ? body.newInterventionDescription : '',
+      );
+    }
     return new StandardJsonResponse<Array<InterventionList>>(
       `New Intervention created`,
       newIntervention,
@@ -329,6 +361,7 @@ export class InterventionController {
     );
   }
 
+  @intercept(AuthenticationCheckInterceptorInterceptor.BINDING_KEY)
   @get('/interventions', {
     description: 'get interventions',
     summary: 'get interventions',
@@ -339,20 +372,109 @@ export class InterventionController {
       .setObjectSchema(getModelSchemaRef(InterventionList))
       .toObject(),
   })
-  async find(): Promise<StandardJsonResponse<Array<InterventionList>>> {
+  async find(
+    @param.header.string('X-Session-Token', {
+      description: 'Optional session token returned by `/user/login`',
+      required: false,
+      example: 'r:123456789abc',
+    })
+    sessionToken: string,
+  ): Promise<StandardJsonResponse<Array<InterventionList>>> {
+    const templateFilter: Filter = {
+      where: {
+        isTemplateIntervention: true,
+      },
+      // fields: {
+      //   userId: false,
+      // },
+    };
+    const templateInterventions = await this.interventionListRepository.find(
+      templateFilter,
+    );
+
+    if ((this.request as AuthenticatedRequest).user) {
+      const user = (this.request as AuthenticatedRequest).user;
+      const userFilter: Filter = {
+        where: {
+          userId: user.id,
+        },
+        // fields: {
+        //   userId: false,
+        // },
+      };
+      const userInterventions = await this.interventionListRepository.find(
+        userFilter,
+      );
+
+      return new StandardJsonResponse<Array<InterventionList>>(
+        `${templateInterventions.length} Template Interventions and ${userInterventions.length} user interventions returned.`,
+        userInterventions.concat(templateInterventions),
+        'InterventionList',
+      );
+    } else {
+      return new StandardJsonResponse<Array<InterventionList>>(
+        `${templateInterventions.length} Template Interventions returned.`,
+        templateInterventions,
+        'InterventionList',
+      );
+    }
+  }
+
+  @intercept(AuthenticationCheckInterceptorInterceptor.BINDING_KEY)
+  @patch('/interventions/{id}', {
+    description: 'get intervention by id',
+    summary: 'get intervention by id',
+    responses: new StandardOpenApiResponses(
+      'Array of Micronutrient model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionList))
+      .toObject(),
+  })
+  async claimIntervention(
+    @param.header.string('X-Session-Token', {
+      description: 'Optional session token returned by `/user/login`',
+      required: true,
+      example: 'r:123456789abc',
+    })
+    sessionToken: string,
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<any>>> {
     const filter: Filter = {
       where: {
-        isPremade: true,
+        id: id,
+        isTemplateIntervention: false,
+        userId: 'Anonymous',
       },
     };
-    const interventions = await this.interventionListRepository.find(filter);
+    const intervention = await this.interventionRepository.find(filter);
+    if (intervention.length < 1) {
+      this.response.status(404);
+      return new StandardJsonResponse<Array<any>>(
+        `Intervention id ${id} not found or unavailable to claim`,
+        [],
+        '',
+        '404',
+      );
+    }
+    if ((this.request as AuthenticatedRequest).user) {
+      const user = (this.request as AuthenticatedRequest).user;
+      intervention[0].userId = user.id;
+
+      await this.interventionRepository.update(intervention[0]);
+    }
+
+    const updated = await this.interventionListRepository.findById(id);
+
+    console.log(intervention[0]);
     return new StandardJsonResponse<Array<InterventionList>>(
-      `${interventions.length} Interventions returned.`,
-      interventions,
+      `Intervention ownership updated.`,
+      [updated],
       'InterventionList',
     );
   }
 
+  @intercept(AuthenticationCheckInterceptorInterceptor.BINDING_KEY)
   @get('/interventions/{id}', {
     description: 'get intervention by id',
     summary: 'get intervention by id',
@@ -364,12 +486,45 @@ export class InterventionController {
       .toObject(),
   })
   async findById(
+    @param.header.string('X-Session-Token', {
+      description: 'Optional session token returned by `/user/login`',
+      required: false,
+      example: 'r:123456789abc',
+    })
+    sessionToken: string,
     @param.path.number('id') id: number,
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
-    const interventions = await this.interventionListRepository.findById(id);
+    let userId = 'Anonymous';
+
+    let authenticatedInterventions: InterventionList[] = [];
+    if ((this.request as AuthenticatedRequest).user) {
+      const user = (this.request as AuthenticatedRequest).user;
+      userId = user.id;
+      const authenticatedFilter: Filter = {
+        where: {
+          id: id,
+          isTemplateIntervention: false,
+          userId: userId,
+        },
+      };
+      authenticatedInterventions = await this.interventionListRepository.find(
+        authenticatedFilter,
+      );
+    }
+
+    const anonymousFilter: Filter = {
+      where: {
+        id: id,
+        isTemplateIntervention: false,
+        userId: 'Anonymous',
+      },
+    };
+    const anonymousInterventions = await this.interventionListRepository.find(
+      anonymousFilter,
+    );
     return new StandardJsonResponse<Array<InterventionList>>(
       `Intervention returned.`,
-      [interventions],
+      anonymousInterventions.concat(authenticatedInterventions),
       'InterventionList',
     );
   }
