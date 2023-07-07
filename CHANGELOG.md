@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.27.0](https://github.com/micronutrientsupport/api/compare/v2.26.0...v2.27.0) (2023-07-07)
+
+
+### Features
+
+* add profile pic ([50aecb4](https://github.com/micronutrientsupport/api/commit/50aecb4c124e79c7c6a355a6e9618b0198d0eba6))
+* improve profile response, add badges ([5846e70](https://github.com/micronutrientsupport/api/commit/5846e704e323fe560ab23e51afcac330986857e6))
+* initial addition of authentication to intervention listing routes ([590a416](https://github.com/micronutrientsupport/api/commit/590a41640c93c146a681a42b91890bbad42e3b07))
+
 ## [2.26.0](https://github.com/micronutrientsupport/api/compare/v2.25.0...v2.26.0) (2023-07-05)
 
 

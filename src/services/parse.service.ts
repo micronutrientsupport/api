@@ -16,6 +16,7 @@ export interface ParseService {
     oragnisation?: string,
   ): Promise<ParseRegisterResponse>;
   getProfile(sessionToken: string): Promise<ParseProfileResponse>;
+  getBadges(sessionToken: string, userId: string): Promise<ParseBadgesResponse>;
 }
 
 export class ParseServiceProvider implements Provider<ParseService> {
@@ -47,34 +48,65 @@ export interface ParseErrorResponse {
 }
 
 export interface ParseLoginResponse {
+  objectId: string;
   username: string;
-  email: string;
+  profilePic: {
+    url: string;
+  };
   sessionToken: string;
 }
 
 export interface ParseRegisterResponse {
+  objectId: string;
   username: string;
-  email: string;
+  profilePic: {
+    url: string;
+  };
   sessionToken: string;
 }
 
 export interface ParseLogoutResponse {}
 
 export interface ParseProfileResponse {
+  objectId: string;
   username: string;
   email: string;
+  name: string;
+  profilePic: {
+    url: string;
+  };
+  organisation: string;
   createdAt: string;
   updatedAt: string;
 }
 
+export interface ParseBadgesResponse {
+  results: {
+    name: string;
+    url: string;
+    description: string;
+    image: {
+      url: string;
+    };
+  }[];
+}
+
 export interface ParseUser {
+  id: string;
   username: string;
+  profilePic: string;
   sessionToken: string;
 }
 
 export interface ParseProfile {
+  id: string;
   username: string;
   email: string;
-  registerDate: Date;
+  profilePic: string;
+  name?: string;
+  organisation?: string;
+  registrationDate: Date;
   updatedDate: Date;
+  badges?: any[];
+  sessionToken?: string;
 }
