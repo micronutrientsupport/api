@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "2.27.0",
+  "version": "2.27.1",
   "description": "MAPS Micronutrient Support Tool API",
   "keywords": [
     "loopback-application",
