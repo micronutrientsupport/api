@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.27.1](https://github.com/micronutrientsupport/api/compare/v2.27.0...v2.27.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* include username in register response ([f539228](https://github.com/micronutrientsupport/api/commit/f539228c018146ebd3415fec7fceb917788e4fd8))
+
 ## [2.27.0](https://github.com/micronutrientsupport/api/compare/v2.26.0...v2.27.0) (2023-07-07)
 
 
