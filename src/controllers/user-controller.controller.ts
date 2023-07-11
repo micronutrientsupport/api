@@ -173,13 +173,13 @@ export class UserControllerController {
 
       const user: ParseUser = {
         id: userResponse.objectId,
-        username: userResponse.username,
+        username: userProfileResponse.username,
         sessionToken: userResponse.sessionToken,
         profilePic: userProfileResponse.profilePic?.url,
       };
 
       return new StandardJsonResponse<Array<ParseUser>>(
-        `Successfully registered as ${body.username}.`,
+        `Successfully registered as ${userProfileResponse.username}.`,
         [user],
         'ParseUser',
       );
