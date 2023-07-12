@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.27.3](https://github.com/micronutrientsupport/api/compare/v2.27.2...v2.27.3) (2023-07-12)
+
+
+### Bug Fixes
+
+* update logout response to object ([8985477](https://github.com/micronutrientsupport/api/commit/8985477d74569c8d7562fdb544cfa0873fff55b1))
+
 ## [2.27.2](https://github.com/micronutrientsupport/api/compare/v2.27.1...v2.27.2) (2023-07-12)
 
 
