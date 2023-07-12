@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.27.2](https://github.com/micronutrientsupport/api/compare/v2.27.1...v2.27.2) (2023-07-12)
+
+
+### Bug Fixes
+
+* return boolean value when logging out ([17a1e9e](https://github.com/micronutrientsupport/api/commit/17a1e9eccc0779a16d6778d6a79a2b1e15dff703))
+* use == for comparisons in jsonlogic ([9a36b1d](https://github.com/micronutrientsupport/api/commit/9a36b1d203e8bfe00e5629ad484d03eb11337495))
+
 ## [2.27.1](https://github.com/micronutrientsupport/api/compare/v2.27.0...v2.27.1) (2023-07-11)
 
 
