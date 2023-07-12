@@ -7,7 +7,7 @@ index de72f86..64b90ac 100644
 +export function transformJS (code: string): any
 +export function processNode (node: any, extraData?: any, valueOnly?: boolean, ): any;
 diff --git a/node_modules/js-to-json-logic/lib/index.js b/node_modules/js-to-json-logic/lib/index.js
-index c6ab89c..074454d 100644
+index c6ab89c..91f818f 100644
 --- a/node_modules/js-to-json-logic/lib/index.js
 +++ b/node_modules/js-to-json-logic/lib/index.js
 @@ -33,14 +33,14 @@ function processError ({ loc, at }, message) {
@@ -148,7 +148,7 @@ index c6ab89c..074454d 100644
        }
        return result
      }
-@@ -107,34 +180,78 @@ function processNode (node, valueOnly = false) {
+@@ -107,34 +180,81 @@ function processNode (node, valueOnly = false) {
      }
  
      case 'ExpressionStatement': {
@@ -220,6 +220,9 @@ index c6ab89c..074454d 100644
      case 'LogicalExpression':
 -    case 'BinaryExpression': {
 +    case 'binary-expression': {
++      if(node.operator === '=') {
++        node.operator = '==';
++      }
        return {
 -        [processOp(node.operator)]: [processNode(node.left), processNode(node.right)]
 +        [processOp(node.operator)]: [processNode(node.left, extraData), processNode(node.right, extraData)]
@@ -234,7 +237,7 @@ index c6ab89c..074454d 100644
          }
        }
  
-@@ -143,23 +260,23 @@ function processNode (node, valueOnly = false) {
+@@ -143,23 +263,23 @@ function processNode (node, valueOnly = false) {
        }
  
        return {
@@ -264,7 +267,7 @@ index c6ab89c..074454d 100644
          : node.property.name
  
        const value = `${object}.${property}`
-@@ -170,10 +287,10 @@ function processNode (node, valueOnly = false) {
+@@ -170,10 +290,10 @@ function processNode (node, valueOnly = false) {
      case 'IfStatement': {
        return {
          if: [
@@ -278,7 +281,7 @@ index c6ab89c..074454d 100644
              : undefined
          ].filter(Boolean)
        }
-@@ -184,8 +301,8 @@ function processNode (node, valueOnly = false) {
+@@ -184,8 +304,8 @@ function processNode (node, valueOnly = false) {
          return processError(node, 'Only one-line arrow functions with implicit return are supported.')
        }
  
@@ -289,7 +292,7 @@ index c6ab89c..074454d 100644
  
        return !params.length || params.length > 1
          ? body
-@@ -193,7 +310,7 @@ function processNode (node, valueOnly = false) {
+@@ -193,7 +313,7 @@ function processNode (node, valueOnly = false) {
      }
  
      case 'ReturnStatement': {
@@ -298,7 +301,7 @@ index c6ab89c..074454d 100644
      }
  
      /** unsuported features */
-@@ -266,4 +383,4 @@ const transformJS = (code) => {
+@@ -266,4 +386,4 @@ const transformJS = (code) => {
    }
  }
  
