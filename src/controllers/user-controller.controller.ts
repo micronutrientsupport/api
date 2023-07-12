@@ -98,9 +98,9 @@ export class UserControllerController {
   ): Promise<object> {
     try {
       const userResponse = await this.parseService.logout(sessionToken);
-      return new StandardJsonResponse<[]>(
+      return new StandardJsonResponse<boolean[]>(
         `Logged out successfully.`,
-        [],
+        [true],
         'ParseUser',
       );
     } catch (e: any) {
