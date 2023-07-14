@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.27.4](https://github.com/micronutrientsupport/api/compare/v2.27.3...v2.27.4) (2023-07-14)
+
+
+### Bug Fixes
+
+* handle null session token in interceptor ([6aafda4](https://github.com/micronutrientsupport/api/commit/6aafda43617800240bae25163a21e6923305171b))
+
 ## [2.27.3](https://github.com/micronutrientsupport/api/compare/v2.27.2...v2.27.3) (2023-07-12)
 
 
