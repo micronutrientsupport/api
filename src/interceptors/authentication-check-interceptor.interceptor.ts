@@ -32,7 +32,8 @@ export interface AuthenticatedRequest extends Request {
   tags: {key: AuthenticationCheckInterceptorInterceptor.BINDING_KEY},
 })
 export class AuthenticationCheckInterceptorInterceptor
-  implements Provider<Interceptor> {
+  implements Provider<Interceptor>
+{
   static readonly BINDING_KEY = `interceptors.${AuthenticationCheckInterceptorInterceptor.name}`;
 
   constructor(
@@ -64,7 +65,10 @@ export class AuthenticationCheckInterceptorInterceptor
     try {
       // If the x-session-token is present, attempt to validate
       // the token and store user details in Request.user
-      if (this.request.headers.hasOwnProperty('x-session-token')) {
+      if (
+        this.request.headers.hasOwnProperty('x-session-token') &&
+        this.request.headers['x-session-token']
+      ) {
         const token = this.request.headers['x-session-token'] as string;
         console.log(token);
         const userProfileResponse = await this.parseService.getProfile(token);
