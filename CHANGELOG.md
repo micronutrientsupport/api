@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.28.0](https://github.com/micronutrientsupport/api/compare/v2.27.4...v2.28.0) (2023-07-18)
+
+
+### Features
+
+* add flag to interventions list endpoint to omit templates ([a8a33d6](https://github.com/micronutrientsupport/api/commit/a8a33d6d34df5cbc0bf92034de5ac4328131de2a))
+
+
+### Bug Fixes
+
+* add focus mn to intervention list endpoints ([b923cb9](https://github.com/micronutrientsupport/api/commit/b923cb92bcb979cb19fbaad00c6e4f087c911b0d))
+
 ## [2.27.4](https://github.com/micronutrientsupport/api/compare/v2.27.3...v2.27.4) (2023-07-14)
 
 
