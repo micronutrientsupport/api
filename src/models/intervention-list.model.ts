@@ -144,6 +144,19 @@ export class InterventionList extends Entity {
   foodVehicleName?: string;
 
   @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'focus_micronutrient',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  focusMicronutrient?: string;
+
+  @property({
     type: 'number',
     scale: 0,
     postgresql: {

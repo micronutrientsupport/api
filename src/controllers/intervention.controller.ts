@@ -155,20 +155,36 @@ const formulaToJsonLogic = (formula: string, missingData?: {}): JSONObject => {
 };
 
 function replaceExcelFormulaeWothJsonLogic<
-  Type extends InterventionDataFields | InterventionDataFieldsSubset
+  Type extends InterventionDataFields | InterventionDataFieldsSubset,
 >(dataObject: Type): Type {
   dataObject.debug = {};
   dataObject.debug.year0FormulaExcel = dataObject.year0Formula;
   dataObject.debug.year1FormulaExcel = dataObject.year1Formula;
   if (Object.prototype.hasOwnProperty.call(dataObject, 'year2Formula')) {
-    dataObject.debug.year2FormulaExcel = (dataObject as InterventionDataFields).year2Formula;
-    dataObject.debug.year3FormulaExcel = (dataObject as InterventionDataFields).year3Formula;
-    dataObject.debug.year4FormulaExcel = (dataObject as InterventionDataFields).year4Formula;
-    dataObject.debug.year5FormulaExcel = (dataObject as InterventionDataFields).year5Formula;
-    dataObject.debug.year6FormulaExcel = (dataObject as InterventionDataFields).year6Formula;
-    dataObject.debug.year7FormulaExcel = (dataObject as InterventionDataFields).year7Formula;
-    dataObject.debug.year8FormulaExcel = (dataObject as InterventionDataFields).year8Formula;
-    dataObject.debug.year9FormulaExcel = (dataObject as InterventionDataFields).year9Formula;
+    dataObject.debug.year2FormulaExcel = (
+      dataObject as InterventionDataFields
+    ).year2Formula;
+    dataObject.debug.year3FormulaExcel = (
+      dataObject as InterventionDataFields
+    ).year3Formula;
+    dataObject.debug.year4FormulaExcel = (
+      dataObject as InterventionDataFields
+    ).year4Formula;
+    dataObject.debug.year5FormulaExcel = (
+      dataObject as InterventionDataFields
+    ).year5Formula;
+    dataObject.debug.year6FormulaExcel = (
+      dataObject as InterventionDataFields
+    ).year6Formula;
+    dataObject.debug.year7FormulaExcel = (
+      dataObject as InterventionDataFields
+    ).year7Formula;
+    dataObject.debug.year8FormulaExcel = (
+      dataObject as InterventionDataFields
+    ).year8Formula;
+    dataObject.debug.year9FormulaExcel = (
+      dataObject as InterventionDataFields
+    ).year9Formula;
   }
 
   dataObject.year0Formula = formulaToJsonLogic(
@@ -331,28 +347,34 @@ export class InterventionController {
     let newIntervention;
     if ((this.request as AuthenticatedRequest).user) {
       const user = (this.request as AuthenticatedRequest).user;
-      newIntervention = await this.interventionListRepository.createNewIntervention(
-        body.parentInterventionId,
-        body.newInterventionName,
-        body.newInterventionNation,
-        body.newInterventionFocusMicronutrient,
-        body.newInterventionFocusGeography
-          ? body.newInterventionFocusGeography
-          : body.newInterventionNation,
-        body.newInterventionDescription ? body.newInterventionDescription : '',
-        user.id,
-      );
+      newIntervention =
+        await this.interventionListRepository.createNewIntervention(
+          body.parentInterventionId,
+          body.newInterventionName,
+          body.newInterventionNation,
+          body.newInterventionFocusMicronutrient,
+          body.newInterventionFocusGeography
+            ? body.newInterventionFocusGeography
+            : body.newInterventionNation,
+          body.newInterventionDescription
+            ? body.newInterventionDescription
+            : '',
+          user.id,
+        );
     } else {
-      newIntervention = await this.interventionListRepository.createNewIntervention(
-        body.parentInterventionId,
-        body.newInterventionName,
-        body.newInterventionNation,
-        body.newInterventionFocusMicronutrient,
-        body.newInterventionFocusGeography
-          ? body.newInterventionFocusGeography
-          : body.newInterventionNation,
-        body.newInterventionDescription ? body.newInterventionDescription : '',
-      );
+      newIntervention =
+        await this.interventionListRepository.createNewIntervention(
+          body.parentInterventionId,
+          body.newInterventionName,
+          body.newInterventionNation,
+          body.newInterventionFocusMicronutrient,
+          body.newInterventionFocusGeography
+            ? body.newInterventionFocusGeography
+            : body.newInterventionNation,
+          body.newInterventionDescription
+            ? body.newInterventionDescription
+            : '',
+        );
     }
     return new StandardJsonResponse<Array<InterventionList>>(
       `New Intervention created`,
@@ -379,6 +401,11 @@ export class InterventionController {
       example: 'r:123456789abc',
     })
     sessionToken: string,
+    @param.query.boolean('includeTemplates', {
+      description:
+        'Should template interventions be included in the respone?  Defaults to true',
+    })
+    includeTemplates?: boolean,
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
     const templateFilter: Filter = {
       where: {
@@ -388,9 +415,15 @@ export class InterventionController {
       //   userId: false,
       // },
     };
-    const templateInterventions = await this.interventionListRepository.find(
-      templateFilter,
-    );
+
+    const returnTemplates =
+      typeof includeTemplates === 'undefined' || includeTemplates
+        ? true
+        : false;
+
+    const templateInterventions = returnTemplates
+      ? await this.interventionListRepository.find(templateFilter)
+      : [];
 
     if ((this.request as AuthenticatedRequest).user) {
       const user = (this.request as AuthenticatedRequest).user;
@@ -402,6 +435,7 @@ export class InterventionController {
         //   userId: false,
         // },
       };
+
       const userInterventions = await this.interventionListRepository.find(
         userFilter,
       );
@@ -547,21 +581,16 @@ export class InterventionController {
         interventionId: id,
       },
     };
-    const baselineAssumptions = await this.interventionBaselineAssumptionsRepository.find(
-      filter,
-    );
-    const foodVehicleStandard = await this.interventionVehicleStandardRepository.find(
-      filter,
-    );
-    const industryInformation = await this.interventionIndustryInformationRepository.find(
-      filter,
-    );
-    const monitoringInformation = await this.interventionMonitoringInformationRepository.find(
-      filter,
-    );
-    const startupScaleupCosts = await this.interventionStartupScaleupCostsRepository.find(
-      filter,
-    );
+    const baselineAssumptions =
+      await this.interventionBaselineAssumptionsRepository.find(filter);
+    const foodVehicleStandard =
+      await this.interventionVehicleStandardRepository.find(filter);
+    const industryInformation =
+      await this.interventionIndustryInformationRepository.find(filter);
+    const monitoringInformation =
+      await this.interventionMonitoringInformationRepository.find(filter);
+    const startupScaleupCosts =
+      await this.interventionStartupScaleupCostsRepository.find(filter);
     const recurringCosts = await this.interventionRecurringCostsRepository.find(
       filter,
     );
@@ -601,9 +630,8 @@ export class InterventionController {
         interventionId: id,
       },
     };
-    const baselineAssumptions = await this.interventionBaselineAssumptionsRepository.find(
-      filter,
-    );
+    const baselineAssumptions =
+      await this.interventionBaselineAssumptionsRepository.find(filter);
     return new StandardJsonResponse<Array<InterventionBaselineAssumptions>>(
       `Intervention data returned.`,
       baselineAssumptions,
@@ -630,9 +658,8 @@ export class InterventionController {
         interventionId: id,
       },
     };
-    const foodVehicleStandard = await this.interventionVehicleStandardRepository.find(
-      filter,
-    );
+    const foodVehicleStandard =
+      await this.interventionVehicleStandardRepository.find(filter);
     return new StandardJsonResponse<Array<InterventionVehicleStandard>>(
       `Intervention data returned.`,
       foodVehicleStandard,
@@ -659,16 +686,16 @@ export class InterventionController {
         interventionId: id,
       },
     };
-    const industryInformation = await this.interventionIndustryInformationRepository.find(
-      filter,
-    );
+    const industryInformation =
+      await this.interventionIndustryInformationRepository.find(filter);
 
     // Replace Excel Formulae with JsonLogic for interpretation on the frontend
-    industryInformation[0].industryInformation = industryInformation[0].industryInformation.map(
-      (value: InterventionDataFields) => {
-        return replaceExcelFormulaeWothJsonLogic(value);
-      },
-    );
+    industryInformation[0].industryInformation =
+      industryInformation[0].industryInformation.map(
+        (value: InterventionDataFields) => {
+          return replaceExcelFormulaeWothJsonLogic(value);
+        },
+      );
 
     return new StandardJsonResponse<Array<InterventionIndustryInformation>>(
       `Intervention data returned.`,
@@ -696,16 +723,16 @@ export class InterventionController {
         interventionId: id,
       },
     };
-    const monitoringInformation = await this.interventionMonitoringInformationRepository.find(
-      filter,
-    );
+    const monitoringInformation =
+      await this.interventionMonitoringInformationRepository.find(filter);
 
     // Replace Excel Formulae with JsonLogic for interpretation on the frontend
-    monitoringInformation[0].monitoringInformation = monitoringInformation[0].monitoringInformation.map(
-      (value: InterventionDataFields) => {
-        return replaceExcelFormulaeWothJsonLogic(value);
-      },
-    );
+    monitoringInformation[0].monitoringInformation =
+      monitoringInformation[0].monitoringInformation.map(
+        (value: InterventionDataFields) => {
+          return replaceExcelFormulaeWothJsonLogic(value);
+        },
+      );
 
     return new StandardJsonResponse<Array<InterventionMonitoringInformation>>(
       `Intervention data returned.`,
@@ -733,9 +760,8 @@ export class InterventionController {
         interventionId: id,
       },
     };
-    const startupScaleup = await this.interventionStartupScaleupCostsRepository.find(
-      filter,
-    );
+    const startupScaleup =
+      await this.interventionStartupScaleupCostsRepository.find(filter);
 
     // Replace Excel Formulae with JsonLogic for interpretation on the frontend
     startupScaleup[0].startupScaleupCosts?.forEach(section => {
@@ -889,9 +915,10 @@ export class InterventionController {
     console.log('Patch');
     console.log(interventionUpdateDeltaList);
 
-    const tx = await this.interventionDataRepository.dataSource.beginTransaction(
-      IsolationLevel.READ_COMMITTED,
-    );
+    const tx =
+      await this.interventionDataRepository.dataSource.beginTransaction(
+        IsolationLevel.READ_COMMITTED,
+      );
     interventionUpdateDeltaList.map(async delta => {
       const interventionUpdateDelta = new InterventionData(delta);
       await this.interventionDataRepository.updateAll(
