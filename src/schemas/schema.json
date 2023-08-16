@@ -116,6 +116,86 @@
         "groupId"
       ]
     },
+    "CountryConsumptionFctlistMatches": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionListId": {
+          "type": "number"
+        },
+        "compositionSourceId": {
+          "type": "number"
+        },
+        "compositionSourceName": {
+          "type": "string"
+        },
+        "consumptionMatchedCount": {
+          "type": "number"
+        },
+        "consumptionTotalCount": {
+          "type": "number"
+        },
+        "consumptionMatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionMatchedWeight": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionMatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
+    "CountryConsumptionFctlistMatchesRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "CountryConsumptionFctlistMatchesWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionListId": {
+          "type": "number"
+        },
+        "compositionSourceId": {
+          "type": "number"
+        },
+        "compositionSourceName": {
+          "type": "string"
+        },
+        "consumptionMatchedCount": {
+          "type": "number"
+        },
+        "consumptionTotalCount": {
+          "type": "number"
+        },
+        "consumptionMatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionMatchedWeight": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionMatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
     "CountryConsumption": {
       "type": "object",
       "properties": {
@@ -1180,6 +1260,86 @@
         "id"
       ]
     },
+    "HouseholdConsumptionFctlistMatches": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionListId": {
+          "type": "number"
+        },
+        "compositionSourceId": {
+          "type": "number"
+        },
+        "compositionSourceName": {
+          "type": "string"
+        },
+        "consumptionMatchedCount": {
+          "type": "number"
+        },
+        "consumptionTotalCount": {
+          "type": "number"
+        },
+        "consumptionMatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionMatchedWeight": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionMatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
+    "HouseholdConsumptionFctlistMatchesRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "HouseholdConsumptionFctlistMatchesWithRelations": {
+      "type": "object",
+      "properties": {
+        "consumptionDataId": {
+          "type": "number"
+        },
+        "micronutrientId": {
+          "type": "string"
+        },
+        "compositionListId": {
+          "type": "number"
+        },
+        "compositionSourceId": {
+          "type": "number"
+        },
+        "compositionSourceName": {
+          "type": "string"
+        },
+        "consumptionMatchedCount": {
+          "type": "number"
+        },
+        "consumptionTotalCount": {
+          "type": "number"
+        },
+        "consumptionMatchedCountPercentage": {
+          "type": "number"
+        },
+        "consumptionMatchedWeight": {
+          "type": "number"
+        },
+        "consumptionTotalWeight": {
+          "type": "number"
+        },
+        "consumptionMatchedWeightPercentage": {
+          "type": "number"
+        }
+      }
+    },
     "HouseholdDeficiencyAfeAggregation": {
       "type": "object",
       "properties": {
@@ -1846,49 +2006,564 @@
         }
       }
     },
-    "Micronutrient": {
+    "InterventionBaselineAssumptions": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string"
+        "interventionId": {
+          "type": "number"
         },
-        "name": {
-          "type": "string"
-        },
-        "unit": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "category": {
-          "type": "string"
-        },
-        "fooditemColumn": {
-          "type": "string"
-        },
-        "isInImpact": {
-          "type": "boolean"
-        },
-        "impactColumn": {
-          "type": "string"
-        },
-        "isBiomarker": {
-          "type": "boolean"
-        },
-        "isDiet": {
-          "type": "boolean"
+        "baselineAssumptions": {
+          "type": "object",
+          "properties": {
+            "potentiallyFortified": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "actuallyFortified": {
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "potentiallyFortified",
+            "actuallyFortified"
+          ],
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
-    "MicronutrientRelations": {
+    "InterventionBaselineAssumptionsRelations": {
       "type": "object",
       "additionalProperties": false
     },
-    "MicronutrientWithRelations": {
+    "InterventionBaselineAssumptionsWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "baselineAssumptions": {
+          "type": "object",
+          "properties": {
+            "potentiallyFortified": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "actuallyFortified": {
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "potentiallyFortified",
+            "actuallyFortified"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "InterventionData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "interventionId": {
+          "type": "number"
+        },
+        "rowIndex": {
+          "type": "number"
+        },
+        "rowName": {
+          "type": "string"
+        },
+        "header1": {
+          "type": "string"
+        },
+        "header2": {
+          "type": "string"
+        },
+        "factorText": {
+          "type": "string"
+        },
+        "year0": {
+          "type": "number"
+        },
+        "year1": {
+          "type": "number"
+        },
+        "year2": {
+          "type": "number"
+        },
+        "year3": {
+          "type": "number"
+        },
+        "year4": {
+          "type": "number"
+        },
+        "year5": {
+          "type": "number"
+        },
+        "year6": {
+          "type": "number"
+        },
+        "year7": {
+          "type": "number"
+        },
+        "year8": {
+          "type": "number"
+        },
+        "year9": {
+          "type": "number"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "InterventionUpdateDelta": {
+      "type": "object",
+      "properties": {
+        "rowIndex": {
+          "type": "number"
+        },
+        "year0": {
+          "type": "number"
+        },
+        "year1": {
+          "type": "number"
+        },
+        "year2": {
+          "type": "number"
+        },
+        "year3": {
+          "type": "number"
+        },
+        "year4": {
+          "type": "number"
+        },
+        "year5": {
+          "type": "number"
+        },
+        "year6": {
+          "type": "number"
+        },
+        "year7": {
+          "type": "number"
+        },
+        "year8": {
+          "type": "number"
+        },
+        "year9": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "rowIndex"
+      ],
+      "additionalProperties": false
+    },
+    "InterventionDataAggregate": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "baselineAssumptions": {
+          "type": "object",
+          "properties": {
+            "potentiallyFortified": {
+              "type": "object",
+              "additionalProperties": false
+            },
+            "actuallyFortified": {
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "potentiallyFortified",
+            "actuallyFortified"
+          ],
+          "additionalProperties": false
+        },
+        "foodVehicleStandard": {
+          "type": "string"
+        },
+        "industryInformation": {
+          "type": "string"
+        },
+        "monitoringInformation": {
+          "type": "string"
+        },
+        "startupScaleupCosts": {
+          "type": "string"
+        },
+        "recurringCosts": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "interventionId"
+      ],
+      "additionalProperties": false
+    },
+    "InterventionDataRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionDataWithRelations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "interventionId": {
+          "type": "number"
+        },
+        "rowIndex": {
+          "type": "number"
+        },
+        "rowName": {
+          "type": "string"
+        },
+        "header1": {
+          "type": "string"
+        },
+        "header2": {
+          "type": "string"
+        },
+        "factorText": {
+          "type": "string"
+        },
+        "year0": {
+          "type": "number"
+        },
+        "year1": {
+          "type": "number"
+        },
+        "year2": {
+          "type": "number"
+        },
+        "year3": {
+          "type": "number"
+        },
+        "year4": {
+          "type": "number"
+        },
+        "year5": {
+          "type": "number"
+        },
+        "year6": {
+          "type": "number"
+        },
+        "year7": {
+          "type": "number"
+        },
+        "year8": {
+          "type": "number"
+        },
+        "year9": {
+          "type": "number"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "InterventionIndustryInformation": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "industryInformation": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionIndustryInformationRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionIndustryInformationWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "industryInformation": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "countryId": {
+          "type": "string"
+        },
+        "fortificationTypeId": {
+          "type": "string"
+        },
+        "fortificationTypeName": {
+          "type": "string"
+        },
+        "programStatus": {
+          "type": "string"
+        },
+        "foodVehicleId": {
+          "type": "number"
+        },
+        "foodVehicleName": {
+          "type": "string"
+        },
+        "baseYear": {
+          "type": "number"
+        },
+        "tenYearTotalCost": {
+          "type": "number"
+        }
+      }
+    },
+    "InterventionListRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionListWithRelations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "countryId": {
+          "type": "string"
+        },
+        "fortificationTypeId": {
+          "type": "string"
+        },
+        "fortificationTypeName": {
+          "type": "string"
+        },
+        "programStatus": {
+          "type": "string"
+        },
+        "foodVehicleId": {
+          "type": "number"
+        },
+        "foodVehicleName": {
+          "type": "string"
+        },
+        "baseYear": {
+          "type": "number"
+        },
+        "tenYearTotalCost": {
+          "type": "number"
+        }
+      }
+    },
+    "InterventionMonitoringInformation": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "monitoringInformation": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionMonitoringInformationRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionMonitoringInformationWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "monitoringInformation": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionRecurringCosts": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "recurringCosts": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionRecurringCostsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionRecurringCostsWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "recurringCosts": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionStartupScaleupCosts": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "startupScaleupCosts": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionStartupScaleupCostsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionStartupScaleupCostsWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "startupScaleupCosts": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionSummaryCosts": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "summaryCosts": {
+          "type": "string"
+        },
+        "discountRate": {
+          "type": "number"
+        },
+        "summaryCostsDiscounted": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionSummaryCostsRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionSummaryCostsWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "summaryCosts": {
+          "type": "string"
+        },
+        "discountRate": {
+          "type": "number"
+        },
+        "summaryCostsDiscounted": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionValuesJson": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "header1": {
+          "type": "string"
+        },
+        "header2": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionValuesJsonRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionValuesJsonWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "header1": {
+          "type": "string"
+        },
+        "header2": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionVehicleStandard": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "foodVehicleStandard": {
+          "type": "string"
+        }
+      }
+    },
+    "InterventionVehicleStandardRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "InterventionVehicleStandardWithRelations": {
+      "type": "object",
+      "properties": {
+        "interventionId": {
+          "type": "number"
+        },
+        "foodVehicleStandard": {
+          "type": "string"
+        }
+      }
+    },
+    "MicronutrientDropdown": {
       "type": "object",
       "properties": {
         "id": {
@@ -1906,7 +2581,40 @@
         "category": {
           "type": "string"
         },
-        "fooditemColumn": {
+        "isInImpact": {
+          "type": "boolean"
+        },
+        "impactColumn": {
+          "type": "string"
+        },
+        "isBiomarker": {
+          "type": "boolean"
+        },
+        "isDiet": {
+          "type": "boolean"
+        }
+      }
+    },
+    "MicronutrientDropdownRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "MicronutrientDropdownWithRelations": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
           "type": "string"
         },
         "isInImpact": {
@@ -1921,10 +2629,87 @@
         "isDiet": {
           "type": "boolean"
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
+    },
+    "MnBinRange": {
+      "type": "object",
+      "properties": {
+        "micronutrientId": {
+          "type": "string"
+        },
+        "scale": {
+          "type": "number"
+        },
+        "bin0": {
+          "type": "number"
+        },
+        "bin1": {
+          "type": "number"
+        },
+        "bin2": {
+          "type": "number"
+        },
+        "bin3": {
+          "type": "number"
+        },
+        "bin4": {
+          "type": "number"
+        },
+        "bin5": {
+          "type": "number"
+        },
+        "binmax": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      }
+    },
+    "MnBinRangeRelations": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "MnBinRangeWithRelations": {
+      "type": "object",
+      "properties": {
+        "micronutrientId": {
+          "type": "string"
+        },
+        "scale": {
+          "type": "number"
+        },
+        "bin0": {
+          "type": "number"
+        },
+        "bin1": {
+          "type": "number"
+        },
+        "bin2": {
+          "type": "number"
+        },
+        "bin3": {
+          "type": "number"
+        },
+        "bin4": {
+          "type": "number"
+        },
+        "bin5": {
+          "type": "number"
+        },
+        "binmax": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      }
     },
     "MonthlyFood": {
       "type": "object",

@@ -1,0 +1,309 @@
+diff --git a/node_modules/js-to-json-logic/js-to-json-logic.d.ts b/node_modules/js-to-json-logic/js-to-json-logic.d.ts
+index de72f86..64b90ac 100644
+--- a/node_modules/js-to-json-logic/js-to-json-logic.d.ts
++++ b/node_modules/js-to-json-logic/js-to-json-logic.d.ts
+@@ -1 +1,2 @@
+-export default function transformJS (code: string): any
++export function transformJS (code: string): any
++export function processNode (node: any, extraData?: any, valueOnly?: boolean, ): any;
+diff --git a/node_modules/js-to-json-logic/lib/index.js b/node_modules/js-to-json-logic/lib/index.js
+index c6ab89c..91f818f 100644
+--- a/node_modules/js-to-json-logic/lib/index.js
++++ b/node_modules/js-to-json-logic/lib/index.js
+@@ -33,14 +33,14 @@ function processError ({ loc, at }, message) {
+   throw error
+ }
+ 
+-function processNode (node, valueOnly = false) {
++function processNode (node,  extraData = {}, valueOnly = false) {
+   if (!node) return null
+ 
+   switch (node.type) {
+     case 'Program': {
+       return node.body.length > 1
+         ? processError(node, 'Only one expression statement allowed.')
+-        : processNode(node.body[0])
++        : processNode(node.body[0], extraData)
+     }
+ 
+     case 'TemplateLiteral': {
+@@ -55,7 +55,7 @@ function processNode (node, valueOnly = false) {
+ 
+         if (index < expressions.length) {
+           const expr = expressions[index++]
+-          nodes.push(processNode(expr))
++          nodes.push(processNode(expr, extraData))
+         }
+       }
+ 
+@@ -66,6 +66,79 @@ function processNode (node, valueOnly = false) {
+       }
+     }
+ 
++    case 'cell': {
++      let cell = node.key;
++      //console.log('Parsing cell', cell)
++      //console.log(extraData)
++      let col = cell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
++      let row = cell.split(col)[1];
++      //console.log({col: col, row: row})
++
++      switch(col) {
++        case 'D': {
++          col = 'year0';
++          break;
++        }
++        case 'E': {
++          col = 'year1';
++          break;
++        }
++        case 'F': {
++          col = 'year2';
++          break;
++        }
++        case 'G': {
++          col = 'year3';
++          break;
++        }
++        case 'H': {
++          col = 'year4';
++          break;
++        }
++        case 'I': {
++          col = 'year5';
++          break;
++        }
++        case 'J': {
++          col = 'year6';
++          break;
++        }
++        case 'K': {
++          col = 'year7';
++          break;
++        }
++        case 'L': {
++          col = 'year8';
++          break;
++        }
++        case 'M': {
++          col = 'year9';
++          break;
++        }
++      }
++
++      if(extraData && extraData.hasOwnProperty(row) && extraData[row].hasOwnProperty(col)) {
++       // console.log('Missing Data: ', extraData[row][col])
++        return extraData[row][col];
++      } else {
++      return { var:
++            {
++              colIndex: col,
++              rowIndex: row
++          }
++        };
++      }
++    }
++
++    case 'cell-range': {
++      console.log('cell-range')
++      console.log(node)
++      return processNode(node.left)
++      //console.log(node);
++    }
++
++    case 'number':
++    case 'text':
+     case 'Literal': {
+       if (node.value instanceof RegExp) {
+         return [node.value.source, node.value.flags]
+@@ -75,7 +148,7 @@ function processNode (node, valueOnly = false) {
+     }
+ 
+     case 'SpreadElement': {
+-      return processNode(node.argument)
++      return processNode(node.argument, extraData)
+     }
+ 
+     case 'ArrayExpression': {
+@@ -83,19 +156,19 @@ function processNode (node, valueOnly = false) {
+       if (node.elements.some((node) => node.type === 'SpreadElement')) {
+         return {
+           merge: [
+-            ...node.elements.map((node) => processNode(node))
++            ...node.elements.map((node) => processNode(node, extraData))
+           ]
+         }
+       }
+ 
+-      return node.elements.map((node) => processNode(node))
++      return node.elements.map((node) => processNode(nod, extraData))
+     }
+ 
+     case 'ObjectExpression': {
+       const result = {}
+       for (const prop of node.properties) {
+         if (prop.type === 'SpreadElement') continue
+-        result[processNode(prop.key, true)] = processNode(prop.value)
++        result[processNode(prop.key, extraData, true)] = processNode(prop.value, extraData)
+       }
+       return result
+     }
+@@ -107,34 +180,81 @@ function processNode (node, valueOnly = false) {
+     }
+ 
+     case 'ExpressionStatement': {
+-      return processNode(node.expression)
++      return processNode(node.expression, extraData)
+     }
+ 
+     case 'BlockStatement': {
+       return node.body.length > 1
+         ? processError(node, 'Block statements can only have one expression statement.')
+-        : processNode(node.body[0])
++        : processNode(node.body[0], extraData)
+     }
+ 
+     case 'CallExpression': {
+-      const key = node.callee.type !== 'Identifier' ? processNode(node.callee, true) : node.callee.name
++      const key = node.callee.type !== 'Identifier' ? processNode(node.callee, extraData, true) : node.callee.name
+ 
+       return {
+-        [key]: node.arguments.map((node) => processNode(node))
++        [key]: node.arguments.map((node) => processNode(node, extraData))
++      }
++    }
++
++    case 'function': {
++      switch(node.name) {
++        case 'ROUNDUP': {
++          return [{'roundup': [processNode(node.arguments[0], extraData), processNode(node.arguments[1], extraData)]}]
++          break;
++        }
++        case 'IF': {
++          return {
++            if: [
++             processNode(node.arguments[0], extraData),
++             processNode(node.arguments[1], extraData),
++             processNode(node.arguments[2], extraData)
++            ]
++          }
++          break;
++        }
++        case 'OR': {
++          console.log(node)
++          return {
++            or: [
++             processNode(node.arguments[0], extraData),
++             processNode(node.arguments[1], extraData),
++            ]
++          }
++          break;
++        }
++        case 'SUM': {
++          console.log(node)
++          let sum = [];
++          node.arguments.forEach((args) => {
++            sum.push(processNode(args, extraData))
++          })
++          return {
++            sum: sum
++          }
++        }
++        default:
++          console.warn("I don't know what to do with Function type", node.name)
++          return processNode(node.arguments[0], extraData);
+       }
++      console.warn("I don't know what to do with Function type", node.name)
++      return processNode(node.arguments[0], extraData)
+     }
+ 
+     case 'LogicalExpression':
+-    case 'BinaryExpression': {
++    case 'binary-expression': {
++      if(node.operator === '=') {
++        node.operator = '==';
++      }
+       return {
+-        [processOp(node.operator)]: [processNode(node.left), processNode(node.right)]
++        [processOp(node.operator)]: [processNode(node.left, extraData), processNode(node.right, extraData)]
+       }
+     }
+ 
+     case 'UnaryExpression': {
+       if (node.operator === '!' && node.argument.operator === '!') {
+         return {
+-          '!!': [processNode(node.argument.argument)]
++          '!!': [processNode(node.argument.argument, extraData)]
+         }
+       }
+ 
+@@ -143,23 +263,23 @@ function processNode (node, valueOnly = false) {
+       }
+ 
+       return {
+-        [node.operator]: [processNode(node.argument)]
++        [node.operator]: [processNode(node.argument, extraData)]
+       }
+     }
+ 
+     case 'ConditionalExpression': {
+       return {
+         if: [
+-          processNode(node.test),
+-          processNode(node.consequent),
+-          processNode(node.alternate)
++          processNode(node.test, extraData),
++          processNode(node.consequent, extraData),
++          processNode(node.alternate, extraData)
+         ]
+       }
+     }
+     case 'MemberExpression': {
+-      const object = node.object.type !== 'Identifier' ? processNode(node.object, true) : node.object.name
++      const object = node.object.type !== 'Identifier' ? processNode(node.object, extraData, true) : node.object.name
+       const property = node.property.type !== 'Identifier'
+-        ? processNode(node.property, true)
++        ? processNode(node.property, extraData, true)
+         : node.property.name
+ 
+       const value = `${object}.${property}`
+@@ -170,10 +290,10 @@ function processNode (node, valueOnly = false) {
+     case 'IfStatement': {
+       return {
+         if: [
+-          processNode(node.test),
+-          processNode(node.consequent),
++          processNode(node.tes, extraDatat),
++          processNode(node.consequent, extraData),
+           node.alternate
+-            ? processNode(node.alternate)
++            ? processNode(node.alternate, extraData)
+             : undefined
+         ].filter(Boolean)
+       }
+@@ -184,8 +304,8 @@ function processNode (node, valueOnly = false) {
+         return processError(node, 'Only one-line arrow functions with implicit return are supported.')
+       }
+ 
+-      const params = node.params.map((node) => processNode(node))
+-      const body = processNode(node.body)
++      const params = node.params.map((node) => processNode(node, extraData))
++      const body = processNode(node.body, extraData)
+ 
+       return !params.length || params.length > 1
+         ? body
+@@ -193,7 +313,7 @@ function processNode (node, valueOnly = false) {
+     }
+ 
+     case 'ReturnStatement': {
+-      return processNode(node.argument)
++      return processNode(node.argument, extraData)
+     }
+ 
+     /** unsuported features */
+@@ -266,4 +386,4 @@ const transformJS = (code) => {
+   }
+ }
+ 
+-module.exports = transformJS
++module.exports = {transformJS, processNode}

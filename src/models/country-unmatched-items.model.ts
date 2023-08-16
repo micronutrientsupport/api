@@ -8,6 +8,20 @@ import {Entity, model, property} from '@loopback/repository';
 })
 export class CountryUnmatchedItems extends Entity {
   @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'micronutrient_id',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+    id: true,
+  })
+  micronutrientId?: string;
+
+  @property({
     type: 'number',
     scale: 0,
     id: true,
@@ -38,21 +52,6 @@ export class CountryUnmatchedItems extends Entity {
   compositionDataId?: number;
 
   @property({
-    type: 'number',
-    precision: 10,
-    scale: 3,
-    postgresql: {
-      columnName: 'amount_consumed_in_g',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 10,
-      dataScale: 3,
-      nullable: 'YES',
-    },
-  })
-  amountConsumedInG?: number;
-
-  @property({
     type: 'string',
     postgresql: {
       columnName: 'food_genus_id',
@@ -77,6 +76,86 @@ export class CountryUnmatchedItems extends Entity {
     },
   })
   foodGenusName?: string;
+
+  @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'food_genus_description',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  foodGenusDescription?: string;
+
+  @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'food_genus_confidence',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  foodGenusConfidence?: string;
+
+  @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'original_id',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  originalId?: string;
+
+  @property({
+    type: 'string',
+    postgresql: {
+      columnName: 'original_name',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  originalName?: string;
+
+  @property({
+    type: 'date',
+    postgresql: {
+      columnName: 'date_consumed',
+      dataType: 'date',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  dateConsumed?: string;
+
+  @property({
+    type: 'number',
+    precision: 10,
+    scale: 3,
+    postgresql: {
+      columnName: 'amount_consumed_in_g',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 10,
+      dataScale: 3,
+      nullable: 'YES',
+    },
+  })
+  amountConsumedInG?: number;
 
   // Define well-known properties here
 

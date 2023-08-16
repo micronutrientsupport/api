@@ -1,5 +1,271 @@
 # Changelog
 
+## [2.28.0](https://github.com/micronutrientsupport/api/compare/v2.27.4...v2.28.0) (2023-07-18)
+
+
+### Features
+
+* add flag to interventions list endpoint to omit templates ([a8a33d6](https://github.com/micronutrientsupport/api/commit/a8a33d6d34df5cbc0bf92034de5ac4328131de2a))
+
+
+### Bug Fixes
+
+* add focus mn to intervention list endpoints ([b923cb9](https://github.com/micronutrientsupport/api/commit/b923cb92bcb979cb19fbaad00c6e4f087c911b0d))
+
+## [2.27.4](https://github.com/micronutrientsupport/api/compare/v2.27.3...v2.27.4) (2023-07-14)
+
+
+### Bug Fixes
+
+* handle null session token in interceptor ([6aafda4](https://github.com/micronutrientsupport/api/commit/6aafda43617800240bae25163a21e6923305171b))
+
+## [2.27.3](https://github.com/micronutrientsupport/api/compare/v2.27.2...v2.27.3) (2023-07-12)
+
+
+### Bug Fixes
+
+* update logout response to object ([8985477](https://github.com/micronutrientsupport/api/commit/8985477d74569c8d7562fdb544cfa0873fff55b1))
+
+## [2.27.2](https://github.com/micronutrientsupport/api/compare/v2.27.1...v2.27.2) (2023-07-12)
+
+
+### Bug Fixes
+
+* return boolean value when logging out ([17a1e9e](https://github.com/micronutrientsupport/api/commit/17a1e9eccc0779a16d6778d6a79a2b1e15dff703))
+* use == for comparisons in jsonlogic ([9a36b1d](https://github.com/micronutrientsupport/api/commit/9a36b1d203e8bfe00e5629ad484d03eb11337495))
+
+## [2.27.1](https://github.com/micronutrientsupport/api/compare/v2.27.0...v2.27.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* include username in register response ([f539228](https://github.com/micronutrientsupport/api/commit/f539228c018146ebd3415fec7fceb917788e4fd8))
+
+## [2.27.0](https://github.com/micronutrientsupport/api/compare/v2.26.0...v2.27.0) (2023-07-07)
+
+
+### Features
+
+* add profile pic ([50aecb4](https://github.com/micronutrientsupport/api/commit/50aecb4c124e79c7c6a355a6e9618b0198d0eba6))
+* improve profile response, add badges ([5846e70](https://github.com/micronutrientsupport/api/commit/5846e704e323fe560ab23e51afcac330986857e6))
+* initial addition of authentication to intervention listing routes ([590a416](https://github.com/micronutrientsupport/api/commit/590a41640c93c146a681a42b91890bbad42e3b07))
+
+## [2.26.0](https://github.com/micronutrientsupport/api/compare/v2.25.0...v2.26.0) (2023-07-05)
+
+
+### Features
+
+* add initial login logout and register routes ([e359407](https://github.com/micronutrientsupport/api/commit/e359407c1e159aa236fbbb6595c63b3d6dbcd123))
+
+## [2.25.0](https://github.com/micronutrientsupport/api/compare/v2.24.1...v2.25.0) (2023-06-28)
+
+
+### Features
+
+* add jsonlogic formulae generation to susu and recurring costs endpoints ([4aad9db](https://github.com/micronutrientsupport/api/commit/4aad9dbf1d7662ada78c99d315adca6e0d0b0dd2))
+
+## [2.24.1](https://github.com/micronutrientsupport/api/compare/v2.24.0...v2.24.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* fix jsonlogic extradata substitution ([78ef69c](https://github.com/micronutrientsupport/api/commit/78ef69c985f111c5b5ddda535944b929c3ba057d))
+
+## [2.24.0](https://github.com/micronutrientsupport/api/compare/v2.23.0...v2.24.0) (2023-06-16)
+
+
+### Features
+
+* return JSONLogic for industry_info ([26a4d5a](https://github.com/micronutrientsupport/api/commit/26a4d5ae1faeff3a162a53aa7810f2f59a43a4bc))
+* update industry info and monitoring info to do json logic and pass missing data as literals ([aca673a](https://github.com/micronutrientsupport/api/commit/aca673a3cadb417fb8d5ba0385b939157a7ce659))
+
+## [2.23.0](https://github.com/micronutrientsupport/api/compare/v2.22.0...v2.23.0) (2023-06-15)
+
+
+### Features
+
+* update create intervention function to accept the new params ([523ffdc](https://github.com/micronutrientsupport/api/commit/523ffdccace0e5a9b0acaf00668a1950aeca65e5))
+
+## [2.22.0](https://github.com/micronutrientsupport/api/compare/v2.21.1...v2.22.0) (2023-06-13)
+
+
+### Features
+
+* add rowFormula to industryInfo endpoint ([d8ba2d0](https://github.com/micronutrientsupport/api/commit/d8ba2d01ecffd3a2ff8cb1c1b8843a5794908cf8))
+
+## [2.21.1](https://github.com/micronutrientsupport/api/compare/v2.21.0...v2.21.1) (2023-06-07)
+
+
+### Bug Fixes
+
+* always display name and id for country endpoint ([ac8b2c7](https://github.com/micronutrientsupport/api/commit/ac8b2c79d27f67f6c15b687543f5934eee3a71ae))
+* always display name, country id for regions endpoint ([d922318](https://github.com/micronutrientsupport/api/commit/d9223185d602c346aefb0a3d30f9fa754c5fefe4))
+
+## [2.21.0](https://github.com/micronutrientsupport/api/compare/v2.20.0...v2.21.0) (2023-06-07)
+
+
+### Features
+
+* add basic output of jsonlogic for inteverntion industryinformation fields from db ([9b67861](https://github.com/micronutrientsupport/api/commit/9b67861a3b78ea07245b834600c5b9ca5a0f2389))
+* add flag to disable GeoJSON for country endpoint and add subregions endpoint ([c94f2f5](https://github.com/micronutrientsupport/api/commit/c94f2f57b59e988f41b090ef50e200c0fb3db7d7))
+
+
+### Bug Fixes
+
+* add patch-package to dev dependencies ([73a5023](https://github.com/micronutrientsupport/api/commit/73a502347fed2399f41bfa4fb16218abf146b195))
+
+
+### Miscellaneous
+
+* actually add the patches: ([1d1be07](https://github.com/micronutrientsupport/api/commit/1d1be07df867260d6b5d0a29a327062d7ab7d45c))
+* add pathces to dockerfile build ([d4ff2f4](https://github.com/micronutrientsupport/api/commit/d4ff2f4d3d11c289ff0a860ba3bac0fd1b911078))
+* tidy up loggin ([9e3155b](https://github.com/micronutrientsupport/api/commit/9e3155b73b649ed8b00f831689339a86a6bcf907))
+
+## [2.20.0](https://github.com/micronutrientsupport/api/compare/v2.19.4...v2.20.0) (2023-05-17)
+
+
+### Features
+
+* update routes to return national median figures in impact summary endpoint ([ce305b5](https://github.com/micronutrientsupport/api/commit/ce305b5bc7a708699f35c8ecaaab4193264b99ba))
+
+## [2.19.4](https://github.com/micronutrientsupport/api/compare/v2.19.3...v2.19.4) (2023-02-14)
+
+
+### Bug Fixes
+
+* add missing fields to intervention list endpoint ([6e9766c](https://github.com/micronutrientsupport/api/commit/6e9766c2a12c71e2bd0fb927bfba192123a8f4df))
+* add parent intervention to intervention list ([6a050fb](https://github.com/micronutrientsupport/api/commit/6a050fb7abaab4b39c9bf6805be6d2d4ed4aaa7f))
+
+## [2.19.3](https://github.com/micronutrientsupport/api/compare/v2.19.2...v2.19.3) (2023-02-03)
+
+
+### Bug Fixes
+
+* try to explicitly set cors headers for intervention pathc request ([fd35014](https://github.com/micronutrientsupport/api/commit/fd35014fef0468f30d913a781821fe034314a4ab))
+
+## [2.19.2](https://github.com/micronutrientsupport/api/compare/v2.19.1...v2.19.2) (2022-11-23)
+
+
+### Bug Fixes
+
+* trigger release update ([a43b1f4](https://github.com/micronutrientsupport/api/commit/a43b1f45d6d7b429259abc48278e597f027ba0d3))
+
+
+### Miscellaneous
+
+* fix release please config 3 ([c3af8b5](https://github.com/micronutrientsupport/api/commit/c3af8b50f961f3e10650b69df3286d2a2de87845))
+* fix release please config 4 ([79445ae](https://github.com/micronutrientsupport/api/commit/79445aea29bf9d9f0037011caf5f7fe0d5432636))
+* fix release please config 5 ([f035147](https://github.com/micronutrientsupport/api/commit/f035147dbd14973a5ef427fd974d543b5a9fad96))
+
+## [2.19.1](https://github.com/micronutrientsupport/api/compare/v2.19.0...v2.19.1) (2022-11-23)
+
+
+### Bug Fixes
+
+* update recporting of API version ([780da15](https://github.com/micronutrientsupport/api/commit/780da1527f7633a57207688e53db2de1c4c2bf87))
+
+
+### Miscellaneous
+
+* bump release please version to support extra-files ([f97665e](https://github.com/micronutrientsupport/api/commit/f97665ec26e1e9427de4d7dc2709b1fd7e415e95))
+* fix GA typo ([6b6f412](https://github.com/micronutrientsupport/api/commit/6b6f412080d95d67b79c86b364fba5c684dabfab))
+* fix release please config ([a743d27](https://github.com/micronutrientsupport/api/commit/a743d273bce9d6fe23ca30b3c625cfffe694a4c2))
+* fix release please config 2 ([6d9a7e8](https://github.com/micronutrientsupport/api/commit/6d9a7e852a94982c404ffb8daecfae28a425d295))
+
+## [2.19.0](https://www.github.com/micronutrientsupport/api/compare/v2.18.1...v2.19.0) (2022-11-23)
+
+
+### Features
+
+* add endpoint to expose API and data version numbers ([e8f189a](https://www.github.com/micronutrientsupport/api/commit/e8f189a8076db567dff125692d519d4fa0fe39dd))
+
+### [2.18.1](https://www.github.com/micronutrientsupport/api/compare/v2.18.0...v2.18.1) (2022-08-17)
+
+
+### Bug Fixes
+
+* update unmatched items endpoint to use the fct hierarchy views ([f357cf7](https://www.github.com/micronutrientsupport/api/commit/f357cf73f7c452d549e9a5db0459872c7848193f))
+
+## [2.18.0](https://www.github.com/micronutrientsupport/api/compare/v2.17.0...v2.18.0) (2022-07-21)
+
+
+### Features
+
+* return data value from intervention patch route ([49fdb7e](https://www.github.com/micronutrientsupport/api/commit/49fdb7e9bcb307c35d270115f5cf85c406d93e43))
+
+## [2.17.0](https://www.github.com/micronutrientsupport/api/compare/v2.16.1...v2.17.0) (2022-07-20)
+
+
+### Features
+
+* add routes to expose updated match statistics routes ([f857587](https://www.github.com/micronutrientsupport/api/commit/f8575870b5f8fee6fe13df5460e4425e95c9d1ee))
+
+
+### Bug Fixes
+
+* adjust inputs for household baseline routes ([4771bec](https://www.github.com/micronutrientsupport/api/commit/4771bec43cd94c0c6d204000dce9312dbe91ec09))
+
+### [2.16.1](https://www.github.com/micronutrientsupport/api/compare/v2.16.0...v2.16.1) (2022-06-28)
+
+
+### Bug Fixes
+
+* fix reference to new intervention fn: ([85e15c9](https://www.github.com/micronutrientsupport/api/commit/85e15c995a4d835dc6bd2cd4078f6995a65dedfb))
+
+## [2.16.0](https://www.github.com/micronutrientsupport/api/compare/v2.15.1...v2.16.0) (2022-06-28)
+
+
+### Features
+
+* add intervention name and description to create derived intervention call ([0a160e9](https://www.github.com/micronutrientsupport/api/commit/0a160e9f6a1cb5483d8d62196a3b0a26253a9d79))
+
+
+### Miscellaneous
+
+* update all models to use env var schema ([8243b91](https://www.github.com/micronutrientsupport/api/commit/8243b91ea4eb3f315bdd88d2f6d9d8a7a4e31658))
+
+### [2.15.1](https://www.github.com/micronutrientsupport/api/compare/v2.15.0...v2.15.1) (2022-05-03)
+
+
+### Bug Fixes
+
+* update models/repositories for micronutrient endpoint to look at new view rather than source table ([0d7de58](https://www.github.com/micronutrientsupport/api/commit/0d7de5881dbaec400b5cccefeaeece053da6045d))
+
+## [2.15.0](https://www.github.com/micronutrientsupport/api/compare/v2.14.2...v2.15.0) (2022-03-23)
+
+
+### Features
+
+* **intervention:** add summary costs endpoint ([f84dde6](https://www.github.com/micronutrientsupport/api/commit/f84dde679a152b4b981fb060d64e1f3211d784d8))
+
+### [2.14.2](https://www.github.com/micronutrientsupport/api/compare/v2.14.1...v2.14.2) (2022-01-19)
+
+
+### Miscellaneous
+
+* fix schema for intervention routes ([acee769](https://www.github.com/micronutrientsupport/api/commit/acee7696b656334a91040c46c8e2674fbc67f788))
+
+### [2.14.1](https://www.github.com/micronutrientsupport/api/compare/v2.14.0...v2.14.1) (2022-01-18)
+
+
+### Bug Fixes
+
+* update intervention responses to use standard JSON format ([9b55882](https://www.github.com/micronutrientsupport/api/commit/9b55882c1ade2162940942c271dfe5be27e0aa04))
+
+## [2.14.0](https://www.github.com/micronutrientsupport/api/compare/v2.13.0...v2.14.0) (2022-01-13)
+
+
+### Features
+
+* add route to create derived intervention ([5f5edcc](https://www.github.com/micronutrientsupport/api/commit/5f5edccb3578f91cebd433ebbd8891e556a83ca2))
+
+## [2.13.0](https://www.github.com/micronutrientsupport/api/compare/v2.12.0...v2.13.0) (2022-01-13)
+
+
+### Features
+
+* **intervention:** add initial routes for accessing and updating intervention data ([678ba24](https://www.github.com/micronutrientsupport/api/commit/678ba24a1a7952edd10c0771e925baeded086e8d))
+
 ## [2.12.0](https://www.github.com/micronutrientsupport/api/compare/v2.11.5...v2.12.0) (2021-11-24)
 
 

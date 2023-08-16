@@ -64,7 +64,7 @@ export class TopFoodsController {
     const filter: Filter = {
       where: {
         micronutrientId: micronutrientId,
-        compositionDataId: compositionDataId,
+        // compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
         ranking: {lte: totalFoods ? totalFoods : 20},
       },

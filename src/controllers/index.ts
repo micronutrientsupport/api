@@ -15,3 +15,4 @@ export * from './diet/projections/projections.controller';
 export * from './diet/scenarios/dietary-change-scenarios.controller';
 export * from './diet/top-foods/top-foods.controller';
 export * from './github.controller';
+export * from './api-metadata-controller.controller';

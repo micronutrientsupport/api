@@ -10,14 +10,18 @@ import {
   RestBindings,
 } from '@loopback/rest';
 import {
+  CountryConsumptionFctlistMatches,
   CountryUnmatchedItems,
   CountryUnmatchedTotals,
+  HouseholdConsumptionFctlistMatches,
   HouseholdUnmatchedItems,
   HouseholdUnmatchedTotals,
 } from '../../../models';
 import {
+  CountryConsumptionFctlistMatchesRepository,
   CountryUnmatchedItemsRepository,
   CountryUnmatchedTotalsRepository,
+  HouseholdConsumptionFctlistMatchesRepository,
   HouseholdUnmatchedItemsRepository,
   HouseholdUnmatchedTotalsRepository,
 } from '../../../repositories';
@@ -36,6 +40,10 @@ export class DietaryUnmatchedController {
     public householdUnmatchedItemsRepository: HouseholdUnmatchedItemsRepository,
     @repository(HouseholdUnmatchedTotalsRepository)
     public householdUnmatchedTotalsRepository: HouseholdUnmatchedTotalsRepository,
+    @repository(CountryConsumptionFctlistMatchesRepository)
+    public countryConsumptionFctlistMatchesRepository: CountryConsumptionFctlistMatchesRepository,
+    @repository(HouseholdConsumptionFctlistMatchesRepository)
+    public householdConsumptionFctlistMatchesRepository: HouseholdConsumptionFctlistMatchesRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
   ) {}
 
@@ -52,6 +60,12 @@ export class DietaryUnmatchedController {
       .toObject(true),
   })
   async findCountryUnmatched(
+    @param.query.string('micronutrientId', {
+      description: 'ID for the micronutrient as returned by `/micronutrients`',
+      required: false,
+      example: 'Ca',
+    })
+    micronutrientId: string,
     @param.query.string('compositionDataId', {
       description:
         'ID for the composition data source as returned by `/diet/data-sources`',
@@ -71,6 +85,7 @@ export class DietaryUnmatchedController {
       where: {
         compositionDataId: compositionDataId,
         consumptionDataId: consumptionDataId,
+        micronutrientId: micronutrientId,
       },
     };
     const data = await this.countryUnmatchedItemsRepository.find(filter);
@@ -82,19 +97,25 @@ export class DietaryUnmatchedController {
     );
   }
 
-  @get('/diet/country/unmatched-totals', {
+  @get('/diet/country/matched-totals', {
     summary: 'Get unmatched consumption data summary by country',
     description:
       'Get the consumption data food genuses not matched by the compsosition data',
     tags: ['diet'],
     responses: new StandardOpenApiResponses(
-      'Array of CountryUnmatchedTotals model instances',
+      'Array of CountryConsumptionFctlistMatches model instances',
     )
       .setDataType('array')
-      .setObjectSchema(getModelSchemaRef(CountryUnmatchedTotals))
+      .setObjectSchema(getModelSchemaRef(CountryConsumptionFctlistMatches))
       .toObject(true),
   })
   async findCountryUnmatchedTotals(
+    @param.query.string('micronutrientId', {
+      description: 'ID for the micronutrient as returned by `/micronutrients`',
+      required: false,
+      example: 'Ca',
+    })
+    micronutrientId: string,
     @param.query.string('compositionDataId', {
       description:
         'ID for the composition data source as returned by `/diet/data-sources`',
@@ -112,16 +133,71 @@ export class DietaryUnmatchedController {
   ): Promise<object> {
     const filter: Filter = {
       where: {
-        compositionDataId: compositionDataId,
+        compositionListId: compositionDataId,
         consumptionDataId: consumptionDataId,
+        micronutrientId: micronutrientId,
       },
     };
-    const data = await this.countryUnmatchedTotalsRepository.find(filter);
+    const data = await this.countryConsumptionFctlistMatchesRepository.find(
+      filter,
+    );
 
     return new StandardJsonResponse<Array<CountryUnmatchedTotals>>(
       `${data.length} top results returned.`,
       data,
-      'CountryUnmatchedTotals',
+      'CountryConsumptionFctlistMatches',
+    );
+  }
+
+  @get('/diet/household/matched-totals', {
+    summary: 'Get unmatched consumption data summary by household',
+    description:
+      'Get the consumption data food genuses not matched by the compsosition data',
+    tags: ['diet'],
+    responses: new StandardOpenApiResponses(
+      'Array of HouseholdConsumptionFctlistMatches model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(HouseholdConsumptionFctlistMatches))
+      .toObject(true),
+  })
+  async findHouseholdMatchedTotals(
+    @param.query.string('micronutrientId', {
+      description: 'ID for the micronutrient as returned by `/micronutrients`',
+      required: false,
+      example: 'Ca',
+    })
+    micronutrientId: string,
+    @param.query.string('compositionDataId', {
+      description:
+        'ID for the composition data source as returned by `/diet/data-sources`',
+      required: false,
+      example: '1',
+    })
+    compositionDataId: number,
+    @param.query.string('consumptionDataId', {
+      description:
+        'ID for the household level consumption data source as returned by `/diet/data-sources`',
+      required: false,
+      example: '1',
+    })
+    consumptionDataId: number,
+  ): Promise<object> {
+    const filter: Filter = {
+      where: {
+        //compositionListId: compositionDataId,
+        consumptionDataId: consumptionDataId,
+        micronutrientId: micronutrientId,
+      },
+    };
+    const data = await this.householdConsumptionFctlistMatchesRepository.find(
+      filter,
+    );
+
+    return new StandardJsonResponse<Array<HouseholdUnmatchedTotals>>(
+      `${data.length} top results returned.`,
+      data,
+      'HouseholdConsumptionFctlistMatches',
     );
   }
 
