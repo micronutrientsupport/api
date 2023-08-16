@@ -1,12 +1,9 @@
+export * from './aggregation-area.model';
 export * from './biomarker-data-sources.model';
 export * from './biomarker-group.model';
-<<<<<<< HEAD
 export * from './biomarker-summary.model';
 export * from './biomarker-threshold-list.model';
-=======
 export * from './country-consumption-fctlist-matches.model';
->>>>>>> develop
-export * from './aggregation-area.model';
 export * from './country-consumption.model';
 export * from './country-deficiency-afe.model';
 export * from './country-intake-geojson.model';
@@ -45,4 +42,3 @@ export * from './mn-bin-range.model';
 export * from './monthly-food.model';
 export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
-
