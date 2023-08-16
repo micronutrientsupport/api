@@ -1,6 +1,12 @@
 export * from './biomarker-data-sources.model';
 export * from './biomarker-group.model';
+<<<<<<< HEAD
+export * from './biomarker-summary.model';
+export * from './biomarker-threshold-list.model';
+=======
 export * from './country-consumption-fctlist-matches.model';
+>>>>>>> develop
+export * from './aggregation-area.model';
 export * from './country-consumption.model';
 export * from './country-deficiency-afe.model';
 export * from './country-intake-geojson.model';
@@ -8,6 +14,7 @@ export * from './country-intake.model';
 export * from './country-unmatched-items.model';
 export * from './country-unmatched-totals.model';
 export * from './country.model';
+export * from './data-version.model';
 export * from './diet-data-sources.model';
 export * from './food-genus-nutrients-pivot.model';
 export * from './food-group-items.model';
@@ -32,11 +39,10 @@ export * from './intervention-startup-scaleup-costs.model';
 export * from './intervention-summary-costs.model';
 export * from './intervention-values-json.model';
 export * from './intervention-vehicle-standard.model';
+export * from './intervention.model';
 export * from './micronutrient-dropdown.model';
 export * from './mn-bin-range.model';
 export * from './monthly-food.model';
 export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
-export * from './data-version.model';
-export * from './aggregation-area.model';
-export * from './intervention.model';
+
