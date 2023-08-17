@@ -1,3 +1,4 @@
+export * from './biomarker-controller.controller';
 export * from './biomarker/age-gender-groups/biomarker-age-gender-groups.controller';
 export * from './biomarker/data-sources/biomarker-data-source.controller';
 export * from './country-intake-controller.controller';

@@ -4,7 +4,7 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'opencpu',
   connector: 'rest',
-  baseURL: 'https://opencpu.micronutrient.support/ocpu/',
+  baseURL: process.env.OCPU_URL + '/ocpu',
   options: {
     //headers: {
     //  accept: "application/json",
@@ -14,29 +14,36 @@ const config = {
   operations: [
     {
       template: {
-        method: "POST",
-        url: "https://opencpu.micronutrient.support/ocpu/library/stringr/R/str_replace/json",
+        method: 'POST',
+        url:
+          process.env.OCPU_URL +
+          '/ocpu/apps/' +
+          process.env.OCPU_BIOMARKER_PACKAGE +
+          '/R/' +
+          process.env.OCPU_BIOMARKER_FUNCTION +
+          '/json',
         body: {
-          string: "{string:string}",
-          pattern: "{pattern:string}",
-          replacement: "{replacement}"
+          theData: '{theData:object}',
+          biomarkerField: '{biomarkerField:string}',
+          aggregationField: '{aggregationField:string}',
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          group_id: '{groupId:string}',
+          thresholds: '{thresholds:object}',
         },
+        fullResponse: true,
       },
       functions: {
-        stringReplace: ["string", "pattern", "replacement"]
+        summaryStats: [
+          'theData',
+          'biomarkerField',
+          'aggregationField',
+          'groupId',
+          'thresholds',
+        ],
       },
     },
-    {
-      template: {
-        method: "GET",
-        url: "https://opencpu.micronutrient.support/ocpu/library",
-      },
-      functions: {
-        library: []
-      },
-    }
   ],
-  crud: false
+  crud: false,
 };
 
 // Observe application's life cycle to disconnect the datasource when
@@ -44,7 +51,8 @@ const config = {
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.
 // Learn more at https://loopback.io/doc/en/lb4/Life-cycle.html
 @lifeCycleObserver('datasource')
-export class OpencpuDataSource extends juggler.DataSource
+export class OpencpuDataSource
+  extends juggler.DataSource
   implements LifeCycleObserver {
   static dataSourceName = 'opencpu';
   static readonly defaultConfig = config;

@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "2.28.0",
+  "version": "2.28.1",
   "description": "MAPS Micronutrient Support Tool API",
   "keywords": [
     "loopback-application",
@@ -59,6 +59,7 @@
     "@loopback/rest-crud": "^0.16.0",
     "@loopback/rest-explorer": "^6.0.0",
     "@loopback/service-proxy": "^6.0.0",
+    "@sentry/node": "^7.64.0",
     "bull": "^4.1.0",
     "dotenv": "^8.2.0",
     "dotenv-extended": "^2.9.0",

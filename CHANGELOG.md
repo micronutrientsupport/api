@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.28.1](https://github.com/micronutrientsupport/api/compare/v2.28.0...v2.28.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* sort package.jsosn dependencies ([e7d48c3](https://github.com/micronutrientsupport/api/commit/e7d48c3a370f0b3c5c07087308cd383922c70fd7))
+
+
+### Miscellaneous
+
+* merge develop ([860fb19](https://github.com/micronutrientsupport/api/commit/860fb199f85236ae446d65745c2241e6f3e67c2b))
+* merge develop 2 ([b34ac11](https://github.com/micronutrientsupport/api/commit/b34ac116002862c2ff1de52aa88ecb3874bc4a59))
+
 ## [2.28.0](https://github.com/micronutrientsupport/api/compare/v2.27.4...v2.28.0) (2023-07-18)
 
 
