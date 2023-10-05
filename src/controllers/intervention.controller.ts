@@ -13,6 +13,8 @@ import {
 } from '@loopback/rest';
 import {parse} from 'excel-formula-parser';
 import transformJS from 'js-to-json-logic';
+import * as jsonLogicParser from 'json-logic-js';
+import {inspect} from 'util';
 import {
   AuthenticatedRequest,
   AuthenticationCheckInterceptorInterceptor,
@@ -32,10 +34,12 @@ import {
 } from '../models';
 import {
   InterventionBaselineAssumptionsRepository,
+  InterventionCellFormulaDepsRepository,
   InterventionDataRepository,
   InterventionIndustryInformationRepository,
   InterventionListRepository,
   InterventionMonitoringInformationRepository,
+  InterventionPremixCostRepository,
   InterventionRecurringCostsRepository,
   InterventionRepository,
   InterventionStartupScaleupCostsRepository,
@@ -44,7 +48,6 @@ import {
 } from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
-
 export type InterventionDataFields = {
   debug: any;
   year0: number;
@@ -277,6 +280,10 @@ export class InterventionController {
     public interventionSummaryCostsRepository: InterventionSummaryCostsRepository,
     @repository(InterventionDataRepository)
     public interventionDataRepository: InterventionDataRepository,
+    @repository(InterventionCellFormulaDepsRepository)
+    public interventionCellFormulaDepsRepository: InterventionCellFormulaDepsRepository,
+    @repository(InterventionPremixCostRepository)
+    public interventionPremixCostRepository: InterventionPremixCostRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
     @inject(RestBindings.Http.REQUEST) private request: Request,
   ) {}
@@ -769,6 +776,17 @@ export class InterventionController {
         costs.costBreakdown.map(value => {
           return replaceExcelFormulaeWothJsonLogic(value);
         });
+        console.log('Replaing Year0Total Formula', costs.year0TotalFormula);
+        costs.year0TotalFormula = formulaToJsonLogic(
+          costs.year0TotalFormula as string,
+          {},
+        );
+        costs.year1TotalFormula = formulaToJsonLogic(
+          costs.year1TotalFormula as string,
+          {},
+        );
+
+        return costs;
       });
     });
 
@@ -912,8 +930,8 @@ export class InterventionController {
     })
     interventionUpdateDeltaList: InterventionUpdateDelta[],
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
-    console.log('Patch');
-    console.log(interventionUpdateDeltaList);
+    // console.log('Patch');
+    // console.log(interventionUpdateDeltaList);
 
     const tx =
       await this.interventionDataRepository.dataSource.beginTransaction(
@@ -936,25 +954,363 @@ export class InterventionController {
     await tx.commit();
 
     // Fetch the intervention
+    const intFilter: Filter = {
+      where: {
+        id: id,
+      },
+    };
+    let intervention = (
+      await this.interventionListRepository.find(intFilter)
+    )[0];
+
+    const formulaeFilter = {
+      where: {
+        interventionId: intervention.parentIntervention,
+      },
+    };
+    const formulae = await this.interventionCellFormulaDepsRepository.find(
+      formulaeFilter,
+    );
+
+    jsonLogicParser.add_operation('roundup', (value, decimals = 0) => {
+      const multiplier = Math.pow(10, decimals);
+      return Math.ceil(Number(value) * multiplier) / multiplier;
+    });
+
+    /**
+     *  Calculate the total or cumulative value obtained by adding together individual values
+     *
+     * @param {Array<number>} value - An array of values to be summed up.
+     * @returns {number} - The total value of all input values.
+     */
+    jsonLogicParser.add_operation('sum', (...values) => {
+      return Number(values.reduce((acc, curr) => acc + Number(curr), 0));
+    });
+
+    /**
+     *
+     * Calculates the present value (PV) of a series of cash flows.
+     *
+     * @param {number} rate - The interest rate per period.
+     * @param {number} nper - The number of periods.
+     * @param {number} pmt - The payment amount per period.
+     * @param {number} [fv=0] - The future value at the end of the series of cash flows (optional, default is 0).
+     * @param {number} [type=0] - The timing of the payment: 0 for the end of the period, 1 for the beginning of the period (optional, default is 0).
+     * @returns {number} The present value (PV) of the series of cash flows.
+     */
+    jsonLogicParser.add_operation('PV', (rate, nper, pmt, fv = 0, type = 0) => {
+      if (rate === 0) {
+        return -pmt * nper - fv;
+      }
+      const pv =
+        -(
+          (pmt * (1 + rate * type) * (Math.pow(1 + rate, nper) - 1)) / rate +
+          fv
+        ) / Math.pow(1 + rate, nper);
+      return pv;
+    });
+
+    jsonLogicParser.add_operation('average', (...values) => {
+      console.error('average', values);
+      if (values.length === 0) return 0;
+
+      const sum = values.reduce((acc, curr) => acc + Number(curr), 0);
+      return sum / values.length;
+    });
+
+    // jsonLogicParser.add_operation('max', (...values) => {
+    //   console.error(`MAX => `, values);
+    //   if (values.length === 0) return 0; // Return 0 for an empty list of values
+
+    //   console.error(values);
+    //   values = values.map(x => Number(x));
+    //   console.error(values);
+
+    //   // Use the spread operator (...) to find the maximum value in the array of values
+    //   return Math.max(...values);
+    // });
+
+    const dataResponse = await this.refreshFullData(intervention);
+    const fullData = dataResponse.fullData;
+    const dataVals = dataResponse.dataVals;
+
+    for (const row of formulae) {
+      //formulae.forEach(async row => {
+      if (row.year0Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          0,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year1Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          1,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year2Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          2,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year3Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          3,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year4Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          4,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year5Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          5,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year6Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          6,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year7Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          7,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year8Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          8,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+      if (row.year9Formula && row.rowIndex) {
+        await this.processFormulaForRowYear(
+          row,
+          9,
+          fullData,
+          dataVals,
+          intervention,
+        );
+      }
+
+      // console.log(`Row #${row.rowIndex}`);
+      /*
+        // console.log(row.year0Formula);
+        const year0Formula = formulaToJsonLogic(row.year0Formula, fullData);
+        // console.log(inspect(year0Formula, false, null, false));
+        const year0NewValue = jsonLogicParser.apply(year0Formula);
+        const dataValsIndex = fullData[row.rowIndex].index;
+
+        if (dataVals[dataValsIndex].year0 != year0NewValue) {
+          console.log(`Row #${row.rowIndex}`);
+          console.log(row.year0Formula);
+          console.log(inspect(year0Formula, false, null, false));
+          console.log(
+            `Year0: ${dataVals[dataValsIndex].year0} => ${year0NewValue}`,
+          );
+
+          // Update the data for jsonLogic
+          fullData[row.rowIndex].year0 = year0NewValue;
+
+          // Update the data values model for the DB and commit
+          dataVals[dataValsIndex].year0 = parseFloat(year0NewValue);
+          await this.interventionDataRepository.update(dataVals[dataValsIndex]);
+
+          console.log('---------------');
+        } else {
+          console.log(`Row #${row.rowIndex}`);
+          console.log(row.year0Formula);
+          console.log(inspect(year0Formula, false, null, false));
+          console.log(`${dataVals[dataValsIndex].year0} => ${year0NewValue}`);
+          console.log('---------------');
+        } */
+
+      // console.log('---------------');
+    }
+
+    // Fetch the intervention
     const filter: Filter = {
       where: {
         id: id,
       },
     };
-    const intervention = await this.interventionListRepository.find(filter);
+    intervention = (await this.interventionListRepository.find(filter))[0];
 
     const data = new StandardJsonResponse<Array<InterventionList>>(
       `Intervention data updated`,
-      intervention,
+      [intervention],
       'InterventionList',
     );
 
-    console.log(data);
+    // console.log(data);
 
     //this.response.set('Access-Control-Allow-Methods', '*');
     //this.response.status(200).send(data);
     // Return the HTTP response object so that LoopBack framework skips the
     // generation of HTTP response
     return data;
+  }
+
+  async processFormulaForRowYear(
+    row: any,
+    year: number,
+    fullData: any,
+    dataVals: any,
+    intervention: InterventionList,
+  ) {
+    console.log(`${row.rowIndex}, Year${year}`);
+
+    const formula = formulaToJsonLogic(row[`year${year}Formula`], fullData);
+    // console.log(inspect(year0Formula, false, null, false));
+    const newValue = jsonLogicParser.apply(formula);
+    const dataValsIndex = fullData[row.rowIndex].index;
+
+    if (dataVals[dataValsIndex][`year${year}`] != newValue) {
+      console.log(`Row #${row.rowIndex}`);
+      console.log(row[`year${year}Formula`]);
+      console.log(inspect(formula, false, null, false));
+      console.log(
+        `Year${year}: ${dataVals[dataValsIndex][`year${year}`]} => ${newValue}`,
+      );
+
+      // Update the data for jsonLogic
+      fullData[row.rowIndex][`year${year}`] = newValue;
+
+      // Update the data values model for the DB and commit
+      dataVals[dataValsIndex][`year${year}`] = parseFloat(newValue);
+      await this.interventionDataRepository.update(dataVals[dataValsIndex]);
+
+      console.log('---------------');
+    } else {
+      console.log(`Row #${row.rowIndex}`);
+      console.log(row[`year${year}Formula`]);
+      console.log(inspect(formula, false, null, false));
+      console.log(`${dataVals[dataValsIndex][`year${year}`]} => ${newValue}`);
+      console.log('---------------');
+    }
+  }
+
+  async refreshFullData(intervention: InterventionList) {
+    const dataFilter = {
+      where: {
+        interventionId: intervention.id,
+      },
+    };
+    const dataVals = await this.interventionDataRepository.find(dataFilter);
+    const fullData = dataVals.reduce(
+      (accumulator, currentValue, currentIndex) => {
+        if (currentValue.rowIndex) {
+          accumulator[currentValue.rowIndex] = {
+            index: currentIndex,
+            year0: Number(currentValue.year0),
+            year1: Number(currentValue.year1),
+            year2: Number(currentValue.year2),
+            year3: Number(currentValue.year3),
+            year4: Number(currentValue.year4),
+            year5: Number(currentValue.year5),
+            year6: Number(currentValue.year6),
+            year7: Number(currentValue.year7),
+            year8: Number(currentValue.year8),
+            year9: Number(currentValue.year9),
+          };
+        }
+        return accumulator;
+      },
+      {} as {
+        [key: number]: {
+          index: number;
+          year0: number | undefined;
+          year1: number | undefined;
+          year2: number | undefined;
+          year3: number | undefined;
+          year4: number | undefined;
+          year5: number | undefined;
+          year6: number | undefined;
+          year7: number | undefined;
+          year8: number | undefined;
+          year9: number | undefined;
+        };
+      },
+    );
+
+    console.error(fullData[275]);
+
+    (fullData as any)['regexes'] = {
+      premix: 'Premix - .*',
+      demographics: 'Demographics',
+    };
+
+    const premixFilter = {
+      where: {
+        interventionId: intervention.parentIntervention,
+      },
+    };
+    const premixCost = (
+      await this.interventionPremixCostRepository.find(premixFilter)
+    )[0];
+
+    console.log(premixCost);
+
+    (fullData as any)['premix'] = {
+      year0: premixCost.premixCostPerMt,
+      year1: premixCost.premixCostPerMt,
+      year2: premixCost.premixCostPerMt,
+      year3: premixCost.premixCostPerMt,
+      year4: premixCost.premixCostPerMt,
+      year5: premixCost.premixCostPerMt,
+      year6: premixCost.premixCostPerMt,
+      year7: premixCost.premixCostPerMt,
+      year8: premixCost.premixCostPerMt,
+      year9: premixCost.premixCostPerMt,
+    };
+
+    (fullData as any)['demographics'] = {
+      year0: 120812698,
+      year1: 123771387,
+      year2: 126750868,
+      year3: 129749447,
+      year4: 132765521,
+      year5: 135796650,
+      year6: 138839374,
+      year7: 141889688,
+      year8: 144944302,
+      year9: 148001185,
+    };
+
+    return {dataVals, fullData};
   }
 }
