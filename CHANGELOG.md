@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.29.0](https://github.com/micronutrientsupport/api/compare/v2.28.1...v2.29.0) (2023-10-06)
+
+
+### Features
+
+* recalculate all intervention values when a patch request is made ([f69b9a4](https://github.com/micronutrientsupport/api/commit/f69b9a4ed8e00fb47dc44beece31aecbe638c57b))
+
 ## [2.28.1](https://github.com/micronutrientsupport/api/compare/v2.28.0...v2.28.1) (2023-08-17)
 
 
