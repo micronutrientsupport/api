@@ -43,3 +43,5 @@ export * from './monthly-food.repository';
 export * from './top-20-mn-per-country.repository';
 export * from './top-20-mn-per-hhsurvey.repository';
 
+export * from './intervention-cell-formula-deps.repository';
+export * from './intervention-premix-cost.repository';

@@ -11,8 +11,8 @@ const config = {
 
 const output_path = './src/schemas/schema.json';
 
-const schema = tsj.createGenerator(config).createSchema(config.type);
-const schemaString = JSON.stringify(schema, null, 2);
-fs.writeFile(output_path, schemaString, err => {
-  if (err) throw err;
-});
+// const schema = tsj.createGenerator(config).createSchema(config.type);
+// const schemaString = JSON.stringify(schema, null, 2);
+// fs.writeFile(output_path, schemaString, err => {
+//   if (err) throw err;
+// });

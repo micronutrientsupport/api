@@ -5,17 +5,18 @@ import {Entity, model, property} from '@loopback/repository';
     idInjection: false,
     postgresql: {
       schema: process.env.DB_SCHEMA,
-      table: 'biomarker_threshold_list',
+      table: 'intervention_cell_formula_deps',
     },
   },
 })
-export class BiomarkerThresholdList extends Entity {
+export class InterventionCellFormulaDeps extends Entity {
   @property({
     type: 'number',
-    scale: 0,
     id: true,
+    jsonSchema: {nullable: true},
+    scale: 0,
     postgresql: {
-      columnName: 'threshold_id',
+      columnName: 'intervention_id',
       dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
@@ -23,129 +24,28 @@ export class BiomarkerThresholdList extends Entity {
       nullable: 'YES',
     },
   })
-  thresholdId?: number;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'biomarker_id',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  biomarkerId?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'group_id',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  groupId?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'condition_text',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  conditionText?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'condition',
-      dataType: 'json',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  condition?: object;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'threshold_type',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  thresholdType?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'source',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  source?: string;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'matrix',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  matrix?: string;
+  interventionId?: number;
 
   @property({
     type: 'number',
+    jsonSchema: {nullable: true},
+    scale: 0,
     postgresql: {
-      columnName: 'lower_threshold',
-      dataType: 'numeric',
+      columnName: 'row_index',
+      dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
-      dataScale: null,
+      dataScale: 0,
       nullable: 'YES',
     },
   })
-  lowerThreshold?: number;
-
-  @property({
-    type: 'number',
-    postgresql: {
-      columnName: 'upper_threshold',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  upperThreshold?: number;
+  rowIndex?: number;
 
   @property({
     type: 'string',
+    jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'comments',
+      columnName: 'year_0_formula',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -153,7 +53,147 @@ export class BiomarkerThresholdList extends Entity {
       nullable: 'YES',
     },
   })
-  comments?: string;
+  year0Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_1_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year1Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_2_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year2Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_3_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year3Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_4_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year4Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_5_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year5Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_6_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year6Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_7_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year7Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_8_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year8Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'year_9_formula',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year9Formula?: string;
+
+  @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'dependent_rows',
+      dataType: 'ARRAY',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  dependentRows?: string;
 
   // Define well-known properties here
 
@@ -161,14 +201,14 @@ export class BiomarkerThresholdList extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<BiomarkerThresholdList>) {
+  constructor(data?: Partial<InterventionCellFormulaDeps>) {
     super(data);
   }
 }
 
-export interface BiomarkerThresholdListRelations {
+export interface InterventionCellFormulaDepsRelations {
   // describe navigational properties here
 }
 
-export type BiomarkerThresholdListWithRelations = BiomarkerThresholdList &
-  BiomarkerThresholdListRelations;
+export type InterventionCellFormulaDepsWithRelations =
+  InterventionCellFormulaDeps & InterventionCellFormulaDepsRelations;
