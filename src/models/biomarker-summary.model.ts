@@ -4,7 +4,7 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'bmgf', table: 'biomarker_summary'},
+    postgresql: {schema: process.env.DB_SCHEMA, table: 'biomarker_summary'},
   },
 })
 export class BiomarkerSummary extends Entity {

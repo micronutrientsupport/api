@@ -7,7 +7,7 @@ index de72f86..64b90ac 100644
 +export function transformJS (code: string): any
 +export function processNode (node: any, extraData?: any, valueOnly?: boolean, ): any;
 diff --git a/node_modules/js-to-json-logic/lib/index.js b/node_modules/js-to-json-logic/lib/index.js
-index c6ab89c..91f818f 100644
+index c6ab89c..382199f 100644
 --- a/node_modules/js-to-json-logic/lib/index.js
 +++ b/node_modules/js-to-json-logic/lib/index.js
 @@ -33,14 +33,14 @@ function processError ({ loc, at }, message) {
@@ -36,78 +36,217 @@ index c6ab89c..91f818f 100644
          }
        }
  
-@@ -66,6 +66,79 @@ function processNode (node, valueOnly = false) {
+@@ -66,6 +66,218 @@ function processNode (node, valueOnly = false) {
        }
      }
  
 +    case 'cell': {
 +      let cell = node.key;
 +      //console.log('Parsing cell', cell)
-+      //console.log(extraData)
-+      let col = cell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
-+      let row = cell.split(col)[1];
-+      //console.log({col: col, row: row})
 +
-+      switch(col) {
-+        case 'D': {
-+          col = 'year0';
-+          break;
-+        }
-+        case 'E': {
-+          col = 'year1';
-+          break;
-+        }
-+        case 'F': {
-+          col = 'year2';
-+          break;
-+        }
-+        case 'G': {
-+          col = 'year3';
-+          break;
-+        }
-+        case 'H': {
-+          col = 'year4';
-+          break;
-+        }
-+        case 'I': {
-+          col = 'year5';
-+          break;
-+        }
-+        case 'J': {
-+          col = 'year6';
-+          break;
-+        }
-+        case 'K': {
-+          col = 'year7';
-+          break;
-+        }
-+        case 'L': {
-+          col = 'year8';
-+          break;
-+        }
-+        case 'M': {
-+          col = 'year9';
-+          break;
-+        }
-+      }
++      if(cell.includes('!')) {
++        // const key = Object.keys(extraData).find(key => key.match(yourRegex));
++        // if (key) {
++        //   extraData[key]
++        //   // Do something with yourObject[key]
++        // }
++        console.error('External sheet ref:', cell)
 +
-+      if(extraData && extraData.hasOwnProperty(row) && extraData[row].hasOwnProperty(col)) {
-+       // console.log('Missing Data: ', extraData[row][col])
-+        return extraData[row][col];
-+      } else {
-+      return { var:
-+            {
-+              colIndex: col,
-+              rowIndex: row
++        // Extract sheet/column/row fromt the cell ref
++        let col = cell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
++        let row = cell.split(col)[1];
++        let subcol = col.split('!');
++        col = subcol[1]
++        let sheet = subcol[0]
++
++        // Strip out $ fixed cell references as they
++        // don't mean anything here
++        col = col.replace(/\$/g, '')
++        row = row.replace(/\$/g, '')
++
++        console.error({sheet, col, row})
++
++        if (extraData.regexes) {
++          for (const [key, value] of Object.entries(extraData.regexes)) {
++            console.error({key, value, sheet})
++            const regex = new RegExp(value);
++            if(sheet.match(regex)) {
++              console.error('Matches', key)
++              console.error(extraData[key])
++
++
++              switch(col) {
++                case 'D': {
++                  col = 'year0';
++                  break;
++                }
++                case 'E': {
++                  col = 'year1';
++                  break;
++                }
++                case 'F': {
++                  col = 'year2';
++                  break;
++                }
++                case 'G': {
++                  col = 'year3';
++                  break;
++                }
++                case 'H': {
++                  col = 'year4';
++                  break;
++                }
++                case 'I': {
++                  col = 'year5';
++                  break;
++                }
++                case 'J': {
++                  col = 'year6';
++                  break;
++                }
++                case 'K': {
++                  col = 'year7';
++                  break;
++                }
++                case 'L': {
++                  col = 'year8';
++                  break;
++                }
++                case 'M': {
++                  col = 'year9';
++                  break;
++                }
++              }
++              console.log({
++                cell: cell,
++                type:
++                typeof(extraData[key][col]),
++                val: extraData[key][col]
++              })
++              return extraData[key][col]
++
++            } else {
++              console.error('Doesnt match', sheet)
++            }
 +          }
-+        };
++        }
++
++        return {}
++
++      } else
++      {
++        let col = cell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
++        let row = cell.split(col)[1];
++
++        // Strip out $ fixed cell references as they
++        // don't mean anything here
++        col = col.replace(/\$/g, '')
++        row = row.replace(/\$/g, '')
++        //console.log({col: col, row: row})
++
++        switch(col) {
++          case 'D': {
++            col = 'year0';
++            break;
++          }
++          case 'E': {
++            col = 'year1';
++            break;
++          }
++          case 'F': {
++            col = 'year2';
++            break;
++          }
++          case 'G': {
++            col = 'year3';
++            break;
++          }
++          case 'H': {
++            col = 'year4';
++            break;
++          }
++          case 'I': {
++            col = 'year5';
++            break;
++          }
++          case 'J': {
++            col = 'year6';
++            break;
++          }
++          case 'K': {
++            col = 'year7';
++            break;
++          }
++          case 'L': {
++            col = 'year8';
++            break;
++          }
++          case 'M': {
++            col = 'year9';
++            break;
++          }
++        }
++
++        if(extraData && extraData.hasOwnProperty(row) && extraData[row].hasOwnProperty(col)) {
++        // console.log('Missing Data: ', extraData[row][col])
++          return extraData[row][col];
++        } else {
++        return { var:
++              {
++                colIndex: col,
++                rowIndex: row
++            }
++          };
++        }
 +      }
 +    }
 +
 +    case 'cell-range': {
 +      console.log('cell-range')
 +      console.log(node)
-+      return processNode(node.left)
++
++      const leftRef = node.left;
++      const rightRef = node.right;
++
++      let leftCell = leftRef.key;
++      let rightCell = rightRef.key;
++      //console.log('Parsing cell', cell)
++      //console.log(extraData)
++      let leftCol = leftCell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
++      let leftRow = parseInt(leftCell.split(leftCol)[1]);
++
++      let rightCol = rightCell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
++      let rightRow = parseInt(rightCell.split(rightCol)[1]);
++
++      console.log(`${leftCol} => ${rightCol}`)
++      console.log(`${leftRow} => ${rightRow}`)
++
++      let res = [processNode(node.left, extraData)]
++      if(leftCol === rightCol) {
++        for(i = leftRow+1; i<rightRow; i++) {
++          console.log(i);
++          let newNode = {
++            type: 'cell',
++            key: `${leftCol}${i}`
++          }
++          res.push(processNode(newNode, extraData))
++        }
++      }
++      else if (leftRow === rightRow) {
++        // Use charcode to convert character to numeric A->Z => 65->90
++        for(i= leftCol.charCodeAt(0)+1; i<rightCol.charCodeAt(0); i++) {
++          // console.log(`${String.fromCharCode(i)}${leftRow}`);
++          let newNode = {
++            type: 'cell',
++            key: `${String.fromCharCode(i)}${leftRow}`
++          }
++          res.push(processNode(newNode, extraData))
++        }
++      }
++      res.push(processNode(node.right, extraData))
++
++
++      return res
 +      //console.log(node);
 +    }
 +
@@ -116,7 +255,7 @@ index c6ab89c..91f818f 100644
      case 'Literal': {
        if (node.value instanceof RegExp) {
          return [node.value.source, node.value.flags]
-@@ -75,7 +148,7 @@ function processNode (node, valueOnly = false) {
+@@ -75,7 +287,7 @@ function processNode (node, valueOnly = false) {
      }
  
      case 'SpreadElement': {
@@ -125,7 +264,7 @@ index c6ab89c..91f818f 100644
      }
  
      case 'ArrayExpression': {
-@@ -83,19 +156,19 @@ function processNode (node, valueOnly = false) {
+@@ -83,19 +295,19 @@ function processNode (node, valueOnly = false) {
        if (node.elements.some((node) => node.type === 'SpreadElement')) {
          return {
            merge: [
@@ -148,7 +287,7 @@ index c6ab89c..91f818f 100644
        }
        return result
      }
-@@ -107,34 +180,81 @@ function processNode (node, valueOnly = false) {
+@@ -107,59 +319,175 @@ function processNode (node, valueOnly = false) {
      }
  
      case 'ExpressionStatement': {
@@ -170,9 +309,9 @@ index c6ab89c..91f818f 100644
        return {
 -        [key]: node.arguments.map((node) => processNode(node))
 +        [key]: node.arguments.map((node) => processNode(node, extraData))
-+      }
-+    }
-+
+       }
+     }
+ 
 +    case 'function': {
 +      switch(node.name) {
 +        case 'ROUNDUP': {
@@ -203,20 +342,87 @@ index c6ab89c..91f818f 100644
 +          console.log(node)
 +          let sum = [];
 +          node.arguments.forEach((args) => {
-+            sum.push(processNode(args, extraData))
++            let arg = processNode(args, extraData)
++            if(Array.isArray(arg)) {
++              sum = sum.concat(arg)
++            }
++            else {
++              sum.push(args)
++            }
 +          })
 +          return {
 +            sum: sum
 +          }
++          break;
++        }
++        case 'AVERAGE': {
++          console.log(node)
++          let avg = [];
++          node.arguments.forEach((args) => {
++            let arg = processNode(args, extraData)
++            if(Array.isArray(arg)) {
++              avg = avg.concat(arg)
++            }
++            else {
++              avg.push(args)
++            }
++          })
++          return {
++            average: avg
++          }
++          break;
++        }
++        case 'PV': {
++          let pv = [];
++          node.arguments.forEach((args) => {
++            let arg = processNode(args, extraData)
++            pv.push(arg)
++          })
++          return {
++            PV: pv
++          }
++          break;
++        }
++        case 'AND': {
++          let and = [];
++          node.arguments.forEach((args) => {
++            let arg = processNode(args, extraData)
++            if(Array.isArray(arg)) {
++              and = and.concat(arg)
++            }
++            else {
++              and.push(args)
++            }
++          })
++          return {
++            and: and
++          }
++          break;
++        }
++        case 'MAX': {
++          let max = [];
++          node.arguments.forEach((args) => {
++            let arg = processNode(args, extraData)
++            if(Array.isArray(arg)) {
++              max = max.concat(arg)
++            }
++            else {
++              max.push(args)
++            }
++          })
++          return {
++            max: max
++          }
++          break;
 +        }
 +        default:
 +          console.warn("I don't know what to do with Function type", node.name)
 +          return processNode(node.arguments[0], extraData);
-       }
++      }
 +      console.warn("I don't know what to do with Function type", node.name)
 +      return processNode(node.arguments[0], extraData)
-     }
- 
++    }
++
      case 'LogicalExpression':
 -    case 'BinaryExpression': {
 +    case 'binary-expression': {
@@ -229,7 +435,10 @@ index c6ab89c..91f818f 100644
        }
      }
  
-     case 'UnaryExpression': {
+-    case 'UnaryExpression': {
++    case 'UnaryExpression':
++    case 'unary-expression': {
++      console.log('UnaryExpr', node)
        if (node.operator === '!' && node.argument.operator === '!') {
          return {
 -          '!!': [processNode(node.argument.argument)]
@@ -237,7 +446,10 @@ index c6ab89c..91f818f 100644
          }
        }
  
-@@ -143,23 +263,23 @@ function processNode (node, valueOnly = false) {
+-      if (node.operator === '-' && typeof node.argument.value === 'number') {
+-        return node.argument.value * -1
++      if (node.operator === '-' && node.operand.type === 'number') {
++        return node.operand.value * -1
        }
  
        return {
@@ -267,7 +479,7 @@ index c6ab89c..91f818f 100644
          : node.property.name
  
        const value = `${object}.${property}`
-@@ -170,10 +290,10 @@ function processNode (node, valueOnly = false) {
+@@ -170,10 +498,10 @@ function processNode (node, valueOnly = false) {
      case 'IfStatement': {
        return {
          if: [
@@ -281,7 +493,7 @@ index c6ab89c..91f818f 100644
              : undefined
          ].filter(Boolean)
        }
-@@ -184,8 +304,8 @@ function processNode (node, valueOnly = false) {
+@@ -184,8 +512,8 @@ function processNode (node, valueOnly = false) {
          return processError(node, 'Only one-line arrow functions with implicit return are supported.')
        }
  
@@ -292,7 +504,7 @@ index c6ab89c..91f818f 100644
  
        return !params.length || params.length > 1
          ? body
-@@ -193,7 +313,7 @@ function processNode (node, valueOnly = false) {
+@@ -193,7 +521,7 @@ function processNode (node, valueOnly = false) {
      }
  
      case 'ReturnStatement': {
@@ -301,7 +513,7 @@ index c6ab89c..91f818f 100644
      }
  
      /** unsuported features */
-@@ -266,4 +386,4 @@ const transformJS = (code) => {
+@@ -266,4 +594,4 @@ const transformJS = (code) => {
    }
  }
  

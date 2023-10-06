@@ -1,3 +1,4 @@
+import {JSONObject} from '@loopback/core';
 import {Entity, model, property} from '@loopback/repository';
 import {InterventionDataFieldsSubset} from '../controllers/intervention.controller';
 
@@ -43,7 +44,9 @@ export class InterventionStartupScaleupCosts extends Entity {
       section: string;
       costBreakdown: InterventionDataFieldsSubset[];
       year0Total: number;
+      year0TotalFormula: string | JSONObject;
       year1Total: number;
+      year1TotalFormula: string | JSONObject;
     }[];
   }[];
 
@@ -62,5 +65,5 @@ export interface InterventionStartupScaleupCostsRelations {
   // describe navigational properties here
 }
 
-export type InterventionStartupScaleupCostsWithRelations = InterventionStartupScaleupCosts &
-  InterventionStartupScaleupCostsRelations;
+export type InterventionStartupScaleupCostsWithRelations =
+  InterventionStartupScaleupCosts & InterventionStartupScaleupCostsRelations;

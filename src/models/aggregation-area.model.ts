@@ -3,7 +3,7 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'bmgf', table: 'aggregation_area'},
+    postgresql: {schema: process.env.DB_SCHEMA, table: 'aggregation_area'},
   },
 })
 export class AggregationArea extends Entity {

@@ -3,7 +3,7 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: 'bmgf', table: 'data_version'},
+    postgresql: {schema: process.env.DB_SCHEMA, table: 'data_version'},
   },
 })
 export class DataVersion extends Entity {
