@@ -1,4 +1,6 @@
+import {JSONObject} from '@loopback/core';
 import {Entity, model, property} from '@loopback/repository';
+import {InterventionDataFieldsSubset} from '../controllers/intervention.controller';
 
 @model({
   settings: {
@@ -36,33 +38,17 @@ export class InterventionSummaryCosts extends Entity {
       nullable: 'YES',
     },
   })
-  summaryCosts?: string;
-
-  @property({
-    type: 'number',
-    postgresql: {
-      columnName: 'discount_rate',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  discountRate?: number;
-
-  @property({
-    type: 'string',
-    postgresql: {
-      columnName: 'summary_costs_discounted',
-      dataType: 'json',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-    },
-  })
-  summaryCostsDiscounted?: string;
+  summaryCosts?: {
+    category: string;
+    costs: {
+      section: string;
+      costBreakdown: InterventionDataFieldsSubset[];
+      year0Total: number;
+      year0TotalFormula: string | JSONObject;
+      year1Total: number;
+      year1TotalFormula: string | JSONObject;
+    }[];
+  }[];
 
   // Define well-known properties here
 
