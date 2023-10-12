@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.30.0](https://github.com/micronutrientsupport/api/compare/v2.29.0...v2.30.0) (2023-10-12)
+
+
+### Features
+
+* fix intervention summary ([96f6bf5](https://github.com/micronutrientsupport/api/commit/96f6bf5369efb3b3c39919eeae31fa4d060a4713))
+
 ## [2.29.0](https://github.com/micronutrientsupport/api/compare/v2.28.1...v2.29.0) (2023-10-06)
 
 
