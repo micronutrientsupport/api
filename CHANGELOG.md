@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.31.0](https://github.com/micronutrientsupport/api/compare/v2.30.0...v2.31.0) (2023-11-01)
+
+
+### Features
+
+* support patching overriden flag for intervention data ([86971d3](https://github.com/micronutrientsupport/api/commit/86971d31b5b942d96d124ad5ad7e0f3ec46e56e4))
+
 ## [2.30.0](https://github.com/micronutrientsupport/api/compare/v2.29.0...v2.30.0) (2023-10-12)
 
 

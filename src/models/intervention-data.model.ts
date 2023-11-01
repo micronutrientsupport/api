@@ -124,6 +124,19 @@ export class InterventionData extends Entity {
   year0?: number;
 
   @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_0_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year0Overriden?: boolean;
+
+  @property({
     type: 'number',
     postgresql: {
       columnName: 'year_1',
@@ -135,6 +148,19 @@ export class InterventionData extends Entity {
     },
   })
   year1?: number;
+
+  @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_1_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year1Overriden?: boolean;
 
   @property({
     type: 'number',
@@ -150,6 +176,19 @@ export class InterventionData extends Entity {
   year2?: number;
 
   @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_2_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year2Overriden?: boolean;
+
+  @property({
     type: 'number',
     postgresql: {
       columnName: 'year_3',
@@ -161,6 +200,19 @@ export class InterventionData extends Entity {
     },
   })
   year3?: number;
+
+  @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_3_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year3Overriden?: boolean;
 
   @property({
     type: 'number',
@@ -176,6 +228,19 @@ export class InterventionData extends Entity {
   year4?: number;
 
   @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_4_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year4Overriden?: boolean;
+
+  @property({
     type: 'number',
     postgresql: {
       columnName: 'year_5',
@@ -187,6 +252,19 @@ export class InterventionData extends Entity {
     },
   })
   year5?: number;
+
+  @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_5_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year5Overriden?: boolean;
 
   @property({
     type: 'number',
@@ -202,6 +280,19 @@ export class InterventionData extends Entity {
   year6?: number;
 
   @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_6_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year6Overriden?: boolean;
+
+  @property({
     type: 'number',
     postgresql: {
       columnName: 'year_7',
@@ -213,6 +304,19 @@ export class InterventionData extends Entity {
     },
   })
   year7?: number;
+
+  @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_7_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year7Overriden?: boolean;
 
   @property({
     type: 'number',
@@ -228,6 +332,19 @@ export class InterventionData extends Entity {
   year8?: number;
 
   @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_8_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year8Overriden?: boolean;
+
+  @property({
     type: 'number',
     postgresql: {
       columnName: 'year_9',
@@ -239,6 +356,19 @@ export class InterventionData extends Entity {
     },
   })
   year9?: number;
+
+  @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'year_9_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year9Overriden?: boolean;
 
   @property({
     type: 'string',
@@ -283,7 +413,17 @@ export class InterventionUpdateDelta extends Entity {
   @property({
     type: 'number',
   })
+  year0Overriden?: boolean;
+
+  @property({
+    type: 'number',
+  })
   year1?: number;
+
+  @property({
+    type: 'number',
+  })
+  year1Overriden?: boolean;
 
   @property({
     type: 'number',
@@ -293,7 +433,17 @@ export class InterventionUpdateDelta extends Entity {
   @property({
     type: 'number',
   })
+  year2Overriden?: boolean;
+
+  @property({
+    type: 'number',
+  })
   year3?: number;
+
+  @property({
+    type: 'number',
+  })
+  year3Overriden?: boolean;
 
   @property({
     type: 'number',
@@ -303,7 +453,17 @@ export class InterventionUpdateDelta extends Entity {
   @property({
     type: 'number',
   })
+  year4Overriden?: boolean;
+
+  @property({
+    type: 'number',
+  })
   year5?: number;
+
+  @property({
+    type: 'number',
+  })
+  year5Overriden?: boolean;
 
   @property({
     type: 'number',
@@ -313,7 +473,17 @@ export class InterventionUpdateDelta extends Entity {
   @property({
     type: 'number',
   })
+  year6Overriden?: boolean;
+
+  @property({
+    type: 'number',
+  })
   year7?: number;
+
+  @property({
+    type: 'number',
+  })
+  year7Overriden?: boolean;
 
   @property({
     type: 'number',
@@ -323,7 +493,17 @@ export class InterventionUpdateDelta extends Entity {
   @property({
     type: 'number',
   })
+  year8Overriden?: boolean;
+
+  @property({
+    type: 'number',
+  })
   year9?: number;
+
+  @property({
+    type: 'number',
+  })
+  year9Overriden?: boolean;
 }
 
 @model({

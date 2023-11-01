@@ -5,7 +5,7 @@ import {Entity, model, property} from '@loopback/repository';
     idInjection: false,
     postgresql: {
       schema: process.env.DB_SCHEMA,
-      table: 'intervention_cell_formula_deps',
+      table: 'intervention_formulae',
     },
   },
 })
@@ -56,6 +56,20 @@ export class InterventionCellFormulaDeps extends Entity {
   year0Formula?: string;
 
   @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_0_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year0Overriden?: boolean;
+
+  @property({
     type: 'string',
     jsonSchema: {nullable: true},
     postgresql: {
@@ -68,6 +82,20 @@ export class InterventionCellFormulaDeps extends Entity {
     },
   })
   year1Formula?: string;
+
+  @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_1_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year1Overriden?: boolean;
 
   @property({
     type: 'string',
@@ -84,6 +112,20 @@ export class InterventionCellFormulaDeps extends Entity {
   year2Formula?: string;
 
   @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_2_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year2Overriden?: boolean;
+
+  @property({
     type: 'string',
     jsonSchema: {nullable: true},
     postgresql: {
@@ -96,6 +138,20 @@ export class InterventionCellFormulaDeps extends Entity {
     },
   })
   year3Formula?: string;
+
+  @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_3_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year3Overriden?: boolean;
 
   @property({
     type: 'string',
@@ -112,6 +168,20 @@ export class InterventionCellFormulaDeps extends Entity {
   year4Formula?: string;
 
   @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_4_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year4Overriden?: boolean;
+
+  @property({
     type: 'string',
     jsonSchema: {nullable: true},
     postgresql: {
@@ -124,6 +194,20 @@ export class InterventionCellFormulaDeps extends Entity {
     },
   })
   year5Formula?: string;
+
+  @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_5_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year5Overriden?: boolean;
 
   @property({
     type: 'string',
@@ -140,6 +224,20 @@ export class InterventionCellFormulaDeps extends Entity {
   year6Formula?: string;
 
   @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_6_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year6Overriden?: boolean;
+
+  @property({
     type: 'string',
     jsonSchema: {nullable: true},
     postgresql: {
@@ -152,6 +250,20 @@ export class InterventionCellFormulaDeps extends Entity {
     },
   })
   year7Formula?: string;
+
+  @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_7_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year7Overriden?: boolean;
 
   @property({
     type: 'string',
@@ -168,6 +280,20 @@ export class InterventionCellFormulaDeps extends Entity {
   year8Formula?: string;
 
   @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_8_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year8Overriden?: boolean;
+
+  @property({
     type: 'string',
     jsonSchema: {nullable: true},
     postgresql: {
@@ -180,6 +306,20 @@ export class InterventionCellFormulaDeps extends Entity {
     },
   })
   year9Formula?: string;
+
+  @property({
+    type: 'boolean',
+    description: 'Is the formula overriden?',
+    postgresql: {
+      columnName: 'year_9_overriden',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  year9Overriden?: boolean;
 
   @property({
     type: 'string',
