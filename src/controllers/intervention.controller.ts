@@ -895,32 +895,82 @@ export class InterventionController {
                 year0: {
                   type: 'number',
                 },
+                year0Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
+                },
                 year1: {
                   type: 'number',
+                },
+                year1Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
                 },
                 year2: {
                   type: 'number',
                 },
+                year2Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
+                },
                 year3: {
                   type: 'number',
+                },
+                year3Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
                 },
                 year4: {
                   type: 'number',
                 },
+                year4Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
+                },
                 year5: {
                   type: 'number',
+                },
+                year5Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
                 },
                 year6: {
                   type: 'number',
                 },
+                year6Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
+                },
                 year7: {
                   type: 'number',
+                },
+                year7Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
                 },
                 year8: {
                   type: 'number',
                 },
+                year8Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
+                },
                 year9: {
                   type: 'number',
+                },
+                year9Overriden: {
+                  type: 'number',
+                  maximum: 1,
+                  minimum: 0,
                 },
               },
             },
@@ -930,8 +980,8 @@ export class InterventionController {
     })
     interventionUpdateDeltaList: InterventionUpdateDelta[],
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
-    // console.log('Patch');
-    // console.log(interventionUpdateDeltaList);
+    console.log('Patch');
+    console.log(interventionUpdateDeltaList);
 
     const tx =
       await this.interventionDataRepository.dataSource.beginTransaction(
@@ -965,7 +1015,7 @@ export class InterventionController {
 
     const formulaeFilter = {
       where: {
-        interventionId: intervention.parentIntervention,
+        interventionId: intervention.id,
       },
     };
     const formulae = await this.interventionCellFormulaDepsRepository.find(
@@ -1035,8 +1085,7 @@ export class InterventionController {
     const dataVals = dataResponse.dataVals;
 
     for (const row of formulae) {
-      //formulae.forEach(async row => {
-      if (row.year0Formula && row.rowIndex) {
+      if (!row.year0Overriden && row.year0Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           0,
@@ -1045,7 +1094,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year1Formula && row.rowIndex) {
+      if (!row.year1Overriden && row.year1Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           1,
@@ -1054,7 +1103,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year2Formula && row.rowIndex) {
+      if (!row.year2Overriden && row.year2Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           2,
@@ -1063,7 +1112,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year3Formula && row.rowIndex) {
+      if (!row.year3Overriden && row.year3Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           3,
@@ -1072,7 +1121,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year4Formula && row.rowIndex) {
+      if (!row.year4Overriden && row.year4Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           4,
@@ -1081,7 +1130,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year5Formula && row.rowIndex) {
+      if (!row.year5Overriden && row.year5Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           5,
@@ -1090,7 +1139,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year6Formula && row.rowIndex) {
+      if (!row.year6Overriden && row.year6Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           6,
@@ -1099,7 +1148,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year7Formula && row.rowIndex) {
+      if (!row.year7Overriden && row.year7Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           7,
@@ -1108,7 +1157,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year8Formula && row.rowIndex) {
+      if (!row.year8Overriden && row.year8Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           8,
@@ -1117,7 +1166,7 @@ export class InterventionController {
           intervention,
         );
       }
-      if (row.year9Formula && row.rowIndex) {
+      if (!row.year9Overriden && row.year9Formula && row.rowIndex) {
         await this.processFormulaForRowYear(
           row,
           9,
