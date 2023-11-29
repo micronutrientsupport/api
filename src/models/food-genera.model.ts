@@ -36,7 +36,7 @@ export class FoodGenera extends Entity {
       generated: undefined,
     },
   })
-  foodName?: string;
+  foodGenusName?: string;
 
   @property({
     type: 'number',
