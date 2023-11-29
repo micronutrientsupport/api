@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.32.0](https://github.com/micronutrientsupport/api/compare/v2.31.0...v2.32.0) (2023-11-29)
+
+
+### Features
+
+* add endpoint for list of valid food genera ([c667501](https://github.com/micronutrientsupport/api/commit/c6675011edc50d5f1074c13fa93e3ad451060936))
+
+
+### Bug Fixes
+
+* update field output names ([4f1077f](https://github.com/micronutrientsupport/api/commit/4f1077fe7dc5eed9af9bed8b7ba3642eb3f6bab0))
+
 ## [2.31.0](https://github.com/micronutrientsupport/api/compare/v2.30.0...v2.31.0) (2023-11-01)
 
 
