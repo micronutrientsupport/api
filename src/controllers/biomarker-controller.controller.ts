@@ -10,6 +10,7 @@ import {
   getModelSchemaRef,
   param,
 } from '@loopback/rest';
+import {CacheHeader} from '../decorators/cache-header.decorator';
 import {BiomarkerThresholdList} from '../models';
 import {BiomarkerSummary} from '../models/biomarker-summary.model';
 import {BiomarkerThresholdListRepository} from '../repositories';
@@ -36,6 +37,26 @@ export class BiomarkerControllerController {
     protected opencpuService: OpencpuService,
     @inject(RestBindings.Http.RESPONSE) public response: Response,
   ) {}
+
+  @CacheHeader(3600)
+  @get('/biomarker-cached', {
+    responses: new StandardOpenApiResponses(
+      'Array of BiomarkerSummary model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(BiomarkerSummary))
+      .toObject(),
+  })
+  async findCached(
+    @param.query.string('surveyId') surveyId: number,
+    @param.query.string('groupId') groupId: string,
+    @param.query.string('biomarker') biomarker: string,
+    @param.query.string('aggregationField') aggregationField: string,
+  ): Promise<{}> {
+    return this.find(surveyId, groupId, biomarker, aggregationField);
+
+    //rthis.find(surveyId, groupId, biomarker, aggregationField
+  }
 
   @get('/biomarker', {
     responses: new StandardOpenApiResponses(
@@ -82,17 +103,16 @@ export class BiomarkerControllerController {
               cond[toSnakeCase(key)] = value;
             }
           }
-          prev[
-            `${threshold.thresholdType}${counts[threshold.thresholdType]}`
-          ] = {
-            //strip whitespace
-            upper: threshold.upperThreshold,
-            lower: threshold.lowerThreshold,
-            thresholdType: threshold.thresholdType,
-            conditionText: threshold.conditionText,
-            condition: cond,
-            comments: threshold.comments,
-          };
+          prev[`${threshold.thresholdType}${counts[threshold.thresholdType]}`] =
+            {
+              //strip whitespace
+              upper: threshold.upperThreshold,
+              lower: threshold.lowerThreshold,
+              thresholdType: threshold.thresholdType,
+              conditionText: threshold.conditionText,
+              condition: cond,
+              comments: threshold.comments,
+            };
         }
         return prev;
       },
@@ -125,9 +145,8 @@ export class BiomarkerControllerController {
     (filter as any).fields[biomarker] = true;
     (filter as any).fields[aggregationField] = true;
 
-    const biomarkerSummaries: BiomarkerSummary[] = await this.biomarkerSummaryRepository.find(
-      filter,
-    );
+    const biomarkerSummaries: BiomarkerSummary[] =
+      await this.biomarkerSummaryRepository.find(filter);
     try {
       const out = await this.opencpuService.summaryStats(
         biomarkerSummaries,
