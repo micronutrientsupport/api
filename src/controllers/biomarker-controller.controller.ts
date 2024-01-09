@@ -38,7 +38,7 @@ export class BiomarkerControllerController {
     @inject(RestBindings.Http.RESPONSE) public response: Response,
   ) {}
 
-  @CacheHeader(600)
+  @CacheHeader(3600)
   @get('/biomarker-cached', {
     responses: new StandardOpenApiResponses(
       'Array of BiomarkerSummary model instances',
