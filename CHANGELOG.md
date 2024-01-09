@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.32.2](https://github.com/micronutrientsupport/api/compare/v2.32.1...v2.32.2) (2024-01-09)
+
+
+### Bug Fixes
+
+* adjust cache duration ([646a269](https://github.com/micronutrientsupport/api/commit/646a26979aa769c322ddf3e59a543e3843b7c41f))
+* bump docker node version ([0f52748](https://github.com/micronutrientsupport/api/commit/0f52748143fb4dbb703411940db33084f26b4996))
+* update bm cache ([047490e](https://github.com/micronutrientsupport/api/commit/047490e21caae21f96d62b81c20e4a232a330918))
+
 ## [2.32.1](https://github.com/micronutrientsupport/api/compare/v2.32.0...v2.32.1) (2024-01-09)
 
 
