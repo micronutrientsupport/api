@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.32.1](https://github.com/micronutrientsupport/api/compare/v2.32.0...v2.32.1) (2024-01-09)
+
+
+### Bug Fixes
+
+* add cached endpoint for biomarker data response ([c290f17](https://github.com/micronutrientsupport/api/commit/c290f177fa3216588ba5409ae7537bd3ae2d099c))
+* update bm cache ([cc1794e](https://github.com/micronutrientsupport/api/commit/cc1794e6c0ad9da2990cbaf4a73cd8a31151986f))
+
 ## [2.32.0](https://github.com/micronutrientsupport/api/compare/v2.31.0...v2.32.0) (2023-11-29)
 
 
