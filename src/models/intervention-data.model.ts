@@ -390,6 +390,9 @@ export class InterventionData extends Entity {
   [prop: string]: any;
 
   constructor(data?: Partial<InterventionData>) {
+    if (data && Object.prototype.hasOwnProperty.call(data, 'targetVal')) {
+      data.year0 = data['targetVal'];
+    }
     super(data);
   }
 }
