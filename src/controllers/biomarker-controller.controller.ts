@@ -38,26 +38,7 @@ export class BiomarkerControllerController {
     @inject(RestBindings.Http.RESPONSE) public response: Response,
   ) {}
 
-  @CacheHeader(3600)
-  @get('/biomarker-cached', {
-    responses: new StandardOpenApiResponses(
-      'Array of BiomarkerSummary model instances',
-    )
-      .setDataType('array')
-      .setObjectSchema(getModelSchemaRef(BiomarkerSummary))
-      .toObject(),
-  })
-  async findCached(
-    @param.query.string('surveyId') surveyId: number,
-    @param.query.string('groupId') groupId: string,
-    @param.query.string('biomarker') biomarker: string,
-    @param.query.string('aggregationField') aggregationField: string,
-  ): Promise<{}> {
-    return this.find(surveyId, groupId, biomarker, aggregationField);
-
-    //rthis.find(surveyId, groupId, biomarker, aggregationField
-  }
-
+  @CacheHeader(86400)
   @get('/biomarker', {
     responses: new StandardOpenApiResponses(
       'Array of BiomarkerSummary model instances',
