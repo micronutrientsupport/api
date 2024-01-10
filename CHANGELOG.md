@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.33.0](https://github.com/micronutrientsupport/api/compare/v2.32.3...v2.33.0) (2024-01-10)
+
+
+### Features
+
+* cache biomarker data responses for 24hrs ([0f57184](https://github.com/micronutrientsupport/api/commit/0f5718479fbac965f637b95adc06a80e411b8267))
+
 ## [2.32.3](https://github.com/micronutrientsupport/api/compare/v2.32.2...v2.32.3) (2024-01-10)
 
 
