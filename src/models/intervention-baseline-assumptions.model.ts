@@ -39,6 +39,7 @@ export class InterventionBaselineAssumptions extends Entity {
   baselineAssumptions?: {
     potentiallyFortified: {};
     actuallyFortified: {};
+    averageFortificationLevel: {};
   };
 
   // Define well-known properties here
@@ -56,5 +57,5 @@ export interface InterventionBaselineAssumptionsRelations {
   // describe navigational properties here
 }
 
-export type InterventionBaselineAssumptionsWithRelations = InterventionBaselineAssumptions &
-  InterventionBaselineAssumptionsRelations;
+export type InterventionBaselineAssumptionsWithRelations =
+  InterventionBaselineAssumptions & InterventionBaselineAssumptionsRelations;

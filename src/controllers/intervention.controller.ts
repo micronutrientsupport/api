@@ -14,7 +14,6 @@ import {
 import {parse} from 'excel-formula-parser';
 import transformJS from 'js-to-json-logic';
 import * as jsonLogicParser from 'json-logic-js';
-import {inspect} from 'util';
 import {
   AuthenticatedRequest,
   AuthenticationCheckInterceptorInterceptor,
@@ -507,7 +506,7 @@ export class InterventionController {
 
     const updated = await this.interventionListRepository.findById(id);
 
-    console.log(intervention[0]);
+    //console.log(intervention[0]);
     return new StandardJsonResponse<Array<InterventionList>>(
       `Intervention ownership updated.`,
       [updated],
@@ -639,6 +638,26 @@ export class InterventionController {
     };
     const baselineAssumptions =
       await this.interventionBaselineAssumptionsRepository.find(filter);
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    if (baselineAssumptions[0].baselineAssumptions) {
+      baselineAssumptions[0].baselineAssumptions.actuallyFortified =
+        replaceExcelFormulaeWothJsonLogic(
+          baselineAssumptions[0].baselineAssumptions
+            ?.actuallyFortified as InterventionDataFields,
+        );
+      baselineAssumptions[0].baselineAssumptions.potentiallyFortified =
+        replaceExcelFormulaeWothJsonLogic(
+          baselineAssumptions[0].baselineAssumptions
+            ?.potentiallyFortified as InterventionDataFields,
+        );
+      baselineAssumptions[0].baselineAssumptions.averageFortificationLevel =
+        replaceExcelFormulaeWothJsonLogic(
+          baselineAssumptions[0].baselineAssumptions
+            ?.averageFortificationLevel as InterventionDataFields,
+        );
+    }
+
     return new StandardJsonResponse<Array<InterventionBaselineAssumptions>>(
       `Intervention data returned.`,
       baselineAssumptions,
@@ -776,7 +795,7 @@ export class InterventionController {
         costs.costBreakdown.map(value => {
           return replaceExcelFormulaeWothJsonLogic(value);
         });
-        console.log('Replaing Year0Total Formula', costs.year0TotalFormula);
+        //console.log('Replaing Year0Total Formula', costs.year0TotalFormula);
         costs.year0TotalFormula = formulaToJsonLogic(
           costs.year0TotalFormula as string,
           {},
@@ -892,6 +911,9 @@ export class InterventionController {
                 rowIndex: {
                   type: 'number',
                 },
+                targetVal: {
+                  type: 'number',
+                },
                 year0: {
                   type: 'number',
                 },
@@ -981,14 +1003,16 @@ export class InterventionController {
     interventionUpdateDeltaList: InterventionUpdateDelta[],
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
     console.log('Patch');
-    console.log(interventionUpdateDeltaList);
+    // console.log(interventionUpdateDeltaList);
 
     const tx =
       await this.interventionDataRepository.dataSource.beginTransaction(
         IsolationLevel.READ_COMMITTED,
       );
     interventionUpdateDeltaList.map(async delta => {
+      console.log({delta});
       const interventionUpdateDelta = new InterventionData(delta);
+      console.log({interventionUpdateDelta});
       await this.interventionDataRepository.updateAll(
         interventionUpdateDelta,
         {
@@ -1061,7 +1085,6 @@ export class InterventionController {
     });
 
     jsonLogicParser.add_operation('average', (...values) => {
-      console.error('average', values);
       if (values.length === 0) return 0;
 
       const sum = values.reduce((acc, curr) => acc + Number(curr), 0);
@@ -1241,7 +1264,7 @@ export class InterventionController {
     dataVals: any,
     intervention: InterventionList,
   ) {
-    console.log(`${row.rowIndex}, Year${year}`);
+    // console.log(`${row.rowIndex}, Year${year}`);
 
     const formula = formulaToJsonLogic(row[`year${year}Formula`], fullData);
     // console.log(inspect(year0Formula, false, null, false));
@@ -1249,12 +1272,12 @@ export class InterventionController {
     const dataValsIndex = fullData[row.rowIndex].index;
 
     if (dataVals[dataValsIndex][`year${year}`] != newValue) {
-      console.log(`Row #${row.rowIndex}`);
-      console.log(row[`year${year}Formula`]);
-      console.log(inspect(formula, false, null, false));
-      console.log(
-        `Year${year}: ${dataVals[dataValsIndex][`year${year}`]} => ${newValue}`,
-      );
+      // console.log(`Row #${row.rowIndex}`);
+      // console.log(row[`year${year}Formula`]);
+      // console.log(inspect(formula, false, null, false));
+      // console.log(
+      //   `Year${year}: ${dataVals[dataValsIndex][`year${year}`]} => ${newValue}`,
+      // );
 
       // Update the data for jsonLogic
       fullData[row.rowIndex][`year${year}`] = newValue;
@@ -1263,13 +1286,13 @@ export class InterventionController {
       dataVals[dataValsIndex][`year${year}`] = parseFloat(newValue);
       await this.interventionDataRepository.update(dataVals[dataValsIndex]);
 
-      console.log('---------------');
+      // console.log('---------------');
     } else {
-      console.log(`Row #${row.rowIndex}`);
-      console.log(row[`year${year}Formula`]);
-      console.log(inspect(formula, false, null, false));
-      console.log(`${dataVals[dataValsIndex][`year${year}`]} => ${newValue}`);
-      console.log('---------------');
+      // console.log(`Row #${row.rowIndex}`);
+      // console.log(row[`year${year}Formula`]);
+      // console.log(inspect(formula, false, null, false));
+      // console.log(`${dataVals[dataValsIndex][`year${year}`]} => ${newValue}`);
+      // console.log('---------------');
     }
   }
 
@@ -1316,8 +1339,6 @@ export class InterventionController {
       },
     );
 
-    console.error(fullData[275]);
-
     (fullData as any)['regexes'] = {
       premix: 'Premix - .*',
       demographics: 'Demographics',
@@ -1332,7 +1353,7 @@ export class InterventionController {
       await this.interventionPremixCostRepository.find(premixFilter)
     )[0];
 
-    console.log(premixCost);
+    // console.log(premixCost);
 
     (fullData as any)['premix'] = {
       year0: premixCost.premixCostPerMt,
