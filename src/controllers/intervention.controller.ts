@@ -25,6 +25,7 @@ import {
   InterventionIndustryInformation,
   InterventionList,
   InterventionMonitoringInformation,
+  InterventionPremixCalculator,
   InterventionRecurringCosts,
   InterventionStartupScaleupCosts,
   InterventionSummaryCosts,
@@ -38,6 +39,7 @@ import {
   InterventionIndustryInformationRepository,
   InterventionListRepository,
   InterventionMonitoringInformationRepository,
+  InterventionPremixCalculatorRepository,
   InterventionPremixCostRepository,
   InterventionRecurringCostsRepository,
   InterventionRepository,
@@ -283,6 +285,8 @@ export class InterventionController {
     public interventionCellFormulaDepsRepository: InterventionCellFormulaDepsRepository,
     @repository(InterventionPremixCostRepository)
     public interventionPremixCostRepository: InterventionPremixCostRepository,
+    @repository(InterventionPremixCalculatorRepository)
+    public interventionPremixCalculatorRepository: InterventionPremixCalculatorRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
     @inject(RestBindings.Http.REQUEST) private request: Request,
   ) {}
@@ -614,6 +618,37 @@ export class InterventionController {
       `Intervention data returned.`,
       [interventionData],
       'InterventionDataAggregate',
+    );
+  }
+
+  @get('/interventions/{id}/premix-levels', {
+    description: 'get premix levels',
+    summary: 'get premix levels',
+    operationId: 'premix-levels',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionPremixCalculator instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionPremixCalculator))
+      .toObject(),
+  })
+  async findFortificationLevelsById(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionPremixCalculator>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+        fortificationLevel: {gt: 0},
+      },
+    };
+    const premixLevels = await this.interventionPremixCalculatorRepository.find(
+      filter,
+    );
+
+    return new StandardJsonResponse<Array<InterventionPremixCalculator>>(
+      `Fortification level data returned.`,
+      premixLevels,
+      'InterventionPremixCalculator',
     );
   }
 

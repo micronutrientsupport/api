@@ -46,3 +46,5 @@ export * from './top-20-mn-per-hhsurvey.repository';
 export * from './intervention-cell-formula-deps.repository';
 export * from './intervention-premix-cost.repository';
 export * from './food-genera.repository';
+export * from './fortification-level.repository';
+export * from './intervention-premix-calculator.repository';
