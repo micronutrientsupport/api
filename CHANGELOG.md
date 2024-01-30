@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.34.1](https://github.com/micronutrientsupport/api/compare/v2.34.0...v2.34.1) (2024-01-30)
+
+
+### Bug Fixes
+
+* sent schema by env var in intervention-premix-calculator.model.ts ([d2caf5f](https://github.com/micronutrientsupport/api/commit/d2caf5f2c040a2f256c39bf2737d0b0ce9077b53))
+
 ## [2.34.0](https://github.com/micronutrientsupport/api/compare/v2.33.0...v2.34.0) (2024-01-30)
 
 
