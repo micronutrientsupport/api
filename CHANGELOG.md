@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.34.0](https://github.com/micronutrientsupport/api/compare/v2.33.0...v2.34.0) (2024-01-30)
+
+
+### Features
+
+* add routes for premix calculator ([8a68dcd](https://github.com/micronutrientsupport/api/commit/8a68dcd00410f9abed84acd905895f0dfb9c8a8f))
+
 ## [2.33.0](https://github.com/micronutrientsupport/api/compare/v2.32.3...v2.33.0) (2024-01-10)
 
 
