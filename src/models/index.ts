@@ -45,3 +45,5 @@ export * from './top-20-mn-per-hhsurvey.model';
 export * from './intervention-cell-formula-deps.model';
 export * from './intervention-premix-cost.model';
 export * from './food-genera.model';
+export * from './fortification-level.model';
+export * from './intervention-premix-calculator.model';
