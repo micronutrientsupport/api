@@ -14,7 +14,7 @@ export class FortificationLevel extends Entity {
     scale: 0,
     id: 1,
     postgresql: {
-      columnName: 'id',
+      columnName: 'row_index',
       dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
@@ -23,7 +23,7 @@ export class FortificationLevel extends Entity {
       generated: undefined,
     },
   })
-  id: number;
+  rowIndex: number;
 
   @property({
     type: 'number',
@@ -61,7 +61,7 @@ export class FortificationLevel extends Entity {
     type: 'number',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'fortificant_amount',
+      columnName: 'fortification_level',
       dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
@@ -70,13 +70,13 @@ export class FortificationLevel extends Entity {
       generated: undefined,
     },
   })
-  fortificantAmount?: number;
+  fortificationLevel?: number;
 
   @property({
     type: 'number',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'fortificant_proportion',
+      columnName: 'fortificant_activity',
       dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
@@ -85,7 +85,22 @@ export class FortificationLevel extends Entity {
       generated: undefined,
     },
   })
-  fortificantProportion?: number;
+  fortificantActivity?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'fortificant_overage',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  fortificantOverage?: number;
 
   @property({
     type: 'number',
@@ -101,21 +116,6 @@ export class FortificationLevel extends Entity {
     },
   })
   fortificantPrice?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    postgresql: {
-      columnName: 'target_level',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  targetLevel?: number;
 
   // Define well-known properties here
 

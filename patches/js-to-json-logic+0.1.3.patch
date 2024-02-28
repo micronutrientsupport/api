@@ -7,7 +7,7 @@ index de72f86..64b90ac 100644
 +export function transformJS (code: string): any
 +export function processNode (node: any, extraData?: any, valueOnly?: boolean, ): any;
 diff --git a/node_modules/js-to-json-logic/lib/index.js b/node_modules/js-to-json-logic/lib/index.js
-index c6ab89c..382199f 100644
+index c6ab89c..d495577 100644
 --- a/node_modules/js-to-json-logic/lib/index.js
 +++ b/node_modules/js-to-json-logic/lib/index.js
 @@ -33,14 +33,14 @@ function processError ({ loc, at }, message) {
@@ -50,7 +50,7 @@ index c6ab89c..382199f 100644
 +        //   extraData[key]
 +        //   // Do something with yourObject[key]
 +        // }
-+        console.error('External sheet ref:', cell)
++        // console.error('External sheet ref:', cell)
 +
 +        // Extract sheet/column/row fromt the cell ref
 +        let col = cell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
@@ -64,15 +64,15 @@ index c6ab89c..382199f 100644
 +        col = col.replace(/\$/g, '')
 +        row = row.replace(/\$/g, '')
 +
-+        console.error({sheet, col, row})
++        // console.error({sheet, col, row})
 +
 +        if (extraData.regexes) {
 +          for (const [key, value] of Object.entries(extraData.regexes)) {
-+            console.error({key, value, sheet})
++            // console.error({key, value, sheet})
 +            const regex = new RegExp(value);
 +            if(sheet.match(regex)) {
-+              console.error('Matches', key)
-+              console.error(extraData[key])
++              // console.error('Matches', key)
++              // console.error(extraData[key])
 +
 +
 +              switch(col) {
@@ -117,16 +117,16 @@ index c6ab89c..382199f 100644
 +                  break;
 +                }
 +              }
-+              console.log({
-+                cell: cell,
-+                type:
-+                typeof(extraData[key][col]),
-+                val: extraData[key][col]
-+              })
++              // console.log({
++              //   cell: cell,
++              //   type:
++              //   typeof(extraData[key][col]),
++              //   val: extraData[key][col]
++              // })
 +              return extraData[key][col]
 +
 +            } else {
-+              console.error('Doesnt match', sheet)
++              //console.error('Doesnt match', sheet)
 +            }
 +          }
 +        }
@@ -202,8 +202,8 @@ index c6ab89c..382199f 100644
 +    }
 +
 +    case 'cell-range': {
-+      console.log('cell-range')
-+      console.log(node)
++      // console.log('cell-range')
++      // console.log(node)
 +
 +      const leftRef = node.left;
 +      const rightRef = node.right;
@@ -218,13 +218,13 @@ index c6ab89c..382199f 100644
 +      let rightCol = rightCell.split(/(?=[0-9])|(?<=[0-9])/g)[0];
 +      let rightRow = parseInt(rightCell.split(rightCol)[1]);
 +
-+      console.log(`${leftCol} => ${rightCol}`)
-+      console.log(`${leftRow} => ${rightRow}`)
++      // console.log(`${leftCol} => ${rightCol}`)
++      // console.log(`${leftRow} => ${rightRow}`)
 +
 +      let res = [processNode(node.left, extraData)]
 +      if(leftCol === rightCol) {
 +        for(i = leftRow+1; i<rightRow; i++) {
-+          console.log(i);
++          // console.log(i);
 +          let newNode = {
 +            type: 'cell',
 +            key: `${leftCol}${i}`
@@ -329,7 +329,7 @@ index c6ab89c..382199f 100644
 +          break;
 +        }
 +        case 'OR': {
-+          console.log(node)
++          // console.log(node)
 +          return {
 +            or: [
 +             processNode(node.arguments[0], extraData),
@@ -339,7 +339,7 @@ index c6ab89c..382199f 100644
 +          break;
 +        }
 +        case 'SUM': {
-+          console.log(node)
++          // console.log(node)
 +          let sum = [];
 +          node.arguments.forEach((args) => {
 +            let arg = processNode(args, extraData)
@@ -356,7 +356,7 @@ index c6ab89c..382199f 100644
 +          break;
 +        }
 +        case 'AVERAGE': {
-+          console.log(node)
++          // console.log(node)
 +          let avg = [];
 +          node.arguments.forEach((args) => {
 +            let arg = processNode(args, extraData)
@@ -438,7 +438,7 @@ index c6ab89c..382199f 100644
 -    case 'UnaryExpression': {
 +    case 'UnaryExpression':
 +    case 'unary-expression': {
-+      console.log('UnaryExpr', node)
++      // console.log('UnaryExpr', node)
        if (node.operator === '!' && node.argument.operator === '!') {
          return {
 -          '!!': [processNode(node.argument.argument)]

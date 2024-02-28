@@ -38,7 +38,8 @@
     "start": "node -r source-map-support/register .",
     "start:watch": "tsc-watch --target es2017 --outDir ./dist --onSuccess \"node .\"",
     "clean": "lb-clean dist *.tsbuildinfo .eslintcache",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "create-patch": "patch-package js-to-json-logic"
   },
   "repository": {
     "type": "git"
