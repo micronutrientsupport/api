@@ -28,6 +28,23 @@ export class InterventionPremixCalculator extends Entity {
   interventionId?: number;
 
   @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    scale: 0,
+    id: true,
+    postgresql: {
+      columnName: 'row_index',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  rowIndex?: number;
+
+  @property({
     type: 'string',
     jsonSchema: {nullable: true},
     postgresql: {
@@ -108,7 +125,7 @@ export class InterventionPremixCalculator extends Entity {
     type: 'number',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'fortificant_amount',
+      columnName: 'fortificant_overage',
       dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
@@ -117,22 +134,7 @@ export class InterventionPremixCalculator extends Entity {
       generated: undefined,
     },
   })
-  fortificantAmount?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    postgresql: {
-      columnName: 'fortificant_proportion',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  fortificantProportion?: number;
+  fortificantOverage?: number;
 
   @property({
     type: 'number',
