@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.35.0](https://github.com/micronutrientsupport/api/compare/v2.34.1...v2.35.0) (2024-02-28)
+
+
+### Features
+
+* wiring for premix calculator routes and data patching ([c0d0cc5](https://github.com/micronutrientsupport/api/commit/c0d0cc5e1f20407ffd3ce59f6cc4e866f84f9f50))
+
 ## [2.34.1](https://github.com/micronutrientsupport/api/compare/v2.34.0...v2.34.1) (2024-01-30)
 
 
