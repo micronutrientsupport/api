@@ -19,6 +19,7 @@ import {
   AuthenticationCheckInterceptorInterceptor,
 } from '../interceptors';
 import {
+  FortificationLevel,
   InterventionBaselineAssumptions,
   InterventionData,
   InterventionDataAggregate,
@@ -33,6 +34,7 @@ import {
   InterventionVehicleStandard,
 } from '../models';
 import {
+  FortificationLevelRepository,
   InterventionBaselineAssumptionsRepository,
   InterventionCellFormulaDepsRepository,
   InterventionDataRepository,
@@ -287,6 +289,8 @@ export class InterventionController {
     public interventionPremixCostRepository: InterventionPremixCostRepository,
     @repository(InterventionPremixCalculatorRepository)
     public interventionPremixCalculatorRepository: InterventionPremixCalculatorRepository,
+    @repository(FortificationLevelRepository)
+    public fortificationLevelRepository: FortificationLevelRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
     @inject(RestBindings.Http.REQUEST) private request: Request,
   ) {}
@@ -637,8 +641,15 @@ export class InterventionController {
   ): Promise<StandardJsonResponse<Array<InterventionPremixCalculator>>> {
     const filter: Filter = {
       where: {
-        interventionId: id,
-        fortificationLevel: {gt: 0},
+        and: [
+          {interventionId: id},
+          {
+            or: [
+              {fortificationLevel: {gt: 0}},
+              {fortificantCompound: 'Excipient'},
+            ],
+          },
+        ],
       },
     };
     const premixLevels = await this.interventionPremixCalculatorRepository.find(
@@ -946,6 +957,9 @@ export class InterventionController {
                 rowIndex: {
                   type: 'number',
                 },
+                type: {
+                  type: 'string',
+                },
                 targetVal: {
                   type: 'number',
                 },
@@ -1046,18 +1060,34 @@ export class InterventionController {
       );
     interventionUpdateDeltaList.map(async delta => {
       console.log({delta});
-      const interventionUpdateDelta = new InterventionData(delta);
-      console.log({interventionUpdateDelta});
-      await this.interventionDataRepository.updateAll(
-        interventionUpdateDelta,
-        {
-          interventionId: id,
-          rowIndex: interventionUpdateDelta.rowIndex,
-        },
-        {
-          transaction: tx,
-        },
-      );
+      let interventionUpdateDelta;
+
+      if (delta.type && delta.type === 'premix') {
+        interventionUpdateDelta = new FortificationLevel(delta);
+        console.log(interventionUpdateDelta);
+        await this.fortificationLevelRepository.updateAll(
+          interventionUpdateDelta,
+          {
+            interventionId: id,
+            rowIndex: interventionUpdateDelta.rowIndex,
+          },
+          {
+            transaction: tx,
+          },
+        );
+      } else {
+        interventionUpdateDelta = new InterventionData(delta);
+        await this.interventionDataRepository.updateAll(
+          interventionUpdateDelta,
+          {
+            interventionId: id,
+            rowIndex: interventionUpdateDelta.rowIndex,
+          },
+          {
+            transaction: tx,
+          },
+        );
+      }
     });
 
     await tx.commit();
@@ -1381,14 +1411,14 @@ export class InterventionController {
 
     const premixFilter = {
       where: {
-        interventionId: intervention.parentIntervention,
+        interventionId: intervention.id,
       },
     };
     const premixCost = (
       await this.interventionPremixCostRepository.find(premixFilter)
     )[0];
 
-    // console.log(premixCost);
+    console.log(premixCost);
 
     (fullData as any)['premix'] = {
       year0: premixCost.premixCostPerMt,

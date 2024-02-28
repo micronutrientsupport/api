@@ -408,6 +408,12 @@ export class InterventionUpdateDelta extends Entity {
     scale: 0,
   })
   rowIndex: number;
+
+  @property({
+    type: 'string',
+  })
+  type?: string;
+
   @property({
     type: 'number',
   })
