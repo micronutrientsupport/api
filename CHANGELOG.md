@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.35.1](https://github.com/micronutrientsupport/api/compare/v2.35.0...v2.35.1) (2024-05-02)
+
+
+### Bug Fixes
+
+* improve biomarker error messages ([d22df09](https://github.com/micronutrientsupport/api/commit/d22df09d9b3eb35c4fce24392440fd102bb31630))
+
 ## [2.35.0](https://github.com/micronutrientsupport/api/compare/v2.34.1...v2.35.0) (2024-02-28)
 
 
