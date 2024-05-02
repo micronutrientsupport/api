@@ -53,6 +53,7 @@ export class BiomarkerControllerController {
     @param.query.string('biomarker') biomarker: string,
     @param.query.string('aggregationField') aggregationField: string,
   ): Promise<{}> {
+    console.log('BM');
     const thresholdFilter: Filter = {
       where: {
         groupId: groupId,
@@ -62,6 +63,7 @@ export class BiomarkerControllerController {
     const thresholds = await this.biomarkerThresholdListRepository.find(
       thresholdFilter,
     );
+    console.log({thresholdFilter});
 
     const counts: {[key: string]: number} = {};
     const tm = thresholds.reduce(
@@ -100,6 +102,8 @@ export class BiomarkerControllerController {
       {},
     );
 
+    console.log({tm});
+
     const filter: Filter = {
       where: {
         survey_id: surveyId,
@@ -126,8 +130,13 @@ export class BiomarkerControllerController {
     (filter as any).fields[biomarker] = true;
     (filter as any).fields[aggregationField] = true;
 
+    console.log({filter});
+
     const biomarkerSummaries: BiomarkerSummary[] =
       await this.biomarkerSummaryRepository.find(filter);
+
+    console.log(biomarkerSummaries.length);
+
     try {
       const out = await this.opencpuService.summaryStats(
         biomarkerSummaries,
@@ -146,8 +155,12 @@ export class BiomarkerControllerController {
         (out as any).body,
       );
     } catch (e) {
-      console.error(e);
-      return {};
+      return {
+        error: {
+          message: (e as any).message,
+          data: biomarkerSummaries.length,
+        },
+      };
     }
   }
 }
