@@ -13,6 +13,20 @@ export interface OpencpuService {
     groupId: string,
     thresholds: object,
   ): Promise<{}>;
+
+  baselineInadequacy(
+    householdDetails: object,
+    householdConsumption: object,
+    nctList: object,
+    intakeThresholds: object,
+  ): Promise<{}>;
+
+  baselineInadequacyCND(
+    householdDetails: object,
+    householdConsumption: object,
+    nctList: object,
+    intakeThresholds: object,
+  ): Promise<{}>;
 }
 
 export class OpencpuServiceProvider implements Provider<OpencpuService> {
