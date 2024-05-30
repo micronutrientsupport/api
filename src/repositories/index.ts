@@ -49,7 +49,9 @@ export * from './intervention-cell-formula-deps.repository';
 export * from './intervention-premix-calculator.repository';
 export * from './intervention-premix-cost.repository';
 
+export * from './fct-list-food-composition.repository';
 export * from './household-consumption.repository';
 export * from './household-details.repository';
 export * from './intake-threshold.repository';
-export * from './fct-list-food-composition.repository';
+export * from './intervention-projected-households.repository';
+export * from './intervention-thresholds.repository';

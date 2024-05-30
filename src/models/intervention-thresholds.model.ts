@@ -3,10 +3,13 @@ import {Entity, model, property} from '@loopback/repository';
 @model({
   settings: {
     idInjection: false,
-    postgresql: {schema: process.env.DB_SCHEMA, table: 'intake_threshold'},
+    postgresql: {
+      schema: 'bmgf-andan_intervention-user-cost',
+      table: 'intervention_thresholds',
+    },
   },
 })
-export class IntakeThreshold extends Entity {
+export class InterventionThresholds extends Entity {
   @property({
     type: 'number',
     required: true,
@@ -26,34 +29,20 @@ export class IntakeThreshold extends Entity {
   id: number;
 
   @property({
-    type: 'string',
+    type: 'number',
     jsonSchema: {nullable: true},
+    scale: 0,
     postgresql: {
-      columnName: 'nutrient',
-      dataType: 'text',
+      columnName: 'intervention_id',
+      dataType: 'integer',
       dataLength: null,
       dataPrecision: null,
-      dataScale: null,
+      dataScale: 0,
       nullable: 'YES',
       generated: undefined,
     },
   })
-  nutrient?: string;
-
-  @property({
-    type: 'string',
-    jsonSchema: {nullable: true},
-    postgresql: {
-      columnName: 'nutrient_name',
-      dataType: 'text',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: null,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  nutrientName?: string;
+  interventionId?: number;
 
   @property({
     type: 'string',
@@ -138,6 +127,23 @@ export class IntakeThreshold extends Entity {
     precision: 20,
     scale: 10,
     postgresql: {
+      columnName: 'ear_default',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 20,
+      dataScale: 10,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  earDefault?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    precision: 20,
+    scale: 10,
+    postgresql: {
       columnName: 'ul',
       dataType: 'numeric',
       dataLength: null,
@@ -148,6 +154,23 @@ export class IntakeThreshold extends Entity {
     },
   })
   ul?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    precision: 20,
+    scale: 10,
+    postgresql: {
+      columnName: 'ul_default',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 20,
+      dataScale: 10,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  ulDefault?: number;
 
   @property({
     type: 'number',
@@ -182,6 +205,40 @@ export class IntakeThreshold extends Entity {
     },
   })
   cul?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    precision: 20,
+    scale: 10,
+    postgresql: {
+      columnName: 'energy',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 20,
+      dataScale: 10,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  energy?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    precision: 20,
+    scale: 10,
+    postgresql: {
+      columnName: 'energy_default',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: 20,
+      dataScale: 10,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  energyDefault?: number;
 
   @property({
     type: 'string',
@@ -219,14 +276,14 @@ export class IntakeThreshold extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<IntakeThreshold>) {
+  constructor(data?: Partial<InterventionThresholds>) {
     super(data);
   }
 }
 
-export interface IntakeThresholdRelations {
+export interface InterventionThresholdsRelations {
   // describe navigational properties here
 }
 
-export type IntakeThresholdWithRelations = IntakeThreshold &
-  IntakeThresholdRelations;
+export type InterventionThresholdsWithRelations = InterventionThresholds &
+  InterventionThresholdsRelations;
