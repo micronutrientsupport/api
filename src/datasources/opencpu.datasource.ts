@@ -42,6 +42,61 @@ const config = {
         ],
       },
     },
+    {
+      template: {
+        method: 'POST',
+        url:
+          process.env.OCPU_URL +
+          '/ocpu/apps/' +
+          process.env.OCPU_EFFECTIVENESS_PACKAGE +
+          '/R/' +
+          process.env.OCPU_EFFECTIVENESS_FUNCTION +
+          '/json',
+        body: {
+          householdDetails: '{householdDetails:object}',
+          householdConsumption: '{householdConsumption:object}',
+          nctList: '{nctList:object}',
+          intakeThresholds: '{intakeThresholds:object}',
+        },
+        fullResponse: true,
+      },
+      functions: {
+        baselineInadequacy: [
+          'householdDetails',
+          'householdConsumption',
+          'nctList',
+          'intakeThresholds',
+        ],
+      },
+    },
+    {
+      template: {
+        method: 'POST',
+        url:
+          process.env.OCPU_URL +
+          '/ocpu/apps/' +
+          process.env.OCPU_EFFECTIVENESS_PACKAGE +
+          '/R/' +
+          process.env.OCPU_EFFECTIVENESS_FUNCTION +
+          'CND' +
+          '/json',
+        body: {
+          householdDetails: '{householdDetails:object}',
+          householdConsumption: '{householdConsumption:object}',
+          nctList: '{nctList:object}',
+          intakeThresholds: '{intakeThresholds:object}',
+        },
+        fullResponse: true,
+      },
+      functions: {
+        baselineInadequacyCND: [
+          'householdDetails',
+          'householdConsumption',
+          'nctList',
+          'intakeThresholds',
+        ],
+      },
+    },
   ],
   crud: false,
 };
@@ -53,7 +108,8 @@ const config = {
 @lifeCycleObserver('datasource')
 export class OpencpuDataSource
   extends juggler.DataSource
-  implements LifeCycleObserver {
+  implements LifeCycleObserver
+{
   static dataSourceName = 'opencpu';
   static readonly defaultConfig = config;
 

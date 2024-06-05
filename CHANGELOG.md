@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.36.0](https://github.com/micronutrientsupport/api/compare/v2.35.1...v2.36.0) (2024-06-05)
+
+
+### Features
+
+* add routes for effectiveness households, effectivness metrics and metrics patch ([c595038](https://github.com/micronutrientsupport/api/commit/c595038c39970d67a73b9ed909b8807fae247d8b))
+* add test effectiveness route ([aa3db59](https://github.com/micronutrientsupport/api/commit/aa3db597f6459acff0be57f4838f3fb175a22cd7))
+* support variable mount path for API ([7168929](https://github.com/micronutrientsupport/api/commit/7168929000bf5d15462509378ed0239fbbe047da))
+
 ## [2.35.1](https://github.com/micronutrientsupport/api/compare/v2.35.0...v2.35.1) (2024-05-02)
 
 

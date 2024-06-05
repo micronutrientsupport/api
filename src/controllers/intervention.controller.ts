@@ -27,9 +27,11 @@ import {
   InterventionList,
   InterventionMonitoringInformation,
   InterventionPremixCalculator,
+  InterventionProjectedHouseholds,
   InterventionRecurringCosts,
   InterventionStartupScaleupCosts,
   InterventionSummaryCosts,
+  InterventionThresholds,
   InterventionUpdateDelta,
   InterventionVehicleStandard,
 } from '../models';
@@ -43,10 +45,12 @@ import {
   InterventionMonitoringInformationRepository,
   InterventionPremixCalculatorRepository,
   InterventionPremixCostRepository,
+  InterventionProjectedHouseholdsRepository,
   InterventionRecurringCostsRepository,
   InterventionRepository,
   InterventionStartupScaleupCostsRepository,
   InterventionSummaryCostsRepository,
+  InterventionThresholdsRepository,
   InterventionVehicleStandardRepository,
 } from '../repositories';
 import {StandardJsonResponse} from './standardJsonResponse';
@@ -289,6 +293,10 @@ export class InterventionController {
     public interventionPremixCostRepository: InterventionPremixCostRepository,
     @repository(InterventionPremixCalculatorRepository)
     public interventionPremixCalculatorRepository: InterventionPremixCalculatorRepository,
+    @repository(InterventionProjectedHouseholdsRepository)
+    public interventionProjectedHouseholdsRepository: InterventionProjectedHouseholdsRepository,
+    @repository(InterventionThresholdsRepository)
+    public interventionThresholdsRepository: InterventionThresholdsRepository,
     @repository(FortificationLevelRepository)
     public fortificationLevelRepository: FortificationLevelRepository,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
@@ -862,6 +870,66 @@ export class InterventionController {
     );
   }
 
+  @get('/interventions/{id}/projected-households', {
+    description: 'get projected household numbers for intervention nation',
+    summary: 'get projected households',
+    operationId: 'projected-households',
+    responses: new StandardOpenApiResponses('Array of Intebr instances')
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionProjectedHouseholds))
+      .toObject(),
+  })
+  async getProjectedHouseholds(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionProjectedHouseholds>>> {
+    const intervention = await this.interventionRepository.findById(id);
+    const countryId = intervention.countryId;
+
+    const filter: Filter = {
+      where: {
+        countryId: countryId,
+      },
+    };
+
+    const projectedHouseholds =
+      await this.interventionProjectedHouseholdsRepository.find(filter);
+
+    return new StandardJsonResponse<Array<InterventionProjectedHouseholds>>(
+      `Intervention data returned.`,
+      projectedHouseholds,
+      'InterventionProjectedHouseholds',
+    );
+  }
+
+  @get('/interventions/{id}/intake-thresholds', {
+    description: 'get intervention specific values for adequacy thresholds',
+    summary: 'get adequacy thresholds',
+    operationId: 'intake-thresholds',
+    responses: new StandardOpenApiResponses('Array of Intebr instances')
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionThresholds))
+      .toObject(),
+  })
+  async getIntakeThresholds(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionThresholds>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+
+    const intakeThresholds = await this.interventionThresholdsRepository.find(
+      filter,
+    );
+
+    return new StandardJsonResponse<Array<InterventionThresholds>>(
+      `Intervention data returned.`,
+      intakeThresholds,
+      'InterventionThresholds',
+    );
+  }
+
   @get('/interventions/{id}/recurring-costs', {
     description: 'get recurring',
     summary: 'get recurring',
@@ -1070,6 +1138,18 @@ export class InterventionController {
           {
             interventionId: id,
             rowIndex: interventionUpdateDelta.rowIndex,
+          },
+          {
+            transaction: tx,
+          },
+        );
+      } else if (delta.type && delta.type === 'intervention-thresholds') {
+        interventionUpdateDelta = new InterventionThresholds(delta);
+        console.log(interventionUpdateDelta);
+        await this.interventionThresholdsRepository.updateAll(
+          interventionUpdateDelta,
+          {
+            interventionId: id,
           },
           {
             transaction: tx,
