@@ -6,13 +6,14 @@ export * from './application';
 
 export async function main(options: ApplicationConfig = {}) {
   Sentry.init({
-    dsn:
-      'https://b52e3657527d4f7b9d05a7fef89568a8@glitchtip.micronutrient.support/2',
+    dsn: 'https://b52e3657527d4f7b9d05a7fef89568a8@glitchtip.micronutrient.support/2',
   });
 
   const app = new ApiApplication(options);
+  app.restServer.basePath(process.env.MOUNT_DIR);
   await app.boot();
   await app.start();
+
   app.bind(RestBindings.REQUEST_BODY_PARSER_OPTIONS).to({limit: '50mb'});
 
   const url = app.restServer.url;
