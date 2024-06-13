@@ -29,6 +29,7 @@ import {
   InterventionPremixCalculator,
   InterventionProjectedHouseholds,
   InterventionRecurringCosts,
+  InterventionStandardExpectedLosses,
   InterventionStartupScaleupCosts,
   InterventionSummaryCosts,
   InterventionThresholds,
@@ -36,10 +37,13 @@ import {
   InterventionVehicleStandard,
 } from '../models';
 import {
+  FortifiableFoodItemsRepository,
   FortificationLevelRepository,
   InterventionBaselineAssumptionsRepository,
   InterventionCellFormulaDepsRepository,
   InterventionDataRepository,
+  InterventionExpectedLossesRepository,
+  InterventionFortificationLevelSummaryRepository,
   InterventionIndustryInformationRepository,
   InterventionListRepository,
   InterventionMonitoringInformationRepository,
@@ -48,11 +52,13 @@ import {
   InterventionProjectedHouseholdsRepository,
   InterventionRecurringCostsRepository,
   InterventionRepository,
+  InterventionStandardExpectedLossesRepository,
   InterventionStartupScaleupCostsRepository,
   InterventionSummaryCostsRepository,
   InterventionThresholdsRepository,
   InterventionVehicleStandardRepository,
 } from '../repositories';
+import {OpencpuService} from '../services';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
 export type InterventionDataFields = {
@@ -145,6 +151,11 @@ export type InterventionDataFieldsSubset = Omit<
   | 'year9Default'
   | 'year9Formula'
 >;
+
+type LsffSummaryResponse = {
+  admin0Name: string;
+  admin1Name: string;
+};
 
 const formulaToJsonLogic = (formula: string, missingData?: {}): JSONObject => {
   if (!formula) return {};
@@ -299,6 +310,16 @@ export class InterventionController {
     public interventionThresholdsRepository: InterventionThresholdsRepository,
     @repository(FortificationLevelRepository)
     public fortificationLevelRepository: FortificationLevelRepository,
+    @repository(InterventionExpectedLossesRepository)
+    public interventionExpectedLossesRepository: InterventionExpectedLossesRepository,
+    @repository(InterventionStandardExpectedLossesRepository)
+    public interventionStandardExpectedLossesRepository: InterventionStandardExpectedLossesRepository,
+    @repository(InterventionFortificationLevelSummaryRepository)
+    public interventionFortificationLevelSummaryRepository: InterventionFortificationLevelSummaryRepository,
+    @repository(FortifiableFoodItemsRepository)
+    public fortifiableFoodItemsRepository: FortifiableFoodItemsRepository,
+    @inject('services.OpencpuService')
+    protected opencpuService: OpencpuService,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
     @inject(RestBindings.Http.REQUEST) private request: Request,
   ) {}
@@ -719,6 +740,34 @@ export class InterventionController {
     );
   }
 
+  @get('/interventions/{id}/expected-losses', {
+    description: 'get expected-losses',
+    summary: 'get expected-losses',
+    operationId: 'expected-losses',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionStandardExpectedLosses instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionStandardExpectedLosses))
+      .toObject(),
+  })
+  async getExpectedLosses(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionStandardExpectedLosses>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+    const expectedLosses =
+      await this.interventionStandardExpectedLossesRepository.find(filter);
+    return new StandardJsonResponse<Array<InterventionStandardExpectedLosses>>(
+      `Intervention data returned.`,
+      expectedLosses,
+      'InterventionStandardExpectedLosses',
+    );
+  }
+
   @get('/interventions/{id}/food-vehicle-standards', {
     description: 'get food-vehicle',
     summary: 'get food-vehicle',
@@ -927,6 +976,108 @@ export class InterventionController {
       `Intervention data returned.`,
       intakeThresholds,
       'InterventionThresholds',
+    );
+  }
+
+  @get('/interventions/{id}/effectiveness-summary')
+  async getLsffSummary(
+    @param.path.number('id') id: number,
+    @param.query.string('aggregation') aggregation?: string,
+    @param.query.string('metric') metric?: string,
+  ): Promise<StandardJsonResponse<Array<{}>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+
+    let aggregationFields = ['admin0Name', 'admin1Name'];
+    if (aggregation && aggregation === 'admin0') {
+      aggregationFields = ['admin0Name'];
+    }
+
+    let metricField = 'afe';
+    if (metric && metric === 'cnd') {
+      metricField = 'cnd';
+    }
+
+    const intakeThresholds = await this.interventionThresholdsRepository.find(
+      filter,
+    );
+
+    const fortificationLevelSummary =
+      await this.interventionFortificationLevelSummaryRepository.find(filter);
+
+    const fortifiableFoodItems =
+      await this.fortifiableFoodItemsRepository.find();
+
+    const interventionDetails = await this.interventionListRepository.find({
+      where: {
+        id: id,
+      },
+    });
+
+    const focusMicronutrient = interventionDetails[0].focusMicronutrient;
+    // console.log(fortificationLevelSummary);
+
+    const foo =
+      metricField === 'afe'
+        ? await this.opencpuService.calculatePreAndPostLSFFSummariesAfe(
+            1,
+            [focusMicronutrient],
+            intakeThresholds,
+            fortifiableFoodItems,
+            fortificationLevelSummary,
+            aggregationFields,
+          )
+        : await this.opencpuService.calculatePreAndPostLSFFSummariesCnd(
+            1,
+            [focusMicronutrient],
+            intakeThresholds,
+            fortifiableFoodItems,
+            fortificationLevelSummary,
+            aggregationFields,
+          );
+
+    const body: LsffSummaryResponse[] = (foo as any).body;
+
+    // console.log(body);
+    //body.filter(val => val.admin0Name !== '');
+
+    return new StandardJsonResponse<Array<object>>(
+      `Intervention data returned.`,
+      body
+        .filter(val => {
+          for (const field of aggregationFields) {
+            if (
+              !Object.prototype.hasOwnProperty.call(val, field) ||
+              (Object.prototype.hasOwnProperty.call(val, field) &&
+                (val as never)[field] === '')
+            ) {
+              return false;
+            }
+          }
+          return true;
+        })
+        .map(val => {
+          const newObj: {[key: string]: unknown} = {};
+          for (const key in val) {
+            if (Object.prototype.hasOwnProperty.call(val, key)) {
+              if (
+                focusMicronutrient &&
+                key.startsWith(`${focusMicronutrient}_`)
+              ) {
+                newObj[key.slice(focusMicronutrient?.length + 1)] = (
+                  val as never
+                )[key];
+              } else {
+                newObj[key] = (val as never)[key];
+              }
+            }
+          }
+          return newObj;
+        }),
+      'InterventionRecurringCosts',
     );
   }
 

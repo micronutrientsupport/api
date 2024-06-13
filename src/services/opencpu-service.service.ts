@@ -14,18 +14,22 @@ export interface OpencpuService {
     thresholds: object,
   ): Promise<{}>;
 
-  baselineInadequacy(
-    householdDetails: object,
-    householdConsumption: object,
-    nctList: object,
+  calculatePreAndPostLSFFSummariesAfe(
+    survey: number,
+    micronutrient: object,
     intakeThresholds: object,
+    fortifiableFoodItems: object,
+    fortificationLevels: object,
+    aggregationFields: object,
   ): Promise<{}>;
 
-  baselineInadequacyCND(
-    householdDetails: object,
-    householdConsumption: object,
-    nctList: object,
+  calculatePreAndPostLSFFSummariesCnd(
+    survey: number,
+    micronutrient: object,
     intakeThresholds: object,
+    fortifiableFoodItems: object,
+    fortificationLevels: object,
+    aggregationFields: object,
   ): Promise<{}>;
 }
 

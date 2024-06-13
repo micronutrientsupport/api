@@ -50,22 +50,26 @@ const config = {
           '/ocpu/apps/' +
           process.env.OCPU_EFFECTIVENESS_PACKAGE +
           '/R/' +
-          process.env.OCPU_EFFECTIVENESS_FUNCTION +
+          'calculatePreAndPostLSFFSummariesAfe' +
           '/json',
         body: {
-          householdDetails: '{householdDetails:object}',
-          householdConsumption: '{householdConsumption:object}',
-          nctList: '{nctList:object}',
+          survey: '{survey:number}',
+          micronutrient: '{micronutrient:object}',
           intakeThresholds: '{intakeThresholds:object}',
+          fortifiableFoodItems: '{fortifiableFoodItems}',
+          fortificationLevels: '{fortificationLevels}',
+          aggregationFields: '{aggregationFields}',
         },
         fullResponse: true,
       },
       functions: {
-        baselineInadequacy: [
-          'householdDetails',
-          'householdConsumption',
-          'nctList',
+        calculatePreAndPostLSFFSummariesAfe: [
+          'survey',
+          'micronutrient',
           'intakeThresholds',
+          'fortifiableFoodItems',
+          'fortificationLevels',
+          'aggregationFields',
         ],
       },
     },
@@ -77,23 +81,26 @@ const config = {
           '/ocpu/apps/' +
           process.env.OCPU_EFFECTIVENESS_PACKAGE +
           '/R/' +
-          process.env.OCPU_EFFECTIVENESS_FUNCTION +
-          'CND' +
+          'calculatePreAndPostLSFFSummariesCnd' +
           '/json',
         body: {
-          householdDetails: '{householdDetails:object}',
-          householdConsumption: '{householdConsumption:object}',
-          nctList: '{nctList:object}',
+          survey: '{survey:number}',
+          micronutrient: '{micronutrient:object}',
           intakeThresholds: '{intakeThresholds:object}',
+          fortifiableFoodItems: '{fortifiableFoodItems}',
+          fortificationLevels: '{fortificationLevels}',
+          aggregationFields: '{aggregationFields}',
         },
         fullResponse: true,
       },
       functions: {
-        baselineInadequacyCND: [
-          'householdDetails',
-          'householdConsumption',
-          'nctList',
+        calculatePreAndPostLSFFSummariesCnd: [
+          'survey',
+          'micronutrient',
           'intakeThresholds',
+          'fortifiableFoodItems',
+          'fortificationLevels',
+          'aggregationFields',
         ],
       },
     },
