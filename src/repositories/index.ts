@@ -55,3 +55,7 @@ export * from './household-details.repository';
 export * from './intake-threshold.repository';
 export * from './intervention-projected-households.repository';
 export * from './intervention-thresholds.repository';
+export * from './intervention-expected-losses.repository';
+export * from './intervention-standard-expected-losses.repository';
+export * from './intervention-fortification-level-summary.repository';
+export * from './fortifiable-food-items.repository';

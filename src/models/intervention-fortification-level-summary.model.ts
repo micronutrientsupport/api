@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {Entity, model, property} from '@loopback/repository';
 
 @model({
@@ -5,33 +6,16 @@ import {Entity, model, property} from '@loopback/repository';
     idInjection: false,
     postgresql: {
       schema: process.env.DB_SCHEMA,
-      table: 'intervention_thresholds',
+      table: 'intervention_fortification_level_summary',
     },
   },
 })
-export class InterventionThresholds extends Entity {
-  @property({
-    type: 'number',
-    required: true,
-    jsonSchema: {nullable: false},
-    scale: 0,
-    id: 1,
-    postgresql: {
-      columnName: 'id',
-      dataType: 'integer',
-      dataLength: null,
-      dataPrecision: null,
-      dataScale: 0,
-      nullable: 'NO',
-      generated: undefined,
-    },
-  })
-  id: number;
-
+export class InterventionFortificationLevelSummary extends Entity {
   @property({
     type: 'number',
     jsonSchema: {nullable: true},
     scale: 0,
+    id: true,
     postgresql: {
       columnName: 'intervention_id',
       dataType: 'integer',
@@ -48,7 +32,7 @@ export class InterventionThresholds extends Entity {
     type: 'string',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'unit_adequacy',
+      columnName: 'Year',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -57,13 +41,29 @@ export class InterventionThresholds extends Entity {
       generated: undefined,
     },
   })
-  unitAdequacy?: string;
+  Year?: string;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    scale: 0,
+    postgresql: {
+      columnName: 'fortification_vehicle_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  fortification_vehicle_id?: number;
 
   @property({
     type: 'string',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'unit_excess',
+      columnName: 'fortification_vehicle_name',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
@@ -72,14 +72,14 @@ export class InterventionThresholds extends Entity {
       generated: undefined,
     },
   })
-  unitExcess?: string;
+  fortification_vehicle_name?: string;
 
   @property({
-    type: 'string',
+    type: 'number',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'unit_cnd',
-      dataType: 'text',
+      columnName: 'perc_fortifiable',
+      dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
@@ -87,14 +87,14 @@ export class InterventionThresholds extends Entity {
       generated: undefined,
     },
   })
-  unitCnd?: string;
+  perc_fortifiable?: number;
 
   @property({
-    type: 'string',
+    type: 'number',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'reference_person',
-      dataType: 'text',
+      columnName: 'perc_fortified',
+      dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
@@ -102,150 +102,14 @@ export class InterventionThresholds extends Entity {
       generated: undefined,
     },
   })
-  referencePerson?: string;
+  perc_fortified?: number;
 
   @property({
     type: 'number',
     jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
     postgresql: {
-      columnName: 'ear',
+      columnName: 'perc_average_fortification_level',
       dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 20,
-      dataScale: 10,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  ear?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
-    postgresql: {
-      columnName: 'ear_default',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 20,
-      dataScale: 10,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  earDefault?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
-    postgresql: {
-      columnName: 'ul',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 20,
-      dataScale: 10,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  ul?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
-    postgresql: {
-      columnName: 'ul_default',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 20,
-      dataScale: 10,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  ulDefault?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
-    postgresql: {
-      columnName: 'cnd',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 20,
-      dataScale: 10,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  CND?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
-    postgresql: {
-      columnName: 'cul',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 20,
-      dataScale: 10,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  CUL?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
-    postgresql: {
-      columnName: 'energy',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 20,
-      dataScale: 10,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  energy?: number;
-
-  @property({
-    type: 'number',
-    jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
-    postgresql: {
-      columnName: 'energy_default',
-      dataType: 'numeric',
-      dataLength: null,
-      dataPrecision: 20,
-      dataScale: 10,
-      nullable: 'YES',
-      generated: undefined,
-    },
-  })
-  energyDefault?: number;
-
-  @property({
-    type: 'string',
-    jsonSchema: {nullable: true},
-    postgresql: {
-      columnName: 'notes',
-      dataType: 'text',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
@@ -253,14 +117,14 @@ export class InterventionThresholds extends Entity {
       generated: undefined,
     },
   })
-  notes?: string;
+  perc_average_fortification_level?: number;
 
   @property({
-    type: 'string',
+    type: 'number',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'source',
-      dataType: 'text',
+      columnName: 'A',
+      dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
@@ -268,16 +132,14 @@ export class InterventionThresholds extends Entity {
       generated: undefined,
     },
   })
-  source?: string;
+  A?: number;
 
   @property({
-    type: 'string',
+    type: 'number',
     jsonSchema: {nullable: true},
-    precision: 20,
-    scale: 10,
     postgresql: {
-      columnName: 'nutrient',
-      dataType: 'text',
+      columnName: 'B12',
+      dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
       dataScale: null,
@@ -285,7 +147,82 @@ export class InterventionThresholds extends Entity {
       generated: undefined,
     },
   })
-  nutrient?: string;
+  B12?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'B2',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  B2?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'B3',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  B3?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'B9',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  B9?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'Fe',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  Fe?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'Zn',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  Zn?: number;
 
   // Define well-known properties here
 
@@ -293,14 +230,15 @@ export class InterventionThresholds extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<InterventionThresholds>) {
+  constructor(data?: Partial<InterventionFortificationLevelSummary>) {
     super(data);
   }
 }
 
-export interface InterventionThresholdsRelations {
+export interface InterventionFortificationLevelSummaryRelations {
   // describe navigational properties here
 }
 
-export type InterventionThresholdsWithRelations = InterventionThresholds &
-  InterventionThresholdsRelations;
+export type InterventionFortificationLevelSummaryWithRelations =
+  InterventionFortificationLevelSummary &
+    InterventionFortificationLevelSummaryRelations;
