@@ -53,3 +53,7 @@ export * from './monthly-food.model';
 export * from './top-20-mn-per-country.model';
 export * from './top-20-mn-per-hhsurvey.model';
 export * from './intervention-thresholds.model';
+export * from './intervention-expected-losses.model';
+export * from './intervention-standard-expected-losses.model';
+export * from './intervention-fortification-level-summary.model';
+export * from './fortifiable-food-items.model';

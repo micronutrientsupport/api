@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.37.0](https://github.com/micronutrientsupport/api/compare/v2.36.0...v2.37.0) (2024-06-13)
+
+
+### Features
+
+* add routes for expected loss, projected households and effectiveness summary ([0c208ce](https://github.com/micronutrientsupport/api/commit/0c208ceaa5da3291f4553ff2abfd82dc0c3b0b55))
+
 ## [2.36.0](https://github.com/micronutrientsupport/api/compare/v2.35.1...v2.36.0) (2024-06-05)
 
 

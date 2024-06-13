@@ -4,7 +4,7 @@ import {Entity, model, property} from '@loopback/repository';
   settings: {
     idInjection: false,
     postgresql: {
-      schema: 'bmgf-andan_intervention-user-cost',
+      schema: process.env.DB_SCHEMA,
       table: 'intervention_projected_households',
     },
   },
