@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.38.0](https://github.com/micronutrientsupport/api/compare/v2.37.0...v2.38.0) (2024-06-14)
+
+
+### Features
+
+* add cost-effectiveness endpoints ([6fbe768](https://github.com/micronutrientsupport/api/commit/6fbe7687018e0262bb435a5c298e729ceb1b7edd))
+
 ## [2.37.0](https://github.com/micronutrientsupport/api/compare/v2.36.0...v2.37.0) (2024-06-13)
 
 
