@@ -979,15 +979,14 @@ export class InterventionController {
     );
   }
 
-  @get('/interventions/{id}/effectiveness-summary')
-  async getLsffSummary(
-    @param.path.number('id') id: number,
-    @param.query.string('aggregation') aggregation?: string,
-    @param.query.string('metric') metric?: string,
-  ): Promise<StandardJsonResponse<Array<{}>>> {
+  async getEffectivenessSummaries(
+    interventionId: number,
+    aggregation?: string,
+    metric?: string,
+  ): Promise<object[]> {
     const filter: Filter = {
       where: {
-        interventionId: id,
+        interventionId: interventionId,
       },
     };
 
@@ -1013,7 +1012,7 @@ export class InterventionController {
 
     const interventionDetails = await this.interventionListRepository.find({
       where: {
-        id: id,
+        id: interventionId,
       },
     });
 
@@ -1041,42 +1040,151 @@ export class InterventionController {
 
     const body: LsffSummaryResponse[] = (foo as any).body;
 
+    return body
+      .filter(val => {
+        for (const field of aggregationFields) {
+          if (
+            !Object.prototype.hasOwnProperty.call(val, field) ||
+            (Object.prototype.hasOwnProperty.call(val, field) &&
+              (val as never)[field] === '')
+          ) {
+            return false;
+          }
+        }
+        return true;
+      })
+      .map(val => {
+        const newObj: {[key: string]: unknown} = {};
+        for (const key in val) {
+          if (Object.prototype.hasOwnProperty.call(val, key)) {
+            if (
+              focusMicronutrient &&
+              key.startsWith(`${focusMicronutrient}_`)
+            ) {
+              newObj[key.slice(focusMicronutrient?.length + 1)] = (
+                val as never
+              )[key];
+            } else {
+              newObj[key] = (val as never)[key];
+            }
+          }
+        }
+        return newObj;
+      });
+  }
+
+  @get('/interventions/{id}/cost-effectiveness-summary')
+  async getLsffCESummary(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<{}>>> {
+    const lsffSummaries = await this.getEffectivenessSummaries(
+      id,
+      'admin0',
+      'afe',
+    );
+
+    const intervention = await this.interventionRepository.findById(id);
+    const countryId = intervention.countryId;
+
+    const countryFilter: Filter = {
+      where: {
+        countryId: countryId,
+      },
+    };
+
+    const projectedHouseholds =
+      await this.interventionProjectedHouseholdsRepository.find(countryFilter);
+
+    const interventionFilter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+    const costSummary = await this.interventionSummaryCostsRepository.find(
+      interventionFilter,
+    );
+
+    const nationalHHCount = [
+      projectedHouseholds[0].population2021,
+      projectedHouseholds[0].population2022,
+      projectedHouseholds[0].population2023,
+      projectedHouseholds[0].population2024,
+      projectedHouseholds[0].population2025,
+      projectedHouseholds[0].population2026,
+      projectedHouseholds[0].population2027,
+      projectedHouseholds[0].population2028,
+      projectedHouseholds[0].population2029,
+      projectedHouseholds[0].population2030,
+    ];
+    const nationalCoveragePerc = [
+      (lsffSummaries[0] as any)['2021_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2022_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2023_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2024_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2025_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2026_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2027_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2028_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2029_effective_coverage_count_perc'],
+      (lsffSummaries[0] as any)['2030_effective_coverage_count_perc'],
+    ];
+
+    console.log(nationalHHCount);
+    console.log(nationalCoveragePerc);
+
+    let cost = 0;
+    if (
+      costSummary &&
+      costSummary.length > 0 &&
+      costSummary[0].summaryCosts &&
+      costSummary[0].summaryCosts.length > 0
+    ) {
+      cost = costSummary[0].summaryCosts[0].costs
+        .find(val => val.section === 'Summaries')
+        ?.costBreakdown.find(
+          val => val.rowName === 'summary_avg_annual_total_cost',
+        )?.year0 as number;
+    }
+    console.log(cost);
+
+    const averageHHCovered =
+      nationalCoveragePerc.reduce((acc, curr, index) => {
+        if (nationalHHCount?.[index])
+          return acc + (curr * (nationalHHCount[index] as number)) / 100;
+        else return acc;
+      }, 0) / 10;
+
+    return new StandardJsonResponse<Array<object>>(
+      `Intervention data returned.`,
+      [
+        {
+          averageAnnualCost: cost,
+          averageEffectivelyCoveredHouseholds: averageHHCovered,
+          costPerHouseholdCovered: cost / averageHHCovered,
+        },
+      ],
+      'InterventionRecurringCosts',
+    );
+  }
+
+  @get('/interventions/{id}/effectiveness-summary')
+  async getLsffSummary(
+    @param.path.number('id') id: number,
+    @param.query.string('aggregation') aggregation?: string,
+    @param.query.string('metric') metric?: string,
+  ): Promise<StandardJsonResponse<Array<{}>>> {
+    const lsffSummaries = await this.getEffectivenessSummaries(
+      id,
+      aggregation,
+      metric,
+    );
+
     // console.log(body);
     //body.filter(val => val.admin0Name !== '');
 
     return new StandardJsonResponse<Array<object>>(
       `Intervention data returned.`,
-      body
-        .filter(val => {
-          for (const field of aggregationFields) {
-            if (
-              !Object.prototype.hasOwnProperty.call(val, field) ||
-              (Object.prototype.hasOwnProperty.call(val, field) &&
-                (val as never)[field] === '')
-            ) {
-              return false;
-            }
-          }
-          return true;
-        })
-        .map(val => {
-          const newObj: {[key: string]: unknown} = {};
-          for (const key in val) {
-            if (Object.prototype.hasOwnProperty.call(val, key)) {
-              if (
-                focusMicronutrient &&
-                key.startsWith(`${focusMicronutrient}_`)
-              ) {
-                newObj[key.slice(focusMicronutrient?.length + 1)] = (
-                  val as never
-                )[key];
-              } else {
-                newObj[key] = (val as never)[key];
-              }
-            }
-          }
-          return newObj;
-        }),
+      lsffSummaries,
       'InterventionRecurringCosts',
     );
   }
