@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.39.1](https://github.com/micronutrientsupport/api/compare/v2.39.0...v2.39.1) (2024-06-28)
+
+
+### Bug Fixes
+
+* fix schema name typo ([e609e2c](https://github.com/micronutrientsupport/api/commit/e609e2cfe56ebdd7d92efe76ad3a132e1a1bb6f7))
+
 ## [2.39.0](https://github.com/micronutrientsupport/api/compare/v2.38.0...v2.39.0) (2024-06-28)
 
 
