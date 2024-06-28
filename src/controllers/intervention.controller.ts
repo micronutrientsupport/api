@@ -32,6 +32,7 @@ import {
   InterventionStandardExpectedLosses,
   InterventionStartupScaleupCosts,
   InterventionSummaryCosts,
+  InterventionTemplates,
   InterventionThresholds,
   InterventionUpdateDelta,
   InterventionVehicleStandard,
@@ -55,6 +56,7 @@ import {
   InterventionStandardExpectedLossesRepository,
   InterventionStartupScaleupCostsRepository,
   InterventionSummaryCostsRepository,
+  InterventionTemplatesRepository,
   InterventionThresholdsRepository,
   InterventionVehicleStandardRepository,
 } from '../repositories';
@@ -316,6 +318,8 @@ export class InterventionController {
     public interventionStandardExpectedLossesRepository: InterventionStandardExpectedLossesRepository,
     @repository(InterventionFortificationLevelSummaryRepository)
     public interventionFortificationLevelSummaryRepository: InterventionFortificationLevelSummaryRepository,
+    @repository(InterventionTemplatesRepository)
+    public interventionTemplatesRepository: InterventionTemplatesRepository,
     @repository(FortifiableFoodItemsRepository)
     public fortifiableFoodItemsRepository: FortifiableFoodItemsRepository,
     @inject('services.OpencpuService')
@@ -387,6 +391,7 @@ export class InterventionController {
       newInterventionDescription?: string;
     },
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
+    console.log('Make new', body);
     let newIntervention;
     if ((this.request as AuthenticatedRequest).user) {
       const user = (this.request as AuthenticatedRequest).user;
@@ -765,6 +770,29 @@ export class InterventionController {
       `Intervention data returned.`,
       expectedLosses,
       'InterventionStandardExpectedLosses',
+    );
+  }
+
+  @get('/intervention-templates', {
+    description: 'get templates',
+    summary: 'get food-vehicle',
+    operationId: 'food-vehicle-standards',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionVehicleStandard instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionTemplates))
+      .toObject(),
+  })
+  async getInterventionTemplates(): Promise<
+    StandardJsonResponse<Array<InterventionTemplates>>
+  > {
+    const interventionTemplates =
+      await this.interventionTemplatesRepository.find();
+    return new StandardJsonResponse<Array<InterventionTemplates>>(
+      `Intervention data returned.`,
+      interventionTemplates,
+      'InterventionVehicleStandard',
     );
   }
 

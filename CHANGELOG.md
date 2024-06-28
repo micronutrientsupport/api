@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.39.0](https://github.com/micronutrientsupport/api/compare/v2.38.0...v2.39.0) (2024-06-28)
+
+
+### Features
+
+* add intervention-templates endpoint ([db151a9](https://github.com/micronutrientsupport/api/commit/db151a9cd2bd3fbbe2d7927be52dba914fa63dcc))
+
 ## [2.38.0](https://github.com/micronutrientsupport/api/compare/v2.37.0...v2.38.0) (2024-06-14)
 
 
