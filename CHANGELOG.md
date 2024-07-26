@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.40.0](https://github.com/micronutrientsupport/api/compare/v2.39.1...v2.40.0) (2024-07-26)
+
+
+### Features
+
+* update biomarker data sources to reflect reported groups ([e8390ec](https://github.com/micronutrientsupport/api/commit/e8390ec92cb3fc8035d6053dc1bf4a2e75bb6c1f))
+
 ## [2.39.1](https://github.com/micronutrientsupport/api/compare/v2.39.0...v2.39.1) (2024-06-28)
 
 

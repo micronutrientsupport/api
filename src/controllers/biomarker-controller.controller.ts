@@ -86,16 +86,21 @@ export class BiomarkerControllerController {
               cond[toSnakeCase(key)] = value;
             }
           }
-          prev[`${threshold.thresholdType}${counts[threshold.thresholdType]}`] =
-            {
-              //strip whitespace
-              upper: threshold.upperThreshold,
-              lower: threshold.lowerThreshold,
-              thresholdType: threshold.thresholdType,
-              conditionText: threshold.conditionText,
-              condition: cond,
-              comments: threshold.comments,
-            };
+          prev[
+            `${threshold.thresholdType}${
+              counts[threshold.thresholdType] > 1
+                ? counts[threshold.thresholdType]
+                : ''
+            }`
+          ] = {
+            //strip whitespace
+            upper: threshold.upperThreshold,
+            lower: threshold.lowerThreshold,
+            thresholdType: threshold.thresholdType,
+            conditionText: threshold.conditionText,
+            condition: cond,
+            comments: threshold.comments,
+          };
         }
         return prev;
       },
@@ -136,6 +141,7 @@ export class BiomarkerControllerController {
       await this.biomarkerSummaryRepository.find(filter);
 
     console.log(biomarkerSummaries.length);
+    console.log(biomarkerSummaries[0]);
 
     try {
       const out = await this.opencpuService.summaryStats(
@@ -147,6 +153,8 @@ export class BiomarkerControllerController {
       );
 
       console.log('Got response');
+
+      (out as any).body.thresholds = tm;
 
       //console.log(out.body);
 
