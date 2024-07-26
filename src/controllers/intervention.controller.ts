@@ -377,6 +377,14 @@ export class InterventionController {
                 description: 'ID for the focus micronutrient',
                 type: 'string',
               },
+              newInterventionStatus: {
+                description: 'Status of the intervention program',
+                type: 'number',
+              },
+              newInterventionNature: {
+                description: 'Nature of the intervention program',
+                type: 'number',
+              },
             },
           },
         },
@@ -389,6 +397,8 @@ export class InterventionController {
       newInterventionFocusMicronutrient: string;
       newInterventionFocusGeography?: string;
       newInterventionDescription?: string;
+      newInterventionStatus?: number;
+      newInterventionNature?: number;
     },
   ): Promise<StandardJsonResponse<Array<InterventionList>>> {
     console.log('Make new', body);
@@ -408,6 +418,8 @@ export class InterventionController {
             ? body.newInterventionDescription
             : '',
           user.id,
+          body.newInterventionStatus,
+          body.newInterventionNature,
         );
     } else {
       newIntervention =
@@ -422,6 +434,9 @@ export class InterventionController {
           body.newInterventionDescription
             ? body.newInterventionDescription
             : '',
+          undefined,
+          body.newInterventionStatus,
+          body.newInterventionNature,
         );
     }
     return new StandardJsonResponse<Array<InterventionList>>(

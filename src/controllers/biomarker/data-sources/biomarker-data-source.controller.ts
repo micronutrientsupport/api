@@ -53,7 +53,7 @@ export class BiomarkerDataSourceController {
       where: {
         countryId: countryId,
         micronutrientId: micronutrientId,
-        groupId: groupId,
+        //groupId: [groupId],
       },
     };
     const data = await this.biomarkerDataSourcesRepository.find(filter);

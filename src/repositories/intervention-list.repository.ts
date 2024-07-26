@@ -19,7 +19,9 @@ export class InterventionListRepository extends DefaultCrudRepository<
     newInterventionFocusMicronutrient: string,
     newInterventionFocusGeography?: string,
     newInterventionDescription?: string,
-    userId: string = 'Anonymous',
+    userId = 'Anonymous',
+    newInterventionStatus?: number,
+    newInterventionNature?: number,
   ): Promise<(InterventionList & InterventionListRelations)[]> {
     // Set the search path to include the current schema
     await this.dataSource.execute(
@@ -30,7 +32,7 @@ export class InterventionListRepository extends DefaultCrudRepository<
 
     // Execute the query
     const sql =
-      'SELECT * FROM create_derived_intervention($1::numeric,$2::text,$3::text,$4::text,$5::text,$6::text,$7::text)';
+      'SELECT * FROM create_derived_intervention($1::numeric,$2::text,$3::text,$4::text,$5::text,$6::text,$7::text,$8::int4,$9::int4)';
     const result: unknown[] = await this.dataSource.execute(sql, [
       parentInterventionId,
       newInterventionName,
@@ -39,6 +41,8 @@ export class InterventionListRepository extends DefaultCrudRepository<
       newInterventionFocusMicronutrient,
       newInterventionFocusGeography,
       userId,
+      newInterventionStatus,
+      newInterventionNature,
     ]);
 
     // Hydrate database rows into loopback models

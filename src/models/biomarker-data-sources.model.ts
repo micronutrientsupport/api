@@ -71,19 +71,19 @@ export class BiomarkerDataSources extends Entity {
   surveyId?: number;
 
   @property({
-    type: 'number',
+    type: 'string',
     description: 'The ID of the age-gender group',
     scale: 0,
     postgresql: {
       columnName: 'group_id',
-      dataType: 'integer',
+      dataType: 'text',
       dataLength: null,
       dataPrecision: null,
-      dataScale: 0,
+      dataScale: null,
       nullable: 'YES',
     },
   })
-  groupId?: number;
+  groupId?: string[];
 
   @property({
     type: 'string',
@@ -117,7 +117,7 @@ export class BiomarkerDataSources extends Entity {
     type: 'string',
     description: 'Human readable description of the biomarker survey',
     postgresql: {
-      columnName: 'survey_name',
+      columnName: 'survey_description',
       dataType: 'text',
       dataLength: null,
       dataPrecision: null,
