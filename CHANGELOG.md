@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.40.1](https://github.com/micronutrientsupport/api/compare/v2.40.0...v2.40.1) (2024-07-30)
+
+
+### Bug Fixes
+
+* add unit column to bm threshold list model ([a36431f](https://github.com/micronutrientsupport/api/commit/a36431f21d8f2c284063671796b564519b89cd76))
+
 ## [2.40.0](https://github.com/micronutrientsupport/api/compare/v2.39.1...v2.40.0) (2024-07-26)
 
 
