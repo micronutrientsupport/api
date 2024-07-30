@@ -132,6 +132,19 @@ export class BiomarkerThresholdList extends Entity {
   @property({
     type: 'number',
     postgresql: {
+      columnName: 'unit',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  unit?: number;
+
+  @property({
+    type: 'number',
+    postgresql: {
       columnName: 'upper_threshold',
       dataType: 'numeric',
       dataLength: null,
