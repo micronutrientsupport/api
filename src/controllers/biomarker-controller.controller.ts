@@ -96,6 +96,7 @@ export class BiomarkerControllerController {
             //strip whitespace
             upper: threshold.upperThreshold,
             lower: threshold.lowerThreshold,
+            unit: threshold.unit,
             thresholdType: threshold.thresholdType,
             conditionText: threshold.conditionText,
             condition: cond,
