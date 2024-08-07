@@ -60,3 +60,4 @@ export * from './intervention-standard-expected-losses.repository';
 export * from './intervention-fortification-level-summary.repository';
 export * from './fortifiable-food-items.repository';
 export * from './intervention-templates.repository';
+export * from './intervention-status.repository';

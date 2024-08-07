@@ -31,6 +31,7 @@ import {
   InterventionRecurringCosts,
   InterventionStandardExpectedLosses,
   InterventionStartupScaleupCosts,
+  InterventionStatus,
   InterventionSummaryCosts,
   InterventionTemplates,
   InterventionThresholds,
@@ -55,6 +56,7 @@ import {
   InterventionRepository,
   InterventionStandardExpectedLossesRepository,
   InterventionStartupScaleupCostsRepository,
+  InterventionStatusRepository,
   InterventionSummaryCostsRepository,
   InterventionTemplatesRepository,
   InterventionThresholdsRepository,
@@ -322,11 +324,35 @@ export class InterventionController {
     public interventionTemplatesRepository: InterventionTemplatesRepository,
     @repository(FortifiableFoodItemsRepository)
     public fortifiableFoodItemsRepository: FortifiableFoodItemsRepository,
+    @repository(InterventionStatusRepository)
+    public interventionStatusRepository: InterventionStatusRepository,
     @inject('services.OpencpuService')
     protected opencpuService: OpencpuService,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
     @inject(RestBindings.Http.REQUEST) private request: Request,
   ) {}
+
+  @get('/intervention-status', {
+    description: 'get intervention status and nature',
+    summary: 'get intervention status and nature',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionStatus model instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionStatus))
+      .toObject(),
+  })
+  async getInterventionStatus(): Promise<
+    StandardJsonResponse<Array<InterventionStatus>>
+  > {
+    const premixLevels = await this.interventionStatusRepository.find();
+
+    return new StandardJsonResponse<Array<InterventionStatus>>(
+      `Fortification level data returned.`,
+      premixLevels,
+      'InterventionStatus',
+    );
+  }
 
   @intercept(AuthenticationCheckInterceptorInterceptor.BINDING_KEY)
   @post('/interventions', {
