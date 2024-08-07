@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.41.0](https://github.com/micronutrientsupport/api/compare/v2.40.2...v2.41.0) (2024-08-07)
+
+
+### Features
+
+* add intervention-status endpoint. Fix intervention list ([1149ed9](https://github.com/micronutrientsupport/api/commit/1149ed938b10dd04a5f86d4c0e18e8d76e0069e9))
+
 ## [2.40.2](https://github.com/micronutrientsupport/api/compare/v2.40.1...v2.40.2) (2024-07-30)
 
 
