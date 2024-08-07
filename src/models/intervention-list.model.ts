@@ -212,6 +212,20 @@ export class InterventionList extends Entity {
   isTemplateIntervention?: boolean;
 
   @property({
+    type: 'date',
+    description: 'Creation date of the template',
+    postgresql: {
+      columnName: 'template_date',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  templateDate?: Date;
+
+  @property({
     type: 'number',
     scale: 0,
     id: true,
