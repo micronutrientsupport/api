@@ -23,6 +23,7 @@ import {
   InterventionBaselineAssumptions,
   InterventionData,
   InterventionDataAggregate,
+  InterventionExtraCosts,
   InterventionIndustryInformation,
   InterventionList,
   InterventionMonitoringInformation,
@@ -45,6 +46,7 @@ import {
   InterventionCellFormulaDepsRepository,
   InterventionDataRepository,
   InterventionExpectedLossesRepository,
+  InterventionExtraCostsRepository,
   InterventionFortificationLevelSummaryRepository,
   InterventionIndustryInformationRepository,
   InterventionListRepository,
@@ -326,6 +328,8 @@ export class InterventionController {
     public fortifiableFoodItemsRepository: FortifiableFoodItemsRepository,
     @repository(InterventionStatusRepository)
     public interventionStatusRepository: InterventionStatusRepository,
+    @repository(InterventionExtraCostsRepository)
+    public interventionExtraCostsRepository: InterventionExtraCostsRepository,
     @inject('services.OpencpuService')
     protected opencpuService: OpencpuService,
     @inject(RestBindings.Http.RESPONSE) private response: Response,
@@ -1483,6 +1487,116 @@ export class InterventionController {
             transaction: tx,
           },
         );
+      } else if (delta.type && delta.type === 'user-recurring-new') {
+        (delta as any).factorText = (delta as any)?.labelText;
+        delete (delta as any)?.type;
+        delete (delta as any)?.labelText;
+        delete (delta as any)?.rowIndex;
+
+        interventionUpdateDelta = new InterventionExtraCosts(delta);
+        console.log(interventionUpdateDelta);
+        interventionUpdateDelta.costType = 'recurring';
+
+        interventionUpdateDelta.interventionId = id;
+        await this.interventionExtraCostsRepository.create(
+          interventionUpdateDelta,
+          {
+            transaction: tx,
+          },
+        );
+      } else if (delta.type && delta.type === 'user-recurring') {
+        (delta as any).id = (delta as any)?.rowIndex;
+        delete (delta as any)?.type;
+        delete (delta as any)?.rowIndex;
+
+        if ((delta as any).labelText) {
+          (delta as any).factorText = (delta as any)?.labelText;
+        }
+
+        interventionUpdateDelta = new InterventionExtraCosts(delta);
+
+        console.log(interventionUpdateDelta);
+        interventionUpdateDelta.costType = 'recurring';
+
+        interventionUpdateDelta.interventionId = id;
+
+        if ((delta as any).isDeleted) {
+          await this.interventionExtraCostsRepository.deleteAll(
+            {
+              interventionId: id,
+              id: interventionUpdateDelta.id,
+            },
+            {
+              transaction: tx,
+            },
+          );
+        } else {
+          await this.interventionExtraCostsRepository.updateAll(
+            interventionUpdateDelta,
+            {
+              interventionId: id,
+              id: interventionUpdateDelta.id,
+            },
+            {
+              transaction: tx,
+            },
+          );
+        }
+      } else if (delta.type && delta.type === 'user-susu-new') {
+        (delta as any).factorText = (delta as any)?.labelText;
+        delete (delta as any)?.type;
+        delete (delta as any)?.labelText;
+        delete (delta as any)?.rowIndex;
+
+        interventionUpdateDelta = new InterventionExtraCosts(delta);
+        console.log(interventionUpdateDelta);
+        interventionUpdateDelta.costType = 'susu';
+
+        interventionUpdateDelta.interventionId = id;
+        await this.interventionExtraCostsRepository.create(
+          interventionUpdateDelta,
+          {
+            transaction: tx,
+          },
+        );
+      } else if (delta.type && delta.type === 'user-susu') {
+        (delta as any).id = (delta as any)?.rowIndex;
+        delete (delta as any)?.type;
+        delete (delta as any)?.rowIndex;
+
+        if ((delta as any).labelText) {
+          (delta as any).factorText = (delta as any)?.labelText;
+        }
+
+        interventionUpdateDelta = new InterventionExtraCosts(delta);
+
+        console.log(interventionUpdateDelta);
+        interventionUpdateDelta.costType = 'susu';
+
+        interventionUpdateDelta.interventionId = id;
+
+        if ((delta as any).isDeleted) {
+          await this.interventionExtraCostsRepository.deleteAll(
+            {
+              interventionId: id,
+              id: interventionUpdateDelta.id,
+            },
+            {
+              transaction: tx,
+            },
+          );
+        } else {
+          await this.interventionExtraCostsRepository.updateAll(
+            interventionUpdateDelta,
+            {
+              interventionId: id,
+              id: interventionUpdateDelta.id,
+            },
+            {
+              transaction: tx,
+            },
+          );
+        }
       } else {
         interventionUpdateDelta = new InterventionData(delta);
         await this.interventionDataRepository.updateAll(
