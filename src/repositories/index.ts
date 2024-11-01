@@ -61,3 +61,4 @@ export * from './intervention-fortification-level-summary.repository';
 export * from './fortifiable-food-items.repository';
 export * from './intervention-templates.repository';
 export * from './intervention-status.repository';
+export * from './intervention-extra-costs.repository';
