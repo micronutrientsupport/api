@@ -59,3 +59,4 @@ export * from './intervention-fortification-level-summary.model';
 export * from './fortifiable-food-items.model';
 export * from './intervention-templates.model';
 export * from './intervention-status.model';
+export * from './intervention-extra-costs.model';

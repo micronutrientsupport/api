@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.42.0](https://github.com/micronutrientsupport/api/compare/v2.41.0...v2.42.0) (2024-11-01)
+
+
+### Features
+
+* add handling for user costs CRUD operations to intervention recalc handler ([2b688ea](https://github.com/micronutrientsupport/api/commit/2b688ea657d0da208eb5da899e14034c80c1172e))
+
 ## [2.41.0](https://github.com/micronutrientsupport/api/compare/v2.40.2...v2.41.0) (2024-08-07)
 
 
