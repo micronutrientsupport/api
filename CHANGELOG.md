@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.42.1](https://github.com/micronutrientsupport/api/compare/v2.42.0...v2.42.1) (2024-11-06)
+
+
+### Bug Fixes
+
+* support intervention type flag in fortifiable foods ([36e8b43](https://github.com/micronutrientsupport/api/commit/36e8b432534ab758dbd95f8a7e350029f0fbfd7f))
+
 ## [2.42.0](https://github.com/micronutrientsupport/api/compare/v2.41.0...v2.42.0) (2024-11-01)
 
 
