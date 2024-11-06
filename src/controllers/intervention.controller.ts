@@ -1080,8 +1080,13 @@ export class InterventionController {
     const fortificationLevelSummary =
       await this.interventionFortificationLevelSummaryRepository.find(filter);
 
-    const fortifiableFoodItems =
-      await this.fortifiableFoodItemsRepository.find();
+    const fortifiableFoodItems = await this.fortifiableFoodItemsRepository.find(
+      {
+        where: {
+          lsff: true,
+        },
+      },
+    );
 
     const interventionDetails = await this.interventionListRepository.find({
       where: {
