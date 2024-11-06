@@ -110,6 +110,45 @@ export class FortifiableFoodItems extends Entity {
   })
   food_group_id?: number;
 
+  @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'lsff',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  lsff?: boolean;
+
+  @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'bio',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  bio?: boolean;
+
+  @property({
+    type: 'boolean',
+    postgresql: {
+      columnName: 'fert',
+      dataType: 'boolean',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  fert?: boolean;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
