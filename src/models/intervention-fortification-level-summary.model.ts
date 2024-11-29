@@ -123,6 +123,51 @@ export class InterventionFortificationLevelSummary extends Entity {
     type: 'number',
     jsonSchema: {nullable: true},
     postgresql: {
+      columnName: 'Ca',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  Ca?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'I',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  I?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'Fe',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  Fe?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
       columnName: 'A',
       dataType: 'numeric',
       dataLength: null,
@@ -198,7 +243,7 @@ export class InterventionFortificationLevelSummary extends Entity {
     type: 'number',
     jsonSchema: {nullable: true},
     postgresql: {
-      columnName: 'Fe',
+      columnName: 'D',
       dataType: 'numeric',
       dataLength: null,
       dataPrecision: null,
@@ -207,7 +252,22 @@ export class InterventionFortificationLevelSummary extends Entity {
       generated: undefined,
     },
   })
-  Fe?: number;
+  D?: number;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'E',
+      dataType: 'numeric',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  E?: number;
 
   @property({
     type: 'number',

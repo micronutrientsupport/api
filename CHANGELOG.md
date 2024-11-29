@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.42.2](https://github.com/micronutrientsupport/api/compare/v2.42.1...v2.42.2) (2024-11-29)
+
+
+### Bug Fixes
+
+* minor tweaks ([200df5e](https://github.com/micronutrientsupport/api/commit/200df5e47bb2cf85954a6b3ce88694a6e2faa171))
+
 ## [2.42.1](https://github.com/micronutrientsupport/api/compare/v2.42.0...v2.42.1) (2024-11-06)
 
 

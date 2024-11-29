@@ -121,7 +121,7 @@ export class FortifiableFoodItems extends Entity {
       nullable: 'YES',
     },
   })
-  lsff?: boolean;
+  LSFF?: boolean;
 
   @property({
     type: 'boolean',
@@ -134,7 +134,7 @@ export class FortifiableFoodItems extends Entity {
       nullable: 'YES',
     },
   })
-  bio?: boolean;
+  Bio?: boolean;
 
   @property({
     type: 'boolean',
@@ -147,7 +147,7 @@ export class FortifiableFoodItems extends Entity {
       nullable: 'YES',
     },
   })
-  fert?: boolean;
+  Fert?: boolean;
 
   // Define well-known properties here
 

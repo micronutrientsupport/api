@@ -1083,7 +1083,7 @@ export class InterventionController {
     const fortifiableFoodItems = await this.fortifiableFoodItemsRepository.find(
       {
         where: {
-          lsff: true,
+          LSFF: true,
         },
       },
     );
@@ -1095,12 +1095,13 @@ export class InterventionController {
     });
 
     const focusMicronutrient = interventionDetails[0].focusMicronutrient;
+    const surveyId = interventionDetails[0].hcesSurveyId;
     // console.log(fortificationLevelSummary);
 
     const foo =
       metricField === 'afe'
         ? await this.opencpuService.calculatePreAndPostLSFFSummariesAfe(
-            1,
+            surveyId,
             [focusMicronutrient],
             intakeThresholds,
             fortifiableFoodItems,
@@ -1108,7 +1109,7 @@ export class InterventionController {
             aggregationFields,
           )
         : await this.opencpuService.calculatePreAndPostLSFFSummariesCnd(
-            1,
+            surveyId,
             [focusMicronutrient],
             intakeThresholds,
             fortifiableFoodItems,
