@@ -240,6 +240,21 @@ export class InterventionList extends Entity {
   })
   parentIntervention?: number;
 
+  @property({
+    type: 'number',
+    scale: 0,
+    id: true,
+    postgresql: {
+      columnName: 'hces_survey_id',
+      dataType: 'integer',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: 0,
+      nullable: 'YES',
+    },
+  })
+  hcesSurveyId: number;
+
   // Define well-known properties here
 
   // Indexer property to allow additional data
