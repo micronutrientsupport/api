@@ -21,15 +21,19 @@ import {
 import {
   FortificationLevel,
   InterventionBaselineAssumptions,
+  InterventionCropProductionInformation,
+  InterventionCropTargetting,
   InterventionData,
   InterventionDataAggregate,
   InterventionExtraCosts,
+  InterventionFarmerAdoptionRates,
   InterventionIndustryInformation,
   InterventionList,
   InterventionMonitoringInformation,
   InterventionPremixCalculator,
   InterventionProjectedHouseholds,
   InterventionRecurringCosts,
+  InterventionSeedPrices,
   InterventionStandardExpectedLosses,
   InterventionStartupScaleupCosts,
   InterventionStatus,
@@ -44,9 +48,12 @@ import {
   FortificationLevelRepository,
   InterventionBaselineAssumptionsRepository,
   InterventionCellFormulaDepsRepository,
+  InterventionCropProductionInformationRepository,
+  InterventionCropTargettingRepository,
   InterventionDataRepository,
   InterventionExpectedLossesRepository,
   InterventionExtraCostsRepository,
+  InterventionFarmerAdoptionRatesRepository,
   InterventionFortificationLevelSummaryRepository,
   InterventionIndustryInformationRepository,
   InterventionListRepository,
@@ -56,6 +63,7 @@ import {
   InterventionProjectedHouseholdsRepository,
   InterventionRecurringCostsRepository,
   InterventionRepository,
+  InterventionSeedPricesRepository,
   InterventionStandardExpectedLossesRepository,
   InterventionStartupScaleupCostsRepository,
   InterventionStatusRepository,
@@ -294,6 +302,14 @@ export class InterventionController {
     public interventionVehicleStandardRepository: InterventionVehicleStandardRepository,
     @repository(InterventionIndustryInformationRepository)
     public interventionIndustryInformationRepository: InterventionIndustryInformationRepository,
+    @repository(InterventionCropProductionInformationRepository)
+    public interventionCropProductionInformationRepository: InterventionCropProductionInformationRepository,
+    @repository(InterventionCropTargettingRepository)
+    public interventionCropTargettingRepository: InterventionCropTargettingRepository,
+    @repository(InterventionFarmerAdoptionRatesRepository)
+    public interventionFarmerAdoptionRatesRepository: InterventionFarmerAdoptionRatesRepository,
+    @repository(InterventionSeedPricesRepository)
+    public interventionSeedPricesRepository: InterventionSeedPricesRepository,
     @repository(InterventionMonitoringInformationRepository)
     public interventionMonitoringInformationRepository: InterventionMonitoringInformationRepository,
     @repository(InterventionStartupScaleupCostsRepository)
@@ -346,10 +362,24 @@ export class InterventionController {
       .setObjectSchema(getModelSchemaRef(InterventionStatus))
       .toObject(),
   })
-  async getInterventionStatus(): Promise<
-    StandardJsonResponse<Array<InterventionStatus>>
-  > {
-    const premixLevels = await this.interventionStatusRepository.find();
+  async getInterventionStatus(
+    @param.query.string('fortificationType', {
+      description: 'Fortification type to limit statuses to LSFF or BF',
+    })
+    fortificationType?: string,
+  ): Promise<StandardJsonResponse<Array<InterventionStatus>>> {
+    let premixLevels;
+
+    if (fortificationType) {
+      const filter: Filter = {
+        where: {
+          fortificationType: fortificationType,
+        },
+      };
+      premixLevels = await this.interventionStatusRepository.find(filter);
+    } else {
+      premixLevels = await this.interventionStatusRepository.find();
+    }
 
     return new StandardJsonResponse<Array<InterventionStatus>>(
       `Fortification level data returned.`,
@@ -790,6 +820,54 @@ export class InterventionController {
     );
   }
 
+  @get('/interventions/{id}/farmer-adoption', {
+    description: 'get farmer adoption rates',
+    summary: 'get farmer adoption rates',
+    operationId: 'farmer-adoption-rates',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionFarmerAdoptionRates instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionFarmerAdoptionRates))
+      .toObject(),
+  })
+  async findFarmerAdtoptionRatesById(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionFarmerAdoptionRates>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+    const farmerAdoption =
+      await this.interventionFarmerAdoptionRatesRepository.find(filter);
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    if (farmerAdoption[0].farmerAdoptionRates) {
+      farmerAdoption[0].farmerAdoptionRates.adoptionRateHybrid =
+        replaceExcelFormulaeWothJsonLogic(
+          farmerAdoption[0].farmerAdoptionRates
+            ?.adoptionRateHybrid as InterventionDataFields,
+        );
+      farmerAdoption[0].farmerAdoptionRates.adoptionRateLocal =
+        replaceExcelFormulaeWothJsonLogic(
+          farmerAdoption[0].farmerAdoptionRates
+            ?.adoptionRateLocal as InterventionDataFields,
+        );
+      farmerAdoption[0].farmerAdoptionRates.adoptionRateRecycled =
+        replaceExcelFormulaeWothJsonLogic(
+          farmerAdoption[0].farmerAdoptionRates
+            ?.adoptionRateRecycled as InterventionDataFields,
+        );
+    }
+
+    return new StandardJsonResponse<Array<InterventionFarmerAdoptionRates>>(
+      `Intervention data returned.`,
+      farmerAdoption,
+      'InterventionFarmerAdoptionRates',
+    );
+  }
+
   @get('/interventions/{id}/expected-losses', {
     description: 'get expected-losses',
     summary: 'get expected-losses',
@@ -903,6 +981,111 @@ export class InterventionController {
       `Intervention data returned.`,
       industryInformation,
       'InterventionIndustryInformation',
+    );
+  }
+
+  @get('/interventions/{id}/crop-production-information', {
+    description: 'get industry-info',
+    summary: 'get industry-info',
+    operationId: 'industry-information',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionCropProductionInformation instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionCropProductionInformation))
+      .toObject(),
+  })
+  async findCropProductionInfoById(
+    @param.path.number('id') id: number,
+  ): Promise<
+    StandardJsonResponse<Array<InterventionCropProductionInformation>>
+  > {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+    const cropProductionInformation =
+      await this.interventionCropProductionInformationRepository.find(filter);
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    cropProductionInformation[0].cropProductionInformation =
+      cropProductionInformation[0].cropProductionInformation.map(
+        (value: InterventionDataFields) => {
+          return replaceExcelFormulaeWothJsonLogic(value);
+        },
+      );
+
+    return new StandardJsonResponse<
+      Array<InterventionCropProductionInformation>
+    >(
+      `Intervention data returned.`,
+      cropProductionInformation,
+      'InterventionCropProductionInformation',
+    );
+  }
+
+  @get('/interventions/{id}/seed-prices', {
+    description: 'get seed-prices',
+    summary: 'get seed-prices',
+    operationId: 'seed-prices',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionSeedPrices instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionSeedPrices))
+      .toObject(),
+  })
+  async findSeedPrices(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionSeedPrices>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+    const seedPrices = await this.interventionSeedPricesRepository.find(filter);
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    seedPrices[0].seedPrices = seedPrices[0]?.seedPrices.map(
+      (value: InterventionDataFields) => {
+        return replaceExcelFormulaeWothJsonLogic(value);
+      },
+    );
+
+    return new StandardJsonResponse<Array<InterventionSeedPrices>>(
+      `Intervention data returned.`,
+      seedPrices,
+      'InterventionSeedPrices',
+    );
+  }
+
+  @get('/interventions/{id}/crop-targetting', {
+    description: 'get crop targetting',
+    summary: 'get crop-targetting',
+    operationId: 'crop-targetting',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionCropTargetting instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionCropTargetting))
+      .toObject(),
+  })
+  async findCropTargettingById(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionCropTargetting>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+    const cropProductionInformation =
+      await this.interventionCropTargettingRepository.find(filter);
+
+    return new StandardJsonResponse<Array<InterventionCropTargetting>>(
+      `Intervention data returned.`,
+      cropProductionInformation,
+      'InterventionCropTargetting',
     );
   }
 
@@ -1947,19 +2130,20 @@ export class InterventionController {
     )[0];
 
     console.log(premixCost);
-
-    (fullData as any)['premix'] = {
-      year0: premixCost.premixCostPerMt,
-      year1: premixCost.premixCostPerMt,
-      year2: premixCost.premixCostPerMt,
-      year3: premixCost.premixCostPerMt,
-      year4: premixCost.premixCostPerMt,
-      year5: premixCost.premixCostPerMt,
-      year6: premixCost.premixCostPerMt,
-      year7: premixCost.premixCostPerMt,
-      year8: premixCost.premixCostPerMt,
-      year9: premixCost.premixCostPerMt,
-    };
+    if (premixCost) {
+      (fullData as any)['premix'] = {
+        year0: premixCost.premixCostPerMt,
+        year1: premixCost.premixCostPerMt,
+        year2: premixCost.premixCostPerMt,
+        year3: premixCost.premixCostPerMt,
+        year4: premixCost.premixCostPerMt,
+        year5: premixCost.premixCostPerMt,
+        year6: premixCost.premixCostPerMt,
+        year7: premixCost.premixCostPerMt,
+        year8: premixCost.premixCostPerMt,
+        year9: premixCost.premixCostPerMt,
+      };
+    }
 
     (fullData as any)['demographics'] = {
       year0: 120812698,
