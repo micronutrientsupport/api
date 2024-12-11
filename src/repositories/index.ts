@@ -62,3 +62,7 @@ export * from './fortifiable-food-items.repository';
 export * from './intervention-templates.repository';
 export * from './intervention-status.repository';
 export * from './intervention-extra-costs.repository';
+export * from './intervention-crop-production-information.repository';
+export * from './intervention-crop-targetting.repository';
+export * from './intervention-farmer-adoption-rates.repository';
+export * from './intervention-seed-prices.repository';

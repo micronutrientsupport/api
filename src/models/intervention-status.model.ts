@@ -11,6 +11,21 @@ import {Entity, model, property} from '@loopback/repository';
 })
 export class InterventionStatus extends Entity {
   @property({
+    type: 'string',
+    jsonSchema: {nullable: true},
+    postgresql: {
+      columnName: 'fortification_type',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+      generated: undefined,
+    },
+  })
+  fortificationType?: string;
+
+  @property({
     type: 'number',
     jsonSchema: {nullable: true},
     scale: 0,
