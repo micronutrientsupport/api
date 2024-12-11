@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.43.0](https://github.com/micronutrientsupport/api/compare/v2.42.2...v2.43.0) (2024-12-11)
+
+
+### Features
+
+* add BF routes ([39e8f1a](https://github.com/micronutrientsupport/api/commit/39e8f1aadfee1ce2598db31d95afee7da53e3643))
+
 ## [2.42.2](https://github.com/micronutrientsupport/api/compare/v2.42.1...v2.42.2) (2024-11-29)
 
 
