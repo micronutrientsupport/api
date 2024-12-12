@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.44.0](https://github.com/micronutrientsupport/api/compare/v2.43.0...v2.44.0) (2024-12-12)
+
+
+### Features
+
+* support BF in effectiveness ([244c399](https://github.com/micronutrientsupport/api/commit/244c399e1853ebd1923758cefd0ca5c6f4667838))
+
 ## [2.43.0](https://github.com/micronutrientsupport/api/compare/v2.42.2...v2.43.0) (2024-12-11)
 
 
