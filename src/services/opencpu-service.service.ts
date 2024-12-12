@@ -17,19 +17,23 @@ export interface OpencpuService {
   calculatePreAndPostLSFFSummariesAfe(
     survey: number,
     micronutrient: object,
+    foodVehicleName: string,
     intakeThresholds: object,
     fortifiableFoodItems: object,
     fortificationLevels: object,
     aggregationFields: object,
+    fortificationType?: string,
   ): Promise<{}>;
 
   calculatePreAndPostLSFFSummariesCnd(
     survey: number,
     micronutrient: object,
+    foodVehicleName: string,
     intakeThresholds: object,
     fortifiableFoodItems: object,
     fortificationLevels: object,
     aggregationFields: object,
+    fortificationType?: string,
   ): Promise<{}>;
 }
 

@@ -19,6 +19,7 @@ import {
   AuthenticationCheckInterceptorInterceptor,
 } from '../interceptors';
 import {
+  FortifiableFoodItems,
   FortificationLevel,
   InterventionBaselineAssumptions,
   InterventionCropProductionInformation,
@@ -1263,41 +1264,67 @@ export class InterventionController {
     const fortificationLevelSummary =
       await this.interventionFortificationLevelSummaryRepository.find(filter);
 
-    const fortifiableFoodItems = await this.fortifiableFoodItemsRepository.find(
-      {
-        where: {
-          LSFF: true,
-        },
-      },
-    );
-
     const interventionDetails = await this.interventionListRepository.find({
       where: {
         id: interventionId,
       },
     });
 
+    let fortifiableFoodItems: FortifiableFoodItems[] = [];
+
     const focusMicronutrient = interventionDetails[0].focusMicronutrient;
     const surveyId = interventionDetails[0].hcesSurveyId;
     // console.log(fortificationLevelSummary);
+
+    let type;
+    switch (interventionDetails[0].fortificationTypeId) {
+      case 'LSFF':
+        type = 'LSFF';
+        fortifiableFoodItems = await this.fortifiableFoodItemsRepository.find({
+          where: {
+            LSFF: true,
+          },
+        });
+        break;
+      case 'BF':
+        type = 'BIO';
+        fortifiableFoodItems = await this.fortifiableFoodItemsRepository.find({
+          where: {
+            BIO: true,
+          },
+        });
+        break;
+      case 'AF':
+        type = 'FERT';
+        fortifiableFoodItems = await this.fortifiableFoodItemsRepository.find({
+          where: {
+            FERT: true,
+          },
+        });
+        break;
+    }
 
     const foo =
       metricField === 'afe'
         ? await this.opencpuService.calculatePreAndPostLSFFSummariesAfe(
             surveyId,
             [focusMicronutrient],
+            interventionDetails[0].foodVehicleName as string,
             intakeThresholds,
             fortifiableFoodItems,
             fortificationLevelSummary,
             aggregationFields,
+            type,
           )
         : await this.opencpuService.calculatePreAndPostLSFFSummariesCnd(
             surveyId,
             [focusMicronutrient],
+            interventionDetails[0].foodVehicleName as string,
             intakeThresholds,
             fortifiableFoodItems,
             fortificationLevelSummary,
             aggregationFields,
+            type,
           );
 
     const body: LsffSummaryResponse[] = (foo as any).body;
