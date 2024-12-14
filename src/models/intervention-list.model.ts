@@ -80,6 +80,19 @@ export class InterventionList extends Entity {
   @property({
     type: 'string',
     postgresql: {
+      columnName: 'focus_geography',
+      dataType: 'text',
+      dataLength: null,
+      dataPrecision: null,
+      dataScale: null,
+      nullable: 'YES',
+    },
+  })
+  focusGeography?: string;
+
+  @property({
+    type: 'string',
+    postgresql: {
       columnName: 'fortification_type_id',
       dataType: 'text',
       dataLength: null,
