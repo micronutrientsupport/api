@@ -28,6 +28,7 @@ import {
   InterventionDataAggregate,
   InterventionExtraCosts,
   InterventionFarmerAdoptionRates,
+  InterventionFarmerAdoptionRatesAF,
   InterventionIndustryInformation,
   InterventionList,
   InterventionMonitoringInformation,
@@ -73,6 +74,7 @@ import {
   InterventionThresholdsRepository,
   InterventionVehicleStandardRepository,
 } from '../repositories';
+import {InterventionFarmerAdoptionRatesAFRepository} from '../repositories/intervention-farmer-adoption-rates-af.repository';
 import {OpencpuService} from '../services';
 import {StandardJsonResponse} from './standardJsonResponse';
 import {StandardOpenApiResponses} from './standardOpenApiResponses';
@@ -309,6 +311,8 @@ export class InterventionController {
     public interventionCropTargettingRepository: InterventionCropTargettingRepository,
     @repository(InterventionFarmerAdoptionRatesRepository)
     public interventionFarmerAdoptionRatesRepository: InterventionFarmerAdoptionRatesRepository,
+    @repository(InterventionFarmerAdoptionRatesAFRepository)
+    public interventionFarmerAdoptionRatesAFRepository: InterventionFarmerAdoptionRatesAFRepository,
     @repository(InterventionSeedPricesRepository)
     public interventionSeedPricesRepository: InterventionSeedPricesRepository,
     @repository(InterventionMonitoringInformationRepository)
@@ -818,6 +822,54 @@ export class InterventionController {
       `Intervention data returned.`,
       baselineAssumptions,
       'InterventionBaselineAssumptions',
+    );
+  }
+
+  @get('/interventions/{id}/farmer-adoption-af', {
+    description: 'get farmer adoption rates',
+    summary: 'get farmer adoption rates',
+    operationId: 'farmer-adoption-rates',
+    responses: new StandardOpenApiResponses(
+      'Array of InterventionFarmerAdoptionRatesAF instances',
+    )
+      .setDataType('array')
+      .setObjectSchema(getModelSchemaRef(InterventionFarmerAdoptionRatesAF))
+      .toObject(),
+  })
+  async findFarmerAdtoptionRatesAFById(
+    @param.path.number('id') id: number,
+  ): Promise<StandardJsonResponse<Array<InterventionFarmerAdoptionRatesAF>>> {
+    const filter: Filter = {
+      where: {
+        interventionId: id,
+      },
+    };
+    const farmerAdoption =
+      await this.interventionFarmerAdoptionRatesAFRepository.find(filter);
+
+    // Replace Excel Formulae with JsonLogic for interpretation on the frontend
+    if (farmerAdoption[0].farmerAdoptionRates) {
+      farmerAdoption[0].farmerAdoptionRates.adoptionRateOverall =
+        replaceExcelFormulaeWothJsonLogic(
+          farmerAdoption[0].farmerAdoptionRates
+            ?.adoptionRateOverall as InterventionDataFields,
+        );
+      farmerAdoption[0].farmerAdoptionRates.adoptionRateGranular =
+        replaceExcelFormulaeWothJsonLogic(
+          farmerAdoption[0].farmerAdoptionRates
+            ?.adoptionRateGranular as InterventionDataFields,
+        );
+      farmerAdoption[0].farmerAdoptionRates.adoptionRateFoliar =
+        replaceExcelFormulaeWothJsonLogic(
+          farmerAdoption[0].farmerAdoptionRates
+            ?.adoptionRateFoliar as InterventionDataFields,
+        );
+    }
+
+    return new StandardJsonResponse<Array<InterventionFarmerAdoptionRatesAF>>(
+      `Intervention data returned.`,
+      farmerAdoption,
+      'InterventionFarmerAdoptionRatesAF',
     );
   }
 

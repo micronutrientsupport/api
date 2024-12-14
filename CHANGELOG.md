@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.45.0](https://github.com/micronutrientsupport/api/compare/v2.44.0...v2.45.0) (2024-12-14)
+
+
+### Features
+
+* af endpoints ([0441b64](https://github.com/micronutrientsupport/api/commit/0441b64836f5676412346726bd0a0268a34c9160))
+
 ## [2.44.0](https://github.com/micronutrientsupport/api/compare/v2.43.0...v2.44.0) (2024-12-12)
 
 
