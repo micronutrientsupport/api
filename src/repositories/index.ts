@@ -67,3 +67,5 @@ export * from './intervention-standard-expected-losses.repository';
 export * from './intervention-status.repository';
 export * from './intervention-templates.repository';
 export * from './intervention-thresholds.repository';
+export * from './intervention-impact-projections.repository';
+export * from './intervention-targetting.repository';
