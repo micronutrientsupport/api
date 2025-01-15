@@ -57,6 +57,7 @@ import {
   InterventionExtraCostsRepository,
   InterventionFarmerAdoptionRatesRepository,
   InterventionFortificationLevelSummaryRepository,
+  InterventionImpactProjectionsRepository,
   InterventionIndustryInformationRepository,
   InterventionListRepository,
   InterventionMonitoringInformationRepository,
@@ -70,6 +71,7 @@ import {
   InterventionStartupScaleupCostsRepository,
   InterventionStatusRepository,
   InterventionSummaryCostsRepository,
+  InterventionTargettingRepository,
   InterventionTemplatesRepository,
   InterventionThresholdsRepository,
   InterventionVehicleStandardRepository,
@@ -345,6 +347,10 @@ export class InterventionController {
     public interventionFortificationLevelSummaryRepository: InterventionFortificationLevelSummaryRepository,
     @repository(InterventionTemplatesRepository)
     public interventionTemplatesRepository: InterventionTemplatesRepository,
+    @repository(InterventionImpactProjectionsRepository)
+    public interventionImpactProjectionsRepository: InterventionImpactProjectionsRepository,
+    @repository(InterventionTargettingRepository)
+    public interventionTargettingRepository: InterventionTargettingRepository,
     @repository(FortifiableFoodItemsRepository)
     public fortifiableFoodItemsRepository: FortifiableFoodItemsRepository,
     @repository(InterventionStatusRepository)
@@ -2197,6 +2203,8 @@ export class InterventionController {
     (fullData as any)['regexes'] = {
       premix: 'Premix - .*',
       demographics: 'Demographics',
+      impact: 'IMPACT projections',
+      bioTarget: 'Biofortification targeting',
     };
 
     const premixFilter = {
@@ -2235,6 +2243,42 @@ export class InterventionController {
       year7: 141889688,
       year8: 144944302,
       year9: 148001185,
+    };
+
+    const impact = await this.interventionImpactProjectionsRepository.find({
+      where: {
+        interventionId: intervention.id,
+      },
+    });
+
+    const bioTarget = await this.interventionTargettingRepository.find({
+      where: {
+        interventionId: intervention.id,
+      },
+    });
+
+    const bTTotal = bioTarget.reduce((prev, curr) => {
+      if (!curr.regionalSharePc) {
+        return prev;
+      }
+      return Number(prev) + Number(curr.regionalSharePc);
+    }, 0);
+
+    console.log({bTTotal});
+
+    (fullData as any)['impact'] = impact[0];
+
+    (fullData as any)['bioTarget'] = {
+      year0: bTTotal,
+      year1: bTTotal,
+      year2: bTTotal,
+      year3: bTTotal,
+      year4: bTTotal,
+      year5: bTTotal,
+      year6: bTTotal,
+      year7: bTTotal,
+      year8: bTTotal,
+      year9: bTTotal,
     };
 
     return {dataVals, fullData};

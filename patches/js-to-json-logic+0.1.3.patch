@@ -7,7 +7,7 @@ index de72f86..64b90ac 100644
 +export function transformJS (code: string): any
 +export function processNode (node: any, extraData?: any, valueOnly?: boolean, ): any;
 diff --git a/node_modules/js-to-json-logic/lib/index.js b/node_modules/js-to-json-logic/lib/index.js
-index c6ab89c..d495577 100644
+index c6ab89c..25ef823 100644
 --- a/node_modules/js-to-json-logic/lib/index.js
 +++ b/node_modules/js-to-json-logic/lib/index.js
 @@ -33,14 +33,14 @@ function processError ({ loc, at }, message) {
@@ -36,7 +36,7 @@ index c6ab89c..d495577 100644
          }
        }
  
-@@ -66,6 +66,218 @@ function processNode (node, valueOnly = false) {
+@@ -66,6 +66,225 @@ function processNode (node, valueOnly = false) {
        }
      }
  
@@ -71,9 +71,13 @@ index c6ab89c..d495577 100644
 +            // console.error({key, value, sheet})
 +            const regex = new RegExp(value);
 +            if(sheet.match(regex)) {
-+              // console.error('Matches', key)
++               console.error(sheet, 'Matches', key, '(', cell , ')')
 +              // console.error(extraData[key])
 +
++              if(sheet === 'IMPACT projections') {
++                // Increment letter e.g. A becomes B
++                col = String.fromCharCode(col.charCodeAt(0)+1)
++              }
 +
 +              switch(col) {
 +                case 'D': {
@@ -123,10 +127,13 @@ index c6ab89c..d495577 100644
 +              //   typeof(extraData[key][col]),
 +              //   val: extraData[key][col]
 +              // })
++
++              //console.log('Replace with', extraData[key][col])
++
 +              return extraData[key][col]
 +
 +            } else {
-+              //console.error('Doesnt match', sheet)
++              //console.error(sheet, 'Doesnt match', value)
 +            }
 +          }
 +        }
@@ -255,7 +262,7 @@ index c6ab89c..d495577 100644
      case 'Literal': {
        if (node.value instanceof RegExp) {
          return [node.value.source, node.value.flags]
-@@ -75,7 +287,7 @@ function processNode (node, valueOnly = false) {
+@@ -75,7 +294,7 @@ function processNode (node, valueOnly = false) {
      }
  
      case 'SpreadElement': {
@@ -264,7 +271,7 @@ index c6ab89c..d495577 100644
      }
  
      case 'ArrayExpression': {
-@@ -83,19 +295,19 @@ function processNode (node, valueOnly = false) {
+@@ -83,19 +302,19 @@ function processNode (node, valueOnly = false) {
        if (node.elements.some((node) => node.type === 'SpreadElement')) {
          return {
            merge: [
@@ -287,7 +294,7 @@ index c6ab89c..d495577 100644
        }
        return result
      }
-@@ -107,59 +319,175 @@ function processNode (node, valueOnly = false) {
+@@ -107,59 +326,175 @@ function processNode (node, valueOnly = false) {
      }
  
      case 'ExpressionStatement': {
@@ -479,7 +486,7 @@ index c6ab89c..d495577 100644
          : node.property.name
  
        const value = `${object}.${property}`
-@@ -170,10 +498,10 @@ function processNode (node, valueOnly = false) {
+@@ -170,10 +505,10 @@ function processNode (node, valueOnly = false) {
      case 'IfStatement': {
        return {
          if: [
@@ -493,7 +500,7 @@ index c6ab89c..d495577 100644
              : undefined
          ].filter(Boolean)
        }
-@@ -184,8 +512,8 @@ function processNode (node, valueOnly = false) {
+@@ -184,8 +519,8 @@ function processNode (node, valueOnly = false) {
          return processError(node, 'Only one-line arrow functions with implicit return are supported.')
        }
  
@@ -504,7 +511,7 @@ index c6ab89c..d495577 100644
  
        return !params.length || params.length > 1
          ? body
-@@ -193,7 +521,7 @@ function processNode (node, valueOnly = false) {
+@@ -193,7 +528,7 @@ function processNode (node, valueOnly = false) {
      }
  
      case 'ReturnStatement': {
@@ -513,7 +520,7 @@ index c6ab89c..d495577 100644
      }
  
      /** unsuported features */
-@@ -266,4 +594,4 @@ const transformJS = (code) => {
+@@ -266,4 +601,4 @@ const transformJS = (code) => {
    }
  }
  
