@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.45.1](https://github.com/micronutrientsupport/api/compare/v2.45.0...v2.45.1) (2025-01-15)
+
+
+### Bug Fixes
+
+* resolve some NaN issues ([ed33e64](https://github.com/micronutrientsupport/api/commit/ed33e641830ef6cbe2954254d9d9d675e7f3a0cc))
+
 ## [2.45.0](https://github.com/micronutrientsupport/api/compare/v2.44.0...v2.45.0) (2024-12-14)
 
 
